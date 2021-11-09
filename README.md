@@ -1,27 +1,15 @@
-University-Courses - UBB BSc
+# University-Courses - UBB BSc
 Algorithms implementation, labs and school work.
 
-Year 1
-First semester
-✔ Computer System Architecture
+# **Year 1**
+**First semester**
 
-✔ Fundamentals of Programming
+Computer System Architecture
 
-✔ Computational Logic
+Fundamentals of Programming
 
-✔ Algebra
+Computational Logic
 
-✔ Mathematical Analysis
+Algebra
 
-Second semester
-✔ Operating Systems
-
-✔ Object-Oriented Programming
-
-✔ Graph Algorithms
-
-✔ Data Structures and Algorithms
-
-✔ Dynamical systems
-
-✔ Geometry
+Mathematical Analysis
