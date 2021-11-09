@@ -1,0 +1,128 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+     8                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+     9                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    10                                  
+    11                                  ; our data is declared here (the variables needed by our program)
+    12                                  segment data use32 class=data
+    13                                  
+    14                                      ; Adunări, scăderi: 22 (prima parte) 21 (a doua parte) 
+    15                                      
+    16                                      ; 22
+    17                                      ; a DB 10
+    18                                      ; b DB 20
+    19                                      ; c DB 5
+    20                                      ; d DB 15
+    21                                      
+    22                                      ; 21
+    23                                      ; a DW 5
+    24                                      ; b DW 5
+    25                                      ; c DW 1
+    26                                      ; d DW 2
+    27                                      
+    28                                      
+    29                                      ; Înmulțiri, împărțiri: 27 (prima parte) 21 (a doua parte)
+    30                                      
+    31                                      ; 27
+    32                                      ; a DB 10
+    33                                      ; b DB 6
+    34                                      ; c DB 1
+    35                                      ; d DW 14
+    36                                      
+    37                                      ; 21
+    38                                      ; a DB 2
+    39                                      ; b DB 2
+    40                                      ; c DB 1
+    41                                      ; d DB 3
+    42                                      ; e DW 2
+    43                                      ; f DW 8
+    44                                      ; g DW 4
+    45                                      ; h DW 1
+    46                                  
+    47                                  
+    48                                  ; our code starts here
+    49                                  segment code use32 class=code
+    50                                      start:
+    51 00000000 B800000000                      mov EAX, 0 ; Pentru usurinta in debugging
+    52                                          
+    53                                          ; Exercitii simple: 15 - 6*3
+    54                                          
+    55                                          ; mov AL, 6 ; AL = 6
+    56                                          ; mov AH, 3 ; AH = 3
+    57                                          ; mul AH    ; AX = AL * AH = 6 * 3
+    58                                          
+    59                                          
+    60                                          ; Adunări, scăderi: 22 (prima parte) 21 (a doua parte) 
+    61                                          
+    62                                          ; 22 - (a+b+b)-(c+d) : (10+20+20)-(5+15) = 30 (1D)
+    63                                          ; mov AL, [a] ; AL = a
+    64                                          ; add AL, [b] ; AL = AL + b = a + b
+    65                                          ; add AL, [b] ; AL = AL + b = a + b + b
+    66                                          ; mov BL, [c] ; BL = c
+    67                                          ; add BL, [d] ; BL = BL + d = c + d
+    68                                          ; sub AL, BL  ; AL = AL - BL = (a + b + b) - (c + d)
+    69                                          
+    70                                          ; 21 - a-c+d-7+b-(2+d) : 5-1+2-7+5-(2+2) = 0
+    71                                          ; mov AX, [a] ; AX = a
+    72                                          ; sub AX, [c] ; AX = AX - c = a - c
+    73                                          ; add AX, [d] ; AX = AX + d = a - c + d
+    74                                          ; sub AX, 7   ; AX = AX - 7 = a - c + d - 7
+    75                                          ; add AX, [b] ; AX = AX + b = a - c + d - 7 + b
+    76                                          ; mov BX, 2   ; BX = 2
+    77                                          ; add BX, [d] ; BX = BX + d = 2 + d
+    78                                          ; sub AX, BX  ; AX = AX - BX = a - c + d - 7 + b - (2 + d)
+    79                                          
+    80                                          
+    81                                          ; Înmulțiri, împărțiri: 27 (prima parte) 21 (a doua parte)
+    82                                          
+    83                                          ; 27 - d/[(a+b)-(c+c)] : 14/[(10+6)-(1+1)] = 1
+    84                                          ; mov AX, [d] ; AX = d
+    85                                          ; mov BL, [a] ; BL = a
+    86                                          ; add BL, [b] ; BL = BL + b = a + b
+    87                                          ; mov BH, [c] ; BH = c
+    88                                          ; add BH, [c] ; BH = BH + c = c + c
+    89                                          ; sub BL, BH  ; BL = BL - BH = (a + b) - (c + c)
+    90                                          ; div BYTE BL      ; AL = AX / BL = d / [(a + b) - (c + c)] , AH = AX % BL = d % [(a + b) - (c + c)]
+    91                                          
+    92                                          ; 21 - (f*g-a*b*e)/(h+c*d) : (8*4-2*2*2)/(1+1*3) = 6
+    93                                          ; mov AX, [f] ; AX = f
+    94                                          ; mov BX, [g] ; BX = g
+    95                                          ; mul BX      ; DX:AX = AX * BX = f * g
+    96                                          
+    97                                          ; push  DX    ; se pune pe stiva partea high din double word-ul DX:AX
+    98                                          ; push  AX    ; se pune pe stiva partea low din double word-ul DX:AX
+    99                                          ; pop   EBX   ; EBX = DX:AX = f * g
+   100                                          
+   101                                          ; mov AL, [a] ; AL = a
+   102                                          ; mov AH, [b] ; AH = b
+   103                                          ; mul AH      ; AX = AL * AH = a * b
+   104                                          ; mov CX, [e] ; CX = e
+   105                                          ; mul CX      ; DX:AX = AX * CX = a * b * e
+   106                                          
+   107                                          ; push  DX    ; se pune pe stiva partea high din double word-ul DX:AX
+   108                                          ; push  AX    ; se pune pe stiva partea low din double word-ul DX:AX
+   109                                          ; pop   ECX   ; ECX = DX:AX = a * b * e
+   110                                          
+   111                                          ; sub EBX, ECX; EBX = EBX - ECX = f * g - a * b * e
+   112                                          
+   113                                          ; mov AL, [c] ; AL = c
+   114                                          ; mov AH, [d] ; AH = d
+   115                                          ; mul AH      ; AX = AL * AH = c * d
+   116                                          ; add AX, [h] ; AX = AX + h = c * d + h
+   117                                          ; mov CX, AX  ; CX = AX = c * d + h
+   118                                          
+   119                                          ; push EBX    ; se pune pe stiva double word-ul EBX
+   120                                          ; pop  AX     ; se scoate partea low din EBX
+   121                                          ; pop  DX     ; se scoate partea high din EBX
+   122                                          
+   123                                          ; div WORD CX ; AX = DX:AX / CX = (f * g - a * b * e) / (h + c * d) , DX = DX:AX % CX = (f * g - a * b * e) % (h + c * d)
+   124                                          
+   125                                          
+   126                                          ; exit(0)
+   127 00000005 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+   128 00000007 FF15[00000000]                  call    [exit]       ; call exit to terminate the program

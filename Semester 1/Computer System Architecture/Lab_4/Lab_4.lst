@@ -1,0 +1,59 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+     8                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+     9                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    10                                  
+    11                                  ; our data is declared here (the variables needed by our program)
+    12                                  segment data use32 class=data
+    13                                  
+    14 00000000 6C                          a db 01101100b
+    15 00000001 BE9B                        b dw 1001101110111110b
+    16 00000003 00000000                    c dd 0
+    17                                      
+    18                                  
+    19                                  ; our code starts here
+    20                                  segment code use32 class=code
+    21                                      start:
+    22 00000000 31C0                            xor EAX, EAX
+    23 00000002 31DB                            xor EBX, EBX
+    24 00000004 31C9                            xor ECX, ECX
+    25 00000006 31D2                            xor EDX, EDX
+    26                                          
+    27                                          ; Rezultatul o sa fie in DX:BX
+    28                                          
+    29 00000008 8A35[00000000]                  mov DH, [a]         ; Bitii 24-31 din DX:BX sunt a lui A
+    30                                          
+    31 0000000E A0[01000000]                    mov AL, byte [b]    ; Izolam bitii din octelul cel mai putin semnificativ a lui B
+    32 00000013 F6D0                            not AL              ; Inversam valoarea octetului
+    33 00000015 88C2                            mov DL, AL          ; Punem bitii in rezultat, reprezentand bitii 16-23 din DX:BX
+    34                                          
+    35 00000017 80CFFC                          or  BH, 11111100b   ; Facem bitii 10-15 din rezultat sa aiba valoarea 1
+    36                                          
+    37 0000001A A0[02000000]                    mov AL, byte [b+1]  ; Izolam bitii din octelul cel mai semnificativ a lui B
+    38 0000001F B102                            mov CL, 2           
+    39 00000021 66D3C0                          rol AX, CL          ; Rotim 2 pozitii spre stanga
+    40 00000024 6609C3                          or  BX, AX          ; Punem bitii in rezultat, reprezentand bitii 2-9 din DX:BX
+    41                                          
+    42 00000027 66B80000                        mov AX, 0           ; Golim AX
+    43 0000002B A0[00000000]                    mov AL, [a]         ; Izolam bitul de semn a lui A
+    44 00000030 2480                            and AL, 10000000b
+    45 00000032 B106                            mov CL, 6
+    46 00000034 D2C8                            ror AL, CL          ; Rotim 6 pozitii spre dreapta
+    47 00000036 6609C3                          or  BX, AX          ; Facem bitul 1 valoarea bitului de semn a lui A
+    48 00000039 D0C8                            ror AL, 1           ; Rotim o pozitie spre dreapta
+    49 0000003B 6609C3                          or  BX, AX          ; Facem bitul 0 valoarea bitului de semn a lui A
+    50                                          
+    51                                          ; Punem rezultatul in C
+    52                                          
+    53 0000003E 6652                            push DX
+    54 00000040 6653                            push BX
+    55 00000042 8F05[03000000]                  pop dword [c]
+    56                                          
+    57                                          ; exit(0)
+    58 00000048 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    59 0000004A FF15[00000000]                  call    [exit]       ; call exit to terminate the program
