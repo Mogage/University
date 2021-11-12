@@ -484,6 +484,19 @@ class Tests:
         except ClientRepositoryError as cre:
             assert str(cre) == "Nume client inexistent."
 
+    @staticmethod
+    def __test_filter_name_by_prefix_success(client_repository, client, prefix):
+        filtered_list = client_repository.filter_name_by_prefix(prefix)
+        assert filtered_list == [client]
+
+    @staticmethod
+    def __test_filter_name_by_non_existent_prefix(client_repositroy, prefix):
+        try:
+            client_repositroy.filter_name_by_prefix(prefix)
+            assert False
+        except ClientRepositoryError as cre:
+            assert str(cre) == "Nu exista niciun client a carui nume sa inceapa cu acest prefix."
+
     def __run_tests_repository_client(self):
         client_repository = ClientsRepository()
         client_id = 1
@@ -493,6 +506,7 @@ class Tests:
         other_name = "Alex"
 
         non_existent_id = 2
+        prefix = "Ga"
 
         client = Clients(client_id, client_name, client_cnp)
         other_client = Clients(client_id, other_name, client_cnp)
@@ -505,6 +519,7 @@ class Tests:
         self.__test_repository_delete_client_by_existent_data(client_repository, client, client_id, client_name,
                                                               client_cnp)
         self.__test_repository_delete_client_by_non_existent_data(client_repository, non_existent_id, other_name)
+        self.__test_filter_name_by_prefix_success(client_repository, client, prefix)
 
     @staticmethod
     def __test_service_add_client_success(client_service, client_id, client_name, client_cnp):

@@ -64,6 +64,7 @@ class ClientUI:
               "\t -id pentru a afisa clientul cu un anumit id.\n"
               "\t -nume pentru a afisa clientii cu un anumit nume.\n"
               "\t -cnp pentru a afisa clientii cu un anumit cnp.\n"
+              "\t -prefix pentru a afisa clientii cu un anumit prefix.\n"
               "\t -client menu pentru a va intoarce la meniul pentru clienti.\n"
               "\t -main menu pentru a va intoarce la meniul principal.\n"
               "\t -exit pentru a iesi din program.")
@@ -84,7 +85,7 @@ class ClientUI:
             print("Valoare numerica invalida.")
             return
 
-        self.__clients_service.add_client(id, nume, cnp)
+        self.__clients_service.add_client(id, nume.lower(), cnp)
         print("Client adaugat cu succes.")
 
     def __ui_update_client(self):
@@ -206,6 +207,9 @@ class ClientUI:
                     self.__clients_service.print_clients_cnp(cnp)
                 except ValueError:
                     print("Valoare numerica invalida.")
+            elif user_input == "prefix":
+                prefix = input("Prefix: ")
+                self.__clients_service.print_filter_name_by_prefix(prefix.lower())
             else:
                 print("Comanda invalida.")
 

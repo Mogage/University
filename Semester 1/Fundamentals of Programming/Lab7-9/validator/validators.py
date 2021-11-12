@@ -84,7 +84,7 @@ class ClientsValidator:
         Clasa pentru validare unei entitati de tip client si atributele lui
     """
     @staticmethod
-    def __validate_string(string):
+    def __check_string(string):
         """
             Verifica daca un string nu este gol
         :param string: string
@@ -114,6 +114,15 @@ class ClientsValidator:
         if id < 1:
             raise ClientValidationError("Id-ul introdus este invalid.")
 
+    def validate_prefix(self, prefix):
+        """
+            Verifica daca prefixul este valid
+        :param prefix: string
+        ":raise: Prefixul introdus este invalid. if prefix is empty
+        """
+        if not self.__check_string(prefix):
+            raise ClientValidationError("Prefixul introdus este invalid.")
+
     def validate_name(self, name):
         """
             Verifica daca numele unui client este valid
@@ -121,7 +130,7 @@ class ClientsValidator:
         :return:-
         :raise: Numele introdus este invalid. if string is empty
         """
-        if not self.__validate_string(name):
+        if not self.__check_string(name):
             raise ClientValidationError("Numele introdus este invalid.")
 
     def validate_cnp(self, cnp):
@@ -144,10 +153,10 @@ class ClientsValidator:
         errors = ""
         if client.id < 1:
             errors += "Id-ul introdus este invalid.\n"
-        if not self.__validate_string(client.name):
+        if not self.__check_string(client.name):
             errors += "Numele introdus este invalid.\n"
         if not self.__check_cnp(client.cnp):
             errors += "Cnp-ul introdus este invalid.\n"
 
-        if self.__validate_string(errors):
+        if self.__check_string(errors):
             raise ClientValidationError(errors)

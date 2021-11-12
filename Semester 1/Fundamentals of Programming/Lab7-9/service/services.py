@@ -241,6 +241,14 @@ class ClientsService:
         self.__clients_validator.validate_cnp(cnp)
         self.__clients_repository.print_clients_cnp(cnp)
 
+    def print_filter_name_by_prefix(self, prefix):
+        """
+            Valideaza prefixul si filtreaza lista de clienti, afisand clientii a caror nume incepe cu acest prefix
+        :param prefix: string
+        """
+        self.__clients_validator.validate_prefix(prefix)
+        self.__clients_repository.print_filter_name_by_prefix(prefix)
+
     def check_client_exists(self, id):
         """
             Valideaza id-ul si verifica daca exista un client cu acest id

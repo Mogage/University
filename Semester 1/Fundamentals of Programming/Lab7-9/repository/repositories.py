@@ -446,6 +446,32 @@ class ClientsRepository:
                 return
         raise ClientRepositoryError("Cnp client inexistent.")
 
+    def filter_name_by_prefix(self, prefix):
+        """
+            Se returneaza o lista cu clientii a coror nume incep cu prefixul prefix
+        :param prefix: string
+        :return: lista filtrata
+        :raise: Nu exista niciun client a carui nume sa inceapa cu acest prefix. daca nu se gaseste un client care sa inceapa cu acel prefix
+        """
+        filtered_list = []
+        for _client in self.__clients:
+            if _client.name.startswith(prefix):
+                filtered_list.append(_client)
+
+        if len(filtered_list):
+            return filtered_list
+
+        raise ClientRepositoryError("Nu exista niciun client a carui nume sa inceapa cu acest prefix.")
+
+    def print_filter_name_by_prefix(self, prefix):
+        """
+            Afiseaza clientii a caror nume incep cu prefixul prefix
+        :param prefix: string
+        """
+        filtered_list = self.filter_name_by_prefix(prefix)
+        for _filtered_client in filtered_list:
+            print(str(_filtered_client))
+
     def __len__(self):
         """
             Lungimea unui repozitoriu este egala cu numarul de clienti inregistrati
