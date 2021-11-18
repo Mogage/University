@@ -5,9 +5,9 @@
 """
 from error.errors import BookValidationError, ClientValidationError
 
-class BooksValidator:
+class MutualValidator:
     """
-        Clasa pentru validarea entitatii de tip carte si a atributelor ei
+        Clasa pentru metode comune
     """
     @staticmethod
     def validate_id(id):
@@ -29,6 +29,16 @@ class BooksValidator:
                  False, else
         """
         return string != ""
+
+class BooksValidator(MutualValidator):
+    """
+        Clasa pentru validarea entitatii de tip carte si a atributelor ei
+    """
+    def __init__(self):
+        """
+
+        """
+        MutualValidator.__init__(self)
 
     def validate_title(self, title):
         """
@@ -79,19 +89,15 @@ class BooksValidator:
         if self.validate_string(errors):
             raise BookValidationError(errors)
 
-class ClientsValidator:
+class ClientsValidator(MutualValidator):
     """
         Clasa pentru validare unei entitati de tip client si atributele lui
     """
-    @staticmethod
-    def __check_string(string):
+    def __init__(self):
         """
-            Verifica daca un string nu este gol
-        :param string: string
-        :return: True, if string is not empty
-                 False, else
+
         """
-        return string != ""
+        MutualValidator.__init__(self)
 
     @staticmethod
     def __check_cnp(cnp):
@@ -120,7 +126,7 @@ class ClientsValidator:
         :param prefix: string
         ":raise: Prefixul introdus este invalid. if prefix is empty
         """
-        if not self.__check_string(prefix):
+        if not self.validate_string(prefix):
             raise ClientValidationError("Prefixul introdus este invalid.")
 
     def validate_name(self, name):
@@ -130,7 +136,7 @@ class ClientsValidator:
         :return:-
         :raise: Numele introdus este invalid. if string is empty
         """
-        if not self.__check_string(name):
+        if not self.validate_string(name):
             raise ClientValidationError("Numele introdus este invalid.")
 
     def validate_cnp(self, cnp):
@@ -153,10 +159,16 @@ class ClientsValidator:
         errors = ""
         if client.id < 1:
             errors += "Id-ul introdus este invalid.\n"
-        if not self.__check_string(client.name):
+        if not self.validate_string(client.name):
             errors += "Numele introdus este invalid.\n"
         if not self.__check_cnp(client.cnp):
             errors += "Cnp-ul introdus este invalid.\n"
 
-        if self.__check_string(errors):
+        if self.validate_string(errors):
             raise ClientValidationError(errors)
+
+class RentValidator(MutualValidator):
+    """
+        Clasa pentru validarea entitatii de tip inchiriere si a atributelor ei
+    """
+    pass

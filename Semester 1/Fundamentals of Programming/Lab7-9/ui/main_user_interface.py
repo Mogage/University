@@ -5,17 +5,19 @@
 """
 from ui.book_user_interface import BookUI
 from ui.client_user_interface import ClientUI
+from ui.rent_user_interface import RentUI
 
 class Console:
     """
         Clasa pentru interactiunea cu utilizatorul in cadrul meniului principal
     """
-    def __init__(self, books_service, clients_service):
+    def __init__(self, books_service, clients_service, rent_service):
         """
             Initializeaza meniurile cu care interactioneaza utilizatorul din cel principal
         :param books_service: serviciu de carti
         :param clients_service: serviciu de clienti
         """
+        self.__rent_ui = RentUI(rent_service)
         self.__books_ui = BookUI(books_service)
         self.__clients_ui = ClientUI(clients_service)
 
@@ -27,6 +29,7 @@ class Console:
         print(" Main menu:\n"
               "\t -book pentru a accesa meniul de gestiune carti.\n"
               "\t -client pentru a accesa meniul de gestiune clienti.\n"
+              "\t -rent pentru a accesa meniul de inchiriere carti.\n"
               "\t -exit pentru a iesi din program")
 
     def run(self):
@@ -49,6 +52,11 @@ class Console:
                 self.__main_menu()
             elif user_input == "client":
                 exit = self.__clients_ui.client_run()
+                if exit:
+                    return
+                self.__main_menu()
+            elif user_input == "rent":
+                exit = self.__rent_ui.rent_run()
                 if exit:
                     return
                 self.__main_menu()

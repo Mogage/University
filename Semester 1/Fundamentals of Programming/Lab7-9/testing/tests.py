@@ -1,8 +1,12 @@
-from domain.data import Books, Clients
-from repository.repositories import BooksRepository, ClientsRepository
-from service.services import BooksService, ClientsService
-from validator.validators import BooksValidator, ClientsValidator
-from error.errors import BookValidationError, BookRepositoryError, ClientValidationError, ClientRepositoryError
+import datetime
+
+from domain.data import Books, Clients, Rent
+from error.errors import BookValidationError, BookRepositoryError, ClientValidationError, ClientRepositoryError, RentRepositoryError
+from repository.book_repository import BooksFileRepository, BooksRepository
+from repository.client_repository import ClientsRepository, ClientsFileRepository
+from repository.rent_repository import RentFileRepository
+from service.services import BooksService, ClientsService, RentService
+from validator.validators import BooksValidator, ClientsValidator, RentValidator
 
 
 class Tests:
@@ -303,7 +307,7 @@ class Tests:
             assert str(bre) == "Id carte inexistent."
 
     def __run_tests_service_book(self):
-        book_repository = BooksRepository()
+        book_repository = BooksFileRepository("Save_files/test.txt")
         book_validator = BooksValidator()
         book_service = BooksService(book_repository, book_validator)
         id_book = 1
@@ -614,7 +618,7 @@ class Tests:
             assert str(cre) == "Id client inexistent."
 
     def __run_tests_service_client(self):
-        client_repository = ClientsRepository()
+        client_repository = ClientsFileRepository("Save_files/test.txt")
         client_validator = ClientsValidator()
         client_service = ClientsService(client_repository, client_validator)
         client_id = 1
@@ -641,15 +645,197 @@ class Tests:
         self.__test_service_update_client_invalid(client_service, client_id, invalid_client_id, invalid_client_name)
         self.__test_service_update_client_non_existent(client_service, non_existent_client_id, non_existent_name)
 
+    @staticmethod
+    def __test_create_rent(book, client, date):
+        rent = Rent(book, client, date)
+        assert rent.book.id == 1
+        assert rent.date == "18/11/2021"
+        assert rent.client.cnp == 1122334455667
+        return rent
+
+    @staticmethod
+    def __test_equal_rent(rent1, book, client2, date):
+        rent2 = Rent(book, client2, date)
+        assert rent1 == rent2
+
+    @staticmethod
+    def __test_print_rent(rent):
+        assert str(rent) == "Clientul 'Mogage' a inchiriat cartea 'Ion' scrisa de 'Rebreanu' la data de 18/11/2021"
+
+    def _run_tests_create_rent(self):
+        book = Books(1, "Ion", "Pamant", "Rebreanu")
+        client = Clients(1, "Mogage", 1122334455667)
+        date = "18/11/2021"
+
+        client2 = Clients(1, "Nicolae", 22334455667)
+
+        rent1 = self.__test_create_rent(book, client, date)
+        self.__test_equal_rent(rent1, book, client2, date)
+        self.__test_print_rent(rent1)
+
+    @staticmethod
+    def __test_repository_add_rent(rent_repository, rent):
+        assert len(rent_repository) == 0
+
+        rent_repository.add_rent(rent)
+        assert len(rent_repository) == 1
+        assert rent_repository.rent[0].book.id == 1
+        assert rent_repository.rent[0].book.author == "Rebreanu"
+        assert rent_repository.rent[0].client.cnp == 1122334455667
+        assert rent_repository.rent[0].date == "18/11/2021"
+
+    @staticmethod
+    def __test_repository_add_existing_rent(rent_repository, other_rent):
+        try:
+            rent_repository.add_rent(other_rent)
+            assert False
+        except RentRepositoryError as rre:
+            assert str(rre) == "Acesta carte este deja inchiriata de acest client."
+
+    @staticmethod
+    def __test_repository_delete_rent_success(rent_repository, rent):
+        rent_repository.delete_rent(rent.book.id, rent.client.id)
+        assert len(rent_repository) == 0
+        rent_repository.add_rent(rent)
+
+    def __run_tests_repository_rent(self):
+        rent_repository = RentFileRepository("Save_files/test.txt")
+        book = Books(1, "Ion", "Pamant", "Rebreanu")
+        client = Clients(1, "Mogage", 1122334455667)
+        date = "18/11/2021"
+        rent = Rent(book, client, date)
+
+        other_client = Clients(1, "Nicolae", 22334455667)
+        other_rent = Rent(book, other_client, date)
+
+        self.__test_repository_add_rent(rent_repository, rent)
+        self.__test_repository_add_existing_rent(rent_repository, other_rent)
+        self.__test_repository_delete_rent_success(rent_repository, rent)
+
+    @staticmethod
+    def __test_service_add_rent_succes(rent_service):
+        assert len(rent_service.get_all_rent()) == 0
+
+        date = datetime.datetime.now().strftime("%d/%m/%y")
+        rent_service.add_rent(1, 1)
+        rent = rent_service.get_all_rent()
+        assert rent[0].book.id == 1
+        assert rent[0].book.title == "Ion"
+        assert rent[0].client.name == "Mogage"
+        assert rent[0].date == date
+
+    @staticmethod
+    def __test_service_add_rent_invalid(rent_service):
+        try:
+            rent_service.add_rent(-2, 5)
+            assert False
+        except BookValidationError as bve:
+            assert str(bve) == "Id-ul introdus este invalid."
+        try:
+            rent_service.add_rent(1, -5)
+            assert False
+        except ClientValidationError as cve:
+            assert str(cve) == "Id-ul introdus este invalid."
+
+    @staticmethod
+    def __test_service_add_rent_non_existent(rent_service):
+        try:
+            rent_service.add_rent(1, 5)
+            assert False
+        except ClientRepositoryError as cre:
+            assert str(cre) == "Id client inexistent."
+        try:
+            rent_service.add_rent(5, 1)
+            assert False
+        except BookRepositoryError as bre:
+            assert str(bre) == "Id carte inexistent."
+
+    @staticmethod
+    def __test_service_delete_rent_succes(rent_service):
+        rent_service.delete_rent(1, 1)
+        assert len(rent_service.get_all_rent()) == 0
+        rent_service.add_rent(1, 1)
+
+    @staticmethod
+    def __test_service_delete_rent_invalid(rent_service):
+        try:
+            rent_service.delete_rent(-1, 1)
+            assert False
+        except BookValidationError as bve:
+            assert str(bve) == "Id-ul introdus este invalid."
+        try:
+            rent_service.delete_rent(1, -1)
+            assert False
+        except ClientValidationError as cve:
+            assert str(cve) == "Id-ul introdus este invalid."
+
+    @staticmethod
+    def __test_service_delete_rent_non_existent(rent_service):
+        try:
+            rent_service.delete_rent(5, 1)
+            assert False
+        except BookRepositoryError as bre:
+            assert str(bre) == "Id carte inexistent."
+        try:
+            rent_service.delete_rent(1, 5)
+            assert False
+        except ClientRepositoryError as cre:
+            assert str(cre) == "Id client inexistent."
+        try:
+            rent_service.delete_rent(2, 1)
+            assert False
+        except RentRepositoryError as rre:
+            assert str(rre) == "Acest client nu a inchiriat aceasta carte."
+        try:
+            rent_service.delete_rent(1, 2)
+            assert False
+        except RentRepositoryError as rre:
+            assert str(rre) == "Acest client nu are inchiriata nicio carte in acest moment."
+    
+    def __run_tests_service_rent(self):
+        books_validator = BooksValidator()
+        clients_validator = ClientsValidator()
+        rent_validator = RentValidator()
+
+        books_repository = BooksFileRepository("Save_files/test.txt")
+        clients_repository = ClientsFileRepository("Save_files/test.txt")
+        rent_repository = RentFileRepository("Save_files/test.txt")
+
+        books_service = BooksService(books_repository, books_validator)
+        clients_service = ClientsService(clients_repository, clients_validator)
+        rent_service = RentService(rent_repository, rent_validator, books_service, clients_service)
+
+        books_service.add_book(1, "Ion", "Pamant", "Rebreanu")
+        books_service.add_book(2, "Ion", "Pamant", "Rebreanu")
+        clients_service.add_client(1, "Mogage", 1122334455667)
+        clients_service.add_client(2, "Mogage", 1122334455668)
+
+        self.__test_service_add_rent_succes(rent_service)
+        self.__test_service_add_rent_invalid(rent_service)
+        self.__test_service_add_rent_non_existent(rent_service)
+        self.__test_service_delete_rent_succes(rent_service)
+        self.__test_service_delete_rent_invalid(rent_service)
+        self.__test_service_delete_rent_non_existent(rent_service)
+
     def run_all_tests(self):
         print("Start tests...")
+        with open("Save_files/test.txt", "w"):
+            pass
         self.__run_tests_create_book()
         self.__run_tests_validate_book()
         self.__run_tests_repository_book()
         self.__run_tests_service_book()
 
+        with open("Save_files/test.txt", "w"):
+            pass
         self.__run_tests_create_client()
         self.__run_tests_validate_client()
         self.__run_tests_repository_client()
         self.__run_tests_service_client()
+
+        with open("Save_files/test.txt", "w"):
+            pass
+        self._run_tests_create_rent()
+        self.__run_tests_repository_rent()
+        self.__run_tests_service_rent()
         print("Finish tests...")

@@ -102,7 +102,7 @@ class BookUI:
             print("Valoare numerica invalida.")
             return
 
-        self.__books_service.check_book_exists(id)
+        self.__books_service.find_book_by_id(id)
 
         self.__update_book_menu()
         while True:

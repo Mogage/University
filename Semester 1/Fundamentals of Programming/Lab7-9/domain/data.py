@@ -4,10 +4,12 @@
     Modul pentru entitati
 """
 
+
 class Books:
     """
         Clasa care gestioneaza o entitate de tip carte
     """
+
     def __init__(self, id_book, book_title, book_description, book_author):
         """
             Functie de initializare a datelor unei carti
@@ -106,12 +108,15 @@ class Books:
                 Descriere: description
                 Autor: author
         """
-        return "[" + str(self.__id) + "]Titlu: " + self.__title + "\nDescriere: " + self.__description + "\nAutor: " + self.__author
+        return "[" + str(
+            self.__id) + "]Titlu: " + self.__title + "\nDescriere: " + self.__description + "\nAutor: " + self.__author
+
 
 class Clients:
     """
         Clasa care gestioneaza entitatea de tip client
     """
+
     def __init__(self, id_client, name, cnp):
         """
             Functie de initializare a datelor unui client
@@ -180,3 +185,74 @@ class Clients:
         :return: client in format: [id]Nume: name. CNP: cnp
         """
         return "[" + str(self.__id) + "]Nume: " + self.__name + ". CNP: " + str(self.__cnp)
+
+
+class Rent:
+    """
+        Clasa pentru gestiunea entitatii de tip inchiriere
+    """
+    def __init__(self, book, client, date):
+        """
+            Initalizarea datelor unei inchirieri
+        :param book: o carte
+        :param client: un client
+        :param date: data in formatul dd/mm/yyyy
+        """
+        self.__book = book
+        self.__client = client
+        self.__date = date
+
+    @property
+    def book(self):
+        """
+            Getter pentru cartea unei inchirieri self
+        :return: o carte
+        """
+        return self.__book
+
+    @property
+    def client(self):
+        """
+            Getter pentru clientul unei inchirieri self
+        :return: un client
+        """
+        return self.__client
+
+    @property
+    def date(self):
+        """
+            Getter pentru data unei inchirieri self
+        :return: o data in forma dd/mm/yyyy
+        """
+        return self.__date
+
+    def __gt__(self, other):
+        """
+            o inchiriere self este mai mare decat una other daca id-ul clientului self e mai mare decat cel a lui other \
+            sau in caz de egalitate, daca id-ul cartii self e mai mare decat id-ul cartii other
+        :param other: inchiriere
+        :return: True, daca inchirierea self > other
+                 False, altfel
+        """
+        if self.__client.id != other.client.id:
+            return self.__client.id > other.client.id
+
+        return self.__book.id > other.book.id
+
+    def __eq__(self, other):
+        """
+            2 inchirieri sunt egale daca au client cu acelasi id si carte cu acelasi id
+        :param other: inchiriere
+        :return: True, daca 2 inchiriere sunt egale
+                 False, altfel
+        """
+        return self.__book.id == other.book.id and self.__client.id == other.client.id
+
+    def __str__(self):
+        """
+            Pregateste o inchiriere pentru afisare
+        :return: inchiriere in format "Clientul 'name' a inchiriat cartea 'titlu_carte' scrisa de 'autor_carte' \
+                 la data de date"
+        """
+        return "Clientul '" + self.__client.name + "' a inchiriat cartea '" + self.__book.title + "' scrisa de '" + \
+               self.__book.author + "' la data de " + str(self.__date)

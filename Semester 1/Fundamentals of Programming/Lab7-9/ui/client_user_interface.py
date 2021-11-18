@@ -103,7 +103,7 @@ class ClientUI:
             print("Valoare numerica invalida.")
             return
 
-        self.__clients_service.check_client_exists(id)
+        self.__clients_service.find_client_by_id(id)
 
         self.__update_client_menu()
         while True:

@@ -14,3 +14,9 @@ class ClientValidationError(Exception):
 
 class ClientRepositoryError(Exception):
     pass
+
+class RentValidatorError(Exception):
+    pass
+
+class RentRepositoryError(Exception):
+    pass
