@@ -1,3 +1,0 @@
-1;Moara cu noroc;ceva;slavici;1;mogage;1122334455667;18/11/21
-2;Ion;Pamant mult;Rebreanu;1;mogage;1122334455667;18/11/21
-3;ultima noapte;stefan si gelozie;petrescu;2;costan;2233445566778;18/11/21
