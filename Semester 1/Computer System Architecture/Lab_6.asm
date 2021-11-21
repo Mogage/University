@@ -48,30 +48,31 @@ segment code use32 class=code
         
         inc byte [aux_length]       ; Altfel crestem valoare lungimii auxiliare cu 1
         jmp crescator               ; si sarim peste operatia din cazul sir[i] > sir[i + 1]
-    descrescator:                   ; Daca sir[BL - 1] > sir[BL] putem zice ca la pasul curent lungimea auxiliara a subsirului
-        mov byte [aux_length], 1    ; este 1
-    crescator:
-        mov AL, [aux_length]        ; AL = aux_length
-        mov AH, [max_length]        ; AH = max_length
-        cmp AL, AH                  ; Verificam daca s-a gasit o lungime auxiliara mai mare decat cea maxima
-        jbe continua                ; Daca aux_length <= max_length inseamna ca nu s-a gasit un subsir cu lungime 
-                                    ; mai mare si sasim 
-        mov byte [second_pos], BL   ; second_pos = BL
         
-        ; first_pos = BL - aux_length + 1
-        mov AL, BL                  ; AL = BL
-        sub AL, byte [aux_length]   ; AL = AL - aux_length = BL - aux_length
-        inc AL                      ; AL = AL + 1 = BL - aux_length + 1
-        mov byte [first_pos], AL    ; first_pos = AL
+        descrescator:                   ; Daca sir[BL - 1] > sir[BL] putem zice ca la pasul curent lungimea auxiliara a subsirului
+            mov byte [aux_length], 1    ; este 1
+        crescator:
+            mov AL, [aux_length]        ; AL = aux_length
+            mov AH, [max_length]        ; AH = max_length
+            cmp AL, AH                  ; Verificam daca s-a gasit o lungime auxiliara mai mare decat cea maxima
+            jbe continua                ; Daca aux_length <= max_length inseamna ca nu s-a gasit un subsir cu lungime 
+                                        ; mai mare si sasim 
+            mov byte [second_pos], BL   ; second_pos = BL
+            
+            ; first_pos = BL - aux_length + 1
+            mov AL, BL                  ; AL = BL
+            sub AL, byte [aux_length]   ; AL = AL - aux_length = BL - aux_length
+            inc AL                      ; AL = AL + 1 = BL - aux_length + 1
+            mov byte [first_pos], AL    ; first_pos = AL
+            
+            ; max_length = aux_length
+            mov AL, byte [aux_length]
+            mov byte [max_length], AL
+            
+        continua:
+            inc BX                      ; BX = BX + 1 | Trecem la urmatorul element
         
-        ; max_length = aux_length
-        mov AL, byte [aux_length]
-        mov byte [max_length], AL
-        
-    continua:
-        inc BX                      ; BX = BX + 1 | Trecem la urmatorul element
-        
-        loop repeta                 ; Daca mai sunt cuvinte de parcus, se reia ciclul
+    loop repeta                         ; Daca mai sunt cuvinte de parcus, se reia ciclul
         
         mov BL, byte [max_length]   ; Punem in BL lungimea subsirului
         
@@ -95,7 +96,7 @@ segment code use32 class=code
         add ESP, 8
         
         dec BL                      ; BX = BX - 1
-        jnz afisare                 ; Daca mai sunt cuvinte in subsir, se reia bucla
+    jnz afisare                     ; Daca mai sunt cuvinte in subsir, se reia bucla
         
         ; exit(0)
         push    dword 0      ; push the parameter for exit onto the stack
