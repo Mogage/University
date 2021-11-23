@@ -3,7 +3,7 @@
     Creation date: 6 nov 2021
     Modul pentru partea de interactiune cu utilizatorul in meniul pentru carti
 """
-from error.errors import BookValidationError, BookRepositoryError
+from error.errors import BookRepositoryError, BookError
 
 class BookUI:
     """
@@ -23,9 +23,10 @@ class BookUI:
         """
         print(" Book menu:\n"
               "\t -add book pentru a adauga o carte.\n"
-              "\t -update book pentru a accesa meniul de actualizare.\n"
-              "\t -delete book pentru a accesa meniul de stergere.\n"
-              "\t -print books pentru a accesa meniul de afisare.\n"
+              "\t -generate pentru a adauga un numar de carti aleatorii.\n"
+              "\t -update pentru a accesa meniul de actualizare.\n"
+              "\t -delete pentru a accesa meniul de stergere.\n"
+              "\t -print pentru a accesa meniul de afisare.\n"
               "\t -show menu pentru a afisa meniul.\n"
               "\t -main menu pentru a va intoarce la meniul principal.\n"
               "\t -exit pentru a iesi din program.")
@@ -119,15 +120,27 @@ class BookUI:
                 continue
             if user_input == "titlu":
                 title = input("Titlu: ")
-                self.__books_service.update_book_title(id, title)
+                try:
+                    self.__books_service.update_book_title(id, title)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Titlu actualizat cu succes.")
             elif user_input == "descriere":
                 description = input("Descriere: ")
-                self.__books_service.update_book_description(id, description)
+                try:
+                    self.__books_service.update_book_description(id, description)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Descriere actualizata cu succes.")
             elif user_input == "autor":
                 author = input("Autor: ")
-                self.__books_service.update_book_author(id, author)
+                try:
+                    self.__books_service.update_book_author(id, author)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Autor actualizat cu succes.")
             else:
                 print("Comanda invalida.")
@@ -161,17 +174,32 @@ class BookUI:
                     print("Carte stearsa cu succes.")
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except BookError as be:
+                    print(be)
+                    continue
             elif user_input == "titlu":
                 title = input("Titlu: ")
-                self.__books_service.delete_book_by_title(title)
+                try:
+                    self.__books_service.delete_book_by_title(title)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Carti sterse cu succes.")
             elif user_input == "descriere":
                 description = input("Descriere: ")
-                self.__books_service.delete_book_by_description(description)
+                try:
+                    self.__books_service.delete_book_by_description(description)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Carti sterse cu succes.")
             elif user_input == "autor":
                 author = input("Autor: ")
-                self.__books_service.delete_book_by_author(author)
+                try:
+                    self.__books_service.delete_book_by_author(author)
+                except BookError as be:
+                    print(be)
+                    continue
                 print("Carti sterse cu succes.")
             else:
                 print("Comanda invalida.")
@@ -206,17 +234,41 @@ class BookUI:
                     self.__books_service.print_books_id(id)
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except BookError as be:
+                    print(be)
+                    continue
             elif user_input == "titlu":
                 title = input("Titlu: ")
-                self.__books_service.print_books_title(title)
+                try:
+                    self.__books_service.print_books_title(title)
+                except BookError as be:
+                    print(be)
+                    continue
             elif user_input == "descriere":
                 description = input("Descriere: ")
-                self.__books_service.print_books_description(description)
+                try:
+                    self.__books_service.print_books_description(description)
+                except BookError as be:
+                    print(be)
+                    continue
             elif user_input == "autor":
                 author = input("Autor: ")
-                self.__books_service.print_books_author(author)
+                try:
+                    self.__books_service.print_books_author(author)
+                except BookError as be:
+                    print(be)
+                    continue
             else:
                 print("Comanda invalida.")
+
+    def __ui_generate_books(self):
+        try:
+            number_of_books = int(input("Numarul de carti care sa se genereze: "))
+        except ValueError:
+            print("Valoare numerica invalida.")
+            return
+
+        self.__books_service.generate_books(number_of_books)
 
     def book_run(self):
         """
@@ -238,45 +290,42 @@ class BookUI:
             elif user_input == "add book":
                 try:
                     self.__ui_add_book()
-                except BookValidationError as bve:
-                    print(bve)
-                except BookRepositoryError as bre:
-                    print(bre)
-            elif user_input == "update book":
+                except BookError as be:
+                    print(be)
+            elif user_input == "generate":
+                try:
+                    self.__ui_generate_books()
+                except BookError as be:
+                    print(be)
+            elif user_input == "update":
                 try:
                     output = self.__ui_update_book()
                     if output == "exit":
                         return True
                     elif output == "main menu":
                         return
-                except BookValidationError as bve:
-                    print(bve)
-                except BookRepositoryError as bre:
-                    print(bre)
+                except BookError as be:
+                    print(be)
                 self.__book_menu()
-            elif user_input == "delete book":
+            elif user_input == "delete":
                 try:
                     output = self.__ui_delete_book()
                     if output == "exit":
                         return True
                     elif output == "main menu":
                         return
-                except BookValidationError as bve:
-                    print(bve)
-                except BookRepositoryError as bre:
-                    print(bre)
+                except BookError as be:
+                    print(be)
                 self.__book_menu()
-            elif user_input == "print books":
+            elif user_input == "print":
                 try:
                     output = self.__ui_print_books()
                     if output == "exit":
                         return True
                     elif output == "main menu":
                         return
-                except BookValidationError as bve:
-                    print(bve)
-                except BookRepositoryError as bre:
-                    print(bre)
+                except BookError as be:
+                    print(be)
                 self.__book_menu()
             else:
                 print("Comanda invalida.")

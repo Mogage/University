@@ -3,20 +3,30 @@
     Creation date: 6 nov 2021
     Modul pentru tratarea exceptiilor
 """
-class BookValidationError(Exception):
+class RentError(Exception):
     pass
 
-class BookRepositoryError(Exception):
+class RentValidationError(RentError):
     pass
 
-class ClientValidationError(Exception):
+class RentRepositoryError(RentError):
     pass
 
-class ClientRepositoryError(Exception):
+class BookError(RentError):
     pass
 
-class RentValidatorError(Exception):
+class BookValidationError(BookError):
     pass
 
-class RentRepositoryError(Exception):
+class BookRepositoryError(BookError):
     pass
+
+class ClientError(RentError):
+    pass
+
+class ClientValidationError(ClientError):
+    pass
+
+class ClientRepositoryError(ClientError):
+    pass
+

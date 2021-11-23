@@ -201,8 +201,9 @@ class ClientsRepository:
         :raise: Nu exista niciun client a carui nume sa inceapa cu acest prefix. daca nu se gaseste un client care sa inceapa cu acel prefix
         """
         filtered_list = []
+        prefix = prefix.lower()
         for _client in self.__clients:
-            if _client.name.startswith(prefix):
+            if _client.name.lower().startswith(prefix):
                 filtered_list.append(_client)
 
         if len(filtered_list):
@@ -279,7 +280,7 @@ class ClientsFileRepository(ClientsRepository):
         client_file.write(line)
         client_file.write("\n")
 
-    def rewrite_file(self):
+    def __rewrite_file(self):
         """
             Scrie in fisier toti clientii
         """
@@ -287,3 +288,44 @@ class ClientsFileRepository(ClientsRepository):
             for _client in self.clients:
                 line = self.__create_line(_client)
                 self.__add_to_file(line, client_file)
+
+    def add_client(self, client):
+        """
+            Adaug un client in fisier
+        :param client: client
+        """
+        ClientsRepository.add_client(self, client)
+        self.__rewrite_file()
+
+    def update_name(self, id, name):
+        """
+            Actualizeaza numele unui client in fisier
+        :param id: int - id-ul unui client
+        :param name: string - numele unui client
+        """
+        ClientsRepository.update_name(self, id, name)
+        self.__rewrite_file()
+
+    def delete_by_id(self, id):
+        """
+            Sterge clientul cu id-ul id din fisier
+        :param id: int - id-ul unui client
+        """
+        ClientsRepository.delete_by_id(self, id)
+        self.__rewrite_file()
+
+    def delete_by_name(self, name):
+        """
+            Sterge clientul cu numele name din fisier
+        :param name: string - numele unui client
+        """
+        ClientsRepository.delete_by_name(self, name)
+        self.__rewrite_file()
+
+    def delete_by_cnp(self, cnp):
+        """
+            Sterge clientul cu cnp-ul cnp din fisier
+        :param cnp: int - cnp-ul unui client
+        """
+        ClientsRepository.delete_by_cnp(self, cnp)
+        self.__rewrite_file()

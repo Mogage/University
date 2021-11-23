@@ -1,6 +1,8 @@
 from testing.tests import Tests
 from ui.main_user_interface import Console
-from service.services import BooksService, ClientsService, RentService
+from service.book_service import BooksService
+from service.client_service import ClientsService
+from service.rent_service import RentService
 from validator.validators import BooksValidator, ClientsValidator, RentValidator
 from repository.book_repository import BooksFileRepository
 from repository.client_repository import ClientsFileRepository
@@ -17,7 +19,7 @@ if __name__ == "__main__":
 
     books_service = BooksService(books_repository, books_validator)
     clients_service = ClientsService(clients_repository, clients_validator)
-    rent_service = RentService(rent_repository, rent_validator, books_service, clients_service)
+    rent_service = RentService(rent_repository, rent_validator, books_repository, clients_repository)
 
     tests = Tests()
     tests.run_all_tests()

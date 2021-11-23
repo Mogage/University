@@ -3,7 +3,7 @@
     Creation date: 8 nov 2021
     Modul pentru partea de interactiune cu utilizatorul in meniul pentru clienti
 """
-from error.errors import ClientRepositoryError, ClientValidationError
+from error.errors import ClientRepositoryError, ClientError
 
 class ClientUI:
     """
@@ -23,9 +23,10 @@ class ClientUI:
         """
         print(" Client menu:\n"
               "\t -add client pentru a adauga un client.\n"
-              "\t -update client pentru a accesa meniul de actualizare.\n"
-              "\t -delete client pentru a accesa meniul de stergere.\n"
-              "\t -print clients pentru a accesa meniul de afisare.\n"
+              "\t -generate pentru a adauga un numar de clienti aleatorii.\n"
+              "\t -update pentru a accesa meniul de actualizare.\n"
+              "\t -delete pentru a accesa meniul de stergere.\n"
+              "\t -print pentru a accesa meniul de afisare.\n"
               "\t -show menu pentru a afisa meniul.\n"
               "\t -main menu pentru a va intoarce la meniul principal.\n"
               "\t -exit pentru a iesi din program.")
@@ -85,7 +86,7 @@ class ClientUI:
             print("Valoare numerica invalida.")
             return
 
-        self.__clients_service.add_client(id, nume.lower(), cnp)
+        self.__clients_service.add_client(id, nume, cnp)
         print("Client adaugat cu succes.")
 
     def __ui_update_client(self):
@@ -120,7 +121,10 @@ class ClientUI:
                 continue
             if user_input == "nume":
                 name = input("Nume: ")
-                self.__clients_service.update_client_name(id, name)
+                try:
+                    self.__clients_service.update_client_name(id, name)
+                except ClientError as ce:
+                    print(ce)
                 print("Nume actualizat cu succes.")
             else:
                 print("Comanda invalida.")
@@ -154,9 +158,14 @@ class ClientUI:
                     print("Client sters cu succes.")
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except ClientError as ce:
+                    print(ce)
             elif user_input == "nume":
                 name = input("Nume: ")
-                self.__clients_service.delete_client_by_name(name)
+                try:
+                    self.__clients_service.delete_client_by_name(name)
+                except ClientError as ce:
+                    print(ce)
                 print("Clienti stersi cu succes.")
             elif user_input == "cnp":
                 try:
@@ -165,6 +174,8 @@ class ClientUI:
                     print("Clienti stersi cu succes.")
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except ClientError as ce:
+                    print(ce)
             else:
                 print("Comanda invalida.")
 
@@ -198,20 +209,42 @@ class ClientUI:
                     self.__clients_service.print_clients_id(id)
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except ClientError as ce:
+                    print(ce)
             elif user_input == "nume":
                 name = input("Nume: ")
-                self.__clients_service.print_clients_name(name)
+                try:
+                    self.__clients_service.print_clients_name(name)
+                except ClientError as ce:
+                    print(ce)
             elif user_input == "cnp":
                 try:
                     cnp = int(input("Cnp: "))
                     self.__clients_service.print_clients_cnp(cnp)
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except ClientError as ce:
+                    print(ce)
             elif user_input == "prefix":
                 prefix = input("Prefix: ")
-                self.__clients_service.print_filter_name_by_prefix(prefix.lower())
+                try:
+                    self.__clients_service.print_filter_name_by_prefix(prefix.lower())
+                except ClientError as ce:
+                    print(ce)
             else:
                 print("Comanda invalida.")
+
+    def __ui_generate_client(self):
+        """
+            Genereaza un numar de clienti introdus de la utilizator
+        """
+        try:
+            number_of_clients = int(input("Numarul de clienti care sa se genereze: "))
+        except ValueError:
+            print("Valoare numerica invalida.")
+            return
+
+        self.__clients_service.generate_clients(number_of_clients)
 
     def client_run(self):
         """
@@ -233,45 +266,42 @@ class ClientUI:
             elif user_input == "add client":
                 try:
                     self.__ui_add_client()
-                except ClientValidationError as cve:
-                    print(cve)
-                except ClientRepositoryError as cre:
-                    print(cre)
-            elif user_input == "update client":
+                except ClientError as ce:
+                    print(ce)
+            elif user_input == "generate":
+                try:
+                    self.__ui_generate_client()
+                except ClientError as ce:
+                    print(ce)
+            elif user_input == "update":
                 try:
                     exit = self.__ui_update_client()
                     if exit == "exit":
                         return "exit"
                     elif exit == "main menu":
                         return
-                except ClientValidationError as cve:
-                    print(cve)
-                except ClientRepositoryError as cre:
-                    print(cre)
+                except ClientError as ce:
+                    print(ce)
                 self.__client_menu()
-            elif user_input == "delete client":
+            elif user_input == "delete":
                 try:
                     exit = self.__ui_delete_client()
                     if exit == "exit":
                         return "exit"
                     elif exit == "main menu":
                         return
-                except ClientValidationError as cve:
-                    print(cve)
-                except ClientRepositoryError as cre:
-                    print(cre)
+                except ClientError as ce:
+                    print(ce)
                 self.__client_menu()
-            elif user_input == "print clients":
+            elif user_input == "print":
                 try:
                     exit = self.__ui_print_clients()
                     if exit == "exit":
                         return "exit"
                     elif exit == "main menu":
                         return
-                except ClientValidationError as cve:
-                    print(cve)
-                except ClientRepositoryError as cre:
-                    print(cre)
+                except ClientError as ce:
+                    print(ce)
                 self.__client_menu()
             else:
                 print("Comanda invalida.")

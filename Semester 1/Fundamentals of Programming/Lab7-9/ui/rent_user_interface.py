@@ -3,8 +3,7 @@
     Creation date: 16 nov 2021
     Modul pentru partea de interactiune cu utilizatorul in meniul de inchiriere
 """
-from error.errors import BookRepositoryError, ClientRepositoryError, RentRepositoryError, ClientValidationError, \
-    BookValidationError
+from error.errors import RentRepositoryError, RentError
 
 class RentUI:
     """
@@ -24,6 +23,7 @@ class RentUI:
         """
         print(" Rent menu:\n"
               "\t -rent book pentru a inchiria o carte.\n"
+              "\t -generate pentru a efectua un numar de inchirieri aleatorii.\n"
               "\t -return pentru a inapoia o carte.\n"
               "\t -print pentru a afisa inchirierile.\n"
               "\t -show menu pentru a afisa meniul.\n"
@@ -120,8 +120,19 @@ class RentUI:
                     self.__rent_service.print_rent_by_client_id(id_client)
                 except ValueError:
                     print("Valoare numerica invalida.")
+                except RentError as re:
+                    print(re)
             else:
                 print("Comanda invalida.")
+
+    def __ui_generate_rent(self):
+        try:
+            number_of_rent = int(input("Numarul de inchirieri care sa se genereze: "))
+        except ValueError:
+            print("Valoare numerica invalida.")
+            return
+
+        self.__rent_service.generate_rent(number_of_rent)
 
     def rent_run(self):
         """
@@ -142,42 +153,24 @@ class RentUI:
             elif user_input == "rent book":
                 try:
                     self.__ui_add_rent()
-                except ClientValidationError as cve:
-                    print(cve)
-                except BookValidationError as bve:
-                    print(bve)
-                except ClientRepositoryError as cre:
-                    print(cre)
-                except BookRepositoryError as bre:
-                    print(bre)
-                except RentRepositoryError as rre:
-                    print(rre)
+                except RentError as re:
+                    print(re)
+            elif user_input == "generate":
+                try:
+                    self.__ui_generate_rent()
+                except RentError as re:
+                    print(re)
             elif user_input == "return":
                 try:
                     self.__ui_delete_rent()
-                except ClientValidationError as cve:
-                    print(cve)
-                except BookValidationError as bve:
-                    print(bve)
-                except ClientRepositoryError as cre:
-                    print(cre)
-                except BookRepositoryError as bre:
-                    print(bre)
-                except RentRepositoryError as rre:
-                    print(rre)
+                except RentError as re:
+                    print(re)
             elif user_input == "print":
-                try:
-                    output = self.__ui_print()
-                    if output == "exit":
-                        return True
-                    if output == "main":
-                        return
-                except RentRepositoryError as rre:
-                    print(rre)
-                except ClientValidationError as cve:
-                    print(cve)
-                except ClientRepositoryError as cre:
-                    print(cre)
+                output = self.__ui_print()
+                if output == "exit":
+                    return True
+                if output == "main":
+                    return
                 self.__rent_menu()
             else:
                 print("Comanda invalida")

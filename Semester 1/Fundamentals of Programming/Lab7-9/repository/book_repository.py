@@ -313,7 +313,7 @@ class BooksFileRepository(BooksRepository):
         book_file.write(line)
         book_file.write("\n")
 
-    def rewrite_file(self):
+    def __rewrite_file(self):
         """
             Scrie in fisier toate cartile
         """
@@ -321,3 +321,70 @@ class BooksFileRepository(BooksRepository):
             for _book in self.books:
                 line = self.__create_line(_book)
                 self.__add_to_file(line, book_file)
+
+    def add_book(self, book):
+        """
+            Adauga carte in fisier
+        :param book: carte
+        """
+        BooksRepository.add_book(self, book)
+        self.__rewrite_file()
+
+    def update_book_title(self, id, title):
+        """
+            Actualizeaza titlul unei carti in fisier
+        :param id: int - id-ul unei carti
+        :param title: string - titlul unei carti
+        """
+        BooksRepository.update_book_title(self, id, title)
+        self.__rewrite_file()
+
+    def update_book_author(self, id, author):
+        """
+            Actualizeaza autorul unei carti in fisier
+        :param id: int - id-ul unei carti
+        :param author: string - autorul unei carti
+        """
+        BooksRepository.update_book_author(self, id, author)
+        self.__rewrite_file()
+
+    def update_book_description(self, id, description):
+        """
+            Actualizeaza descrierea unei carti in fisier
+        :param id: int - id-ul unei carti
+        :param description: string - descrierea unei carti
+        """
+        BooksRepository.update_book_description(self, id, description)
+        self.__rewrite_file()
+
+    def delete_book_by_id(self, id):
+        """
+            Sterge o carte cu id-ul id din fisier
+        :param id: int - id-ul unei carti
+        """
+        BooksRepository.delete_book_by_id(self, id)
+        self.__rewrite_file()
+
+    def delete_book_by_title(self, title):
+        """
+            Sterge cartile cu titlul title din fisier
+        :param title: string - titlul unei carti
+        """
+        BooksRepository.delete_book_by_title(self, title)
+        self.__rewrite_file()
+
+    def delete_book_by_author(self, author):
+        """
+            Sterge cartile cu autorul author din fisier
+        :param author: string - autorul unei carti
+        """
+        BooksRepository.delete_book_by_author(self, author)
+        self.__rewrite_file()
+
+    def delete_book_by_description(self, description):
+        """
+            Sterge cartile cu descrierea description din fisier
+        :param description: string - descrierea unei carti
+        """
+        BooksRepository.delete_book_by_description(self, description)
+        self.__rewrite_file()

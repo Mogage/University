@@ -1,13 +1,16 @@
 import datetime
 
-from domain.data import Books, Clients, Rent
-from error.errors import BookValidationError, BookRepositoryError, ClientValidationError, ClientRepositoryError, RentRepositoryError
+from domain.data import Books, Clients
+from domain.dtos import RentDto
+from error.errors import BookValidationError, BookRepositoryError, ClientValidationError, ClientRepositoryError, \
+    RentRepositoryError, RentValidationError
 from repository.book_repository import BooksFileRepository, BooksRepository
 from repository.client_repository import ClientsRepository, ClientsFileRepository
 from repository.rent_repository import RentFileRepository
-from service.services import BooksService, ClientsService, RentService
+from service.book_service import BooksService
+from service.client_service import ClientsService
+from service.rent_service import RentService
 from validator.validators import BooksValidator, ClientsValidator, RentValidator
-
 
 class Tests:
 
@@ -647,7 +650,9 @@ class Tests:
 
     @staticmethod
     def __test_create_rent(book, client, date):
-        rent = Rent(book, client, date)
+        rent = RentDto(book.id, client.id, date)
+        rent.book = book
+        rent.client = client
         assert rent.book.id == 1
         assert rent.date == "18/11/2021"
         assert rent.client.cnp == 1122334455667
@@ -655,7 +660,7 @@ class Tests:
 
     @staticmethod
     def __test_equal_rent(rent1, book, client2, date):
-        rent2 = Rent(book, client2, date)
+        rent2 = RentDto(book.id, client2.id, date)
         assert rent1 == rent2
 
     @staticmethod
@@ -703,10 +708,12 @@ class Tests:
         book = Books(1, "Ion", "Pamant", "Rebreanu")
         client = Clients(1, "Mogage", 1122334455667)
         date = "18/11/2021"
-        rent = Rent(book, client, date)
+        rent = RentDto(book.id, client.id, date)
+        rent.book = book
+        rent.client = client
 
         other_client = Clients(1, "Nicolae", 22334455667)
-        other_rent = Rent(book, other_client, date)
+        other_rent = RentDto(book.id, other_client.id, date)
 
         self.__test_repository_add_rent(rent_repository, rent)
         self.__test_repository_add_existing_rent(rent_repository, other_rent)
@@ -729,13 +736,13 @@ class Tests:
         try:
             rent_service.add_rent(-2, 5)
             assert False
-        except BookValidationError as bve:
-            assert str(bve) == "Id-ul introdus este invalid."
+        except RentValidationError as rve:
+            assert str(rve) == "Id-ul introdus este invalid."
         try:
             rent_service.add_rent(1, -5)
             assert False
-        except ClientValidationError as cve:
-            assert str(cve) == "Id-ul introdus este invalid."
+        except RentValidationError as rve:
+            assert str(rve) == "Id-ul introdus este invalid."
 
     @staticmethod
     def __test_service_add_rent_non_existent(rent_service):
@@ -761,13 +768,13 @@ class Tests:
         try:
             rent_service.delete_rent(-1, 1)
             assert False
-        except BookValidationError as bve:
-            assert str(bve) == "Id-ul introdus este invalid."
+        except RentValidationError as rve:
+            assert str(rve) == "Id-ul introdus este invalid."
         try:
             rent_service.delete_rent(1, -1)
             assert False
-        except ClientValidationError as cve:
-            assert str(cve) == "Id-ul introdus este invalid."
+        except RentValidationError as rve:
+            assert str(rve) == "Id-ul introdus este invalid."
 
     @staticmethod
     def __test_service_delete_rent_non_existent(rent_service):
@@ -793,6 +800,8 @@ class Tests:
             assert str(rre) == "Acest client nu are inchiriata nicio carte in acest moment."
     
     def __run_tests_service_rent(self):
+        with open("Save_files/test.txt", "w"):
+            pass
         books_validator = BooksValidator()
         clients_validator = ClientsValidator()
         rent_validator = RentValidator()

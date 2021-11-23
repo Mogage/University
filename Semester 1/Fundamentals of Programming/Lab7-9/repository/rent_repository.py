@@ -3,13 +3,14 @@
     Creation date: 16 nov 2021
     Modul pentru stocarea inchirierilor
 """
-from domain.data import Rent, Books, Clients
+from domain.dtos import RentDto
 from error.errors import RentRepositoryError
 
 class RentRepository:
     """
         Clasa pentru stocarea entitatilor de tip inchiriere
     """
+
     def __init__(self):
         """
             Initializarea listei in care vor fi stocare inchirierile
@@ -42,7 +43,7 @@ class RentRepository:
 
     def delete_rent(self, id_book, id_client):
         """
-            Stergerea / Returnarea de catre unui client cu id-ul id_client a cartii cu id_book
+            Stergerea unei inchirieri efectuate de clientul cu id-ul id_client
         :param id_book: id-ul unei carti - int
         :param id_client: id-ul unui client - int
         :raise RentRepositoryError: Daca clientul cu id-ul id_client nu a inchiriat nicio carte
@@ -50,12 +51,10 @@ class RentRepository:
         index = 0
         number_of_rent = len(self.__rent)
         while index < number_of_rent:
-            if self.__rent[index].client.id == id_client and self.__rent[index].book.id == id_book:
+            if self.__rent[index].id_client == id_client and self.__rent[index].id_book == id_book:
                 self.__rent.pop(index)
                 return
             index = index + 1
-
-        raise RentRepositoryError("Acest client nu are inchiriata nicio carte in acest moment.")
 
     def print_all(self):
         """
@@ -64,20 +63,15 @@ class RentRepository:
         for _rent in self.__rent:
             print(str(_rent))
 
-    def print_rent_by_client_id(self, id):
+    def print_rent_by_client_id(self, id_client):
         """
             Afisarea tuturor inchirierilor efectuate de un client cu id-ul id
-        :param id: id client - int
-        :raise RentRepositoryError: Daca clientul cu id-ul id nu a inchiriat nicio carte
+        # :param id: id client - int
+        :param id_client: id-ul unui client
         """
-        rented = False
         for _rent in self.__rent:
-            if _rent.client.id == id:
+            if _rent.id_client == id_client:
                 print(str(_rent))
-                rented = True
-
-        if not rented:
-            raise RentRepositoryError("Acest client nu are inchiriata nicio carte in acest moment.")
 
     def check_rent_client_book(self, id_book, id_client):
         """
@@ -87,7 +81,7 @@ class RentRepository:
         :raises RentRepositoryError: Daca acest client nu a inchiriat aceasta carte
         """
         for _rent in self.__rent:
-            if _rent.client.id == id_client and _rent.book.id == id_book:
+            if _rent.id_client == id_client and _rent.id_book == id_book:
                 return True
 
         raise RentRepositoryError("Acest client nu a inchiriat aceasta carte.")
@@ -100,7 +94,7 @@ class RentRepository:
         :raise RentRepositoryError: Daca acest client nu a efectuat nicio inchiriere
         """
         for _rent in self.__rent:
-            if _rent.client.id == id:
+            if _rent.id_client == id:
                 return True
 
         raise RentRepositoryError("Acest client nu are inchiriata nicio carte in acest moment.")
@@ -116,6 +110,7 @@ class RentFileRepository(RentRepository):
     """
         Clasa pentru stocarea in fisiere a inchirierilor
     """
+
     def __init__(self, file_name):
         """
             Initializarea datelor pentru stocarea in fisiere
@@ -133,10 +128,8 @@ class RentFileRepository(RentRepository):
         :return: o inchiriere
         """
         fields = line.split(";")
-        fields[7] = fields[7].removesuffix("\n")
-        book = Books(int(fields[0]), fields[1], fields[2], fields[3])
-        client = Clients(int(fields[4]), fields[5], int(fields[6]))
-        rent = Rent(book, client, fields[7])
+        fields[2] = fields[2].removesuffix("\n")
+        rent = RentDto(int(fields[0]), int(fields[1]), fields[2])
         return rent
 
     def __load_from_file(self):
@@ -149,30 +142,13 @@ class RentFileRepository(RentRepository):
                 RentRepository.add_rent(self, rent)
 
     @staticmethod
-    def __create_book_line(book):
-        """
-            Formateaza o carte pentru a fi stocata in fisier
-        :param book: o carte
-        :return: un string cu atributele separate prin ;
-        """
-        return str(book.id) + ";" + book.title + ";" + book.description + ";" + book.author
-
-    @staticmethod
-    def __create_client_line(client):
-        """
-            Formateaza un client pentru a fi stocat in fisier
-        :param client: un client
-        :return: un string cu atributele separate prin ;
-        """
-        return str(client.id) + ";" + client.name + ";" + str(client.cnp)
-
-    def __create_line(self, rent):
+    def __create_line(rent):
         """
             Formateaza o inchiriere pentru a fi stocata in fisier
         :param rent: o inchiriere
         :return: un string cu toate atributele separate prin ;
         """
-        return self.__create_book_line(rent.book) + ";" + self.__create_client_line(rent.client) + ";" + rent.date
+        return str(rent.id_book) + ";" + str(rent.id_client) + ";" + rent.date
 
     @staticmethod
     def __add_to_file(line, rent_file):
@@ -184,7 +160,7 @@ class RentFileRepository(RentRepository):
         rent_file.write(line)
         rent_file.write("\n")
 
-    def rewrite_file(self):
+    def __rewrite_file(self):
         """
             Scrie in fisier toate inchirierile efectuate
         """
@@ -192,3 +168,20 @@ class RentFileRepository(RentRepository):
             for _rent in self.rent:
                 line = self.__create_line(_rent)
                 self.__add_to_file(line, rent_file)
+
+    def add_rent(self, rent):
+        """
+            Adaugarea unei inchirieri in fisier
+        :param rent: inchiriere
+        """
+        RentRepository.add_rent(self, rent)
+        self.__rewrite_file()
+
+    def delete_rent(self, id_book, id_client):
+        """
+            Stergerea unei inchirieri efectuate de clientul cu id-ul id_client din fisier
+        :param id_book: id-ul unei carti - int
+        :param id_client: id-ul unui client - int
+        """
+        RentRepository.delete_rent(self, id_book, id_client)
+        self.__rewrite_file()

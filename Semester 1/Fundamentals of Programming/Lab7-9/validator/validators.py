@@ -3,9 +3,10 @@
     Creation date: 6 nov 2021
     Modul pentru validarea entitatilor si a atributelor lor
 """
-from error.errors import BookValidationError, ClientValidationError
+from error.errors import BookValidationError, ClientValidationError, RentValidationError
 
-class MutualValidator:
+
+class _MutualValidator:
     """
         Clasa pentru metode comune
     """
@@ -14,11 +15,10 @@ class MutualValidator:
         """
             Verifica daca id-ul unei carti este valid
         :param id: int
-        :return: -
-        :raise: Id-ul introdus este invalid. if int <= 0
+        :return: True, if id > 0
+                 False, else
         """
-        if id < 1:
-            raise BookValidationError("Id-ul introdus este invalid.")
+        return id > 0
 
     @staticmethod
     def validate_string(string):
@@ -30,7 +30,7 @@ class MutualValidator:
         """
         return string != ""
 
-class BooksValidator(MutualValidator):
+class BooksValidator(_MutualValidator):
     """
         Clasa pentru validarea entitatii de tip carte si a atributelor ei
     """
@@ -38,7 +38,18 @@ class BooksValidator(MutualValidator):
         """
 
         """
-        MutualValidator.__init__(self)
+        _MutualValidator.__init__(self)
+
+    @staticmethod
+    def validate_id(id):
+        """
+            Verifica daca id-ul unei carti este valid
+        :param id: int
+        :return: -
+        :raise: Id-ul introdus este invalid. if int <= 0
+        """
+        if not _MutualValidator.validate_id(id):
+            raise BookValidationError("Id-ul introdus este invalid.")
 
     def validate_title(self, title):
         """
@@ -89,7 +100,7 @@ class BooksValidator(MutualValidator):
         if self.validate_string(errors):
             raise BookValidationError(errors)
 
-class ClientsValidator(MutualValidator):
+class ClientsValidator(_MutualValidator):
     """
         Clasa pentru validare unei entitati de tip client si atributele lui
     """
@@ -97,7 +108,7 @@ class ClientsValidator(MutualValidator):
         """
 
         """
-        MutualValidator.__init__(self)
+        _MutualValidator.__init__(self)
 
     @staticmethod
     def __check_cnp(cnp):
@@ -117,7 +128,7 @@ class ClientsValidator(MutualValidator):
         :return: -
         :raise: Id-ul introdus este invalid. if id <= 0
         """
-        if id < 1:
+        if not _MutualValidator.validate_id(id):
             raise ClientValidationError("Id-ul introdus este invalid.")
 
     def validate_prefix(self, prefix):
@@ -167,8 +178,17 @@ class ClientsValidator(MutualValidator):
         if self.validate_string(errors):
             raise ClientValidationError(errors)
 
-class RentValidator(MutualValidator):
+class RentValidator(_MutualValidator):
     """
         Clasa pentru validarea entitatii de tip inchiriere si a atributelor ei
     """
-    pass
+    def __init__(self):
+        """
+
+        """
+        _MutualValidator.__init__(self)
+
+    @staticmethod
+    def validate_id(id):
+        if not _MutualValidator.validate_id(id):
+            raise RentValidationError("Id-ul introdus este invalid.")
