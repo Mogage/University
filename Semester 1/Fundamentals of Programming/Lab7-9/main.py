@@ -1,4 +1,9 @@
-from testing.tests import Tests
+"""
+    Author: Mogage Nicolae
+    Creation date: 6 nov 2021
+    Modul de unde incepe aplicatia
+"""
+from testing.pyunit_tests import run_tests
 from ui.main_user_interface import Console
 from service.book_service import BooksService
 from service.client_service import ClientsService
@@ -21,8 +26,7 @@ if __name__ == "__main__":
     clients_service = ClientsService(clients_repository, clients_validator)
     rent_service = RentService(rent_repository, rent_validator, books_repository, clients_repository)
 
-    tests = Tests()
-    tests.run_all_tests()
+    run_tests()
 
     ui = Console(books_service, clients_service, rent_service)
     ui.run()
