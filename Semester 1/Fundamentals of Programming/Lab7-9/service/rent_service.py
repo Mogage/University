@@ -179,7 +179,35 @@ class RentService:
         rent_times = self.__query_most_rented_books()
         sorted_rent_times = self.__sort_rent_times(rent_times)
         for _rent_times in sorted_rent_times:
-            print("Cartea", _rent_times["book"].title, "scrisa de", _rent_times["book"].author + ".")
+            print("Cartea '" + _rent_times["book"].title + "' scrisa de", _rent_times["book"].author + ".")
+
+    def __query_least_rented_books(self, prefix):
+        """
+            Calculeaza de cate ori este inchiriata fiecare carte care incepe cu stringul prefix
+        :return: dictionary {} - dictionar {id_book, rent_times} in care cartea cu id-ul id_book
+                                a fost inchiriata de rent_times
+        """
+        rent_times = {}
+        for _rent in self.__rent_repository.rent:
+            if _rent.book.title.lower().startswith(prefix.lower()):
+                if _rent.id_book in rent_times.keys():
+                    rent_times[_rent.id_book] = rent_times[_rent.id_book] + 1
+                else:
+                    rent_times[_rent.id_book] = 1
+
+        return rent_times
+
+    def print_least_rented_books(self, prefix):
+        """
+            Afiseaza 50% cele mai putin inchiriate carti in ordine crescatoare dupa nume
+        """
+        rent_times = self.__query_least_rented_books(prefix)
+        sorted_rent_times = self.__sort_rent_times(rent_times)
+        number_of_half_books_rented = len(rent_times) // 2
+        sorted_rent_times = sorted_rent_times[number_of_half_books_rented:]
+        sorted_rent_times.sort(key=lambda rent: rent["book"].title)
+        for _book in sorted_rent_times:
+            print(str(_book["book"]))
 
     def __sort_active_clients(self, number_of_books_rented):
         """
@@ -223,6 +251,25 @@ class RentService:
 
         return number_of_books_rented
 
+    @staticmethod
+    def __format_string_from_client(client):
+        """
+            Formateaza un dic{client, carti_inchiriate} intr-un string pentru a afisa
+            cate carti inchiriate are un anumit client
+        :param client: dic {} - dictionar de tipul {client, carti_inchiriate}
+        :return: string
+        """
+        string_to_be_printed = "Clientul " + client["client"].name + " a inchiriat "
+        if client["number_of_books_rented"] == 1:
+            string_to_be_printed = string_to_be_printed + "o carte."
+        else:
+            string_to_be_printed = string_to_be_printed + str(client["number_of_books_rented"])
+            if client["number_of_books_rented"] >= 20:
+                string_to_be_printed = string_to_be_printed + " de "
+            string_to_be_printed = string_to_be_printed + " carti."
+
+        return string_to_be_printed
+
     def print_most_active_clients(self, top=None):
         """
             Afiseaza clientii in ordine descrescatoare dupa numarul de carti inchiriate,
@@ -235,15 +282,7 @@ class RentService:
             number_of_clients_with_rented_books = int(len(number_of_books_rented) * 0.2) + 1
             sorted_active_clients = sorted_active_clients[:number_of_clients_with_rented_books]
         for _client in sorted_active_clients:
-            string_to_be_printed = "Clientul " + _client["client"].name + " a inchiriat "
-            if _client["number_of_books_rented"] == 1:
-                string_to_be_printed = string_to_be_printed + "o carte."
-            else:
-                string_to_be_printed = string_to_be_printed + str(_client["number_of_books_rented"])
-                if _client["number_of_books_rented"] >= 20:
-                    string_to_be_printed = string_to_be_printed + " de "
-                string_to_be_printed = string_to_be_printed + " carti."
-
+            string_to_be_printed = self.__format_string_from_client(_client)
             print(string_to_be_printed)
 
     def print_all(self):

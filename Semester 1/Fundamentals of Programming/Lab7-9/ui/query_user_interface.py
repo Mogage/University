@@ -25,9 +25,15 @@ class QueryUI:
               "\t -book pentru a afisa cele mai inchiriate carti.\n"
               "\t -client pentru a afisa clientii cu cele mai multe carti inchiriate.\n"
               "\t -top pentru a afisa primii 20% cei mai activi clienti.\n"
+              "\t -string pentru a afisa 50% cele mai putin inchiriate carti incepand cu un sir.\n"
               "\t -show menu pentru a afisa meniul.\n"
               "\t -main menu pentru a va intoarce la meniul principal.\n"
               "\t -exit pentru a iesi din program.")
+
+    def __ui_string(self):
+        user_input = input("Sirul cu care sa inceapa cartile: ")
+
+        self.__rent_service.print_least_rented_books(user_input)
 
     def query_run(self):
         """
@@ -53,6 +59,8 @@ class QueryUI:
                 self.__rent_service.print_most_active_clients()
             elif user_input == "top":
                 self.__rent_service.print_most_active_clients(top=True)
+            elif user_input == "string":
+                self.__ui_string()
             elif user_input == "show menu":
                 self.__query_menu()
             else:
