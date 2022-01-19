@@ -6,10 +6,10 @@ Algorithms implementation, labs and school work.
 
 Computer System Architecture
 
-Fundamentals of Programming
+Fundamentals of Programming ✔️
 
 Computational Logic
 
-Algebra
+Algebra ✔️
 
 Mathematical Analysis
