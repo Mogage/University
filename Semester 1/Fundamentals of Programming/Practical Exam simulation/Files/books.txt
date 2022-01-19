@@ -1,0 +1,10 @@
+1,Nume1,Autor1,2000
+2,Nume2,Autor2,2001
+3,Nume3,Autor3,2002
+4,Nume4,Autor4,2003
+5,Nume5,Autor5,2003
+6,Nume6,Autor6,2005
+7,Nume7,Autor7,2006
+8,Nume8,Autor8,2007
+9,Nume9,Autor9,2008
+10,Nume0,Autor0,2009

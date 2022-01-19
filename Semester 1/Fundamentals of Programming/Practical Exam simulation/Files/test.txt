@@ -1,0 +1,3 @@
+1,Nume1,Autor1,2000
+2,Nume2,Autor2,2001
+3,Nume3,Autor3,2002
