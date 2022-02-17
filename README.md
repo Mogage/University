@@ -4,12 +4,12 @@ Algorithms implementation, labs and school work.
 # **Year 1**
 **First semester**
 
-Computer System Architecture
+✔️ Computer System Architecture
 
 ✔️ Fundamentals of Programming
 
-Computational Logic
+✔️ Computational Logic
 
 ✔️ Algebra
 
-Mathematical Analysis
+✔️ Mathematical Analysis
