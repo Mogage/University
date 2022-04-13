@@ -100,3 +100,18 @@ public:
 	/// <returns>vector cu toate produsele</returns>
 	std::vector < Product > GetAll() const noexcept;
 };
+
+class ServiceBucket
+{
+private:
+	Repository& Repo;
+	Bucket& Bck;
+	Validator& Valid;
+public:
+	ServiceBucket(Repository& _Repo, Bucket& _Bucket, Validator& _Validator) : Repo{ _Repo }, Bck{ _Bucket }, Valid{ _Validator }{}
+
+	int addToBucket(std::string);
+	int clearBucket();
+	int generateBucket(int);
+	const std::vector < Product >& getBucket() const;
+};

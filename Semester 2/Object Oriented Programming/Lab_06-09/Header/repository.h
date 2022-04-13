@@ -8,7 +8,7 @@
 /// </summary>
 class Repository
 {
-	friend class Bucket;
+	friend class ServiceBucket;
 private:
 	std::vector < Product > Repo;
 
@@ -95,13 +95,16 @@ public:
 	int GetSize() noexcept;
 };
 
-class Bucket
+class Bucket 
 {
 private:
+	int TotalPrice;
 	std::vector < Product > MemoryBucket;
 public:
-	void add(Product&);
-	void clear();
-	void generate(int);
-	void exp(std::string);
+	Bucket() { TotalPrice = 0; }
+	int add(Product&);
+	int clear();
+	const std::vector < Product >& getBucket() const;
+	int getPrice() const;
+	// void exp(std::string) const;
 };

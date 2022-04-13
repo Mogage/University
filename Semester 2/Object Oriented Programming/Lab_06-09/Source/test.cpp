@@ -1,7 +1,8 @@
-#include "test.h"
+﻿#include "test.h"
 #include "domain.h"
 #include "repository.h"
 #include "service.h"
+#include "exceptions.h"
 #include <assert.h>
 
 void Test::TestProduct()
@@ -57,9 +58,9 @@ void Test::TestRepoAdd()
 	{
 		repo.AddProduct(product1);
 	}
-	catch (const std::string error)
+	catch (RepositoryError& error)
 	{
-		assert(error == "Acest produs exista deja.\n");
+		assert(error.getMessage() == "Acest produs exista deja.\n");
 	}
 }
 
@@ -92,9 +93,9 @@ void Test::TestRepoUpdate()
 	{
 		repo.ModifyProduct(3, "ana");
 	}
-	catch (const std::string error)
+	catch (RepositoryError& error)
 	{
-		assert(error == "Nu exista niciun produs cu acest id.\n");
+		assert(error.getMessage() == "Nu exista niciun produs cu acest id.\n");
 	}
 }
 
@@ -169,9 +170,9 @@ void Test::TestRepoDelete()
 	{
 		repo.DeleteProduct(1);
 	}
-	catch (const std::string error)
+	catch (RepositoryError& error)
 	{
-		assert(error == "Nu exista niciun produs cu acest id.\n");
+		assert(error.getMessage() == "Nu exista niciun produs cu acest id.\n");
 	}
 }
 
@@ -197,27 +198,27 @@ void Test::TestValidator()
 	{
 		valid.ValidateProduct(emptyProduct);
 	}
-	catch (const std::string errors)
+	catch (ValidationError& errors)
 	{
-		assert(errors == "Id-ul produsului este invalid.\nNumele produsului este invalid.\nTipul produsului este invalid.\nProducatorul produsului este invalid.\nPretul produsului este invalid.\n");
+		assert(errors.getMessage() == "Id-ul produsului este invalid.\nNumele produsului este invalid.\nTipul produsului este invalid.\nProducatorul produsului este invalid.\nPretul produsului este invalid.\n");
 	}
 
 	try
 	{
 		valid.ValidateProduct(dataProduct1);
 	}
-	catch (const std::string errors)
+	catch (ValidationError& errors)
 	{
-		assert(errors == "Producatorul produsului este invalid.\nPretul produsului este invalid.\n");
+		assert(errors.getMessage() == "Producatorul produsului este invalid.\nPretul produsului este invalid.\n");
 	}
 
 	try
 	{
 		valid.ValidateProduct(dataProduct2);
 	}
-	catch (const std::string errors)
+	catch (ValidationError& errors)
 	{
-		assert(errors == "Numele produsului este invalid.\nTipul produsului este invalid.\n");
+		assert(errors.getMessage() == "Numele produsului este invalid.\nTipul produsului este invalid.\n");
 	}
 
 	valid.ValidateProduct(dataProduct3);
@@ -240,18 +241,18 @@ void Test::TestServAdd()
 	{
 		serv.AddProduct(1, "lapte", "bautura", "dorna", 7); // 24
 	}
-	catch (const std::string error)
+	catch (RepositoryError& error)
 	{
-		assert(error == "Acest produs exista deja.\n");
+		assert(error.getMessage() == "Acest produs exista deja.\n");
 	}
 
 	try
 	{
 		serv.AddProduct(-5, "", "snacks", "chio", -1005); // 25
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		assert(error == "Id-ul produsului este invalid.\nNumele produsului este invalid.\nPretul produsului este invalid.\n");
+		assert(error.getMessage() == "Id-ul produsului este invalid.\nNumele produsului este invalid.\nPretul produsului este invalid.\n");
 	}
 
 	result = serv.GetAll();
@@ -276,17 +277,17 @@ void Test::TestServUpdate()
 	{
 		serv.ModifyProduct(-1);
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		assert(error == "Id invalid.\n");
+		assert(error.getMessage() == "Id invalid.\n");
 	}
 	try
 	{
 		serv.ModifyProduct(5, "", "", "", -25);
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		assert(error == "Pret invalid.\n");
+		assert(error.getMessage() == "Pret invalid.\n");
 	}
 
 	serv.ModifyProduct(1);
@@ -347,7 +348,7 @@ void Test::TestServFind()
 	assert(result[0] == product4);
 	*/
 	try { serv.FindProduct(-1); } // 59
-	catch (const std::string error) { assert(error == "Cod de bare invalid.\n"); }
+	catch (ValidationError& error) { assert(error.getMessage() == "Cod de bare invalid.\n"); }
 	/*try { serv.FindProduct(-1, 5); }
 	catch (const std::string error) { assert(error == "Pret invalid.\n"); }
 	try { serv.FindProduct("", 2); }
@@ -378,17 +379,17 @@ void Test::TestServDelete()
 	{
 		serv.DeleteProduct(-25);
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		assert(error == "Id invalid.\n");
+		assert(error.getMessage() == "Id invalid.\n");
 	}
 	try
 	{
 		serv.DeleteProduct(2);
 	}
-	catch (const std::string error)
+	catch (RepositoryError& error)
 	{
-		assert(error == "Nu exista niciun produs cu acest id.\n");
+		assert(error.getMessage() == "Nu exista niciun produs cu acest id.\n");
 	}
 
 	assert(serv.GetAll().size() == 1);
@@ -428,11 +429,11 @@ void Test::TestFilter()
 	assert(serv.Filter("dorna", 1).size() == 0);
 
 	try { serv.Filter(-25); }
-	catch (const std::string error) { assert(error == "Pret invalid.\n"); }
+	catch (ValidationError& error) { assert(error.getMessage() == "Pret invalid.\n"); }
 	try { serv.Filter("", 1); }
-	catch (const std::string error) { assert(error == "Date invalide.\n"); }
+	catch (ValidationError& error) { assert(error.getMessage() == "Date invalide.\n"); }
 	try { serv.Filter("dorna", 3); }
-	catch (const std::string error) { assert(error == "Tip filtru invalid.\n"); }
+	catch (ValidationError& error) { assert(error.getMessage() == "Tip filtru invalid.\n"); }
 }
 
 void Test::TestSort()
@@ -492,10 +493,85 @@ void Test::TestService()
 	this->TestSort();
 }
 
+void Test::TestBucketRepo()
+{
+	int price;
+	Repository repo;
+	Bucket bucket;
+	Product product1(1, "lapte", "bautura", "dorna", 7);
+	Product product2(2, "cartofi", "snacks", "lays", 4); 
+	Product product3(3, "cartofi", "alcool", "dorna", 6); 
+	Product product4(4, "vin", "alcool", "chio", 7); 
+	std::vector < Product > products;
+
+	repo.AddProduct(product1);
+	repo.AddProduct(product2);
+	repo.AddProduct(product3);
+	repo.AddProduct(product4);
+
+	price = bucket.add(product1);
+	assert(price == 7);
+	price = bucket.add(product2);
+	assert(price == 11);
+	bucket.add(product3);
+	assert(bucket.getPrice() == 17);
+
+	products = bucket.getBucket();
+	assert(products[0] == product1);
+	assert(products[1] == product2);
+	assert(products[2] == product3);
+
+	price = bucket.clear();
+	assert(price == 0);
+}
+
+void Test::TestBucketService()
+{
+	int price;
+	Repository repo;
+	Validator valid;
+	Bucket bucket;
+	ServiceBucket serv(repo, bucket, valid);
+	Product product1(1, "lapte", "bautura", "dorna", 7);
+	Product product2(2, "cartofi", "snacks", "lays", 4);
+	Product product3(3, "cartofi", "alcool", "dorna", 6);
+	Product product4(4, "vin", "alcool", "chio", 7);
+	std::vector < Product > products;
+
+	repo.AddProduct(product1);
+	repo.AddProduct(product2);
+	repo.AddProduct(product3);
+	repo.AddProduct(product4);
+
+	try { serv.addToBucket(""); } 
+	catch (ValidationError& error) { assert(error.getMessage() == "Nume invalid.\n"); }
+	try { serv.addToBucket("a"); }
+	catch (RepositoryError& error) { assert(error.getMessage() == "Nu exista niciun produs cu acest nume.\n"); }
+
+	serv.addToBucket("lapte");
+	price = serv.addToBucket("vin");
+	assert(price == 14);
+
+	products = serv.getBucket();
+	assert(products.size() == 2);
+
+	assert(serv.clearBucket() == 0);
+
+	price = serv.generateBucket(3);
+	assert(price >= 12);
+}
+
+void Test::TestBucket()
+{
+	this->TestBucketRepo();
+	this->TestBucketService();
+}
+
 void Test::RunAll()
 {
 	this->TestProduct();
 	this->TestRepository();
 	this->TestValidator();
 	this->TestService();
+	this->TestBucket();
 }

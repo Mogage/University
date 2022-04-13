@@ -6,6 +6,7 @@ class UserInterface
 {
 private:
 	Service& Serv;
+	ServiceBucket& ServBck;
 
 	/// <summary>
 	///		Afiseaza meniul
@@ -47,12 +48,20 @@ private:
 	/// </summary>
 	void Sort();
 
+	void AddBucket();
+
+	void ClearBucket();
+
+	void GenerateBucket();
+
+	void ExportBucket();
+
 public:
 	/// <summary>
 	///		Constructor user interface
 	/// </summary>
 	/// <param name="Serv">Service-ul de produse</param>
-	UserInterface(Service& Serv) noexcept : Serv{ Serv } {}
+	UserInterface(Service& Serv, ServiceBucket& ServBck) noexcept : Serv{ Serv }, ServBck{ ServBck } {}
 
 	/// <summary>
 	///		Main app start

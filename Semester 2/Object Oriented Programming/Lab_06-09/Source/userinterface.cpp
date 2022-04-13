@@ -1,18 +1,24 @@
 #include "userinterface.h"
+#include "exceptions.h"
 #include <iostream>
+#include <fstream>
 
 void UserInterface::PrintMenu()
 {
 	std::cout << "Menu:\n"
-		<< "\t1. Adauga element.\n"
-		<< "\t2. Modifica element.\n"
-		<< "\t3. Sterge element.\n"
-		<< "\t4. Afiseaza elementele.\n"
-		<< "\t5. Cauta produs.\n"
-		<< "\t6. Filtreaza produse.\n"
-		<< "\t7. Sorteaza produse.\n"
-		<< "\t8. Afiseaza meniu.\n"
-		<< "\t9. Iesire aplicatie.\n";
+		<< "\t1.  Adauga element.\n"
+		<< "\t2.  Modifica element.\n"
+		<< "\t3.  Sterge element.\n"
+		<< "\t4.  Afiseaza elementele.\n"
+		<< "\t5.  Cauta produs.\n"
+		<< "\t6.  Filtreaza produse.\n"
+		<< "\t7.  Sorteaza produse.\n"
+		<< "\t8.  Afiseaza meniu.\n"
+		<< "\t9.  Adauga in cos.\n"
+		<< "\t10. Goleste cos.\n"
+		<< "\t11. Genereaza random in cos.\n"
+		<< "\t12. Exporta cos.\n"
+		<< "\t13. Iesire aplicatie.\n";
 }
 
 void UserInterface::Add()
@@ -59,9 +65,13 @@ void UserInterface::Add()
 		this->Serv.AddProduct(intId, name, type, producer, intPrice);
 		std::cout << "Produs adaugat cu succes.\n";
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		std::cout << error;
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
 	}
 }
 
@@ -114,9 +124,13 @@ void UserInterface::Modify()
 		this->Serv.ModifyProduct(intId, name, type, producer, intPrice);
 		std::cout << "Produs modificat cu succes.\n";
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		std::cout << error;
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
 	}
 }
 
@@ -148,9 +162,13 @@ void UserInterface::Delete()
 		this->Serv.DeleteProduct(intId);
 		std::cout << "Produs sters cu succes.\n";
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		std::cout << error;
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
 	}
 }
 
@@ -205,9 +223,13 @@ void UserInterface::Find()
 			std::cout << productToFind.Print();
 		}
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		std::cout << error;
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
 	}
 }
 
@@ -279,9 +301,13 @@ void UserInterface::Filter()
 			}
 		}
 	}
-	catch (const std::string error)
+	catch (ValidationError& error)
 	{
-		std::cout << error;
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
 	}
 }
 
@@ -340,6 +366,103 @@ void UserInterface::Sort()
 
 }
 
+void UserInterface::AddBucket()
+{
+	int price;
+	std::string name;
+
+	if (0 == this->Serv.GetAll().size())
+	{
+		std::cout << "Nu exista produse adaugate.\n";
+		return;
+	}
+
+	std::cout << "Numele produsului de adaugat in cos: ";
+	std::getline(std::cin, name);
+
+	try
+	{
+		price = ServBck.addToBucket(name);
+		std::cout << "Valoare cos: " << price << "\n";
+	}
+	catch (ValidationError& error)
+	{
+		std::cout << error.getMessage();
+	}
+	catch (RepositoryError& error)
+	{
+		std::cout << error.getMessage();
+	}
+}
+
+void UserInterface::ClearBucket()
+{
+	std::cout << "Valoare cos: " << ServBck.clearBucket() << "\n";
+}
+
+void UserInterface::GenerateBucket()
+{
+	int price, intNumberToGenerate = 0;
+	std::string strNumberToGenerate;
+
+	if (0 == this->Serv.GetAll().size())
+	{
+		std::cout << "Nu exista produse adaugate.\n";
+		return;
+	}
+
+	while (true)
+	{
+		std::cout << "Numarul de produse de adaugat in cos: ";
+		std::getline(std::cin, strNumberToGenerate);
+		if (strNumberToGenerate != "0" && 0 == (intNumberToGenerate = atoi(strNumberToGenerate.c_str())))
+		{
+			std::cout << "Valoare invalida.\n";
+			continue;
+		}
+		break;
+	}
+
+	price = ServBck.generateBucket(intNumberToGenerate);
+	std::cout << "Valoare cos: " << price << "\n";
+}
+
+void UserInterface::ExportBucket()
+{
+	std::fstream fout;
+	std::vector < Product > products = ServBck.getBucket();
+	size_t length = products.size();
+	std::string fileName = "";
+	std::string path = "export_files/";
+	Product toExport;
+
+	while (fileName == "")
+	{
+		std::cout << "Numele fisierului pentru export: ";
+		std::getline(std::cin, fileName);
+	}
+
+	path = path + fileName + ".csv";
+
+	fout.open(path, std::ios::out, std::ios::trunc);
+	fout.close();
+	fout.open(path, std::ios::out | std::ios::app);
+
+	for (size_t count = 0; count < length; count = count + 1)
+	{
+		toExport = products[count];
+		fout << toExport.GetId() << ","
+			<< toExport.GetName() << ","
+			<< toExport.GetType() << ","
+			<< toExport.GetProducer() << ","
+			<< toExport.GetPrice() << "\n";
+	}
+
+	std::cout << "Cos exportat cu succes.\n";
+
+	fout.close();
+}
+
 void UserInterface::Run()
 {
 	std::string input;
@@ -357,7 +480,7 @@ void UserInterface::Run()
 
 		switch (atoi(input.c_str()))
 		{
-		case 9:
+		case 13:
 			std::cout << "Aplicatie incheiata cu succes.\n";
 			return;
 		case 1:
@@ -383,6 +506,18 @@ void UserInterface::Run()
 			break;
 		case 8: 
 			this->PrintMenu();
+			break;
+		case 9:
+			this->AddBucket();
+			break;
+		case 10:
+			this->ClearBucket();
+			break;
+		case 11:
+			this->GenerateBucket();
+			break;
+		case 12:
+			this->ExportBucket();
 			break;
 		default:
 			std::cout << "Comanda invalida.\n";

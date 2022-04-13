@@ -1,5 +1,5 @@
 #include "repository.h"
-#include <random>
+#include "exceptions.h"
 
 void Repository::AddProduct(Product& ProductToAdd)
 {
@@ -7,7 +7,7 @@ void Repository::AddProduct(Product& ProductToAdd)
 	{
 		if (iterator == ProductToAdd)
 		{
-			throw std::string("Acest produs exista deja.\n");
+			throw RepositoryError("Acest produs exista deja.\n");
 		}
 	}
 
@@ -51,7 +51,7 @@ void Repository::ModifyProduct(
 
 	if (!exist)
 	{
-		throw std::string("Nu exista niciun produs cu acest id.\n");
+		throw RepositoryError("Nu exista niciun produs cu acest id.\n");
 	}
 }
 
@@ -128,7 +128,7 @@ void Repository::DeleteProduct(int IdToDelete)
 
 	if (position == this->Repo.end())
 	{
-		throw std::string("Nu exista niciun produs cu acest id.\n");
+		throw RepositoryError("Nu exista niciun produs cu acest id.\n");
 	}
 
 	this->Repo.erase(position);
@@ -144,26 +144,45 @@ int Repository::GetSize() noexcept
 	return static_cast<int>(this->Repo.size());
 }
 
-
-void Bucket::add(Product& ToAdd)
+int Bucket::add(Product& ToAdd)
 {
 	MemoryBucket.push_back(ToAdd);
+	TotalPrice = TotalPrice + ToAdd.GetPrice();
+	return TotalPrice;
 }
 
-void Bucket::clear()
+int Bucket::clear()
 {
 	MemoryBucket.clear();
+	TotalPrice = 0;
+	return TotalPrice;
 }
 
-void Bucket::generate(int NumberOfProducts)
+const std::vector < Product >& Bucket::getBucket() const
 {
-	std::mt19937 mt{ std::random_device{}() };
-	std::uniform_int_distribution<> dist(0, MemoryBucket.size() - 1);
-	int rndNr = dist(mt);// numar aleator intre [0,size-1]
-
-	for (int count = 0; count < NumberOfProducts; count = count + 1)
-	{
-		MemoryBucket.push_back()
-	}
-
+	return MemoryBucket;
 }
+
+int Bucket::getPrice() const
+{
+	return TotalPrice;
+}
+/*
+void Bucket::exp(std::string FileName) const
+{
+	std::fstream fout;
+	size_t length = MemoryBucket.size();
+	Product toExport;
+
+	fout.open(FileName, std::ios::out | std::ios::app);
+
+	for (size_t count = 0; count < length; count = count + 1)
+	{
+		toExport = MemoryBucket[count];
+		fout << toExport.GetId() << ","
+			 << toExport.GetName() << ","
+			 << toExport.GetType() << ","
+			 << toExport.GetProducer() << "."
+			 << toExport.GetPrice() << "\n";
+	}
+}*/

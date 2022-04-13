@@ -1,5 +1,7 @@
 #include "service.h"
+#include "exceptions.h"
 #include <algorithm>
+#include <random>
 
 void Service::AddProduct(
 	int		Id,
@@ -25,11 +27,11 @@ void Service::ModifyProduct(
 	
 	if (!this->Valid.ValidateNumber(IdProductToModify))
 	{
-		throw std::string("Id invalid.\n");
+		throw ValidationError("Id invalid.\n");
 	}
 	if (!this->Valid.ValidateNumber(Price))
 	{
-		throw std::string("Pret invalid.\n");
+		throw ValidationError("Pret invalid.\n");
 	}
 
 	this->Repo.ModifyProduct(IdProductToModify, Name, Type, Producer, Price);
@@ -39,7 +41,7 @@ Product Service::FindProduct(int Id)
 {
 	if (!this->Valid.ValidateNumber(Id))
 	{
-		throw std::string("Cod de bare invalid.\n");
+		throw ValidationError("Cod de bare invalid.\n");
 	}
 	return this->Repo.FindProductAfterID(Id);
 }
@@ -110,7 +112,7 @@ void Service::DeleteProduct(int Id)
 {
 	if (!this->Valid.ValidateNumber(Id))
 	{
-		throw std::string("Id invalid.\n");
+		throw ValidationError("Id invalid.\n");
 	}
 	this->Repo.DeleteProduct(Id);
 }
@@ -119,7 +121,7 @@ std::vector<Product> Service::Filter(int Price) const
 {
 	if (!this->Valid.ValidateNumber(Price))
 	{
-		throw std::string("Pret invalid.\n");
+		throw ValidationError("Pret invalid.\n");
 	}
 
 	return this->Repo.FindProductsAfterPrice(Price);
@@ -129,11 +131,11 @@ std::vector<Product> Service::Filter(std::string StringData, int FilterType)
 {
 	if (!this->Valid.ValidateString(StringData))
 	{
-		throw std::string("Date invalide.\n");
+		throw ValidationError("Date invalide.\n");
 	}
 	if (FilterType < 1 || FilterType > 2)
 	{
-		throw std::string("Tip filtru invalid.\n");
+		throw ValidationError("Tip filtru invalid.\n");
 	}
 	
 	if (FilterType == 1)
@@ -156,4 +158,44 @@ std::vector<Product> Service::Sort(bool Compare(const Product& Product1, const P
 std::vector < Product > Service::GetAll() const noexcept
 {
 	return this->Repo.GetAll();
+}
+
+int ServiceBucket::addToBucket(std::string Name)
+{
+	if (false == Valid.ValidateString(Name))
+	{
+		throw ValidationError("Nume invalid.\n");
+	}
+	std::vector < Product > products = Repo.FindProductsAfterName(Name);
+	if (products.size() == 0)
+	{
+		throw RepositoryError("Nu exista niciun produs cu acest nume.\n");
+	}
+	return Bck.add(products[0]);
+}
+
+int ServiceBucket::clearBucket()
+{
+	return Bck.clear();
+}
+
+int ServiceBucket::generateBucket(int NumberOfProducts)
+{
+	std::mt19937 mt{ std::random_device{}() };
+	std::uniform_int_distribution<> dist(0, (int)Repo.GetSize() - 1);
+	int rndNr, totalPrice = Bck.getPrice();
+	Product random;
+
+	for (int count = 0; count < NumberOfProducts; count = count + 1)
+	{
+		rndNr = dist(mt);
+		random = Repo.Repo[rndNr];
+		totalPrice = Bck.add(random);
+	}
+	return totalPrice;
+}
+
+const std::vector < Product >& ServiceBucket::getBucket() const
+{
+	return Bck.getBucket();
 }

@@ -20,6 +20,10 @@ private:
 	void TestFilter();
 	void TestSort();
 	void TestService();
+
+	void TestBucketRepo();
+	void TestBucketService();
+	void TestBucket();
 public:
 	void RunAll();
 };
