@@ -24,6 +24,8 @@ private:
 	void TestBucketRepo();
 	void TestBucketService();
 	void TestBucket();
+
+	void TestUndo();
 public:
 	void RunAll();
 };

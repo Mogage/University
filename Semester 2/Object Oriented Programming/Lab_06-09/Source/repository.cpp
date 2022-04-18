@@ -1,5 +1,7 @@
 #include "repository.h"
 #include "exceptions.h"
+#include <fstream>
+#include <sstream>
 
 void Repository::AddProduct(Product& ProductToAdd)
 {
@@ -55,7 +57,7 @@ void Repository::ModifyProduct(
 	}
 }
 
-Product Repository::FindProductAfterID(int IdToFind)
+Product Repository::FindProductAfterID(int IdToFind) const 
 {
 	Product toReturn;
 	for(auto& iterator : Repo)
@@ -69,8 +71,7 @@ Product Repository::FindProductAfterID(int IdToFind)
 	return toReturn;
 }
 
-
-std::vector < Product > Repository::FindProductsAfterName(std::string NameToFind)
+std::vector < Product > Repository::FindProductsAfterName(std::string NameToFind) const 
 {
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
@@ -83,7 +84,7 @@ std::vector < Product > Repository::FindProductsAfterName(std::string NameToFind
 	return toReturn;
 }
 
-std::vector < Product > Repository::FindProductsAfterType(std::string TypeToFind)
+std::vector < Product > Repository::FindProductsAfterType(std::string TypeToFind) const 
 {
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
@@ -96,7 +97,7 @@ std::vector < Product > Repository::FindProductsAfterType(std::string TypeToFind
 	return toReturn;
 }
 
-std::vector < Product > Repository::FindProductsAfterProducer(std::string ProducerToFind)
+std::vector < Product > Repository::FindProductsAfterProducer(std::string ProducerToFind) const
 {
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
@@ -109,7 +110,7 @@ std::vector < Product > Repository::FindProductsAfterProducer(std::string Produc
 	return toReturn;
 }
 
-std::vector < Product > Repository::FindProductsAfterPrice(int PriceToFind)
+std::vector < Product > Repository::FindProductsAfterPrice(int PriceToFind) const 
 {
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
@@ -134,12 +135,12 @@ void Repository::DeleteProduct(int IdToDelete)
 	this->Repo.erase(position);
 }
 
-std::vector<Product> Repository::GetAll() noexcept
+std::vector<Product> Repository::GetAll() const noexcept
 {
 	return std::vector<Product>(Repo);
 }
 
-int Repository::GetSize() noexcept
+int Repository::GetSize() const noexcept
 {
 	return static_cast<int>(this->Repo.size());
 }
@@ -167,22 +168,70 @@ int Bucket::getPrice() const
 {
 	return TotalPrice;
 }
-/*
-void Bucket::exp(std::string FileName) const
+
+void FileRepository::LoadFromFile()
 {
-	std::fstream fout;
-	size_t length = MemoryBucket.size();
-	Product toExport;
+	std::ifstream in(FilePath);
+	std::string line, name, type, producer;
+	int id, price;
 
-	fout.open(FileName, std::ios::out | std::ios::app);
-
-	for (size_t count = 0; count < length; count = count + 1)
+	while (std::getline(in, line))
 	{
-		toExport = MemoryBucket[count];
-		fout << toExport.GetId() << ","
-			 << toExport.GetName() << ","
-			 << toExport.GetType() << ","
-			 << toExport.GetProducer() << "."
-			 << toExport.GetPrice() << "\n";
+		std::istringstream stringInput(line);
+		stringInput >> id;
+		std::getline(stringInput, name, ',');
+		std::getline(stringInput, name, ',');
+		std::getline(stringInput, type, ',');
+		std::getline(stringInput, producer, ',');
+		stringInput >> price;
+
+		Product toAdd{ id, name, type, producer, price };
+		Repository::AddProduct(toAdd);
 	}
-}*/
+
+	in.close();
+}
+
+void FileRepository::WriteToFile()
+{
+	std::vector < Product > products = Repository::GetAll();
+	std::ofstream out(FilePath);
+
+	if (out.is_open())
+	{
+		for (const auto& product : products)
+		{
+			out << product.GetId() << ","
+				<< product.GetName() << ","
+				<< product.GetType() << ","
+				<< product.GetProducer() << ","
+				<< product.GetPrice() << "\n";
+		}
+	}
+
+	out.close();
+}
+
+FileRepository::FileRepository(std::string FileName) : Repository()
+{
+	FilePath = "save_files/" + FileName;
+	LoadFromFile();
+}
+
+void FileRepository::AddProduct(Product& ProductToAdd)
+{
+	Repository::AddProduct(ProductToAdd);
+	WriteToFile();
+}
+
+void FileRepository::ModifyProduct(int IdProductToModify, std::string NewName, std::string NewType, std::string NewProducer, int NewPrice)
+{
+	Repository::ModifyProduct(IdProductToModify, NewName, NewType, NewProducer, NewPrice);
+	WriteToFile();
+}
+
+void FileRepository::DeleteProduct(int IdToDelete)
+{
+	Repository::DeleteProduct(IdToDelete);
+	WriteToFile();
+}

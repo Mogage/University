@@ -567,6 +567,28 @@ void Test::TestBucket()
 	this->TestBucketService();
 }
 
+void Test::TestUndo()
+{
+	FileRepository repo("test.csv");
+	Validator valid;
+	Service serv{ repo, valid };
+	Product product1(1, "lapte", "bautura", "dorna", 8);
+
+	try { serv.UndoServ(); }
+	catch (GeneralExceptions& error) { assert(error.getMessage() == "Nu s-au efectuat operatii.\n"); }
+
+	serv.AddProduct(1, "lapte", "bautura", "dorna", 8);
+	serv.ModifyProduct(1, "mog", "", "", 5);
+	serv.UndoServ();
+	assert(serv.GetAll()[0] == product1);
+	serv.DeleteProduct(1);
+	assert(serv.GetAll().size() == 0);
+	serv.UndoServ();
+	assert(serv.GetAll()[0] == product1);
+	serv.UndoServ();
+	assert(serv.GetAll().size() == 0);
+}
+
 void Test::RunAll()
 {
 	this->TestProduct();
@@ -574,4 +596,5 @@ void Test::RunAll()
 	this->TestValidator();
 	this->TestService();
 	this->TestBucket();
+	this->TestUndo();
 }

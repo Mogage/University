@@ -3,12 +3,18 @@
 #include "repository.h"
 #include "validator.h"
 #include "domain.h"
+#include "undo.h"
+#include <vector>
 
+/// <summary>
+///		Service pentru produse
+/// </summary>
 class Service
 {
 private:
 	Repository& Repo;
 	Validator& Valid;
+	std::vector < Undo* > UndoActions;
 
 public:
 	/// <summary>
@@ -17,6 +23,11 @@ public:
 	/// <param name="Repo">Repo pentru obiecte</param>
 	/// <param name="Valid">Validator pentru obiecte</param>
 	Service(Repository& Repo, Validator& Valid) noexcept : Repo{ Repo }, Valid{ Valid } {}
+
+	/// <summary>
+	///		Destructor service
+	/// </summary>
+	~Service();
 
 	/// <summary>
 	///		Adauga un produs cu atribute
@@ -99,8 +110,16 @@ public:
 	/// </summary>
 	/// <returns>vector cu toate produsele</returns>
 	std::vector < Product > GetAll() const noexcept;
+
+	/// <summary>
+	///		Functie pentru a face undo la o operatie
+	/// </summary>
+	void UndoServ();
 };
 
+/// <summary>
+///		Service pentru cosul de cumparaturi
+/// </summary>
 class ServiceBucket
 {
 private:
@@ -108,10 +127,36 @@ private:
 	Bucket& Bck;
 	Validator& Valid;
 public:
+	/// <summary>
+	///		Constructor service cos de cumparaturi
+	/// </summary>
+	/// <param name="_Repo"></param>
+	/// <param name="_Bucket"></param>
+	/// <param name="_Validator"></param>
 	ServiceBucket(Repository& _Repo, Bucket& _Bucket, Validator& _Validator) : Repo{ _Repo }, Bck{ _Bucket }, Valid{ _Validator }{}
 
+	/// <summary>
+	///		Adauga in cos un produs dupa nume
+	/// </summary>
+	/// <param name="">Numele produsului de adaugat</param>
+	/// <returns>Pretul curent al cosului</returns>
 	int addToBucket(std::string);
+
+	/// <summary>
+	///		Goleste cosul
+	/// </summary>
+	/// <returns>Pretul curent al cosului</returns>
 	int clearBucket();
+
+	/// <summary>
+	///		Adauga un numbar de produse random in cos
+	/// </summary>
+	/// <param name="">Numarul de produse random de adaugat</param>
+	/// <returns>Valoarea cosului</returns>
 	int generateBucket(int);
+
+	/// <summary>
+	///		Returneaza toate produsele din cos
+	/// </summary>
 	const std::vector < Product >& getBucket() const;
 };

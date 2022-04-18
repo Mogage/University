@@ -2,6 +2,7 @@
 #include "exceptions.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 void UserInterface::PrintMenu()
 {
@@ -18,7 +19,9 @@ void UserInterface::PrintMenu()
 		<< "\t10. Goleste cos.\n"
 		<< "\t11. Genereaza random in cos.\n"
 		<< "\t12. Exporta cos.\n"
-		<< "\t13. Iesire aplicatie.\n";
+		<< "\t13. Bash mode.\n"
+		<< "\t14. Undo.\n"
+		<< "\t15. Iesire aplicatie.\n";
 }
 
 void UserInterface::Add()
@@ -463,6 +466,132 @@ void UserInterface::ExportBucket()
 	fout.close();
 }
 
+void UserInterface::BatchMode()
+{
+	std::vector < std::string > commands;
+	std::string input = "";
+	int commandType;
+
+	int id, price;
+	std::string name, type, producer;
+
+	while (true)
+	{
+		std::cout << "Batch mode(insert 'exit' to go in normal mode >>>";
+		std::getline(std::cin, input);
+		if (input == "exit")
+		{
+			break;
+		}
+		commands.push_back(input);
+	}
+
+	for (const auto& command : commands)
+	{
+		std::istringstream ss(command);
+		ss >> commandType;
+		switch (commandType)
+		{
+		case 1:
+			ss >> id >> name >> type >> producer >> price;
+			try
+			{
+				Serv.AddProduct(id, name, type, producer, price);
+				std::cout << "Produs adaugat cu succes.\n";
+			}
+			catch (ValidationError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			catch (RepositoryError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			id = price = 0;
+			name = type = producer = "";
+			break;
+		case 2:
+			ss >> id >> name >> type >> producer >> price;
+			try
+			{
+				Serv.ModifyProduct(id, name, type, producer, price);
+				std::cout << "Produs modificat cu succes.\n";
+			}
+			catch (ValidationError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			catch (RepositoryError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			id = price = 0;
+			name = type = producer = "";
+			break;
+		case 3:
+			ss >> id;
+			try
+			{
+				Serv.DeleteProduct(id);
+				std::cout << "Produs sters cu succes.\n";
+			}
+			catch (ValidationError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			catch (RepositoryError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			id = 0;
+			break;
+		case 4:
+			PrintAll();
+			break;
+		case 5:
+			ss >> id;
+			try
+			{
+				Product productToFind(Serv.FindProduct(id));
+				if (-1 == productToFind.GetId())
+				{
+					std::cout << "Produs inexistent.\n";
+				}
+				else
+				{
+					std::cout << productToFind.Print();
+				}
+			}
+			catch (ValidationError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			catch (RepositoryError& error)
+			{
+				std::cout << error.getMessage();
+			}
+			id = 0;
+			break;
+		default:
+			std::cout << "Comanda invalida.\n";
+			break;
+		}
+	}
+}
+
+void UserInterface::Undo()
+{
+	try
+	{
+		Serv.UndoServ();
+		std::cout << "Operatie anulata cu succes.\n";
+	}
+	catch (const GeneralExceptions& error)
+	{
+		std::cout << error.getMessage();
+	}
+}
+
 void UserInterface::Run()
 {
 	std::string input;
@@ -480,7 +609,7 @@ void UserInterface::Run()
 
 		switch (atoi(input.c_str()))
 		{
-		case 13:
+		case 15:
 			std::cout << "Aplicatie incheiata cu succes.\n";
 			return;
 		case 1:
@@ -518,6 +647,12 @@ void UserInterface::Run()
 			break;
 		case 12:
 			this->ExportBucket();
+			break;
+		case 13:
+			this->BatchMode();
+			break;
+		case 14:
+			this->Undo();
 			break;
 		default:
 			std::cout << "Comanda invalida.\n";

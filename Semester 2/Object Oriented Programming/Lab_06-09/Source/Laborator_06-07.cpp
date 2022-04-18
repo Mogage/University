@@ -11,18 +11,25 @@ Creați o aplicație care permite:
 #include "userinterface.h"
 #include "test.h"
 #include <crtdbg.h>
+#include <fstream>
+#include <sstream>
 
 int main()
 {
-	Test test;
-	Repository repo;
-	Validator valid;
-	Service service(repo, valid);
-	UserInterface userInt(service);
+	{
+		Test test;
+		// Repository repo;
+		FileRepository repo("out.csv");
+		Bucket bucket;
+		Validator valid;
+		Service service(repo, valid);
+		ServiceBucket serviceBck(repo, bucket, valid);
+		UserInterface userInt(service, serviceBck);
 
-	test.RunAll();
-	userInt.Run();
-
+		test.RunAll();
+		userInt.Run();
+	}
+	
 	_CrtDumpMemoryLeaks();
 
 	return 0;

@@ -3,6 +3,17 @@
 #include <algorithm>
 #include <random>
 
+Service::~Service()
+{
+	Undo* toUndo;
+	while (false == UndoActions.empty())
+	{
+		toUndo = UndoActions.back();
+		UndoActions.pop_back();
+		delete toUndo;
+	}
+}
+
 void Service::AddProduct(
 	int		Id,
 	std::string Name,
@@ -14,6 +25,7 @@ void Service::AddProduct(
 	Product productToAdd(Id, Name, Type, Producer, Price);
 	this->Valid.ValidateProduct(productToAdd);
 	this->Repo.AddProduct(productToAdd);
+	UndoActions.push_back(new UndoAdd{ Repo, Id });
 }
 
 void Service::ModifyProduct(
@@ -35,6 +47,8 @@ void Service::ModifyProduct(
 	}
 
 	this->Repo.ModifyProduct(IdProductToModify, Name, Type, Producer, Price);
+	Product toModify{ IdProductToModify, Name, Type, Producer, Price };
+	UndoActions.push_back(new UndoModify{ Repo, toModify });
 }
 
 Product Service::FindProduct(int Id)
@@ -114,7 +128,10 @@ void Service::DeleteProduct(int Id)
 	{
 		throw ValidationError("Id invalid.\n");
 	}
+
+	Product toDelete = Repo.FindProductAfterID(Id);
 	this->Repo.DeleteProduct(Id);
+	UndoActions.push_back(new UndoDelete{ Repo, toDelete });
 }
 
 std::vector<Product> Service::Filter(int Price) const
@@ -159,6 +176,21 @@ std::vector < Product > Service::GetAll() const noexcept
 {
 	return this->Repo.GetAll();
 }
+
+void Service::UndoServ()
+{
+	if (true == UndoActions.empty())
+	{
+		throw GeneralExceptions{ "Nu s-au efectuat operatii.\n" };
+	}
+
+	Undo* toUndo = UndoActions.back();
+	toUndo->doUndo();
+	UndoActions.pop_back();
+	delete toUndo;
+}
+
+// ------------------------------------------------------------------------------------------------------
 
 int ServiceBucket::addToBucket(std::string Name)
 {

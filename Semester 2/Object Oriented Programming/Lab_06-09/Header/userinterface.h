@@ -48,13 +48,35 @@ private:
 	/// </summary>
 	void Sort();
 
+	/// <summary>
+	///		Citeste numele produsului de adaugat in cos
+	/// </summary>
 	void AddBucket();
 
+	/// <summary>
+	///		Goleste cosul
+	/// </summary>
 	void ClearBucket();
 
+	/// <summary>
+	///		Citeste un numar x si adauga x produse random in cos
+	/// </summary>
 	void GenerateBucket();
 
+	/// <summary>
+	///		Exporteaza cosul intr-un fisier citit de la utilizator
+	/// </summary>
 	void ExportBucket();
+
+	/// <summary>
+	///		Intra in modul batch de inserare comenzi
+	/// </summary>
+	void BatchMode();
+
+	/// <summary>
+	///		Anuleaza ultima operatie daca este posibil
+	/// </summary>
+	void Undo();
 
 public:
 	/// <summary>
