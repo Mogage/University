@@ -1,12 +1,45 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include "domain.h"
+
+class RepoAbstract
+{
+public:
+	virtual void AddProduct(Product& ProductToAdd) = 0;
+
+	virtual void ModifyProduct(
+		int			IdProductToModify,
+		std::string NewName = "",
+		std::string NewType = "",
+		std::string NewProducer = "",
+		int			NewPrice = 0
+	) = 0;
+
+	virtual void DeleteProduct(int IdToDelete) = 0;
+
+	virtual Product FindProductAfterID(int IdToFind) const = 0;
+
+	virtual std::vector < Product > FindProductsAfterName(std::string NameToFind) const = 0;
+
+	virtual std::vector < Product > FindProductsAfterType(std::string TypeToFind) const = 0;
+
+	virtual std::vector < Product > FindProductsAfterProducer(std::string ProducerToFind) const = 0;
+
+	virtual std::vector < Product > FindProductsAfterPrice(int PriceToFind) const = 0;
+
+	virtual std::vector < Product > GetAll() const = 0;
+
+	virtual int GetSize() const = 0;
+
+	virtual ~RepoAbstract() {}
+};
 
 /// <summary>
 ///		Clasa pentru stocarea produselor
 /// </summary>
-class Repository
+class Repository : public RepoAbstract
 {
 	friend class ServiceBucket;
 private:
@@ -16,7 +49,7 @@ public:
 	/// <summary>
 	///		Adauga un produs in repo
 	/// </summary>
-	virtual void AddProduct(Product& ProductToAdd);
+	void AddProduct(Product& ProductToAdd) override;
 
 	/// <summary>
 	///		Modifica un produs existent
@@ -26,19 +59,19 @@ public:
 	/// <param name="Type">Tipul cu care se modifica - optional</param>
 	/// <param name="Producer">Producatorul cu care se modifica - optional</param>
 	/// <param name="Price">Pretul cu care se modifica - optional</param>
-	virtual void ModifyProduct(
+	void ModifyProduct(
 		int			IdProductToModify,
 		std::string NewName = "",
 		std::string NewType = "",
 		std::string NewProducer = "",
 		int			NewPrice = 0
-	);
+	) override;
 
 	/// <summary>
 	///		Sterge un produs din repo cu id-ul Id
 	/// </summary>
 	/// <param name="Id">Id-ul produsului care se sterge</param>
-	virtual void DeleteProduct(int IdToDelete);
+	void DeleteProduct(int IdToDelete) override;
 	
 	// -------------------------------------------------------------------------------------------
 
@@ -50,35 +83,35 @@ public:
 	///		Produsul cu respectivul id	- daca exista
 	///		Un produs invalid			- altfel
 	/// </returns>
-	Product FindProductAfterID(int IdToFind) const;
+	Product FindProductAfterID(int IdToFind) const override;
 
 	/// <summary>
 	///		Cauta produse dupa Nume
 	/// </summary>
 	/// <param name="Name">Numele dupa care se cauta</param>
 	/// <returns>vector cu toate produsele care au numele Name</returns>
-	std::vector < Product > FindProductsAfterName(std::string NameToFind) const;
+	std::vector < Product > FindProductsAfterName(std::string NameToFind) const override;
 
 	/// <summary>
 	///		Cauta produse dupa Tip
 	/// </summary>
 	/// <param name="Type">Tipul dupa care se cauta</param>
 	/// <returns>vector cu toate produsele cu tipul Type</returns>
-	std::vector < Product > FindProductsAfterType(std::string TypeToFind) const;
+	std::vector < Product > FindProductsAfterType(std::string TypeToFind) const override;
 
 	/// <summary>
 	///		Cauta produse dupa Producator
 	/// </summary>
 	/// <param name="Producer">Producatorul dupa care se cauta</param>
 	/// <returns>vector cu toate produsele cu tipul Producer</returns>
-	std::vector < Product > FindProductsAfterProducer(std::string ProducerToFind) const;
+	std::vector < Product > FindProductsAfterProducer(std::string ProducerToFind) const override;
 
 	/// <summary>
 	///		Cauta produse dupa Pret
 	/// </summary>
 	/// <param name="Price">Pretul dupa care se cauta</param>
 	/// <returns>vector cu toate produsele cu pretul Price</returns>
-	std::vector < Product > FindProductsAfterPrice(int PriceToFind) const;
+	std::vector < Product > FindProductsAfterPrice(int PriceToFind) const override;
 
 	// -------------------------------------------------------------------------------------------
 
@@ -86,13 +119,13 @@ public:
 	///		Getter pentru toate produsele
 	/// </summary>
 	/// <returns>vector cu toate produsele din repo</returns>
-	std::vector < Product > GetAll() const noexcept;
+	std::vector < Product > GetAll() const override;
 
 	/// <summary>
 	///		Getter pentru numarul de produse din repo
 	/// </summary>
 	/// <returns>numar natural - numarul de produse din repo</returns>
-	int GetSize() const noexcept;
+	int GetSize() const override;
 };
 
 /// <summary>
@@ -185,3 +218,41 @@ public:
 	/// </summary>
 	int getPrice() const;
 };
+
+class NewRepository : public RepoAbstract
+{
+private:
+	double Probability;
+	std::map < int, Product > Repo;
+
+	void AruncaExceptie() const;
+public:
+	NewRepository(double _Probability) : Probability{ _Probability } {}
+
+	void AddProduct(Product& ProductToAdd) override;
+
+	void ModifyProduct(
+		int			IdProductToModify,
+		std::string NewName = "",
+		std::string NewType = "",
+		std::string NewProducer = "",
+		int			NewPrice = 0
+	) override;
+
+	void DeleteProduct(int IdToDelete) override;
+
+	Product FindProductAfterID(int IdToFind) const override;
+
+	std::vector < Product > FindProductsAfterName(std::string NameToFind) const override;
+
+	std::vector < Product > FindProductsAfterType(std::string TypeToFind) const override;
+
+	std::vector < Product > FindProductsAfterProducer(std::string ProducerToFind) const override;
+
+	std::vector < Product > FindProductsAfterPrice(int PriceToFind) const override;
+
+	std::vector < Product > GetAll() const override;
+
+	int GetSize() const override;
+};
+

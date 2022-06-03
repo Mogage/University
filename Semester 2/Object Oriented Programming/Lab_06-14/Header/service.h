@@ -4,6 +4,7 @@
 #include "validator.h"
 #include "domain.h"
 #include "undo.h"
+#include "observer.h"
 #include <vector>
 
 /// <summary>
@@ -13,6 +14,7 @@ class Service
 {
 private:
 	Repository& Repo;
+	// RepoAbstract* Repo;
 	Validator& Valid;
 	std::vector < Undo* > UndoActions;
 
@@ -109,7 +111,7 @@ public:
 	///		Getter pentru toate produsele existente
 	/// </summary>
 	/// <returns>vector cu toate produsele</returns>
-	std::vector < Product > GetAll() const noexcept;
+	std::vector < Product > GetAll() const;
 
 	/// <summary>
 	///		Functie pentru a face undo la o operatie
@@ -120,7 +122,7 @@ public:
 /// <summary>
 ///		Service pentru cosul de cumparaturi
 /// </summary>
-class ServiceBucket
+class ServiceBucket : public Observable
 {
 private:
 	Repository& Repo;
@@ -140,7 +142,7 @@ public:
 	/// </summary>
 	/// <param name="">Numele produsului de adaugat</param>
 	/// <returns>Pretul curent al cosului</returns>
-	int addToBucket(std::string);
+	int addToBucket(int);
 
 	/// <summary>
 	///		Goleste cosul

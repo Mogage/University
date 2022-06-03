@@ -172,7 +172,7 @@ std::vector<Product> Service::Sort(bool Compare(const Product& Product1, const P
 	return products;
 }
 
-std::vector < Product > Service::GetAll() const noexcept
+std::vector < Product > Service::GetAll() const 
 {
 	return this->Repo.GetAll();
 }
@@ -192,23 +192,32 @@ void Service::UndoServ()
 
 // ------------------------------------------------------------------------------------------------------
 
-int ServiceBucket::addToBucket(std::string Name)
+int ServiceBucket::addToBucket(int Id)
 {
-	if (false == Valid.ValidateString(Name))
+	if (false == Valid.ValidateNumber(Id))
 	{
-		throw ValidationError("Nume invalid.\n");
+		throw ValidationError("Id invalid.\n");
 	}
-	std::vector < Product > products = Repo.FindProductsAfterName(Name);
-	if (products.size() == 0)
+	Product product = Repo.FindProductAfterID(Id);
+	if (product.GetId() == -1)
 	{
-		throw RepositoryError("Nu exista niciun produs cu acest nume.\n");
+		throw RepositoryError("Nu exista niciun produs cu acest id.\n");
 	}
-	return Bck.add(products[0]);
+
+	int price = Bck.add(product);
+
+	notify();
+
+	return price;
 }
 
 int ServiceBucket::clearBucket()
 {
-	return Bck.clear();
+	Bck.clear();
+
+	notify();
+
+	return 0;
 }
 
 int ServiceBucket::generateBucket(int NumberOfProducts)
@@ -224,6 +233,9 @@ int ServiceBucket::generateBucket(int NumberOfProducts)
 		random = Repo.Repo[rndNr];
 		totalPrice = Bck.add(random);
 	}
+
+	notify();
+
 	return totalPrice;
 }
 

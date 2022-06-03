@@ -2,6 +2,7 @@
 #include "exceptions.h"
 #include <fstream>
 #include <sstream>
+#include <random>
 
 void Repository::AddProduct(Product& ProductToAdd)
 {
@@ -76,7 +77,7 @@ std::vector < Product > Repository::FindProductsAfterName(std::string NameToFind
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
 	{
-		if (iterator.GetName() == NameToFind)
+		if (iterator.GetName()._Starts_with(NameToFind) != false)
 		{
 			toReturn.push_back(iterator);
 		}
@@ -102,7 +103,7 @@ std::vector < Product > Repository::FindProductsAfterProducer(std::string Produc
 	std::vector < Product > toReturn;
 	for(auto& iterator : Repo)
 	{
-		if (iterator.GetProducer() == ProducerToFind)
+		if (iterator.GetProducer()._Starts_with(ProducerToFind) != false)
 		{
 			toReturn.push_back(iterator);
 		}
@@ -135,12 +136,12 @@ void Repository::DeleteProduct(int IdToDelete)
 	this->Repo.erase(position);
 }
 
-std::vector<Product> Repository::GetAll() const noexcept
+std::vector<Product> Repository::GetAll() const
 {
 	return std::vector<Product>(Repo);
 }
 
-int Repository::GetSize() const noexcept
+int Repository::GetSize() const
 {
 	return static_cast<int>(this->Repo.size());
 }
@@ -234,4 +235,169 @@ void FileRepository::DeleteProduct(int IdToDelete)
 {
 	Repository::DeleteProduct(IdToDelete);
 	WriteToFile();
+}
+
+void NewRepository::AruncaExceptie() const
+{
+	std::mt19937 mt{ std::random_device{}() };
+	std::uniform_int_distribution<> dist(0, 100);
+	double randomNumber = dist(mt);
+
+	if (randomNumber / 100 <= Probability)
+	{
+		throw RepositoryError("Exceptie repo lab nou.\n");
+	}
+}
+
+void NewRepository::AddProduct(Product& ProductToAdd)
+{
+	AruncaExceptie();
+	for (auto& iterator : Repo)
+	{
+		if (iterator.second == ProductToAdd)
+		{
+			throw RepositoryError("Acest produs exista deja.\n");
+		}
+	}
+
+	Repo.insert(std::make_pair(ProductToAdd.GetId(), ProductToAdd));
+}
+
+void NewRepository::DeleteProduct(int IdToDelete)
+{
+	AruncaExceptie();
+	for (auto& iterator : Repo)
+	{
+		if (iterator.first == IdToDelete)
+		{
+			Repo.erase(IdToDelete);
+			return;
+			
+		}
+	}
+
+	throw RepositoryError("Acest produs nu exista.\n");
+}
+
+void NewRepository::ModifyProduct(
+	int			IdProductToModify,
+	std::string NewName,
+	std::string NewType,
+	std::string NewProducer,
+	int			NewPrice
+	)
+{
+	AruncaExceptie();
+	for (auto& iterator : Repo)
+	{
+		if (iterator.first == IdProductToModify)
+		{
+			throw RepositoryError("Acest produs nu exista.\n");
+		}
+	}
+
+	if ("" != NewName)
+	{
+		Repo[IdProductToModify].SetName(NewName);
+	}
+	if ("" != NewType)
+	{
+		Repo[IdProductToModify].SetType(NewType);
+	}
+	if ("" != NewProducer)
+	{
+		Repo[IdProductToModify].SetProducer(NewProducer);
+	}
+	if (0 != NewPrice)
+	{
+		Repo[IdProductToModify].SetPrice(NewPrice);
+	}
+}
+
+Product NewRepository::FindProductAfterID(int IdToFind) const
+{
+	AruncaExceptie();
+	Product toReturn;
+	for (auto& iterator : Repo)
+	{
+		if (iterator.first == IdToFind)
+		{
+			toReturn = iterator.second;
+			break;
+		}
+	}
+	return toReturn;
+}
+
+std::vector<Product> NewRepository::FindProductsAfterName(std::string NameToFind) const
+{
+	AruncaExceptie();
+	std::vector< Product > toReturn;
+	for (auto& iterator : Repo)
+	{
+		if (iterator.second.GetName() == NameToFind)
+		{
+			toReturn.push_back(iterator.second);
+		}
+	}
+	return toReturn;
+}
+
+std::vector<Product> NewRepository::FindProductsAfterType(std::string TypeToFind) const
+{
+	AruncaExceptie();
+	std::vector< Product > toReturn;
+	for (auto& iterator : Repo)
+	{
+		if (iterator.second.GetType() == TypeToFind)
+		{
+			toReturn.push_back(iterator.second);
+		}
+	}
+	return toReturn;
+}
+
+std::vector<Product> NewRepository::FindProductsAfterProducer(std::string ProducerToFind) const
+{
+	AruncaExceptie();
+	std::vector< Product > toReturn;
+	for (auto& iterator : Repo)
+	{
+		if (iterator.second.GetProducer() == ProducerToFind)
+		{
+			toReturn.push_back(iterator.second);
+		}
+	}
+	return toReturn;
+}
+
+std::vector<Product> NewRepository::FindProductsAfterPrice(int PriceToFind) const
+{
+	AruncaExceptie();
+	std::vector< Product > toReturn;
+	for (auto& iterator : Repo)
+	{
+		if (iterator.second.GetPrice() == PriceToFind)
+		{
+			toReturn.push_back(iterator.second);
+		}
+	}
+	return toReturn;
+}
+
+std::vector<Product> NewRepository::GetAll() const
+{
+	AruncaExceptie();
+	std::vector < Product > toReturn;
+	for (auto& iterator : Repo)
+	{
+		toReturn.push_back(iterator.second);
+	}
+	return toReturn;
+}
+
+int NewRepository::GetSize() const
+{
+	AruncaExceptie();
+	return (int)Repo.size();
 }

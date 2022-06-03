@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
     ProductsGUI ui{ serv, servBck };
 
     test.RunAll();
-
-    ui.show();
-    ui.activateWindow();
+	
+	ui.show();
+    // ui.activateWindow();
 
     return app.exec();
 }
