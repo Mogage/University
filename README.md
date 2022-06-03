@@ -26,6 +26,6 @@ Data Structures and Algorithms
 
 Graph Algorithms
 
-Geometry
+✔️ Geometry
 
 Dynamical Systems
