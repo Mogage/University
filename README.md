@@ -18,14 +18,14 @@ Algorithms implementation, labs and school work.
 
 **Second semester**
 
-Operating System
+✔️ Operating System
 
 Object Oriented Programming
 
 Data Structures and Algorithms
 
-Graph Algorithms
+✔️ Graph Algorithms
 
 ✔️ Geometry
 
-Dynamical Systems
+✔️ Dynamical Systems
