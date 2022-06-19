@@ -2,6 +2,7 @@
 
 #include "domain.h"
 #include <qtableview.h>
+#include <algorithm>
 
 class TableModel : public QAbstractTableModel
 {
@@ -77,6 +78,24 @@ public:
 	void setGames(vector < Game >& _Games)
 	{
 		this->Games = _Games;
+		std::sort(Games.begin(), Games.end(), [](const Game& Game1, const Game& Game2)
+			{
+				int id1, id2;
+				if (Game1.stare() == "Neinceput")
+					id1 = 1;
+				else if (Game1.stare() == "In derulare")
+					id1 = 2;
+				else id1 = 3;
+
+				if (Game2.stare() == "Neinceput")
+					id2 = 1;
+				else if (Game2.stare() == "In derulare")
+					id2 = 2;
+				else id2 = 3;
+
+				return id1 < id2;
+			}
+		);
 		auto topLeft = createIndex(0, 0);
 		auto bottomRight = createIndex(rowCount(), columnCount());
 		emit dataChanged(topLeft, bottomRight);

@@ -73,6 +73,64 @@ char Game::cell(int Row, int Col)
 	return Tabla[Row][Col];
 }
 
+bool Game::checkWin(const vector < vector < char > >& _Tabla)
+{
+	bool toRet = false;
+	int nr = Tabla.size();
+
+	for (int cont = 0; cont < nr; ++cont)
+	{
+		toRet = true;
+		for (int cont2 = 1; cont2 < nr; ++cont2)
+		{
+			if (Tabla[cont][0] == '-' || Tabla[cont][0] != Tabla[cont][cont2])
+			{
+				toRet = false;
+				break;
+			}
+		}
+		if (toRet) return toRet;
+	}
+
+	for (int cont = 0; cont < nr; ++cont)
+	{
+		toRet = true;
+		for (int cont2 = 1; cont2 < nr; ++cont2)
+		{
+			if (Tabla[0][cont] == '-' || Tabla[0][cont] != Tabla[cont2][cont])
+			{
+				toRet = false;
+				break;
+			}
+		}
+		if (toRet) return toRet;
+	}
+
+	toRet = true;
+	for (int cont = 1; cont < nr; ++cont)
+	{
+		if (Tabla[0][0] == '-' || Tabla[0][0] != Tabla[cont][cont])
+		{
+			toRet = false;
+			break;
+		}
+	}
+	if (toRet) return toRet;
+
+	toRet = true;
+	for (int cont = 1; cont < nr; ++cont)
+	{
+		if (Tabla[0][nr - 1] == '-' || Tabla[0][nr - 1] != Tabla[cont][nr - 1 - cont])
+		{
+			toRet = false;
+			break;
+		}
+	}
+	if (toRet) return toRet;
+
+	return toRet;
+}
+
 char Game::move(int Row, int Col)
 {
 	if (Stare == "Terminat")
@@ -93,13 +151,14 @@ char Game::move(int Row, int Col)
 			}
 		}
 	}
-	if (nrLin > 0 && nrLin < Dim * Dim)
-	{
-		Stare = "In derulare";
-	}
-	else if (0 == nrLin)
+
+	if (checkWin(Tabla) || 0 == nrLin)
 	{
 		Stare = "Terminat";
+	}
+	else if (nrLin > 0 && nrLin < Dim * Dim)
+	{
+		Stare = "In derulare";
 	}
 	return toReturn;
 }

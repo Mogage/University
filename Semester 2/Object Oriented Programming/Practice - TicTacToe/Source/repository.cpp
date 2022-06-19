@@ -74,24 +74,6 @@ char Repository::move(int Id, int Row, int Col)
 		if (Id == game.id())
 		{
 			char aux = game.move(Row, Col);
-			std::sort(Repo.begin(), Repo.end(), [](const Game& Game1, const Game& Game2) 
-				{
-					int id1, id2;
-					if (Game1.stare() == "Neinceput")
-						id1 = 1;
-					else if (Game1.stare() == "In derulare")
-						id1 = 2;
-					else id1 = 3;
-
-					if (Game2.stare() == "Neinceput")
-						id2 = 1;
-					else if (Game2.stare() == "In derulare")
-						id2 = 2;
-					else id2 = 3;
-
-					return id1 < id2;
-				}
-			);
 			writeToFile();
 			return aux;
 		}

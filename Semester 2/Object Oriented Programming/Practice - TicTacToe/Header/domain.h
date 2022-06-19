@@ -14,6 +14,8 @@ private:
 	int Id, Dim;
 	string Stare;
 	vector < vector < char > > Tabla;
+
+	bool checkWin(const vector < vector < char > >& _Tabla);
 public:
 	Game();
 	Game(int _Id, int _Dim, string _Stare, char _Jucator, string _Tabla);

@@ -116,6 +116,7 @@ void UserInterface::connectSignals()
 						{
 							char aux = Serv.move(gameId, row, col);
 							reloadList(Serv.all());
+							aux = (aux == '-') ? ' ' : aux;
 							ButtonsForPlay[row][col]->setText(QString(aux));
 						}
 					);
