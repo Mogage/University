@@ -20,9 +20,9 @@ Algorithms implementation, labs and school work.
 
 ✔️ Operating System
 
-Object Oriented Programming
+✔️ Object Oriented Programming
 
-Data Structures and Algorithms
+✔️ Data Structures and Algorithms
 
 ✔️ Graph Algorithms
 
