@@ -1,7 +1,7 @@
 # University-Courses - UBB Computer Science
 Algorithms implementation, labs and school work.
 
-# **Year 1**
+## **Year 1**
 **First semester** 
 
 ✔️ Computer System Architecture
@@ -29,7 +29,7 @@ Algorithms implementation, labs and school work.
 ✔️ Dynamical Systems
 
 
-# **Year 2**
+## **Year 2**
 **First semester** 
 
 Database
