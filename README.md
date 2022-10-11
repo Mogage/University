@@ -4,7 +4,6 @@ Algorithms implementation, labs and school work.
 # **Year 1**
 **First semester** 
 
-
 ✔️ Computer System Architecture
 
 ✔️ Fundamentals of Programming
@@ -14,7 +13,6 @@ Algorithms implementation, labs and school work.
 ✔️ Algebra
 
 ✔️ Mathematical Analysis
-
 
 **Second semester**
 
@@ -29,3 +27,17 @@ Algorithms implementation, labs and school work.
 ✔️ Geometry
 
 ✔️ Dynamical Systems
+
+
+# **Year 2**
+**First semester** 
+
+Database
+
+Advanced Programming Techniques
+
+Computer networks
+
+Functional logic programming
+
+Probability and statistics
