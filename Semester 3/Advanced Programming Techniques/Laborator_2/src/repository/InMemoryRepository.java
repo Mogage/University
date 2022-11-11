@@ -25,6 +25,18 @@ public class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<
     }
 
     @Override
+    public void update(ID id, T entity) throws IllegalArgumentException, RepositoryException {
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity cannot be null");
+        }
+        if (!entities.containsKey(id)) {
+            throw new RepositoryException("Element with this id does not exist.\n");
+        }
+        entities.remove(id);
+        entities.put(entity.getId(), entity);
+    }
+
+    @Override
     public T delete(ID id) throws RepositoryException {
         if (!entities.containsKey(id)) {
             throw new RepositoryException("Element with this id does not exist.\n");
@@ -43,5 +55,10 @@ public class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<
     @Override
     public Iterable<T> getAll() {
         return entities.values();
+    }
+
+    @Override
+    public int size() {
+        return entities.size();
     }
 }

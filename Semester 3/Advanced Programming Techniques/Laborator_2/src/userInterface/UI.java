@@ -11,10 +11,10 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class UI {
-    private final Service<User> service;
+    private final Service service;
     private final Scanner in = new Scanner(System.in);
 
-    public UI(Service<User> service) {
+    public UI(Service service) {
         this.service = service;
     }
 
@@ -31,10 +31,43 @@ public class UI {
         System.out.println("User added.");
     }
 
-    private void removeUser() throws RepositoryException {
+    private void updateUser() throws ValidationException, RepositoryException {
+        long id;
+        String firstName;
+        String lastName;
+
+        if (0 == service.numberOfUsers()) {
+            System.out.println("There are no users.");
+            return;
+        }
+
+        this.printAllUsers();
+        System.out.print("Id of the user to update: ");
+        try {
+            id = Long.parseLong(in.nextLine());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        System.out.print("New first name: ");
+        firstName = in.nextLine();
+        System.out.print("New last name: ");
+        lastName = in.nextLine();
+
+        service.updateUser(id, firstName, lastName);
+
+        System.out.println("User updated.");
+
+    }
+
+    private void removeUser() throws RepositoryException, NetworkException {
         long id;
 
-        this.printAll();
+        if (0 == service.numberOfUsers()) {
+            System.out.println("There are no users.");
+            return;
+        }
+
+        this.printAllUsers();
         System.out.print("Id of the user to delete: ");
         try {
             id = Long.parseLong(in.nextLine());
@@ -47,50 +80,87 @@ public class UI {
         System.out.println("User " + removed + " removed.");
     }
 
-    private void addFriends() throws NetworkException, ValidationException {
-        long id1;
-        long id2;
+    private Long[] readIds() {
+        Long[] ids = new Long[2];
         System.out.print("First user id: ");
         try {
-            id1 = Long.parseLong(in.nextLine());
+            ids[0] = Long.parseLong(in.nextLine());
         } catch (NumberFormatException e) {
-            return;
+            return null;
         }
         System.out.print("Second user id: ");
         try {
-            id2 = Long.parseLong(in.nextLine());
+            ids[1] = Long.parseLong(in.nextLine());
         } catch (NumberFormatException e) {
-            return;
+            return null;
         }
 
-        service.makeFriends(id1, id2);
+        return ids;
+    }
+
+    private void addFriends() throws NetworkException, ValidationException, RepositoryException {
+        Long[] ids = readIds();
+
+        if (null == ids) {
+            return;
+        }
+        service.makeFriends(ids[0], ids[1]);
 
         System.out.println("Users are friends now.");
     }
 
-    private void removeFriends() throws NetworkException, ValidationException {
-        long id1;
-        long id2;
-        System.out.print("First user id: ");
+    private void updateFriends() throws ValidationException, RepositoryException, NetworkException {
+        long id;
+
+        if (0 == service.numberOfFriendships()) {
+            System.out.println("There are no friends.");
+            return;
+        }
+
+        this.printAllFriendships();
+        System.out.print("Id of the friendship to update: ");
         try {
-            id1 = Long.parseLong(in.nextLine());
+            id = Long.parseLong(in.nextLine());
         } catch (NumberFormatException e) {
             return;
         }
-        System.out.print("Second user id: ");
+        Long[] ids = readIds();
+
+        if (null == ids) {
+            return;
+        }
+        service.updateFriends(id, ids[0], ids[1]);
+
+        System.out.println("Friendship updated.");
+    }
+
+    private void removeFriends() throws NetworkException, ValidationException, RepositoryException {
+        long id;
+
+        if (0 == service.numberOfFriendships()) {
+            System.out.println("There are no friends.");
+            return;
+        }
+
+        this.printAllFriendships();
+        System.out.print("Id of the friendship to delete: ");
         try {
-            id2 = Long.parseLong(in.nextLine());
+            id = Long.parseLong(in.nextLine());
         } catch (NumberFormatException e) {
             return;
         }
 
-        service.removeFriends(id1, id2);
+        service.removeFriends(id);
 
         System.out.println("Users are not friends anymore.");
     }
 
-    private void printAll() {
-        service.getAll().forEach(System.out::println);
+    private void printAllUsers() {
+        service.getAllUsers().forEach(System.out::println);
+    }
+
+    private void printAllFriendships() {
+        service.getAllFriendships().forEach(System.out::println);
     }
 
     private void printNumberOfCommunities() {
@@ -107,15 +177,18 @@ public class UI {
     private void printMenu() {
         System.out.print("""
                 Menu app:
-                1. Add user.
-                2. Remove user.
-                3. Make friends.
-                4. Remove friends.
-                5. Show users.
-                6. Show number of communities.
-                7. Show most populated community.
-                8. Show Menu.
-                9. Exit.
+                0. Exit.
+                1. Show Menu.
+                2. Add user.
+                3. Update user.
+                4. Remove user.
+                5. Make friends.
+                6. Update friends.
+                7. Remove friends.
+                8. Show users.
+                9. Show friendships.
+                10. Show number of communities.
+                11. Show most populated community.
                 \s""");
     }
 
@@ -130,52 +203,69 @@ public class UI {
                 continue;
             }
             switch (input) {
+                case 0:
+                    return;
                 case 1:
+                    this.printMenu();
+                    break;
+                case 2:
                     try {
                         this.addUser();
                     } catch (ValidationException | RepositoryException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 2:
-                    try {
-                        this.removeUser();
-                    } catch (RepositoryException e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
                 case 3:
                     try {
-                        this.addFriends();
-                    } catch (NetworkException | ValidationException e) {
-                        System.out.println(e.getMessage());
+                        this.updateUser();
+                    } catch (ValidationException | RepositoryException e) {
+                        throw new RuntimeException(e);
                     }
                     break;
                 case 4:
                     try {
-                        this.removeFriends();
-                    } catch (NetworkException | ValidationException e) {
+                        this.removeUser();
+                    } catch (RepositoryException | NetworkException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 5:
-                    this.printAll();
+                    try {
+                        this.addFriends();
+                    } catch (NetworkException | ValidationException | RepositoryException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 6:
-                    this.printNumberOfCommunities();
+                    try {
+                        this.updateFriends();
+                    } catch (ValidationException | RepositoryException | NetworkException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 7:
+                    try {
+                        this.removeFriends();
+                    } catch (NetworkException | ValidationException | RepositoryException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 8:
+                    this.printAllUsers();
+                    break;
+                case 9:
+                    this.printAllFriendships();
+                    break;
+                case 10:
+                    this.printNumberOfCommunities();
+                    break;
+                case 11:
                     try {
                         this.printPopulatedCommunity();
                     } catch (RepositoryException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 8:
-                    this.printMenu();
-                    break;
-                case 9:
-                    return;
                 default:
                     break;
             }

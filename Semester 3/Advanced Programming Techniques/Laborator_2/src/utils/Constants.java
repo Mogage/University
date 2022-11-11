@@ -1,5 +1,7 @@
 package utils;
 
+import java.time.format.DateTimeFormatter;
+
 public class Constants {
-    public static final int INITIAL_NETWORK_SIZE = 10000;
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss");
 }

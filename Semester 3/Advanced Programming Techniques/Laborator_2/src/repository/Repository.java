@@ -3,14 +3,19 @@ package repository;
 import domain.Entity;
 import exceptions.RepositoryException;
 
-import java.util.Vector;
-
 public interface Repository<ID, T extends Entity<ID>> {
     /**
      * @param obj entity to be added
      * @throws RepositoryException if the entity already exists
      */
     void save(T obj) throws RepositoryException;
+
+    /**
+     * @param id  id of the object to modify
+     * @param obj the new values of the object
+     * @throws RepositoryException if the id does not exists
+     */
+    void update(ID id, T obj) throws RepositoryException;
 
     /**
      * @param id id of the entity to be deleted
@@ -30,4 +35,8 @@ public interface Repository<ID, T extends Entity<ID>> {
      * @return iterable with all entities
      */
     Iterable<T> getAll();
+
+    int size();
+
+
 }

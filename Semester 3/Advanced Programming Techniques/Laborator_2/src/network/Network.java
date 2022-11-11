@@ -1,24 +1,25 @@
 package network;
 
 import domain.Friendship;
+import domain.User;
 import exceptions.NetworkException;
 
 import java.util.Vector;
 
-public interface Network<T> {
+public interface Network {
     /**
      * Adds an entity to network
      *
      * @param entity - entity to be added in network
      */
-    void add(T entity);
+    void add(User entity);
 
     /**
      * Removes an entity to network
      *
      * @param entity - entity to be removed
      */
-    void remove(T entity);
+    void remove(User entity);
 
     /**
      * Makes a friendship relation between two entities
