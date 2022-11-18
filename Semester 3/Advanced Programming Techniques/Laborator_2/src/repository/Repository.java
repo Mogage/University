@@ -36,7 +36,8 @@ public interface Repository<ID, T extends Entity<ID>> {
      */
     Iterable<T> getAll();
 
+    /**
+     * @return number of entities from repo
+     */
     int size();
-
-
 }

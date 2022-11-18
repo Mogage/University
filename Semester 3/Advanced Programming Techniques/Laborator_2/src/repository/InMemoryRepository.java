@@ -6,7 +6,7 @@ import exceptions.RepositoryException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<ID, T> {
+public abstract class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<ID, T> {
     private final Map<ID, T> entities;
 
     public InMemoryRepository() {
@@ -20,6 +20,9 @@ public class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<
         }
         if (entities.containsKey(entity.getId())) {
             throw new RepositoryException("Element with this id already exists.\n");
+        }
+        if (entities.containsValue(entity)) {
+            throw new RepositoryException("This element is already added.\n");
         }
         entities.put(entity.getId(), entity);
     }

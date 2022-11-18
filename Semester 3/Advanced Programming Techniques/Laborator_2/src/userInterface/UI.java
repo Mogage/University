@@ -1,11 +1,13 @@
 package userInterface;
 
 
+import domain.Friendship;
 import domain.User;
 import exceptions.NetworkException;
 import exceptions.RepositoryException;
 import exceptions.ValidationException;
 import service.Service;
+import utils.Constants;
 
 import java.util.Scanner;
 import java.util.Vector;
@@ -99,6 +101,11 @@ public class UI {
     }
 
     private void addFriends() throws NetworkException, ValidationException, RepositoryException {
+        if (2 > service.numberOfUsers()) {
+            System.out.println("A friendship cannot be made at the moment.");
+            return;
+        }
+
         Long[] ids = readIds();
 
         if (null == ids) {
@@ -159,8 +166,19 @@ public class UI {
         service.getAllUsers().forEach(System.out::println);
     }
 
-    private void printAllFriendships() {
-        service.getAllFriendships().forEach(System.out::println);
+    private void printAllFriendships() throws RepositoryException {
+        Iterable<Friendship> friendships = service.getAllFriendships();
+        for (Friendship friendship : friendships) {
+            User user1 = service.getUser(friendship.getIdUser1());
+            User user2 = service.getUser(friendship.getIdUser2());
+            String toPrint = "Id: " + friendship.getId() + " | Friends: " +
+                    user1.getFirstName() + " " +
+                    user1.getLastName() + " - " +
+                    user2.getFirstName() + " " +
+                    user2.getLastName() + " since: " +
+                    friendship.getFriendsFrom().format(Constants.DATE_TIME_FORMATTER);
+            System.out.println(toPrint);
+        }
     }
 
     private void printNumberOfCommunities() {
@@ -193,7 +211,7 @@ public class UI {
     }
 
     public void run() {
-        int input = 0;
+        int input;
         this.printMenu();
         while (true) {
             System.out.print(">>> ");
@@ -219,7 +237,7 @@ public class UI {
                     try {
                         this.updateUser();
                     } catch (ValidationException | RepositoryException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 4:
@@ -240,7 +258,7 @@ public class UI {
                     try {
                         this.updateFriends();
                     } catch (ValidationException | RepositoryException | NetworkException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 7:
@@ -254,7 +272,11 @@ public class UI {
                     this.printAllUsers();
                     break;
                 case 9:
-                    this.printAllFriendships();
+                    try {
+                        this.printAllFriendships();
+                    } catch (RepositoryException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 10:
                     this.printNumberOfCommunities();
