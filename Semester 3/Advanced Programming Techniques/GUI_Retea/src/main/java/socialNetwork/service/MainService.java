@@ -1,21 +1,19 @@
-package service;
+package socialNetwork.service;
 
-import domain.Entity;
-import domain.Friendship;
-import domain.User;
-import domain.validators.FriendshipValidator;
-import domain.validators.UserValidator;
-import domain.validators.Validator;
-import exceptions.NetworkException;
-import exceptions.RepositoryException;
-import exceptions.ValidationException;
-import network.Network;
-import network.MainNetwork;
-import repository.databaseSystem.FriendshipDBRepository;
-import repository.databaseSystem.UserDBRepository;
-import repository.fileSystem.FriendshipFileRepository;
-import repository.fileSystem.UserFileRepository;
-import repository.Repository;
+import socialNetwork.domain.Entity;
+import socialNetwork.domain.Friendship;
+import socialNetwork.domain.User;
+import socialNetwork.domain.validators.FriendshipValidator;
+import socialNetwork.domain.validators.UserValidator;
+import socialNetwork.domain.validators.Validator;
+import socialNetwork.exceptions.NetworkException;
+import socialNetwork.exceptions.RepositoryException;
+import socialNetwork.exceptions.ValidationException;
+import socialNetwork.network.Network;
+import socialNetwork.network.MainNetwork;
+import socialNetwork.repository.databaseSystem.FriendshipDBRepository;
+import socialNetwork.repository.databaseSystem.UserDBRepository;
+import socialNetwork.repository.Repository;
 
 
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
-package repository.databaseSystem;
+package socialNetwork.repository.databaseSystem;
 
-import domain.Entity;
-import exceptions.RepositoryException;
-import repository.InMemoryRepository;
+import socialNetwork.domain.Entity;
+import socialNetwork.exceptions.RepositoryException;
+import socialNetwork.repository.InMemoryRepository;
 
 import java.sql.*;
 

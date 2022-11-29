@@ -1,10 +1,10 @@
-package service;
+package socialNetwork.service;
 
-import domain.Friendship;
-import domain.User;
-import exceptions.NetworkException;
-import exceptions.RepositoryException;
-import exceptions.ValidationException;
+import socialNetwork.domain.Friendship;
+import socialNetwork.domain.User;
+import socialNetwork.exceptions.NetworkException;
+import socialNetwork.exceptions.RepositoryException;
+import socialNetwork.exceptions.ValidationException;
 
 import java.util.Vector;
 

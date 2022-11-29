@@ -1,7 +1,7 @@
-package repository;
+package socialNetwork.repository;
 
-import domain.Entity;
-import exceptions.RepositoryException;
+import socialNetwork.domain.Entity;
+import socialNetwork.exceptions.RepositoryException;
 
 import java.util.HashMap;
 import java.util.Map;

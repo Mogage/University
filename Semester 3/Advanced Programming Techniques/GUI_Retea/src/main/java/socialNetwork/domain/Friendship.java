@@ -1,6 +1,6 @@
-package domain;
+package socialNetwork.domain;
 
-import utils.Constants;
+import socialNetwork.utils.Constants;
 
 import java.time.LocalDateTime;
 

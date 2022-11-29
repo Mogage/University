@@ -1,4 +1,4 @@
-package exceptions;
+package socialNetwork.exceptions;
 
 public class NetworkException extends Exception {
     public NetworkException() {

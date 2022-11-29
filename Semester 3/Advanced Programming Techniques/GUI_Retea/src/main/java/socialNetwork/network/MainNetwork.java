@@ -1,8 +1,8 @@
-package network;
+package socialNetwork.network;
 
-import domain.Friendship;
-import domain.User;
-import exceptions.NetworkException;
+import socialNetwork.domain.Friendship;
+import socialNetwork.domain.User;
+import socialNetwork.exceptions.NetworkException;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package domain.validators;
+package socialNetwork.domain.validators;
 
-import exceptions.ValidationException;
+import socialNetwork.exceptions.ValidationException;
 
 public interface Validator<T> {
     /**

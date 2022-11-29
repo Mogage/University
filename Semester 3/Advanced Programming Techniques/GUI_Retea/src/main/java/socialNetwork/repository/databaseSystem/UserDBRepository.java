@@ -1,7 +1,7 @@
-package repository.databaseSystem;
+package socialNetwork.repository.databaseSystem;
 
-import domain.User;
-import exceptions.RepositoryException;
+import socialNetwork.domain.User;
+import socialNetwork.exceptions.RepositoryException;
 
 import java.sql.*;
 

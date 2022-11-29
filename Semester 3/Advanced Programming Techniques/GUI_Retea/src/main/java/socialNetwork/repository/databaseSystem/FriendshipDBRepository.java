@@ -1,7 +1,7 @@
-package repository.databaseSystem;
+package socialNetwork.repository.databaseSystem;
 
-import domain.Friendship;
-import exceptions.RepositoryException;
+import socialNetwork.domain.Friendship;
+import socialNetwork.exceptions.RepositoryException;
 
 import java.sql.*;
 import java.time.LocalDateTime;

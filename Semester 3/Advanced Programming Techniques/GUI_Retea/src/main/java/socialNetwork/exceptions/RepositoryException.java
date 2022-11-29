@@ -1,4 +1,4 @@
-package exceptions;
+package socialNetwork.exceptions;
 
 public class RepositoryException extends Exception{
     public RepositoryException() {

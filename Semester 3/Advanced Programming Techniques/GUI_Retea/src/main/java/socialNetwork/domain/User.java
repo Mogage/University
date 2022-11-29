@@ -1,4 +1,4 @@
-package domain;
+package socialNetwork.domain;
 
 public class User extends Entity<Long>{
     private String firstName;

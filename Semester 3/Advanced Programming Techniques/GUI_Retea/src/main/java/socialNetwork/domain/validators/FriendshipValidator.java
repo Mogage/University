@@ -1,7 +1,7 @@
-package domain.validators;
+package socialNetwork.domain.validators;
 
-import domain.Friendship;
-import exceptions.ValidationException;
+import socialNetwork.domain.Friendship;
+import socialNetwork.exceptions.ValidationException;
 
 public class FriendshipValidator implements Validator<Friendship> {
 

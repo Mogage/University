@@ -1,7 +1,7 @@
-package domain.validators;
+package socialNetwork.domain.validators;
 
-import domain.User;
-import exceptions.ValidationException;
+import socialNetwork.domain.User;
+import socialNetwork.exceptions.ValidationException;
 
 import java.util.Objects;
 

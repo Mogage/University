@@ -5,6 +5,7 @@ module com.example.gui_retea {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens com.example.gui_retea to javafx.fxml;
     exports com.example.gui_retea;
