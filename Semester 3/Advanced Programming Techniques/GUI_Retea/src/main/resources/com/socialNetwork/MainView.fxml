@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialNetwork.controllers.MainController">
+   <children>
+      <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="472.0" prefWidth="771.0">
+         <children>
+            <Label alignment="CENTER" layoutX="204.0" layoutY="155.0" prefHeight="163.0" prefWidth="364.0" text="Hello user">
+               <font>
+                  <Font size="55.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

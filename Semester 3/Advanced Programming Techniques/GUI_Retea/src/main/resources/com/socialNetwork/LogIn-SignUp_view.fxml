@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0"
+            prefWidth="349.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.socialNetwork.controllers.LogInViewController">
+    <children>
+        <Label alignment="CENTER" layoutX="101.0" layoutY="44.0" prefHeight="50.0" prefWidth="150.0" text="MOSocial">
+            <font>
+                <Font name="Monospaced Bold Italic" size="29.0"/>
+            </font>
+        </Label>
+        <AnchorPane fx:id="signUpPane" layoutX="43.0" layoutY="123.0" prefHeight="331.0" prefWidth="265.0"
+                    visible="false">
+            <children>
+                <TextField fx:id="firstNameRegisterTextField" layoutX="25.0" layoutY="23.0" prefHeight="21.0"
+                           prefWidth="220.0" promptText="First Name"/>
+                <TextField fx:id="lastNameRegisterTextField" layoutX="25.0" layoutY="62.0" prefHeight="21.0"
+                           prefWidth="220.0" promptText="Last Name"/>
+                <TextField fx:id="emailRegisterTextField" layoutX="25.0" layoutY="102.0" prefHeight="21.0"
+                           prefWidth="220.0" promptText="Email"/>
+                <PasswordField fx:id="passwordRegisterTextField" layoutX="25.0" layoutY="139.0" prefHeight="25.0"
+                               prefWidth="220.0" promptText="Password"/>
+                <PasswordField fx:id="repeatPasswordRegisterTextField" layoutX="25.0" layoutY="177.0" prefHeight="25.0"
+                               prefWidth="220.0" promptText="Repeat password"/>
+                <Button fx:id="signUpButtonRegisterPane" layoutX="25.0" layoutY="217.0" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="220.0" text="Sign up" onAction="#onSignUpButtonRegisterClick"/>
+                <Line endX="150.0" layoutX="117.0" layoutY="263.0" startX="-115.0"/>
+                <Label layoutX="41.0" layoutY="280.0" text="Have an account?">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="logInLabelRegisterPane" layoutX="182.0" layoutY="280.0"
+                       text="Log in" textFill="#000dff" onMouseClicked="#onLogInButtonRegisterClick">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="logInPane" layoutX="43.0" layoutY="123.0" prefHeight="253.0" prefWidth="265.0">
+            <children>
+                <TextField fx:id="emailLogInTextField" layoutX="23.0" layoutY="21.0" prefHeight="21.0" prefWidth="220.0"
+                           promptText="Email"/>
+                <PasswordField fx:id="passwordLogInTextField" layoutX="23.0" layoutY="60.0" prefHeight="25.0"
+                               prefWidth="220.0" promptText="Password"/>
+                <Button fx:id="logInButtonLogInPane" layoutX="50.0" layoutY="102.0" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="70.0" text="Log in" onAction="#onLogInButtonLogInClick"/>
+                <Button fx:id="signUpButtonLogInPane" layoutX="145.0" layoutY="102.0" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="70.0" text="Sign up" onAction="#onSignUpButtonLogInClick"/>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
