@@ -6,7 +6,7 @@ import com.socialNetwork.exceptions.NetworkException;
 import com.socialNetwork.exceptions.RepositoryException;
 import com.socialNetwork.exceptions.ValidationException;
 
-import java.util.Vector;
+import java.util.List;
 
 public interface Service {
     /**
@@ -40,7 +40,13 @@ public interface Service {
      */
     User getUser(Long id) throws RepositoryException;
 
+    Friendship getFriendship(Long id) throws RepositoryException;
+
     User findUserAfterEmail(String email) throws RepositoryException;
+
+    List<Friendship> findUserFriends(Long id);
+
+    List<Friendship> findUserRequests(Long id);
 
     /**
      * @param id1 id of the first entity to add friendship
@@ -73,7 +79,7 @@ public interface Service {
     /**
      * @return the community with the most people
      */
-    Vector<User> mostPopulatedCommunity();
+    List<User> mostPopulatedCommunity();
 
     /**
      * @return get all users

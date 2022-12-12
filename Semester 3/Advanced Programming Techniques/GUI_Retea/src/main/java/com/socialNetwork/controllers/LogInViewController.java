@@ -65,10 +65,10 @@ public class LogInViewController {
             alert.show();
             return;
         }
-        System.out.println(firstName + lastName + email + password);
 
         try {
             service.add(firstName, lastName, email, password);
+            onLogInButtonRegisterClick();
         } catch (ValidationException | RepositoryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.show();
@@ -81,7 +81,7 @@ public class LogInViewController {
         signUpPane.setVisible(false);
     }
 
-    private void changeScene() {
+    private void changeScene(User user) {
         Scene scene;
         FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource("MainView.fxml"));
 
@@ -91,6 +91,9 @@ public class LogInViewController {
             e.printStackTrace();
             return;
         }
+
+        MainController mainController = loader.getController();
+        mainController.initialise(service, user);
 
         Stage currentStage = (Stage) logInButtonLogInPane.getScene().getWindow();
 
@@ -111,8 +114,9 @@ public class LogInViewController {
             if (!Objects.equals(password, user.getPassword())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Password does not match", ButtonType.OK);
                 alert.show();
+                return;
             }
-            changeScene();
+            changeScene(user);
         } catch (RepositoryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.show();

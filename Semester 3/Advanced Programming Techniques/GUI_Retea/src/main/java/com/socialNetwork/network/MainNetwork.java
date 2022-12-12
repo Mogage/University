@@ -7,24 +7,24 @@ import com.socialNetwork.exceptions.NetworkException;
 import java.util.*;
 
 public class MainNetwork implements Network{
-    private final Map<Long, Vector<Long>> network = new HashMap<>();
+    private final Map<Long, List<Long>> network = new HashMap<>();
 
     @Override
     public void add(User entity) {
-        network.put(entity.getId(), new Vector<>());
+        network.put(entity.getId(), new ArrayList<>());
     }
 
     @Override
     public void remove(User entity) {
         Long idToRemove = entity.getId();
-        for (Vector<Long> friends : network.values()) {
+        for (List<Long> friends : network.values()) {
             friends.remove(idToRemove);
         }
         network.remove(idToRemove);
     }
 
     private Boolean areFriends(Long entity1, Long entity2) {
-        Vector<Long> friends = network.get(entity1);
+        List<Long> friends = network.get(entity1);
         for (Long friendId : friends) {
             if (Objects.equals(friendId, entity2)) {
                 return true;
@@ -54,7 +54,7 @@ public class MainNetwork implements Network{
     private int dfs(long[] users, Long id, int communityNumber) {
         users[Math.toIntExact(id)] = communityNumber;
         int numberOfPath = 0;
-        Vector<Long> friends = network.get(id);
+        List<Long> friends = network.get(id);
         for (long idFriend : friends) {
             if (users[Math.toIntExact(idFriend)] == 0) {
                 int path = dfs(users, idFriend, communityNumber);
@@ -110,9 +110,9 @@ public class MainNetwork implements Network{
     }
 
     @Override
-    public Vector<Long> getMostPopulatedCommunity() {
+    public List<Long> getMostPopulatedCommunity() {
         long[] users = new long[(int) (getMaxId() + 1)];
-        Vector<Long> biggestCommunity = new Vector<>();
+        List<Long> biggestCommunity = new ArrayList<>();
         int communityNumber = 1;
         int maxPath = 0;
         int currentPath;

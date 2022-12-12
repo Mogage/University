@@ -17,9 +17,8 @@ import com.socialNetwork.repository.Repository;
 
 
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainService implements Service {
 
@@ -106,7 +105,7 @@ public class MainService implements Service {
     @Override
     public User remove(Long id) throws RepositoryException, NetworkException {
         User toDelete = userRepository.findAfterId(id);
-        Vector<Friendship> userFriendships = friendshipRepository.findUserFriends(id);
+        List<Friendship> userFriendships = friendshipRepository.findUserFriends(id);
         for (Friendship friendship : userFriendships) {
             network.removeFriends(friendship);
             friendshipRepository.delete(friendship.getId());
@@ -121,8 +120,28 @@ public class MainService implements Service {
     }
 
     @Override
+    public Friendship getFriendship(Long id) throws RepositoryException {
+        return friendshipRepository.findAfterId(id);
+    }
+
+    @Override
     public User findUserAfterEmail(String email) throws RepositoryException {
         return userRepository.findAfterEmail(email);
+    }
+
+    private List<Friendship> getFriendships(Long id, String friendshipType) {
+        return friendshipRepository.findUserFriends(id).stream()
+                .filter(friendship -> Objects.equals(friendship.getStatus(), friendshipType))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<Friendship> findUserFriends(Long id) {
+        return getFriendships(id, "Friends");
+    }
+
+    @Override
+    public List<Friendship> findUserRequests(Long id) {
+        return getFriendships(id, "Pending");
     }
 
     @Override
@@ -130,7 +149,7 @@ public class MainService implements Service {
         userRepository.findAfterId(id1);
         userRepository.findAfterId(id2);
         Long id = getId(friendshipRepository.getAll());
-        Friendship friendship = new Friendship(id1, id2, LocalDateTime.now());
+        Friendship friendship = new Friendship(id1, id2, LocalDateTime.now(), "Pending");
         friendship.setId(id);
         friendshipValidator.validate(friendship);
         network.makeFriends(friendship);
@@ -140,7 +159,7 @@ public class MainService implements Service {
     @Override
     public void updateFriends(Long friendshipId, Long idUser1, Long idUser2) throws ValidationException, RepositoryException, NetworkException {
         Friendship oldFriendship = friendshipRepository.findAfterId(friendshipId);
-        Friendship newFriendship = new Friendship(idUser1, idUser2, oldFriendship.getFriendsFrom());
+        Friendship newFriendship = new Friendship(idUser1, idUser2, LocalDateTime.now(), "Friends");
         newFriendship.setId(friendshipId);
         friendshipValidator.validate(newFriendship);
         network.removeFriends(oldFriendship);
@@ -161,9 +180,9 @@ public class MainService implements Service {
     }
 
     @Override
-    public Vector<User> mostPopulatedCommunity() {
-        Vector<Long> communityIds = network.getMostPopulatedCommunity();
-        Vector<User> community = new Vector<>();
+    public List<User> mostPopulatedCommunity() {
+        List<Long> communityIds = network.getMostPopulatedCommunity();
+        List<User> community = new ArrayList<>();
         for (Long id : communityIds) {
             try {
                 community.add(userRepository.findAfterId(id));

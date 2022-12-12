@@ -4,7 +4,7 @@ import com.socialNetwork.domain.Friendship;
 import com.socialNetwork.domain.User;
 import com.socialNetwork.exceptions.NetworkException;
 
-import java.util.Vector;
+import java.util.List;
 
 public interface Network {
     /**
@@ -45,5 +45,5 @@ public interface Network {
     /**
      * @return the community with the most people
      */
-    Vector<Long> getMostPopulatedCommunity();
+    List<Long> getMostPopulatedCommunity();
 }

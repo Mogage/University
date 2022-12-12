@@ -1,20 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.socialNetwork.controllers.MainController">
-   <children>
-      <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="472.0" prefWidth="771.0">
-         <children>
-            <Label alignment="CENTER" layoutX="204.0" layoutY="155.0" prefHeight="163.0" prefWidth="364.0" text="Hello user">
-               <font>
-                  <Font size="55.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0"
+            prefWidth="801.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.socialNetwork.controllers.MainController">
+    <children>
+        <AnchorPane layoutX="2.0" layoutY="14.0" prefHeight="474.0" prefWidth="399.0">
+            <children>
+                <Label fx:id="userName" alignment="CENTER" layoutX="29.0" prefHeight="50.0" prefWidth="341.0"
+                       text="Users' name">
+                    <font>
+                        <Font size="32.0"/>
+                    </font>
+                </Label>
+                <TableView fx:id="friendsTable" layoutX="13.0" layoutY="124.0" prefHeight="336.0" prefWidth="373.0">
+                    <columns>
+                        <TableColumn fx:id="friendsFirstNameColumn" prefWidth="118.0" text="First name"/>
+                        <TableColumn fx:id="friendsLastNameColumn" minWidth="6.0" prefWidth="137.0" text="Last Name"/>
+                        <TableColumn fx:id="friendsSinceFromColumn" minWidth="6.0" prefWidth="117.0"
+                                     text="Friends From"/>
+                    </columns>
+                </TableView>
+                <Button fx:id="logOutButton" layoutX="20.0" layoutY="74.0" mnemonicParsing="false"
+                        onAction="#onLogOutAction" prefHeight="25.0" prefWidth="106.0" text="Log out"/>
+                <Button fx:id="deleteAccountButton" layoutX="143.0" layoutY="74.0" mnemonicParsing="false"
+                        onAction="#onDeleteAccountAction" prefHeight="25.0" prefWidth="113.0" text="Delete account"/>
+                <Button fx:id="removeFriendButton" disable="true" layoutX="274.0" layoutY="74.0" mnemonicParsing="false"
+                        onAction="#onRemoveFriendAction" prefHeight="25.0" prefWidth="106.0" text="Remove friend"/>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="407.0" layoutY="10.0" prefHeight="465.0" prefWidth="384.0">
+            <children>
+                <TextField fx:id="searchBar" layoutX="7.0" layoutY="14.0" prefHeight="25.0" prefWidth="285.0"
+                           promptText="Search user"/>
+                <Button fx:id="addFriendButton" layoutX="300.0" layoutY="14.0" mnemonicParsing="false"
+                        onAction="#onAddFriendAction" prefHeight="25.0" prefWidth="78.0" text="Add friend"/>
+                <TableView fx:id="searchUserTable" layoutX="6.0" layoutY="49.0" prefHeight="180.0" prefWidth="373.0">
+                    <columns>
+                        <TableColumn fx:id="searchUserFirstNameColumn" prefWidth="185.0" text="First Name"/>
+                        <TableColumn fx:id="searchUserLastNameColumn" prefWidth="186.0" text="Last Name"/>
+                    </columns>
+                </TableView>
+                <TableView fx:id="requestsTable" layoutX="6.0" layoutY="274.0" prefHeight="157.0" prefWidth="373.0">
+                    <columns>
+                        <TableColumn fx:id="requestsFirstNameColumn" prefWidth="100.0" text="First Name"/>
+                        <TableColumn fx:id="requestsLastNameColumn" prefWidth="131.0" text="Last Name"/>
+                        <TableColumn fx:id="requestsSinceFromColumn" prefWidth="140.0" text="Request date"/>
+                    </columns>
+                </TableView>
+                <Label alignment="CENTER" layoutX="6.0" layoutY="233.0" prefHeight="36.0" prefWidth="373.0"
+                       text="Friends requests">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Button fx:id="acceptRequestButton" layoutX="7.0" layoutY="439.0" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="184.0" text="Accept request" onAction="#onAcceptRequestAction"/>
+                <Button fx:id="refuseRequestButton" layoutX="200.0" layoutY="439.0" mnemonicParsing="false"
+                        prefHeight="25.0" prefWidth="178.0" text="Refuse request" onAction="#onRefuseRequestAction"/>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

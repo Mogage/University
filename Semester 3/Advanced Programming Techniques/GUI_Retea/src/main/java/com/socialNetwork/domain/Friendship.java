@@ -8,11 +8,13 @@ public class Friendship extends Entity<Long> {
     private final Long idUser1;
     private final Long idUser2;
     private final LocalDateTime friendsFrom;
+    private final String status;
 
-    public Friendship(Long idUser1, Long idUser2, LocalDateTime friendsFrom) {
+    public Friendship(Long idUser1, Long idUser2, LocalDateTime friendsFrom, String status) {
         this.idUser1 = idUser1;
         this.idUser2 = idUser2;
         this.friendsFrom = friendsFrom;
+        this.status = status;
     }
 
     public Long getIdUser1() {
@@ -27,6 +29,8 @@ public class Friendship extends Entity<Long> {
         return friendsFrom;
     }
 
+    public String getStatus() { return status; }
+
     @Override
     public String toString() {
         return "Friendship{" +
@@ -34,6 +38,7 @@ public class Friendship extends Entity<Long> {
                 "idUser1=" + idUser1 +
                 ", idUser2=" + idUser2 +
                 ", friendsFrom=" + friendsFrom.format(Constants.DATE_TIME_FORMATTER) +
+                ", status=" + status +
                 '}';
     }
 }

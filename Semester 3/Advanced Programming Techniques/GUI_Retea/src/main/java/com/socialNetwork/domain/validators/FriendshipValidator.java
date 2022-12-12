@@ -18,11 +18,11 @@ public class FriendshipValidator implements Validator<Friendship> {
     public void validate(Friendship entity) throws ValidationException {
         String err = "";
 
-        if (entity.getIdUser1() <= 0) {
+        if (entity.getIdUser1() < 0) {
             err += "Invalid first id for friendship.\n";
         }
 
-        if (entity.getIdUser2() <= 0) {
+        if (entity.getIdUser2() < 0) {
             err += "Invalid second id for friendship.\n";
         }
 
