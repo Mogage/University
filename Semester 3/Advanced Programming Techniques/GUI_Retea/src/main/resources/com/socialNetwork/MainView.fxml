@@ -61,10 +61,12 @@
                         <Font size="20.0"/>
                     </font>
                 </Label>
-                <Button fx:id="acceptRequestButton" layoutX="7.0" layoutY="439.0" mnemonicParsing="false"
-                        prefHeight="25.0" prefWidth="184.0" text="Accept request" onAction="#onAcceptRequestAction"/>
-                <Button fx:id="refuseRequestButton" layoutX="200.0" layoutY="439.0" mnemonicParsing="false"
-                        prefHeight="25.0" prefWidth="178.0" text="Refuse request" onAction="#onRefuseRequestAction"/>
+                <Button fx:id="acceptRequestButton" layoutX="6.0" layoutY="439.0" mnemonicParsing="false"
+                        onAction="#onAcceptRequestAction" prefHeight="25.0" prefWidth="120.0" text="Accept request"/>
+                <Button fx:id="refuseRequestButton" layoutX="136.0" layoutY="439.0" mnemonicParsing="false"
+                        onAction="#onRefuseRequestAction" prefHeight="25.0" prefWidth="120.0" text="Refuse request"/>
+                <Button fx:id="refreshRequestsButton" layoutX="266.0" layoutY="439.0" mnemonicParsing="false"
+                        onAction="#onRefreshRequestsAction" prefHeight="25.0" prefWidth="113.0" text="Refresh"/>
             </children>
         </AnchorPane>
     </children>

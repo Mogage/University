@@ -100,4 +100,6 @@ public interface Service {
      * @return number of friendships in repository
      */
     int numberOfFriendships();
+
+    void refresh();
 }

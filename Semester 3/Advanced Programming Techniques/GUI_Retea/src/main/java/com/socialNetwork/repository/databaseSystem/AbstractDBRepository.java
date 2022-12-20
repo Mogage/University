@@ -18,7 +18,7 @@ public abstract class AbstractDBRepository<ID, T extends Entity<ID>> extends InM
         this.userName = userName;
         this.password = password;
         this.sqlCommand = sqlCommand;
-        loadData();
+        loadData(this.sqlCommand);
     }
 
     public String getSqlCommand() {
@@ -29,7 +29,11 @@ public abstract class AbstractDBRepository<ID, T extends Entity<ID>> extends InM
         this.sqlCommand = sqlCommand;
     }
 
-    private void loadData() {
+    public void clearData() {
+        super.entities.clear();
+    }
+
+    public void loadData(String sqlCommand) {
         try (Connection connection = DriverManager.getConnection(url, userName, password);
              PreparedStatement statement = connection.prepareStatement(sqlCommand);
              ResultSet resultSet = statement.executeQuery()

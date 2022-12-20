@@ -43,12 +43,13 @@ public class MainController {
     public Button removeFriendButton;
     public Button acceptRequestButton;
     public Button refuseRequestButton;
+    public Button refreshRequestsButton;
 
     private Service service;
     private User loggedInUser;
-    private ObservableList<DTOUserFriendship> friendsList = FXCollections.observableArrayList();
-    private ObservableList<User> usersList = FXCollections.observableArrayList();
-    private ObservableList<DTOUserFriendship> requestsList = FXCollections.observableArrayList();
+    private final ObservableList<DTOUserFriendship> friendsList = FXCollections.observableArrayList();
+    private final ObservableList<User> usersList = FXCollections.observableArrayList();
+    private final ObservableList<DTOUserFriendship> requestsList = FXCollections.observableArrayList();
     private Alert alert;
 
     public void initialise(Service service, User loggedInUser) {
@@ -215,6 +216,7 @@ public class MainController {
             Friendship friendshipToUpdate = service.getFriendship(requestsTable.getSelectionModel().getSelectedItem().getId());
             service.updateFriends(friendshipToUpdate.getId(), friendshipToUpdate.getIdUser1(), friendshipToUpdate.getIdUser2());
             updateRequestsTable();
+            updateFriendsTable();
             alert = new Alert(Alert.AlertType.INFORMATION, "Friend request accepted.", ButtonType.CLOSE);
         } catch (ValidationException | RepositoryException | NetworkException e) {
             alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
@@ -232,5 +234,12 @@ public class MainController {
             alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
         }
         alert.show();
+    }
+
+    @FXML
+    public void onRefreshRequestsAction() {
+        service.refresh();
+        updateFriendsTable();
+        updateRequestsTable();
     }
 }

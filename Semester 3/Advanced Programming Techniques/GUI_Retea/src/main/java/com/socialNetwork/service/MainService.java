@@ -2,8 +2,10 @@ package com.socialNetwork.service;
 
 import com.socialNetwork.domain.Entity;
 import com.socialNetwork.domain.Friendship;
+import com.socialNetwork.domain.Message;
 import com.socialNetwork.domain.User;
 import com.socialNetwork.domain.validators.FriendshipValidator;
+import com.socialNetwork.domain.validators.MessageValidator;
 import com.socialNetwork.domain.validators.UserValidator;
 import com.socialNetwork.domain.validators.Validator;
 import com.socialNetwork.exceptions.NetworkException;
@@ -12,6 +14,7 @@ import com.socialNetwork.exceptions.ValidationException;
 import com.socialNetwork.network.Network;
 import com.socialNetwork.network.MainNetwork;
 import com.socialNetwork.repository.databaseSystem.FriendshipDBRepository;
+import com.socialNetwork.repository.databaseSystem.MessagesDBRepository;
 import com.socialNetwork.repository.databaseSystem.UserDBRepository;
 import com.socialNetwork.repository.Repository;
 
@@ -24,22 +27,32 @@ public class MainService implements Service {
 
     private final UserValidator userValidator;
     private final FriendshipValidator friendshipValidator;
+    private final MessageValidator messageValidator;
     private final UserDBRepository userRepository;
     private final FriendshipDBRepository friendshipRepository;
+    private final MessagesDBRepository messagesRepository;
     private final MainNetwork network;
 
     public MainService(
             Validator<User> validator,
             Validator<Friendship> friendshipValidator,
+            Validator<Message> messageValidator,
             Repository<Long, User> userRepository,
             Repository<Long, Friendship> friendshipRepository,
+            Repository<Long, Message> messageRepository,
             Network network) {
         this.userValidator = (UserValidator) validator;
         this.friendshipValidator = (FriendshipValidator) friendshipValidator;
+        this.messageValidator = (MessageValidator) messageValidator;
         this.userRepository = (UserDBRepository) userRepository;
         this.friendshipRepository = (FriendshipDBRepository) friendshipRepository;
+        this.messagesRepository = (MessagesDBRepository) messageRepository;
         this.network = (MainNetwork) network;
 
+        createNetwork(this.userRepository, this.friendshipRepository);
+    }
+
+    private void createNetwork(UserDBRepository userRepository, FriendshipDBRepository friendshipRepository) {
         Iterable<User> users = userRepository.getAll();
         for (User user : users) {
             network.add(user);
@@ -211,5 +224,16 @@ public class MainService implements Service {
     @Override
     public int numberOfFriendships() {
         return friendshipRepository.size();
+    }
+
+    @Override
+    public void refresh() {
+        userRepository.clearData();
+        userRepository.loadData("SELECT * FROM users");
+        friendshipRepository.clearData();
+        friendshipRepository.loadData("SELECT * FROM friendships");
+        messagesRepository.clearData();
+        messagesRepository.loadData("SELECT * FROM messages");
+        createNetwork(userRepository, friendshipRepository);
     }
 }

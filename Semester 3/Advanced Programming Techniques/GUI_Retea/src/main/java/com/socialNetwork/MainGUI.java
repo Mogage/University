@@ -2,14 +2,17 @@ package com.socialNetwork;
 
 import com.socialNetwork.controllers.LogInViewController;
 import com.socialNetwork.domain.Friendship;
+import com.socialNetwork.domain.Message;
 import com.socialNetwork.domain.User;
 import com.socialNetwork.domain.validators.FriendshipValidator;
+import com.socialNetwork.domain.validators.MessageValidator;
 import com.socialNetwork.domain.validators.UserValidator;
 import com.socialNetwork.domain.validators.Validator;
 import com.socialNetwork.network.MainNetwork;
 import com.socialNetwork.network.Network;
 import com.socialNetwork.repository.Repository;
 import com.socialNetwork.repository.databaseSystem.FriendshipDBRepository;
+import com.socialNetwork.repository.databaseSystem.MessagesDBRepository;
 import com.socialNetwork.repository.databaseSystem.UserDBRepository;
 import com.socialNetwork.service.MainService;
 import com.socialNetwork.service.Service;
@@ -27,12 +30,17 @@ public class MainGUI extends Application {
 
     Validator<User> userValidator = UserValidator.getInstance();
     Validator<Friendship> friendshipValidator = FriendshipValidator.getInstance();
+    Validator<Message> messageValidator = MessageValidator.getInstance();
 
     Repository<Long, User> userRepository = new UserDBRepository(url, userName, password);
     Repository<Long, Friendship> friendshipRepository = new FriendshipDBRepository(url, userName, password);
+    Repository<Long,Message> messageRepository = new MessagesDBRepository(url, userName, password);
 
     Network network = new MainNetwork();
-    Service service = new MainService(userValidator, friendshipValidator, userRepository, friendshipRepository, network);
+    Service service = new MainService(
+            userValidator, friendshipValidator, messageValidator,
+            userRepository, friendshipRepository, messageRepository,
+            network);
 
     @Override
     public void start(Stage stage) throws IOException {
