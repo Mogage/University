@@ -224,6 +224,7 @@ public class MainController {
             return;
         }
 
+        service.refreshConversation();
         Long friendshipId = friendsTable.getSelectionModel().getSelectedItem().getId();
         ConversationController conversationController = fxmlLoader.getController();
         try {

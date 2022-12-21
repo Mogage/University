@@ -102,6 +102,8 @@ public interface Service {
      */
     int numberOfFriendships();
 
+    void refreshConversation();
+
     void refresh();
 
     List<Message> getMessages(Long friendshipId);

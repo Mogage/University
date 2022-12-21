@@ -18,4 +18,6 @@ module com.socialNetwork {
     exports com.socialNetwork.domain.validators;
     opens com.socialNetwork.controllers to javafx.fxml;
     opens com.socialNetwork.domain to javafx.base;
+    exports com.socialNetwork.controllers.customs;
+    opens com.socialNetwork.controllers.customs to javafx.fxml;
 }

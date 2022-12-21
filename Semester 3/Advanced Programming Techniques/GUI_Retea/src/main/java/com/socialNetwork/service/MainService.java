@@ -228,14 +228,19 @@ public class MainService implements Service {
     }
 
     @Override
+    public void refreshConversation() {
+        messagesRepository.clearData();
+        messagesRepository.loadData("SELECT * FROM messages");
+    }
+
+    @Override
     public void refresh() {
         userRepository.clearData();
         userRepository.loadData("SELECT * FROM users");
         friendshipRepository.clearData();
         friendshipRepository.loadData("SELECT * FROM friendships");
-        messagesRepository.clearData();
-        messagesRepository.loadData("SELECT * FROM messages");
         createNetwork(userRepository, friendshipRepository);
+        refreshConversation();
     }
 
     @Override
