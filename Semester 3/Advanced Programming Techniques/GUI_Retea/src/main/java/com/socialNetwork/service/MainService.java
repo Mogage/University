@@ -147,6 +147,7 @@ public class MainService implements Service {
                 .filter(friendship -> Objects.equals(friendship.getStatus(), friendshipType))
                 .collect(Collectors.toList());
     }
+
     @Override
     public List<Friendship> findUserFriends(Long id) {
         return getFriendships(id, "Friends");
@@ -235,5 +236,19 @@ public class MainService implements Service {
         messagesRepository.clearData();
         messagesRepository.loadData("SELECT * FROM messages");
         createNetwork(userRepository, friendshipRepository);
+    }
+
+    @Override
+    public List<Message> getMessages(Long friendshipId) {
+        List<Message> friendsMessages = messagesRepository.getAll();
+        return friendsMessages.stream().filter(message -> Objects.equals(message.getFriendshipId(), friendshipId)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void sendMessage(Long friendshipId, String text, Long senderId, Long receiverId) throws ValidationException, RepositoryException {
+        Message message = new Message(text, senderId, receiverId, friendshipId);
+        message.setId(getId(messagesRepository.getAll()));
+        messageValidator.validate(message);
+        messagesRepository.save(message);
     }
 }

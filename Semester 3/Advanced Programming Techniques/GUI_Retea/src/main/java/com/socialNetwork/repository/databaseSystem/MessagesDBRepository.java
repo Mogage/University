@@ -19,7 +19,8 @@ public class MessagesDBRepository extends AbstractDBRepository<Long, Message>{
         String text = resultSet.getString("text");
         Long fromUserId = resultSet.getLong("from_user");
         Long toUserId = resultSet.getLong("to_user");
-        Message message = new Message(text, fromUserId, toUserId);
+        Long friendshipId = resultSet.getLong("id_friendship");
+        Message message = new Message(text, fromUserId, toUserId, friendshipId);
         message.setId(messageID);
         return message;
     }
@@ -31,6 +32,7 @@ public class MessagesDBRepository extends AbstractDBRepository<Long, Message>{
         statement.setString(2, entity.getText());
         statement.setLong(3, entity.getFromUserId());
         statement.setLong(4, entity.getToUserId());
+        statement.setLong(5, entity.getFriendshipId());
         return statement;
     }
 
@@ -48,7 +50,7 @@ public class MessagesDBRepository extends AbstractDBRepository<Long, Message>{
 
     @Override
     public void save(Message entity) throws RepositoryException {
-        setSqlCommand("INSERT INTO messages(id, text, from_user, to_user) VALUES (?, ?, ?, ?)");
+        setSqlCommand("INSERT INTO messages(id, text, from_user, to_user, id_friendship) VALUES (?, ?, ?, ?, ?)");
         super.save(entity);
     }
 

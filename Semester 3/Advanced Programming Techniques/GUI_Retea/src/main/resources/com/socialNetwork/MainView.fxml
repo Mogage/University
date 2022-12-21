@@ -28,12 +28,15 @@
                                      text="Friends From"/>
                     </columns>
                 </TableView>
-                <Button fx:id="logOutButton" layoutX="20.0" layoutY="74.0" mnemonicParsing="false"
-                        onAction="#onLogOutAction" prefHeight="25.0" prefWidth="106.0" text="Log out"/>
-                <Button fx:id="deleteAccountButton" layoutX="143.0" layoutY="74.0" mnemonicParsing="false"
-                        onAction="#onDeleteAccountAction" prefHeight="25.0" prefWidth="113.0" text="Delete account"/>
-                <Button fx:id="removeFriendButton" disable="true" layoutX="274.0" layoutY="74.0" mnemonicParsing="false"
-                        onAction="#onRemoveFriendAction" prefHeight="25.0" prefWidth="106.0" text="Remove friend"/>
+                <Button fx:id="logOutButton" layoutX="29.0" layoutY="51.0" mnemonicParsing="false"
+                        onAction="#onLogOutAction" prefHeight="25.0" prefWidth="164.0" text="Log out"/>
+                <Button fx:id="deleteAccountButton" layoutX="206.0" layoutY="51.0" mnemonicParsing="false"
+                        onAction="#onDeleteAccountAction" prefHeight="25.0" prefWidth="164.0" text="Delete account"/>
+                <Button fx:id="removeFriendButton" disable="true" layoutX="206.0" layoutY="87.0" mnemonicParsing="false"
+                        onAction="#onRemoveFriendAction" prefHeight="25.0" prefWidth="164.0" text="Remove friend"/>
+                <Button fx:id="openConversationButton" alignment="CENTER" disable="true" layoutX="29.0" layoutY="87.0"
+                        mnemonicParsing="false" onAction="#onOpenConversationAction" prefHeight="25.0" prefWidth="164.0"
+                        text="Open Conversation"/>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="407.0" layoutY="10.0" prefHeight="465.0" prefWidth="384.0">

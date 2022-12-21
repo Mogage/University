@@ -1,6 +1,7 @@
 package com.socialNetwork.service;
 
 import com.socialNetwork.domain.Friendship;
+import com.socialNetwork.domain.Message;
 import com.socialNetwork.domain.User;
 import com.socialNetwork.exceptions.NetworkException;
 import com.socialNetwork.exceptions.RepositoryException;
@@ -102,4 +103,8 @@ public interface Service {
     int numberOfFriendships();
 
     void refresh();
+
+    List<Message> getMessages(Long friendshipId);
+
+    void sendMessage(Long friendshipId, String text, Long senderId, Long receiverId) throws ValidationException, RepositoryException;
 }

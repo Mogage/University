@@ -44,6 +44,7 @@ public class MainController {
     public Button acceptRequestButton;
     public Button refuseRequestButton;
     public Button refreshRequestsButton;
+    public Button openConversationButton;
 
     private Service service;
     private User loggedInUser;
@@ -59,6 +60,7 @@ public class MainController {
         userName.setText(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
         searchBar.textProperty().addListener(o -> onSearchUser());
         removeFriendButton.disableProperty().bind(Bindings.isEmpty(friendsTable.getSelectionModel().getSelectedItems()));
+        openConversationButton.disableProperty().bind(Bindings.isEmpty(friendsTable.getSelectionModel().getSelectedItems()));
         addFriendButton.disableProperty().bind(Bindings.isEmpty(searchUserTable.getSelectionModel().getSelectedItems()));
         acceptRequestButton.disableProperty().bind(Bindings.isEmpty(requestsTable.getSelectionModel().getSelectedItems()));
         refuseRequestButton.disableProperty().bind(Bindings.isEmpty(requestsTable.getSelectionModel().getSelectedItems()));
@@ -208,6 +210,33 @@ public class MainController {
             alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
         }
         alert.show();
+    }
+
+    @FXML
+    public void onOpenConversationAction() {
+        Scene scene;
+        FXMLLoader fxmlLoader = new FXMLLoader(MainGUI.class.getResource("ConversationView.fxml"));
+
+        try {
+            scene = new Scene(fxmlLoader.load(), 300, 450);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Long friendshipId = friendsTable.getSelectionModel().getSelectedItem().getId();
+        ConversationController conversationController = fxmlLoader.getController();
+        try {
+            conversationController.setService(service, service.getFriendship(friendshipId), loggedInUser.getId());
+        } catch (RepositoryException e) {
+            alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+        }
+
+        Stage newStage = new Stage();
+        newStage.setScene(scene);
+        newStage.setResizable(false);
+        newStage.setTitle("MoSocial");
+        newStage.show();
     }
 
     @FXML

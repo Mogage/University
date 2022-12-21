@@ -4,6 +4,7 @@ import com.socialNetwork.domain.Entity;
 import com.socialNetwork.exceptions.RepositoryException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class InMemoryRepository<ID, T extends Entity<ID>> implements Repository<ID, T> {
@@ -56,8 +57,8 @@ public abstract class InMemoryRepository<ID, T extends Entity<ID>> implements Re
     }
 
     @Override
-    public Iterable<T> getAll() {
-        return entities.values();
+    public List<T> getAll() {
+        return entities.values().stream().toList();
     }
 
     @Override
