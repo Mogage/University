@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Facultativ
+namespace Facultativ.Service
 {
-    internal class Main
+    internal class Service
     {
-
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Facultativ
+namespace Facultativ.Utils
 {
-    internal class Main
+    internal class Constants
     {
-
+        public enum PlayerType : byte { Rezerva, Participant }
     }
 }
