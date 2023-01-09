@@ -32,6 +32,6 @@ public class Main {
         Service service = new MainService(userValidator, friendshipValidator, userRepository, friendshipRepository, network);
         UI userInterface = new UI(service);
 
-        userInterface.run();
+        userInterface.runMain();
     }
 }

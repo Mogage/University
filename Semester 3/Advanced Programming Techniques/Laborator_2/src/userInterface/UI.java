@@ -1,6 +1,5 @@
 package userInterface;
 
-
 import domain.Friendship;
 import domain.User;
 import exceptions.NetworkException;
@@ -210,7 +209,7 @@ public class UI {
                 \s""");
     }
 
-    public void run() {
+    public void runMain() {
         int input;
         this.printMenu();
         while (true) {

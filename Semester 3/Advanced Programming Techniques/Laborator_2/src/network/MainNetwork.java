@@ -51,11 +51,11 @@ public class MainNetwork implements Network{
         network.get(friendship.getIdUser2()).remove(friendship.getIdUser1());
     }
 
-    private int dfs(Long[] users, Long id, int communityNumber) {
-        users[Math.toIntExact(id)] = (long) communityNumber;
+    private int dfs(long[] users, Long id, int communityNumber) {
+        users[Math.toIntExact(id)] = communityNumber;
         int numberOfPath = 0;
         Vector<Long> friends = network.get(id);
-        for (Long idFriend : friends) {
+        for (long idFriend : friends) {
             if (users[Math.toIntExact(idFriend)] == 0) {
                 int path = dfs(users, idFriend, communityNumber);
                 numberOfPath = Math.max(numberOfPath, path);
@@ -72,10 +72,10 @@ public class MainNetwork implements Network{
         return max;
     }
 
-    private Long[] getCommunities() {
-        Long[] users = new Long[(int) (getMaxId() + 1)];
+    private long[] getCommunities() {
+        long[] users = new long[(int) (getMaxId() + 1)];
         int communityNumber = 1;
-        for (Long id : network.keySet()) {
+        for (long id : network.keySet()) {
             if (users[Math.toIntExact(id)] == 0) {
                 dfs(users, id, communityNumber);
                 communityNumber = communityNumber + 1;
@@ -85,7 +85,7 @@ public class MainNetwork implements Network{
     }
 
     private Map<Long, Integer> getPopulation() {
-        Long[] users = getCommunities();
+        long[] users = getCommunities();
         Map<Long, Integer> communitiesPopulation = new HashMap<>();
 
         for (int count = 1; count < users.length; count = count + 1) {
@@ -111,7 +111,7 @@ public class MainNetwork implements Network{
 
     @Override
     public Vector<Long> getMostPopulatedCommunity() {
-        Long[] users = new Long[(int) (getMaxId() + 1)];
+        long[] users = new long[(int) (getMaxId() + 1)];
         Vector<Long> biggestCommunity = new Vector<>();
         int communityNumber = 1;
         int maxPath = 0;
