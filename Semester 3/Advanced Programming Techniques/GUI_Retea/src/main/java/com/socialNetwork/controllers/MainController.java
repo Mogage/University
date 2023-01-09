@@ -26,13 +26,17 @@ import java.util.stream.Collectors;
 public class MainController {
     public TableView<DTOUserFriendship> friendsTable;
     public TableView<User> searchUserTable;
-    public TableView<DTOUserFriendship> requestsTable;
+    public TableView<DTOUserFriendship> receivedRequestsTable;
+    public TableView<DTOUserFriendship> sentRequestsTable;
     public TableColumn<DTOUserFriendship, String> friendsFirstNameColumn;
     public TableColumn<DTOUserFriendship, String> friendsLastNameColumn;
     public TableColumn<DTOUserFriendship, String> friendsSinceFromColumn;
-    public TableColumn<DTOUserFriendship, String> requestsFirstNameColumn;
-    public TableColumn<DTOUserFriendship, String> requestsLastNameColumn;
-    public TableColumn<DTOUserFriendship, String> requestsSinceFromColumn;
+    public TableColumn<DTOUserFriendship, String> receivedRequestsFirstNameColumn;
+    public TableColumn<DTOUserFriendship, String> receivedRequestsLastNameColumn;
+    public TableColumn<DTOUserFriendship, String> receivedRequestsSinceFromColumn;
+    public TableColumn<DTOUserFriendship, String> sentRequestsFirstNameColumn;
+    public TableColumn<DTOUserFriendship, String> sentRequestsLastNameColumn;
+    public TableColumn<DTOUserFriendship, String> sentRequestsSinceFromColumn;
     public TableColumn<User, String> searchUserFirstNameColumn;
     public TableColumn<User, String> searchUserLastNameColumn;
     public Label userName;
@@ -43,6 +47,7 @@ public class MainController {
     public Button removeFriendButton;
     public Button acceptRequestButton;
     public Button refuseRequestButton;
+    public Button cancelRequestButton;
     public Button refreshRequestsButton;
     public Button openConversationButton;
 
@@ -50,7 +55,8 @@ public class MainController {
     private User loggedInUser;
     private final ObservableList<DTOUserFriendship> friendsList = FXCollections.observableArrayList();
     private final ObservableList<User> usersList = FXCollections.observableArrayList();
-    private final ObservableList<DTOUserFriendship> requestsList = FXCollections.observableArrayList();
+    private final ObservableList<DTOUserFriendship> receivedRequestsList = FXCollections.observableArrayList();
+    private final ObservableList<DTOUserFriendship> sentRequestsList = FXCollections.observableArrayList();
     private Alert alert;
 
     public void initialise(Service service, User loggedInUser) {
@@ -62,8 +68,8 @@ public class MainController {
         removeFriendButton.disableProperty().bind(Bindings.isEmpty(friendsTable.getSelectionModel().getSelectedItems()));
         openConversationButton.disableProperty().bind(Bindings.isEmpty(friendsTable.getSelectionModel().getSelectedItems()));
         addFriendButton.disableProperty().bind(Bindings.isEmpty(searchUserTable.getSelectionModel().getSelectedItems()));
-        acceptRequestButton.disableProperty().bind(Bindings.isEmpty(requestsTable.getSelectionModel().getSelectedItems()));
-        refuseRequestButton.disableProperty().bind(Bindings.isEmpty(requestsTable.getSelectionModel().getSelectedItems()));
+        acceptRequestButton.disableProperty().bind(Bindings.isEmpty(receivedRequestsTable.getSelectionModel().getSelectedItems()));
+        refuseRequestButton.disableProperty().bind(Bindings.isEmpty(receivedRequestsTable.getSelectionModel().getSelectedItems()));
         initTables();
     }
 
@@ -104,12 +110,33 @@ public class MainController {
         friendsTable.setItems(friendsList);
     }
 
-    private void updateRequestsTable() {
+    private void updateReceivedRequestsTable() {
         List<Friendship> userRequests = service.findUserRequests(loggedInUser.getId()).stream()
                 .filter(friendship -> !Objects.equals(friendship.getIdUser1(), loggedInUser.getId()))
                 .collect(Collectors.toList());
-        requestsList.setAll(updateFriendsList(userRequests));
-        requestsTable.setItems(requestsList);
+        receivedRequestsList.setAll(updateFriendsList(userRequests));
+        receivedRequestsTable.setItems(receivedRequestsList);
+    }
+
+    private void updateSentRequestsTable() {
+        List<Friendship> userRequests = service.findUserRequests(loggedInUser.getId()).stream()
+                .filter(friendship -> !Objects.equals(friendship.getIdUser2(), loggedInUser.getId()))
+                .collect(Collectors.toList());
+        sentRequestsList.setAll(updateFriendsList(userRequests));
+        sentRequestsTable.setItems(sentRequestsList);
+    }
+
+    private void updateSearchTable() {
+        List<User> userListAux = new ArrayList<>();
+        Iterable<User> users = service.getAllUsers();
+        for (User user : users) {
+            if (Objects.equals(user.getId(), loggedInUser.getId())) {
+                continue;
+            }
+            userListAux.add(user);
+        }
+        usersList.setAll(userListAux);
+        searchUserTable.setItems(usersList);
     }
 
     private void initFriendsTable() {
@@ -120,29 +147,30 @@ public class MainController {
     }
 
     private void initSearchTable() {
-        List<User> userListAux = new ArrayList<>();
-        Iterable<User> users = service.getAllUsers();
-
-        for (User user : users) {
-            userListAux.add(user);
-        }
-        usersList.setAll(userListAux);
         searchUserFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         searchUserLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        searchUserTable.setItems(usersList);
+        updateSearchTable();
     }
 
-    private void initRequestsTable() {
-        requestsFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        requestsLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        requestsSinceFromColumn.setCellValueFactory(new PropertyValueFactory<>("friendsFrom"));
-        updateRequestsTable();
+    private void initReceivedRequestsTable() {
+        receivedRequestsFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        receivedRequestsLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        receivedRequestsSinceFromColumn.setCellValueFactory(new PropertyValueFactory<>("friendsFrom"));
+        updateReceivedRequestsTable();
+    }
+
+    private void initSentRequestsTable() {
+        sentRequestsFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        sentRequestsLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        sentRequestsSinceFromColumn.setCellValueFactory(new PropertyValueFactory<>("friendsFrom"));
+        updateSentRequestsTable();
     }
 
     private void initTables() {
         initFriendsTable();
         initSearchTable();
-        initRequestsTable();
+        initReceivedRequestsTable();
+        initSentRequestsTable();
     }
 
     @FXML
@@ -151,6 +179,7 @@ public class MainController {
             User userToAskFriendship = searchUserTable.getSelectionModel().getSelectedItem();
             service.makeFriends(loggedInUser.getId(), userToAskFriendship.getId());
             updateFriendsTable();
+            updateSentRequestsTable();
             alert = new Alert(Alert.AlertType.INFORMATION, "Friend request sent.", ButtonType.CLOSE);
         } catch (ValidationException | RepositoryException | NetworkException e) {
             alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
@@ -243,9 +272,9 @@ public class MainController {
     @FXML
     public void onAcceptRequestAction() {
         try {
-            Friendship friendshipToUpdate = service.getFriendship(requestsTable.getSelectionModel().getSelectedItem().getId());
+            Friendship friendshipToUpdate = service.getFriendship(receivedRequestsTable.getSelectionModel().getSelectedItem().getId());
             service.updateFriends(friendshipToUpdate.getId(), friendshipToUpdate.getIdUser1(), friendshipToUpdate.getIdUser2());
-            updateRequestsTable();
+            updateReceivedRequestsTable();
             updateFriendsTable();
             alert = new Alert(Alert.AlertType.INFORMATION, "Friend request accepted.", ButtonType.CLOSE);
         } catch (ValidationException | RepositoryException | NetworkException e) {
@@ -257,8 +286,8 @@ public class MainController {
     @FXML
     public void onRefuseRequestAction() {
         try {
-            service.removeFriends(requestsTable.getSelectionModel().getSelectedItem().getId());
-            updateRequestsTable();
+            service.removeFriends(receivedRequestsTable.getSelectionModel().getSelectedItem().getId());
+            updateReceivedRequestsTable();
             alert = new Alert(Alert.AlertType.CONFIRMATION, "Friend request refused.", ButtonType.CLOSE);
         } catch (NetworkException | ValidationException | RepositoryException e) {
             alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
@@ -270,6 +299,20 @@ public class MainController {
     public void onRefreshRequestsAction() {
         service.refresh();
         updateFriendsTable();
-        updateRequestsTable();
+        updateReceivedRequestsTable();
+        updateSentRequestsTable();
+        updateSearchTable();
+    }
+
+    @FXML
+    public void onCancelRequestAction() {
+        try {
+            service.removeFriends(sentRequestsTable.getSelectionModel().getSelectedItem().getId());
+            updateSentRequestsTable();
+            alert = new Alert(Alert.AlertType.CONFIRMATION, "Friend request canceled.", ButtonType.CLOSE);
+        } catch (NetworkException | ValidationException | RepositoryException e) {
+            alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+        }
+        alert.show();
     }
 }

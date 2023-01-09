@@ -29,7 +29,7 @@
                 <ImageView fx:id="sendMessageImageView" fitHeight="25.0" fitWidth="33.0" layoutX="245.0" layoutY="16.0"
                            onMouseClicked="#onSendMessageAction" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/ada.png"/>
+                        <Image url="@images/random.png"/>
                     </image>
                 </ImageView>
             </children>
