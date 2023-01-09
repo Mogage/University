@@ -9,13 +9,13 @@ namespace Facultativ.Repository
 {
     internal abstract class AbstractRepo<ID, T> : IRepository<ID, T> where T : Entity<ID>
     {
-        protected static List<T> entities = new List<T>();
+        protected List<T> entities;
         private string filePath;
 
         public AbstractRepo(string filePath)
         {
+            entities = new List<T>();
             this.filePath = filePath;
-            LoadData();
         }
 
         public abstract T ExtractEntity(string[] values);
@@ -38,7 +38,7 @@ namespace Facultativ.Repository
             }
         }
 
-        public static T? Find(ID id)
+        public T Find(ID id)
         {
             return entities.Find(entity => entity.Id.Equals(id));
         }

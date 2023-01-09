@@ -11,7 +11,9 @@ namespace Facultativ.Repository
     internal class ActivePlayersRepo : AbstractRepo<int, ActivePlayer>
     {
         public ActivePlayersRepo(string filePath) : base(filePath)
-        {}
+        {
+            base.LoadData();
+        }
 
         public override ActivePlayer ExtractEntity(string[] values)
         {
@@ -25,10 +27,8 @@ namespace Facultativ.Repository
                 case "Participant":
                     type = Constants.PlayerType.Participant;
                     break;
-                case "Rezerva":
-                    type = Constants.PlayerType.Rezerva;
-                    break;
                 default:
+                    type = Constants.PlayerType.Rezerva;
                     break;
             }
             ActivePlayer activePlayer = new ActivePlayer(id, idPlayer, idGame, scoredPoints, type);

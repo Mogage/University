@@ -10,7 +10,9 @@ namespace Facultativ.Repository
     internal class TeamsRepo : AbstractRepo<int, Team>
     {
         public TeamsRepo(string filePath) : base(filePath)
-        {}
+        {
+            base.LoadData();
+        }
 
         public override Team ExtractEntity(string[] values)
         {

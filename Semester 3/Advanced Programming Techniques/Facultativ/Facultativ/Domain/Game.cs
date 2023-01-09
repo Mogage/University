@@ -37,7 +37,7 @@ namespace Facultativ.Domain
 
         public override string ToString() 
         { 
-            return hostTeam.ToString() + " - " + guestTeam.ToString() + "\t at " + date.ToString();
+            return hostTeam.ToString() + " - " + guestTeam.ToString() + "\t at " + date.ToString("dd.MM.yyyy");
         }
     }
 }
