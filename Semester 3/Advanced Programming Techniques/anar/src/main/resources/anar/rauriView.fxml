@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0"
+            prefWidth="269.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="anar.controllers.RauriController">
+    <children>
+        <Label alignment="CENTER" layoutX="85.0" layoutY="14.0" prefHeight="43.0" prefWidth="99.0" text="Rauri">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TableView fx:id="rauriTable" layoutX="12.0" layoutY="65.0" prefHeight="207.0" prefWidth="245.0">
+            <columns>
+                <TableColumn fx:id="numeRauTableColumn" prefWidth="124.0" text="Nume"/>
+                <TableColumn fx:id="cotaRauTableColumn" prefWidth="120.0" text="CotaMedie"/>
+            </columns>
+        </TableView>
+        <Label layoutX="14.0" layoutY="286.0" prefHeight="34.0" prefWidth="54.0" text="Cota:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="cotaTextField" layoutX="66.0" layoutY="291.0" prefHeight="25.0" prefWidth="71.0"/>
+        <Button fx:id="schimbaCotaButton" layoutX="146.0" layoutY="290.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="110.0" text="Schimba Cota" onAction="#schimbaCota"/>
+    </children>
+</AnchorPane>
