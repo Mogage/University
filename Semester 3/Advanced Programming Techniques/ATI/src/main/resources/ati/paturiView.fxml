@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0"
+            prefWidth="163.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ati.controllers.PaturiController">
+    <children>
+        <Label alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="42.0" prefWidth="138.0" text="ATI">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="paturiOcupateLabel" layoutX="12.0" layoutY="65.0" prefHeight="21.0" prefWidth="138.0"
+               text="Paturi ocupate:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="ticLabel" layoutX="11.0" layoutY="95.0" prefHeight="21.0" prefWidth="138.0"
+               text="TIC 14 paturi libere">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="timLabel" layoutX="12.0" layoutY="123.0" prefHeight="21.0" prefWidth="138.0"
+               text="TIM 8 paturi libere">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="tiipLabel" layoutX="12.0" layoutY="153.0" prefHeight="21.0" prefWidth="138.0"
+               text="TIIP 8 paturi libere">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="cnpTextField" layoutX="7.0" layoutY="191.0" promptText="CNP"/>
+        <Button fx:id="elibereazaPatButton" layoutX="7.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="149.0" text="Elibereaza pat" onAction="#elibereazaPat"/>
+    </children>
+</AnchorPane>

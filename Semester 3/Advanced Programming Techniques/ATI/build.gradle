@@ -24,8 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'ati.ati'
-    mainClass = 'ati.ati.HelloApplication'
+    mainModule = 'ati'
+    mainClass = 'ati.HelloApplication'
 }
 
 javafx {
@@ -39,6 +39,7 @@ dependencies {
         exclude(group: 'org.openjfx')
     }
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.1'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
