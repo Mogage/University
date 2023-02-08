@@ -24,8 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.example.clinica'
-    mainClass = 'com.example.clinica.HelloApplication'
+    mainModule = 'clinica'
+    mainClass = 'clinica.HelloApplication'
 }
 
 javafx {
@@ -42,7 +42,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.1'
 }
 
 test {

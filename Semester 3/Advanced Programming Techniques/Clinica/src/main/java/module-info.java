@@ -1,4 +1,4 @@
-module com.example.clinica {
+module clinica {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -7,6 +7,11 @@ module com.example.clinica {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
 
-    opens com.example.clinica to javafx.fxml;
-    exports com.example.clinica;
+    opens clinica to javafx.fxml;
+    exports clinica;
+    exports clinica.controllers;
+    exports clinica.service;
+    exports clinica.domain;
+    exports clinica.repository;
+    opens clinica.controllers to javafx.fxml;
 }
