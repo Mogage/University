@@ -10,6 +10,14 @@ public class Consultatie extends Entity<Long> {
     private LocalDate data;
     private LocalTime ora;
 
+    public Consultatie(Long idMedic, String numePacient, String cnpPacient, LocalDate data, LocalTime ora) {
+        this.idMedic = idMedic;
+        this.numePacient = numePacient;
+        this.cnpPacient = cnpPacient;
+        this.data = data;
+        this.ora = ora;
+    }
+
     public Long getIdMedic() {
         return idMedic;
     }

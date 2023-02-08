@@ -26,10 +26,7 @@ public class SectiiRepository extends AbstractRepository<Long, Sectie> {
 
     @Override
     public Iterable<Sectie> getAll() {
-        super.setSqlCommand("SELECT * FROM " +
-                "(SELECT id, nume, id_sef_de_sectie, pret_per_consultatie, durata_maxima_consultatie," +
-                "        ROW_NUMBER() OVER (PARTITION BY nume ORDER BY id) AS row_number " +
-                "FROM sectii GROUP BY sectii.nume, sectii.id) AS a WHERE a.row_number = 1");
+        super.setSqlCommand("SELECT * FROM sectii");
         return super.getAll();
     }
 

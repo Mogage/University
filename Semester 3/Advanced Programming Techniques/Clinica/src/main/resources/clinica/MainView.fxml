@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="clinica.controllers.MainController">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="6.0" prefHeight="46.0"
-               prefWidth="140.0" text="Clinica" textAlignment="CENTER"/>
-        <TableView fx:id="sectieTableView" layoutX="32.0" layoutY="49.0" prefHeight="339.0" prefWidth="270.0">
+               prefWidth="140.0" text="Clinica" textAlignment="CENTER">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Label>
+        <TableView fx:id="sectieTableView" layoutX="32.0" layoutY="49.0" prefHeight="304.0" prefWidth="270.0">
             <columns>
                 <TableColumn fx:id="numeSectie" prefWidth="85.0" text="Nume Sectie"/>
                 <TableColumn fx:id="numeSefDeSectie" prefWidth="83.66667175292969" text="Sef de Sectie"/>
                 <TableColumn fx:id="pretSectie" prefWidth="100.0" text="Pret Consultatie"/>
             </columns>
         </TableView>
+        <Button fx:id="programareButton" layoutX="32.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="270.0" text="Programare" onAction="#openProgramare"/>
     </children>
 </AnchorPane>

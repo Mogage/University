@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="clinica.controllers.ProgramareController">
+    <children>
+        <Label fx:id="numeSectie" alignment="CENTER" layoutX="99.0" layoutY="14.0" prefHeight="43.0" prefWidth="239.0"
+               text="Nume Sectie">
+            <font>
+                <Font size="30.0"/>
+            </font>
+        </Label>
+        <TableView fx:id="mediciTableView" layoutX="43.0" layoutY="73.0" prefHeight="134.0" prefWidth="354.0">
+            <columns>
+                <TableColumn fx:id="numeMedic" prefWidth="353.0" text="Nume Medic"/>
+            </columns>
+        </TableView>
+        <Button fx:id="programeazaButton" layoutX="44.0" layoutY="349.0" mnemonicParsing="false"
+                onAction="#doProgramare" prefHeight="25.0" prefWidth="354.0" text="Programeaza"/>
+        <Label layoutX="44.0" layoutY="222.0" prefHeight="17.0" prefWidth="77.0" text="Nume Pacient"/>
+        <Label layoutX="44.0" layoutY="254.0" prefHeight="17.0" prefWidth="77.0" text="CNP Pacient"/>
+        <DatePicker fx:id="data" layoutX="75.0" layoutY="283.0" prefHeight="25.0" prefWidth="321.0"/>
+        <Label layoutX="44.0" layoutY="287.0" prefHeight="17.0" prefWidth="28.0" text="Data"/>
+        <TextField fx:id="numePacient" layoutX="128.0" layoutY="218.0" prefHeight="25.0" prefWidth="269.0"/>
+        <TextField fx:id="cnpPacient" layoutX="119.0" layoutY="250.0" prefHeight="25.0" prefWidth="278.0"/>
+        <Label layoutX="44.0" layoutY="320.0" prefHeight="17.0" prefWidth="28.0" text="Ora"/>
+        <Slider fx:id="oraSlider" blockIncrement="1.0" layoutX="75.0" layoutY="316.0" majorTickUnit="12.0" max="23.0"
+                prefHeight="33.0" prefWidth="89.0" showTickLabels="true"/>
+        <Slider fx:id="minuteSlider" blockIncrement="1.0" layoutX="211.0" layoutY="317.0" majorTickUnit="15.0"
+                max="59.0" prefHeight="33.0" prefWidth="140.0" showTickLabels="true"/>
+        <Label fx:id="oraLabel" layoutX="170.0" layoutY="315.0" prefHeight="17.0" prefWidth="28.0" text="0"/>
+        <Label fx:id="minuteLabel" layoutX="356.0" layoutY="315.0" prefHeight="17.0" prefWidth="48.0" text="0"/>
+    </children>
+</AnchorPane>

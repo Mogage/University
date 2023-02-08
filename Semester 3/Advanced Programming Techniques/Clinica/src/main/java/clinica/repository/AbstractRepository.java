@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractRepository<ID, T extends Entity<ID>> implements Repository<ID, T> {
-    private final String url;
-    private final String userName;
-    private final String password;
+    protected final String url;
+    protected final String userName;
+    protected final String password;
     private String sqlCommand;
 
     public AbstractRepository(String url, String userName, String password, String sqlCommand) {
@@ -21,6 +21,10 @@ public abstract class AbstractRepository<ID, T extends Entity<ID>> implements Re
 
     public void setSqlCommand(String sqlCommand) {
         this.sqlCommand = sqlCommand;
+    }
+
+    public String getSqlCommand() {
+        return sqlCommand;
     }
 
     protected abstract T extractEntity(ResultSet resultSet) throws SQLException;
