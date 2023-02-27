@@ -32,12 +32,24 @@ Algorithms implementation, labs and school work.
 ## **Year 2**
 **First semester** 
 
-Database
+✔️ Databases
 
-Advanced Programming Techniques
+✔️ Advanced Programming Techniques
 
-Computer networks
+✔️ Computer networks
 
-Functional logic programming
+✔️ Functional logic programming
 
-Probability and statistics
+✔️ Probability and statistics
+
+**Second semester** 
+
+Web Programming
+
+Artificial Intelligence
+
+Software Engineering
+
+Programming and Projection Environments
+
+Database Management Systems
