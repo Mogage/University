@@ -87,8 +87,6 @@ public class MainService implements Service, Observable {
         consultatie.setId(getId(consultatiiRepository.getAll()));
         this.consultatiiRepository.add(consultatie);
         notifyObservers();
-
-
     }
 
     @Override

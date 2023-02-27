@@ -52,7 +52,7 @@ public abstract class AbstractRepository<ID, T extends Entity<ID>> {
     public T findAfterId(ID id) {
         try (Connection connection = DriverManager.getConnection(url, userName, password);
              PreparedStatement statement = connection.prepareStatement(sqlCommand);
-             ResultSet resultSet = statement.executeQuery();
+             ResultSet resultSet = statement.executeQuery()
         ) {
             if(resultSet.next())
                 return extractEntity(resultSet);

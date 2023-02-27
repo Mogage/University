@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examen.controllers.AjutaController">
+    <children>
+        <TabPane layoutX="14.0" layoutY="78.0" prefHeight="351.0" prefWidth="770.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Doresc sa ajut!">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="770.0">
+                            <children>
+                                <TableView fx:id="nevoiTable" layoutX="7.0" layoutY="51.0" prefHeight="210.0" prefWidth="455.0">
+                                    <columns>
+                                        <TableColumn fx:id="titluNevoieColumn" prefWidth="70.0" text="Titlu" />
+                                        <TableColumn fx:id="descriereNevoieColumn" prefWidth="90.0" text="Descriere" />
+                                        <TableColumn fx:id="deadlineNevoieColumn" prefWidth="114.0" text="Deadline" />
+                                        <TableColumn fx:id="statusNevoieColumn" prefWidth="68.0" text="Status" />
+                                        <TableColumn fx:id="omInNevoieNevoieColumn" prefWidth="113.0" text="OmInNevoie" />
+                                    </columns>
+                                </TableView>
+                                <TableView fx:id="nevoieRezolvateTable" layoutX="473.0" layoutY="51.0" prefHeight="260.0" prefWidth="290.0">
+                                    <columns>
+                                        <TableColumn fx:id="titluRezolvatColumn" prefWidth="77.0" text="Titlu" />
+                                        <TableColumn fx:id="deadlineRezolvatColumn" minWidth="0.0" prefWidth="116.0" text="Deadline" />
+                                        <TableColumn fx:id="omInNevoieRezolvatColumn" minWidth="0.0" prefWidth="96.0" text="OmInNevoie" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="rezolvaButton" layoutX="7.0" layoutY="271.0" mnemonicParsing="false" onAction="#rezolvaNevoie" prefHeight="40.0" prefWidth="455.0" text="Rezolva nevoie">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Button>
+                        <Label fx:id="orasLabel" alignment="CENTER" layoutX="52.0" layoutY="14.0" prefHeight="30.0" prefWidth="366.0" text="Oameni de ajutat din oras:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="532.0" layoutY="14.0" prefHeight="30.0" prefWidth="173.0" text="Oameni ajutati:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Doresc sa fiu ajutat!">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="14.0" layoutY="22.0" prefHeight="30.0" prefWidth="35.0" text="Titlu:">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="52.0" prefHeight="30.0" prefWidth="77.0" text="Descriere:">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="82.0" prefHeight="30.0" prefWidth="69.0" text="Deadline:">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="titluTextField" layoutX="53.0" layoutY="25.0" />
+                                <TextField fx:id="descriereTextField" layoutX="83.0" layoutY="56.0" />
+                                <DatePicker fx:id="data" layoutX="80.0" layoutY="86.0" />
+                                <Spinner fx:id="ora" editable="true" layoutX="264.0" layoutY="86.0" max="23" min="0" prefHeight="25.0" prefWidth="54.0" />
+                                <Spinner fx:id="minut" editable="true" layoutX="327.0" layoutY="86.0" max="59" min="0" prefHeight="25.0" prefWidth="53.0" />
+                                <Button fx:id="submitButton" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="33.0" prefWidth="120.0" text="Submit" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Label fx:id="numeUtilizatorLabel" alignment="CENTER" layoutX="288.0" layoutY="14.0" prefHeight="51.0" prefWidth="222.0" text="Label">
+            <font>
+                <Font size="35.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

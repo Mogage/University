@@ -11,7 +11,9 @@ module examen {
     exports examen;
     exports examen.controllers;
     exports examen.domain;
+    exports examen.domain.validators;
     exports examen.repository;
     exports examen.service;
+    exports examen.utils;
     opens examen.controllers to javafx.fxml;
 }

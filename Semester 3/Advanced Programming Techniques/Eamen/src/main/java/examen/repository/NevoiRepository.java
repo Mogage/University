@@ -1,11 +1,11 @@
-package faptebune.repository;
+package examen.repository;
 
-import faptebune.domain.Nevoie;
+import examen.domain.Nevoie;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class NevoiRepository extends AbstractRepository<Nevoie> {
+public class NevoiRepository extends AbstractRepository<Long, Nevoie> {
 
     public NevoiRepository(String url, String userName, String password) {
         super(url, userName, password);
@@ -30,16 +30,16 @@ public class NevoiRepository extends AbstractRepository<Nevoie> {
         PreparedStatement statement = connection.prepareStatement(super.sqlCommand);
         statement.setLong(1, entity.getId());
         statement.setString(2, entity.getTitlu());
-        statement.setString(3, entity.getDeadline().toString());
-        statement.setLong(4, entity.getOmInNevoie());
-        statement.setString(5, entity.getStatus());
-        statement.setString(6, entity.getDescriere());
+        statement.setString(3, entity.getDescriere());
+        statement.setString(4, entity.getDeadline().toString());
+        statement.setLong(5, entity.getOmInNevoie());
+        statement.setString(6, entity.getStatus());
         return statement;
     }
 
     @Override
     public void save(Nevoie entity) throws Exception {
-        super.sqlCommand = "INSERT INTO nevoi(id, titlu, deadline, om_in_nevoie, status, descriere) VALUES (?, ?, ?, ?, ?, ?)";
+        super.sqlCommand = "INSERT INTO nevoi(id, titlu, descriere, deadline, om_in_nevoie, status) VALUES (?, ?, ?, ?, ?, ?)";
         super.save(entity);
     }
 
@@ -52,7 +52,7 @@ public class NevoiRepository extends AbstractRepository<Nevoie> {
     public void update(Nevoie nevoie) {
         super.sqlCommand = "UPDATE nevoi SET om_salvator=?, status=? WHERE id=?";
         try (Connection connection = DriverManager.getConnection(super.url, super.userName, super.password);
-             PreparedStatement statement = connection.prepareStatement(super.sqlCommand);
+             PreparedStatement statement = connection.prepareStatement(super.sqlCommand)
         ) {
             statement.setLong(1, nevoie.getOmSalvator());
             statement.setString(2, nevoie.getStatus());
@@ -61,5 +61,10 @@ public class NevoiRepository extends AbstractRepository<Nevoie> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Nevoie findAfterId(Long id) {
+        super.sqlCommand = "SELECT * FROM nevoi WHERE id=" + id.toString();
+        return super.findAfterId(id);
     }
 }

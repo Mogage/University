@@ -1,4 +1,4 @@
-module faptebune.faptebune {
+module faptebune {
     requires javafx.controls;
     requires javafx.fxml;
 
