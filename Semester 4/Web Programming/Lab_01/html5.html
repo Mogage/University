@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form 5</title>
+</head>
+<body>
+<form>
+    <table valign="center">
+        <thead>
+        <tr>
+            <th colspan="6">Inscriere exchange</th>
+        </tr>
+        <tr>
+            <th colspan="6">Date Personale</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <label for="prenume">Prenume</label>
+            </td>
+            <td>
+                <input type="text" id="prenume" name="prenume">
+            </td>
+            <td>
+                <label for="nume">Nume</label>
+            </td>
+            <td>
+                <input type="text" id="nume" name="nume">
+            </td>
+            <td>
+                <label for="varsta">Vârstă</label>
+            </td>
+            <td>
+                <input type="number" id="varsta" name="varsta" min="18" value="18">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="oras">Oraș</label>
+            </td>
+            <td colspan="2">
+                <input type="text" id="oras" name="oras" size="30">
+            </td>
+            <td>
+                <label for="judet">Județ</label>
+            </td>
+            <td colspan="2">
+                <select name="judet" id="judet">
+                    <option>Alba</option>
+                    <option>Arad</option>
+                    <option>Argeș</option>
+                    <option>Bacău</option>
+                    <option>Bihor</option>
+                    <option>Bistrița-Năsăud</option>
+                    <option>Botoșani</option>
+                    <option>Brașov</option>
+                    <option>Brăila</option>
+                    <option>București</option>
+                    <option>Buzău</option>
+                    <option>Călărași</option>
+                    <option>Caraș-Severin</option>
+                    <option>Cluj</option>
+                    <option>Constanța</option>
+                    <option>Covasna</option>
+                    <option>Dâmbovița</option>
+                    <option>Dolj</option>
+                    <option>Galați</option>
+                    <option>Giurgiu</option>
+                    <option>Gorj</option>
+                    <option>Harghita</option>
+                    <option>Hunedoara</option>
+                    <option>Ialomița</option>
+                    <option>Iași</option>
+                    <option>Ilfov</option>
+                    <option>Maramureș</option>
+                    <option>Mehedinți</option>
+                    <option>Mureș</option>
+                    <option>Neamț</option>
+                    <option>Olt</option>
+                    <option>Prahova</option>
+                    <option>Sălaj</option>
+                    <option>Satu Mare</option>
+                    <option>Sibiu</option>
+                    <option>Suceava</option>
+                    <option>Teleorman</option>
+                    <option>Timiș</option>
+                    <option>Tulcea</option>
+                    <option>Vaslui</option>
+                    <option>Vâlcea</option>
+                    <option>Vrancea</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="adresa">Adresă</label>
+            </td>
+            <td colspan="3">
+                <input type="text" id="adresa" name="adresa" placeholder="Str. Nr. Bloc Scara Ap." size="55">
+            </td>
+            <td>
+                <div>Gen</div>
+            </td>
+            <td>
+                <label for="m">M</label>
+                <input type="radio" id="m" name="gen" value="M">
+                <label for="f">F</label>
+                <input type="radio" id="f" name="gen" value="F">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Email</label>
+            </td>
+            <td colspan="2">
+                <input type="text" id="email" name="email" size="30">
+            </td>
+            <td>
+                <label for="telefon">Telefon</label>
+            </td>
+            <td colspan="2">
+                <input type="number" id="telefon" name="telefon" placeholder="0712 345 678">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="6">Date Exchange</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label for="domeniu">Domeniu</label>
+                        </td>
+                        <td>
+                            <select id="domeniu" name="domeniu">
+                                <option value="it">Information Technology</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="finance">Finance</option>
+                                <option value="ba">Business Administration</option>
+                                <option value="bd">Business Development</option>
+                                <option value="hr">Human Resources</option>
+                                <option value="voluntariat">Voluntariat</option>
+                                <option value="profesorat">Profesor</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="tara">Țară</label>
+                        </td>
+                        <td colspan="3">
+                            <input type="text" id="tara" name="tara" size="65">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="viza">Viză</label>
+                            <input type="radio" id="viza" name="viza" value="viza">
+                        </td>
+                        <td>
+                            <label for="cv">CV</label>
+                        </td>
+                        <td>
+                            <input type="file" id="cv" name="cv">
+                        </td>
+                        <td>
+                            <label for="perioada">Perioadă</label>
+                        </td>
+                        <td>
+                            <select id="perioada" name="perioada">
+                                <option value="scurta">Scurtă</option>
+                                <option value="medie">Medie</option>
+                                <option value="lunga">Lungă</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="observatii">Observații</label>
+                        </td>
+                        <td colspan="5">
+                            <textarea id="observatii" rows="3" cols="92"
+                                      placeholder="Detalii de adaugat despre exchange"></textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="3">Informații exchange</th>
+                    </tr>
+                    <tr>
+                        <th>Taxe</th>
+                        <th>Perioada</th>
+                        <th>Beneficii</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <ol>
+                                <li>
+                                    Internship
+                                    <ul>
+                                        <li>
+                                            Scurtă - 210€
+                                        </li>
+                                        <li>
+                                            Medie - 250€
+                                        </li>
+                                        <li>
+                                            Lungă - 280€
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Profesorat
+                                    <ul>
+                                        <li>
+                                            Scurtă - 210€
+                                        </li>
+                                        <li>
+                                            Medie - 230€
+                                        </li>
+                                        <li>
+                                            Lungă - 260€
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Voluntariat
+                                    <ul>
+                                        <li>190€</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </td>
+                        <td>
+                            <ol type="A">
+                                <li>
+                                    Internship
+                                    <ul>
+                                        <li>
+                                            Scurtă - de la 6 la 12 săptămâni
+                                        </li>
+                                        <li>
+                                            Medie - de la 13 la 26 săptămâni
+                                        </li>
+                                        <li>
+                                            Lungă - de la 27 la 78 săptămâni
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Profesorat
+                                    <ul>
+                                        <li>
+                                            Scurtă - de la 9 la 12 săptămâni
+                                        </li>
+                                        <li>
+                                            Medie - de la 13 la 26 săptămâni
+                                        </li>
+                                        <li>
+                                            Lungă - de la 27 la 78 săptămâni
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Voluntariat
+                                    <ul>
+                                        <li>6 săptămâni</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </td>
+                        <td>
+                            <ol type="I">
+                                <li>
+                                    Internship
+                                    <ul>
+                                        <li>
+                                            6-8 săptămâni:
+                                            <ul>
+                                                <li>Cazare asigurată și plătită</li>
+                                                <li>Neplătit</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            9-78 săptămâni:
+                                            <ul>
+                                                <li>Cazare neasigurată</li>
+                                                <li>Salariu</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Profesorat
+                                    <ul>
+                                        <li>
+                                            9-78 săptămâni:
+                                            <ul>
+                                                <li>Cazare neasigurată</li>
+                                                <li>Salariu</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Voluntariat
+                                    <ul>
+                                        <li>
+                                            6-8 săptămâni:
+                                            <ul>
+                                                <li>Cazare asigurată și plătită</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Exista posibilitatea asigurării unor mese,<br>
+                                    a transportului, a unui calculator sau și a<br>
+                                    cazării(la peste 9 săpt) pe unele proiecte.
+                                </li>
+                            </ol>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <input type="submit" id="submit" name="submit">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
