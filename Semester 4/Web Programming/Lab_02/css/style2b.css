@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+.middle {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    background-color: red;
+    height: 150px;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.menu {
+    background-color: yellow;
+    float: left;
+    width: 125px;
+}
+
+.menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu li {
+    padding: 2px 0 5px 10px;
+    border-bottom: 1px solid black;
+}
+
+.mainView {
+    background-color: green;
+    height: 75vh;
+    width: calc(100% - 125px);
+}
+
+.footer {
+    background-color: pink;
+    height: 75px;
+}

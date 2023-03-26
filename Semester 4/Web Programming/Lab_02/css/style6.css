@@ -1,0 +1,19 @@
+.col-1 {
+    float: left;
+    width: 75px;
+}
+
+.col-2 {
+    width: 415px;
+    background: repeating-linear-gradient(90deg, #ffffff 0, #ffffff 20px, #000000 21px);
+    letter-spacing: 14px;
+    font-family: monospace;
+}
+
+.col-2:focus {
+    outline: none;
+}
+
+#cnp {
+    width: 265px;
+}

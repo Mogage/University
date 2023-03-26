@@ -32,7 +32,8 @@ namespace Facultativ
 
         public static void Main(String[] Args)
         {
-            RunApp();
+            TimeOnly time = new TimeOnly(15, 30, 30);
+            Console.WriteLine(time.ToString("HH:mm:ss"));
         }
     }
 }

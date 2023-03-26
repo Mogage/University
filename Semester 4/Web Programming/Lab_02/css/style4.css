@@ -1,0 +1,109 @@
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+}
+
+li {
+    height: 82px;
+}
+
+#facebook {
+    width: 84px;
+    background: url("../images/image3_color.png") 0 82px;
+}
+
+#facebook:hover {
+    background: url("../images/image3_color.png") 0 0;
+}
+
+#other {
+    width: 84px;
+    background: url("../images/image3_color.png") -84px 82px;
+}
+
+#other:hover {
+    background: url("../images/image3_color.png") -84px 0;
+}
+
+#ball {
+    width: 84px;
+    background: url("../images/image3_color.png") -168px 82px;
+}
+
+#ball:hover {
+    background: url("../images/image3_color.png") -168px 0;
+}
+
+#google {
+    width: 84px;
+    background: url("../images/image3_color.png") -252px 82px;
+}
+
+#google:hover {
+    background: url("../images/image3_color.png") -252px 0;
+}
+
+#linkedin {
+    width: 84px;
+    background: url("../images/image3_color.png") -336px 82px;
+}
+
+#linkedin:hover {
+    background: url("../images/image3_color.png") -336px 0;
+}
+
+#pinterest {
+    width: 84px;
+    background: url("../images/image3_color.png") -420px 82px;
+}
+
+#pinterest:hover {
+    background: url("../images/image3_color.png") -420px 0;
+}
+
+#wifi {
+    width: 84px;
+    background: url("../images/image3_color.png") 420px 82px;
+}
+
+#wifi:hover {
+    background: url("../images/image3_color.png") 420px 0;
+}
+
+#skype {
+    width: 84px;
+    background: url("../images/image3_color.png") 336px 82px;
+}
+
+#skype:hover {
+    background: url("../images/image3_color.png") 336px 0;
+}
+
+#twitter {
+    width: 84px;
+    background: url("../images/image3_color.png") 252px 82px;
+}
+
+#twitter:hover {
+    background: url("../images/image3_color.png") 252px 0;
+}
+
+#vimeo {
+    width: 84px;
+    background: url("../images/image3_color.png") 168px 82px;
+}
+
+#vimeo:hover {
+    background: url("../images/image3_color.png") 168px 0;
+}
+
+#youtube {
+    width: 84px;
+    background: url("../images/image3_color.png") 84px 82px;
+}
+
+#youtube:hover {
+    background: url("../images/image3_color.png") 84px 0;
+}

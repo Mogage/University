@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.middle {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    background-color: red;
+    height: 150px;
+}
+
+.menu {
+    background-color: yellow;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu li {
+    padding-left: 10px;
+    border-left: 1px solid black;
+}
+
+.menu li:first-child {
+    border-left: none;
+}
+
+.menu li:last-child{
+    padding-right: 5%;
+}
+
+.mainView {
+    background-color: green;
+    min-height: calc(100vh - 250px);
+}
+
+.footer {
+    background-color: pink;
+    height: 75px;
+}

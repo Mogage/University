@@ -1,0 +1,15 @@
+.parent {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.child {
+    width: 200px;
+    text-align: center;
+}
+
+.right img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -1,0 +1,27 @@
+.wrapper {
+    border: 2px solid black;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 50% 50%;
+    max-width: 700px;
+}
+
+.block {
+    margin: 20px;
+    padding: 5px;
+    background: aqua;
+    width: 300px;
+}
+
+.block img {
+    display: block;
+    margin: auto;
+    padding-top: 25px;
+    width: 250px;
+    height: 300px;
+}
+
+.block p {
+    text-align: center;
+}

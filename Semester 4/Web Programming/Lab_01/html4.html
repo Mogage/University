@@ -33,7 +33,7 @@
                 <input type="text" id="nume" name="nume">
             </td>
             <td>
-                <label for="varsta">Vârstă</label>
+                <label for="varsta"><strong>Vârstă</strong></label>
             </td>
             <td>
                 <input type="text" id="varsta" name="varsta" value="18">
@@ -110,12 +110,12 @@
                 </center>
             </td>
             <td>
-                <div>Gen</div>
+                <div align="center">Gen</div>
             </td>
             <td>
                 <center>
                     <label for="m">M</label>
-                    <input type="radio" id="m" name="gen" value="M">
+                    <input type="radio" id="m" name="gen" value="M" checked>
                     <label for="f">F</label>
                     <input type="radio" id="f" name="gen" value="F">
                 </center>
@@ -170,14 +170,14 @@
                             <label for="tara">Țară</label>
                         </td>
                         <td colspan="3">
-                            <input type="text" id="tara" name="tara" size="65">
+                            <input type="text" id="tara" name="tara" size="65" value="Spania" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <center>
                                 <label for="viza">Viză</label>
-                                <input type="radio" id="viza" name="viza" value="viza">
+                                <input type="checkbox" id="viza" name="viza" value="viza">
                             </center>
                         </td>
                         <td>
@@ -195,7 +195,7 @@
                             <center>
                                 <select id="perioada" name="perioada">
                                     <option value="scurta">Scurtă</option>
-                                    <option value="medie">Medie</option>
+                                    <option value="medie" selected>Medie</option>
                                     <option value="lunga">Lungă</option>
                                 </select>
                             </center>
@@ -223,7 +223,6 @@
                     <tr>
                         <th>Taxe</th>
                         <th>Perioada</th>
-                        <th>Beneficii</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -305,59 +304,92 @@
                             </ol>
                         </td>
                         <td>
-                            <ol type="I">
-                                <li>
-                                    Internship
-                                    <ul>
-                                        <li>
-                                            6-8 săptămâni:
-                                            <ul>
-                                                <li>Cazare asigurată și plătită</li>
-                                                <li>Neplătit</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            9-78 săptămâni:
-                                            <ul>
-                                                <li>Cazare neasigurată</li>
-                                                <li>Salariu</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Profesorat
-                                    <ul>
-                                        <li>
-                                            9-78 săptămâni:
-                                            <ul>
-                                                <li>Cazare neasigurată</li>
-                                                <li>Salariu</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Voluntariat
-                                    <ul>
-                                        <li>
-                                            6-8 săptămâni:
-                                            <ul>
-                                                <li>Cazare asigurată și plătită</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Exista posibilitatea asigurării unor mese,<br>
-                                    a transportului, a unui calculator sau și a<br>
-                                    cazării(la peste 9 săpt) pe unele proiecte.
-                                </li>
-                            </ol>
+                            <fieldset>
+                                <legend>Beneficii</legend>
+                                <ol type="I" start="5">
+                                    <li>
+                                        Internship
+                                        <ul>
+                                            <li>
+                                                6-8 săptămâni:
+                                                <ul>
+                                                    <li>Cazare asigurată și plătită</li>
+                                                    <li>Neplătit</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                9-78 săptămâni:
+                                                <ul>
+                                                    <li>Cazare neasigurată</li>
+                                                    <li>Salariu</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Profesorat
+                                        <ul>
+                                            <li>
+                                                9-78 săptămâni:
+                                                <ul>
+                                                    <li>Cazare neasigurată</li>
+                                                    <li>Salariu</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Voluntariat
+                                        <ul>
+                                            <li>
+                                                6-8 săptămâni:
+                                                <ul>
+                                                    <li>Cazare asigurată și plătită</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Exista posibilitatea asigurării unor mese,<br>
+                                        a transportului, a unui calculator sau și a<br>
+                                        cazării(la peste 9 săpt) pe unele proiecte.
+                                    </li>
+                                </ol>
+                            </fieldset>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4" colspan="2">
+                <center>
+                    <img src="Bufnea-Darius.jpg" alt="logo">
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <center>
+                    <p><a href="html4.html">Termeni si condiții</a></p>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <center>
+                    <label for="accept">Accept</label>
+                    <input type="radio" id="accept" name="termeni">
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <center>
+                    <label for="refuz">Refuz</label>
+                    <input type="radio" id="refuz" name="termeni">
+                </center>
             </td>
         </tr>
         <tr>

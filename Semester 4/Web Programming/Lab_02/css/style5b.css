@@ -1,0 +1,21 @@
+.wrapper {
+    border: 2px solid black;
+    background: yellow;
+    max-width: 500px;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.block img {
+    width: 250px;
+    height: 300px;
+}
+
+.block p {
+    margin-left: 20px;
+    text-align: center;
+}

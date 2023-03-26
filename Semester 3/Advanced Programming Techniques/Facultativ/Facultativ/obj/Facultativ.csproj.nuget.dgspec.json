@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj": {}
+    "F:\\Repositories\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj": {}
   },
   "projects": {
-    "F:\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj": {
+    "F:\\Repositories\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj",
+        "projectUniqueName": "F:\\Repositories\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj",
         "projectName": "Facultativ",
-        "projectPath": "F:\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj",
+        "projectPath": "F:\\Repositories\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\Facultativ.csproj",
         "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
-        "outputPath": "F:\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\obj\\",
+        "outputPath": "F:\\Repositories\\Git_repo\\University\\Semester 3\\Advanced Programming Techniques\\Facultativ\\Facultativ\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
