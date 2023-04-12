@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="370.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bms.bugmanagementsystem.DeveloperView">
+    <children>
+        <TableView layoutX="13.0" layoutY="14.0" prefHeight="300.0" prefWidth="475.0">
+            <columns>
+                <TableColumn prefWidth="118.0" text="Name" />
+                <TableColumn prefWidth="288.0" text="Description" />
+            <TableColumn prefWidth="68.0" text="Severity" />
+            </columns>
+        </TableView>
+        <Button layoutX="232.0" layoutY="329.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Solve bug" />
+      <CheckBox layoutX="14.0" layoutY="330.0" mnemonicParsing="false" text="Sort after severity">
+         <font>
+            <Font name="Monospaced Regular" size="16.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="363.0" layoutY="329.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Log out" />
+    </children>
+</AnchorPane>
