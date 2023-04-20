@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestCars" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-14T11:51:48" hostname="DESKTOP-P6FMEQ4" time="0.844">
+  <properties/>
+  <testcase name="Test Cars" classname="TestCars" time="0.844"/>
+  <system-out><![CDATA[14 Mar 2023 13:51:48,734 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:51:48,762 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:51:48,763 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,764 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:51:48,765 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:51:48,767 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:51:48,768 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:51:48,924 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,935 TRACE CarsDBRepository 89 add - Saved 1 instances
+14 Mar 2023 13:51:48,936 TRACE CarsDBRepository 94 add - Exit
+Toate masinile din db
+14 Mar 2023 13:51:48,937 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,939 TRACE CarsDBRepository 138 findAll - Exit
+Id=3 Tesla Model S 2019
+Id=9 Volkswagen Passat 2022
+Toate masinile de dupa 2020
+14 Mar 2023 13:51:48,940 TRACE CarsDBRepository 53 findBetweenYears - Enter
+14 Mar 2023 13:51:48,940 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,941 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,942 TRACE CarsDBRepository 76 findBetweenYears - Exit
+Id=9 Volkswagen Passat 2022
+14 Mar 2023 13:51:48,943 TRACE CarsDBRepository 99 update - Enter updating task Id=0 Tesla Passat 2022
+14 Mar 2023 13:51:48,943 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,944 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,947 ERROR CarsDBRepository 109 update - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:51:48,948 TRACE CarsDBRepository 112 update - Exit
+Masinile produse de Tesla
+14 Mar 2023 13:51:48,950 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,952 TRACE CarsDBRepository 47 findByManufacturer - Exit
+Id=3 Tesla Model S 2019
+]]></system-out>
+  <system-err><![CDATA[Error DBorg.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+]]></system-err>
+</testsuite>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class TestCars</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class TestCars</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; TestCars</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.844s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Test Cars</td>
+<td class="success">testExample()</td>
+<td class="success">0.844s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>14 Mar 2023 13:51:48,734 INFO  CarsDBRepository 19 &lt;init&gt; - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:51:48,762 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:51:48,763 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,764 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:51:48,765 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:51:48,767 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:51:48,768 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:51:48,924 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,935 TRACE CarsDBRepository 89 add - Saved 1 instances
+14 Mar 2023 13:51:48,936 TRACE CarsDBRepository 94 add - Exit
+Toate masinile din db
+14 Mar 2023 13:51:48,937 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,939 TRACE CarsDBRepository 138 findAll - Exit
+Id=3 Tesla Model S 2019
+Id=9 Volkswagen Passat 2022
+Toate masinile de dupa 2020
+14 Mar 2023 13:51:48,940 TRACE CarsDBRepository 53 findBetweenYears - Enter
+14 Mar 2023 13:51:48,940 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,941 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,942 TRACE CarsDBRepository 76 findBetweenYears - Exit
+Id=9 Volkswagen Passat 2022
+14 Mar 2023 13:51:48,943 TRACE CarsDBRepository 99 update - Enter updating task Id=0 Tesla Passat 2022
+14 Mar 2023 13:51:48,943 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,944 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,947 ERROR CarsDBRepository 109 update - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near &quot;manufacturer&quot;: syntax error)
+14 Mar 2023 13:51:48,948 TRACE CarsDBRepository 112 update - Exit
+Masinile produse de Tesla
+14 Mar 2023 13:51:48,950 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,952 TRACE CarsDBRepository 47 findByManufacturer - Exit
+Id=3 Tesla Model S 2019
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Error DBorg.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near &quot;manufacturer&quot;: syntax error)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4</a> at Mar 14, 2023, 1:51:49 PM</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+rootProject.name = "Proiect_MPP"
+include 'AirportModel'
+include 'AirportNetworking'
+include 'AirportPersistence'
+include 'AirportServer'
+include 'AirportServices'
+include 'AirportClientSimple'
+

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="39c5df4e-a22c-4aef-9bfa-0a91cd1ccb0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/AirportClientFX.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/java/root/client/StartRpcClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/java/root/client/gui/BuyTicketController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/java/root/client/gui/LogInController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/java/root/client/gui/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/resources/client.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/resources/root/BuyTicketView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/resources/root/LogInView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple/src/main/resources/root/MainView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Airport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/DTOAirportFlight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/DTODestinationDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/DTOFlight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Flight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Invoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/Ticket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/people/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/people/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportModel/src/main/java/root/model/people/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/ClientRpcProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/RequestType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/rpcprotocol/ResponseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/utils/AbsConcurrentServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/utils/AbstractServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/utils/RpcConcurrentServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportNetworking/src/main/java/root/utils/ServerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/AbstractRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/JdbcUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/airports/AirportRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/airports/IAirportRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/flights/FlightRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/flights/IFlightRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/invoices/IInvoiceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/invoices/InvoiceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/IPersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/clients/ClientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/clients/IClientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/employees/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/people/employees/IEmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/tickets/ITicketRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportPersistence/src/main/java/root/persistence/tickets/TicketRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportServer/src/main/java/root/server/StartServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportServer/src/main/java/root/server/implementation/ServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportServer/src/main/resources/bd.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportServices/src/main/java/root/services/IObserver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proiect_MPP/AirportServices/src/main/java/root/services/IService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proiect_MPP/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Proiect_MPP/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proiect_MPP/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Proiect_MPP/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proiect_MPP/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/Proiect_MPP/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proiect_MPP/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Proiect_MPP/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proiect_MPP/src/main/java/root/proiect_mpp/service/tickets/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proiect_MPP/src/main/java/root/proiect_mpp/service/tickets/TicketService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/Proiect_MPP">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/Proiect_MPP/AirportClientFX">
+      <ProjectState>
+        <dataType path="$PROJECT_DIR$/Proiect_MPP/AirportClientFX/AirportClientFX">
+          <ModuleState>
+            <id value="com.intellij.externalSystem.JavaModuleData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ContentRootData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ModuleData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ModuleSdkData" />
+            <id value="com.intellij.openapi.externalSystem.model.task.TaskData" />
+            <id value="org.jetbrains.idea.gradle.ext.profiler.model.JavaTaskData" />
+            <id value="org.jetbrains.kotlin.android.synthetic.idea.AndroidExtensionProperties" />
+            <id value="org.jetbrains.plugins.gradle.model.GradleExtensions" />
+            <id value="org.jetbrains.plugins.gradle.model.data.BuildScriptClasspathData" />
+            <id value="org.jetbrains.plugins.gradle.model.data.GradleProjectBuildScriptData" />
+          </ModuleState>
+        </dataType>
+      </ProjectState>
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/Proiect_MPP">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/Proiect_MPP/AirportServer">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/Proiect_MPP/AirportNetworking">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportClientSimple" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportClientSimple" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportClientSimple" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportServer" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportServer" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Proiect_MPP" type="f1a62948:ProjectNode" />
+                <item name="AirportServer" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Nt2Doc7NAXhf7uOtRs1SNZZWkf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;jbr-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Repositories/MPP/mpp-proiect-java-MogageNicolae/Proiect_MPP/AirportClientSimple/src/main/java/root/client/gui&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.37471265&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\AirportClientSimple\src\main\java\root\client\gui" />
+      <recent name="F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\AirportClientSimple\src\main\resources" />
+      <recent name="F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\AirportClientSimple\src\main\java\root\client" />
+      <recent name="F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\AirportClientFX\src\main\java\root\gui" />
+      <recent name="F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\AirportClientFX\src\main\resources\root" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="root.model" />
+      <recent name="root" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.Proiect_MPP:AirportClientSimple [run]">
+    <configuration name="Proiect_MPP:AirportClientSimple [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Proiect_MPP/AirportClientSimple" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Proiect_MPP:AirportServer [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Proiect_MPP/AirportServer" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Proiect_MPP:AirportClientSimple [run]" />
+        <item itemvalue="Gradle.Proiect_MPP:AirportServer [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39c5df4e-a22c-4aef-9bfa-0a91cd1ccb0f" name="Changes" comment="" />
+      <created>1680468953360</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680468953360</updated>
+      <workItem from="1680468953361" duration="75000" />
+      <workItem from="1680514751111" duration="2927000" />
+      <workItem from="1680520834492" duration="1960000" />
+      <workItem from="1680527490523" duration="5117000" />
+      <workItem from="1680548153151" duration="9792000" />
+      <workItem from="1681133349781" duration="292000" />
+      <workItem from="1681134197808" duration="1318000" />
+      <workItem from="1681160226686" duration="17019000" />
+      <workItem from="1681202076627" duration="528000" />
+      <workItem from="1681203737039" duration="6960000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

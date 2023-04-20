@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="root.proiect_mpp.controllers.MainController">
+    <children>
+        <TableView fx:id="flightsTable" layoutX="21.0" layoutY="20.0" prefHeight="200.0" prefWidth="752.0">
+            <columns>
+                <TableColumn fx:id="departureCityColumn" prefWidth="106.0" text="Departure City"/>
+                <TableColumn fx:id="departureAirportColumn" prefWidth="97.0" text="Airport Name"/>
+                <TableColumn fx:id="destinationCityColumn" prefWidth="108.0" text="Destination City"/>
+                <TableColumn fx:id="destinationAirportColumn" prefWidth="110.0" text="Airport Name"/>
+                <TableColumn fx:id="departureDateColumn" prefWidth="107.0" text="Departure Date"/>
+                <TableColumn fx:id="departureTimeColumn" prefWidth="118.0" text="Departure Time"/>
+                <TableColumn fx:id="freeSeatsColumn" prefWidth="105.0" text="Free Seats"/>
+            </columns>
+        </TableView>
+        <TableView fx:id="searchFlightsTable" layoutX="21.0" layoutY="286.0" prefHeight="200.0" prefWidth="752.0">
+            <columns>
+                <TableColumn fx:id="searchDepartureCityColumn" prefWidth="106.0" text="Departure City"/>
+                <TableColumn fx:id="searchDepartureAirportColumn" prefWidth="97.0" text="Airport Name"/>
+                <TableColumn fx:id="searchDestinationCityColumn" prefWidth="108.0" text="Destination City"/>
+                <TableColumn fx:id="searchDestinationAirportColumn" prefWidth="110.0" text="Airport Name"/>
+                <TableColumn fx:id="searchDepartureDateColumn" prefWidth="107.0" text="Departure Date"/>
+                <TableColumn fx:id="searchDepartureTimeColumn" prefWidth="118.0" text="Departure Time"/>
+                <TableColumn fx:id="searchFreeSeatsColumn" prefWidth="105.0" text="Free Seats"/>
+            </columns>
+        </TableView>
+        <Label layoutX="21.0" layoutY="242.0" text="Search:">
+            <font>
+                <Font name="Monospaced Regular" size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="destinationSearchInput" layoutX="111.0" layoutY="242.0" promptText="Destination"/>
+        <DatePicker fx:id="dateSearchInput" layoutX="270.0" layoutY="242.0" prefHeight="25.0" prefWidth="149.0"
+                    promptText="Date"/>
+        <Button fx:id="ticketsButton" layoutX="428.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="100.0" text="Buy tickets" onAction="#buyTicketAction"/>
+        <Button fx:id="logOutButton" layoutX="537.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="100.0" text="Log out" onAction="#logOutAction"/>
+    </children>
+</AnchorPane>

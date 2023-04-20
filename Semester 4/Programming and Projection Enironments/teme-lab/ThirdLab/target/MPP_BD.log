@@ -1,0 +1,127 @@
+14 Mar 2023 13:45:06,884 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:45:06,899 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Tesla Model S 2019
+14 Mar 2023 13:45:06,899 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:45:06,900 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:45:06,900 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:45:06,901 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:45:06,901 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:45:07,096 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@45312be2)
+14 Mar 2023 13:45:07,103 ERROR CarsDBRepository 92 add - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:45:07,104 TRACE CarsDBRepository 95 add - Exit
+14 Mar 2023 13:45:07,105 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:45:07,105 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:45:07,106 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@45312be2)
+14 Mar 2023 13:45:07,107 TRACE CarsDBRepository 138 findAll - Exit
+14 Mar 2023 13:45:07,108 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:45:07,108 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:45:07,109 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@45312be2)
+14 Mar 2023 13:45:07,110 TRACE CarsDBRepository 47 findByManufacturer - Exit
+14 Mar 2023 13:46:00,152 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:46:00,166 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Tesla Model S 2019
+14 Mar 2023 13:46:00,167 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:46:00,167 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:46:00,167 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:46:00,168 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:46:00,168 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:46:00,367 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@ab7395e)
+14 Mar 2023 13:46:00,374 ERROR CarsDBRepository 92 add - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:46:00,376 TRACE CarsDBRepository 95 add - Exit
+14 Mar 2023 13:46:00,376 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:46:00,377 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:46:00,377 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@ab7395e)
+14 Mar 2023 13:46:00,379 TRACE CarsDBRepository 138 findAll - Exit
+14 Mar 2023 13:46:00,380 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:46:00,380 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:46:00,381 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@ab7395e)
+14 Mar 2023 13:46:00,381 TRACE CarsDBRepository 47 findByManufacturer - Exit
+14 Mar 2023 13:47:48,205 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:47:48,229 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:47:48,230 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:47:48,231 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:47:48,231 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:47:48,232 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:47:48,233 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:47:48,393 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:47:48,402 ERROR CarsDBRepository 92 add - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:47:48,403 TRACE CarsDBRepository 95 add - Exit
+14 Mar 2023 13:47:48,404 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:47:48,405 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:47:48,406 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:47:48,409 TRACE CarsDBRepository 138 findAll - Exit
+14 Mar 2023 13:47:48,410 TRACE CarsDBRepository 53 findBetweenYears - Enter
+14 Mar 2023 13:47:48,410 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:47:48,411 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:47:48,412 TRACE CarsDBRepository 76 findBetweenYears - Exit
+14 Mar 2023 13:47:48,413 TRACE CarsDBRepository 100 update - Enter saving task Id=0 Tesla Passat 2022
+14 Mar 2023 13:47:48,413 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:47:48,413 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:47:48,427 TRACE CarsDBRepository 107 update - Saved 1 instances
+14 Mar 2023 13:47:48,428 TRACE CarsDBRepository 112 update - Exit
+14 Mar 2023 13:47:48,429 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:47:48,430 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:47:48,431 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:47:48,433 TRACE CarsDBRepository 47 findByManufacturer - Exit
+14 Mar 2023 13:48:45,093 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:48:45,111 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:48:45,112 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:48:45,112 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:48:45,113 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:48:45,114 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:48:45,114 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:48:45,243 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:48:45,248 ERROR CarsDBRepository 92 add - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:48:45,249 TRACE CarsDBRepository 95 add - Exit
+14 Mar 2023 13:50:22,076 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:50:22,098 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:50:22,099 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:50:22,100 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:50:22,100 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:50:22,101 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:50:22,102 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:50:22,241 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:50:22,253 TRACE CarsDBRepository 89 add - Saved 1 instances
+14 Mar 2023 13:50:22,253 TRACE CarsDBRepository 94 add - Exit
+14 Mar 2023 13:50:22,254 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:50:22,255 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:50:22,255 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:50:22,257 TRACE CarsDBRepository 138 findAll - Exit
+14 Mar 2023 13:50:22,258 TRACE CarsDBRepository 53 findBetweenYears - Enter
+14 Mar 2023 13:50:22,258 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:50:22,259 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:50:22,260 TRACE CarsDBRepository 76 findBetweenYears - Exit
+14 Mar 2023 13:50:22,261 TRACE CarsDBRepository 99 update - Enter updating task Id=0 Tesla Passat 2022
+14 Mar 2023 13:50:22,262 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:50:22,263 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:50:22,268 ERROR CarsDBRepository 109 update - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:50:22,269 TRACE CarsDBRepository 112 update - Exit
+14 Mar 2023 13:50:22,270 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:50:22,270 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:50:22,271 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:50:22,272 TRACE CarsDBRepository 47 findByManufacturer - Exit
+14 Mar 2023 13:51:48,734 INFO  CarsDBRepository 19 <init> - Initializing CarsDBRepository with properties: {jdbc.url=jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db} 
+14 Mar 2023 13:51:48,762 TRACE CarsDBRepository 82 add - Enter saving task Id=0 Volkswagen Passat 2022
+14 Mar 2023 13:51:48,763 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,764 TRACE JdbcUtils 23 getNewConnection - Enter
+14 Mar 2023 13:51:48,765 INFO  JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:F:/Repositories/MPP/teme-lab-MogageNicolae/ThirdLab/cars.db
+14 Mar 2023 13:51:48,767 INFO  JdbcUtils 29 getNewConnection - user: null
+14 Mar 2023 13:51:48,768 INFO  JdbcUtils 30 getNewConnection - pass: null
+14 Mar 2023 13:51:48,924 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,935 TRACE CarsDBRepository 89 add - Saved 1 instances
+14 Mar 2023 13:51:48,936 TRACE CarsDBRepository 94 add - Exit
+14 Mar 2023 13:51:48,937 TRACE CarsDBRepository 117 findAll - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,938 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,939 TRACE CarsDBRepository 138 findAll - Exit
+14 Mar 2023 13:51:48,940 TRACE CarsDBRepository 53 findBetweenYears - Enter
+14 Mar 2023 13:51:48,940 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,941 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,942 TRACE CarsDBRepository 76 findBetweenYears - Exit
+14 Mar 2023 13:51:48,943 TRACE CarsDBRepository 99 update - Enter updating task Id=0 Tesla Passat 2022
+14 Mar 2023 13:51:48,943 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,944 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,947 ERROR CarsDBRepository 109 update - org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "manufacturer": syntax error)
+14 Mar 2023 13:51:48,948 TRACE CarsDBRepository 112 update - Exit
+14 Mar 2023 13:51:48,950 TRACE CarsDBRepository 25 findByManufacturer - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 46 getConnection - Enter
+14 Mar 2023 13:51:48,951 TRACE JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@1ad926d3)
+14 Mar 2023 13:51:48,952 TRACE CarsDBRepository 47 findByManufacturer - Exit

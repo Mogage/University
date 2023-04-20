@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="AirportClientFX" target="17" />
+      <module name="AirportClientFX.main" target="17" />
+      <module name="AirportClientFX.test" target="17" />
+      <module name="Proiect_MPP.AirportClient.main" target="17" />
+      <module name="Proiect_MPP.AirportClient.test" target="17" />
+      <module name="Proiect_MPP.AirportClientFX" target="17" />
+      <module name="Proiect_MPP.AirportClientFX.main" target="17" />
+      <module name="Proiect_MPP.AirportClientFX.test" target="17" />
+      <module name="Proiect_MPP.AirportFX.main" target="17" />
+      <module name="Proiect_MPP.AirportFX.test" target="17" />
+      <module name="root.Proiect_MPP" target="17" />
+      <module name="root.Proiect_MPP.main" target="17" />
+      <module name="root.Proiect_MPP.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

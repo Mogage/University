@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-03-07T11:05:00" hostname="DESKTOP-P6FMEQ4" time="0.026">
+  <properties/>
+  <testcase name="First Test" classname="MainTest" time="0.024"/>
+  <testcase name="Second test" classname="MainTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
