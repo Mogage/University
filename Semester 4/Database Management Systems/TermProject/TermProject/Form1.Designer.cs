@@ -56,10 +56,10 @@
             // dataGridViewChild
             // 
             dataGridViewChild.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewChild.Location = new Point(475, 12);
+            dataGridViewChild.Location = new Point(458, 12);
             dataGridViewChild.Name = "dataGridViewChild";
             dataGridViewChild.RowTemplate.Height = 25;
-            dataGridViewChild.Size = new Size(294, 164);
+            dataGridViewChild.Size = new Size(350, 164);
             dataGridViewChild.TabIndex = 1;
             dataGridViewChild.CellContentClick += dataGridViewChild_CellContentClick;
             // 

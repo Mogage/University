@@ -1,17 +1,31 @@
 using System.ComponentModel.Design;
 using System.Data;
+using System.Configuration;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Reflection;
 
 namespace TermProject
 {
     public partial class Form1 : Form
     {
-        string connectionString = @"Server=DESKTOP-P6FMEQ4;Database=Laborator_01;Integrated Security=true;TrustServerCertificate=true;";
         DataSet ds = new DataSet();
         SqlDataAdapter parentAdapter = new SqlDataAdapter();
         SqlDataAdapter childAdapter = new SqlDataAdapter();
         BindingSource parentBS = new BindingSource();
         BindingSource childBS = new BindingSource();
+
+        private readonly string connectionString = ConfigurationManager.AppSettings["connectionString"];
+        private readonly string parent = ConfigurationManager.AppSettings["parent"];
+        private readonly string parentSelect = ConfigurationManager.AppSettings["parentSelect"];
+        private readonly List<string> parentParams = new List<string>(ConfigurationManager.AppSettings["parentParams"].Split(','));
+        private readonly string child = ConfigurationManager.AppSettings["child"];
+        private readonly string childSelect = ConfigurationManager.AppSettings["childSelect"];
+        private readonly List<string> childParams = new List<string>(ConfigurationManager.AppSettings["childParams"].Split(','));
+        private readonly List<string> childParamsTypes = new List<string>(ConfigurationManager.AppSettings["childParamsTypes"].Split(','));
+        private readonly string insertCommand = ConfigurationManager.AppSettings["insertCommand"];
+        private readonly string deleteCommand = ConfigurationManager.AppSettings["deleteCommand"];
+        private readonly string updateCommand = ConfigurationManager.AppSettings["updateCommand"];
 
         public Form1()
         {
@@ -25,25 +39,22 @@ namespace TermProject
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    parentAdapter.SelectCommand = new SqlCommand("SELECT * FROM Users", connection);
-                    childAdapter.SelectCommand = new SqlCommand("SELECT * FROM Profiles", connection);
-                    parentAdapter.Fill(ds, "Users");
-                    childAdapter.Fill(ds, "Profiles");
-                    parentBS.DataSource = ds.Tables["Users"];
+                    parentAdapter.SelectCommand = new SqlCommand(parentSelect, connection);
+                    childAdapter.SelectCommand = new SqlCommand(childSelect, connection);
+                    //parentAdapter.SelectCommand = new SqlCommand("SELECT * FROM Users", connection);
+                    //childAdapter.SelectCommand = new SqlCommand("SELECT * FROM Profiles", connection);
+                    parentAdapter.Fill(ds, parent);
+                    childAdapter.Fill(ds, child);
+                    parentBS.DataSource = ds.Tables[parent];
                     dataGridViewParent.DataSource = parentBS;
-                    //dataGridViewParent.Columns[0].Visible = false;
-                    //dataGridViewParent.Columns[1].Width = 175;
-                    //dataGridViewParent.Columns[2].Visible = false;
-                    DataColumn parentColumn = ds.Tables["Users"].Columns["idUser"];
-                    DataColumn childColumn = ds.Tables["Profiles"].Columns["idUser"];
-                    DataRelation relation = new DataRelation("FK_Users_Profiles", parentColumn, childColumn);
+                    DataColumn parentColumn = ds.Tables[parent].Columns[parentParams[0]];
+                    DataColumn childColumn = ds.Tables[child].Columns[parentParams[0]];
+                    string relationName = "FK_" + parent + "_" + child;
+                    DataRelation relation = new DataRelation(relationName, parentColumn, childColumn);
                     ds.Relations.Add(relation);
                     childBS.DataSource = parentBS;
-                    childBS.DataMember = "FK_Users_Profiles";
+                    childBS.DataMember = relationName;
                     dataGridViewChild.DataSource = childBS;
-                    //dataGridViewChild.Columns[0].Visible = false;
-                    //dataGridViewChild.Columns[1].Visible = false;
-                    //dataGridViewChild.Columns[2].Width = 100;
                 }
             }
             catch (Exception ex)
@@ -65,9 +76,9 @@ namespace TermProject
         private void refreshTable(SqlConnection connection)
         {
             childAdapter.SelectCommand.Connection = connection;
-            if (ds.Tables.Contains("Profiles"))
-                ds.Tables["Profiles"].Clear();
-            childAdapter.Fill(ds, "Profiles");
+            if (ds.Tables.Contains(child))
+                ds.Tables[child].Clear();
+            childAdapter.Fill(ds, child);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -79,16 +90,23 @@ namespace TermProject
 
             try
             {
-                int id = int.Parse(dataGridViewParent.CurrentRow.Cells["idUser"].FormattedValue.ToString());
-                string profileName = dataGridViewChild.CurrentRow.Cells["profileName"].FormattedValue.ToString();
+                int id = int.Parse(dataGridViewParent.CurrentRow.Cells[parentParams[0]].FormattedValue.ToString());
+                List<string> parameters = new List<string>();
+                for (int index = 2; index < childParams.Count; index++)
+                {
+                    parameters.Add(dataGridViewChild.CurrentRow.Cells[childParams[index]].FormattedValue.ToString());
+                }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    childAdapter.InsertCommand = new SqlCommand("INSERT INTO Profiles(idUser, profileName) VALUES (@idUser, @profileName)", connection);
-                    childAdapter.InsertCommand.Parameters.AddWithValue("@idUser", id);
-                    childAdapter.InsertCommand.Parameters.AddWithValue("@profileName", profileName);
+                    childAdapter.InsertCommand = new SqlCommand(insertCommand, connection);
+                    childAdapter.InsertCommand.Parameters.AddWithValue("@" + parentParams[0], id);
+                    for (int index = 0; index < parameters.Count; index++)
+                    {
+                        childAdapter.InsertCommand.Parameters.AddWithValue("@" + childParams[index + 2], parameters[index]);
+                    }
                     childAdapter.InsertCommand.ExecuteNonQuery();
                     refreshTable(connection);
                     MessageBox.Show("Profil adaugat cu succes", "Notificare", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -109,17 +127,16 @@ namespace TermProject
 
             try
             {
-                string id = dataGridViewChild.CurrentRow.Cells["idProfile"].FormattedValue.ToString();
-                string name = dataGridViewChild.CurrentRow.Cells["profileName"].FormattedValue.ToString();
-                DialogResult dialogResult = MessageBox.Show("Stergeti profilul " + name + "?", "Confirmare stergere", MessageBoxButtons.OKCancel);
+                string id = dataGridViewChild.CurrentRow.Cells[childParams[0]].FormattedValue.ToString();
+                DialogResult dialogResult = MessageBox.Show("Stergeti profilul cu id-ul " + id + "?", "Confirmare stergere", MessageBoxButtons.OKCancel);
                 if (dialogResult != DialogResult.OK) { return; }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    childAdapter.DeleteCommand = new SqlCommand("DELETE FROM Profiles WHERE idProfile = @id", connection);
-                    childAdapter.DeleteCommand.Parameters.AddWithValue("@id", id);
+                    childAdapter.DeleteCommand = new SqlCommand(deleteCommand, connection);
+                    childAdapter.DeleteCommand.Parameters.AddWithValue(childParams[0], id);
                     childAdapter.DeleteCommand.ExecuteNonQuery();
                     refreshTable(connection);
                     MessageBox.Show("Profil stears cu succes", "Notificare", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -140,16 +157,28 @@ namespace TermProject
 
             try
             {
-                int id = int.Parse(dataGridViewChild.CurrentRow.Cells["idProfile"].FormattedValue.ToString());
-                string profileName = dataGridViewChild.CurrentRow.Cells["profileName"].FormattedValue.ToString();
+                List<string> parameters = new List<string>();
+                parameters.Add(dataGridViewChild.CurrentRow.Cells[childParams[0]].FormattedValue.ToString());
+                for (int index = 2; index < childParams.Count; index++)
+                {
+                    parameters.Add(dataGridViewChild.CurrentRow.Cells[childParams[index]].FormattedValue.ToString());
+                }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    childAdapter.UpdateCommand = new SqlCommand("UPDATE Profiles SET profileName=@profileName WHERE idProfile=@id", connection);
-                    childAdapter.UpdateCommand.Parameters.AddWithValue("@id", id);
-                    childAdapter.UpdateCommand.Parameters.AddWithValue("@profileName", profileName);
+                    childAdapter.UpdateCommand = new SqlCommand(updateCommand, connection);
+                    childAdapter.UpdateCommand.Parameters.AddWithValue("@" + childParams[0], int.Parse(parameters[0]));
+                    for (int index = 1; index < parameters.Count; index++)
+                    {
+                        if (childParamsTypes[index + 1] == "int")
+                        {
+                            childAdapter.UpdateCommand.Parameters.AddWithValue("@" + childParams[index + 1], int.Parse(parameters[index]));
+                            continue;
+                        }
+                        childAdapter.UpdateCommand.Parameters.AddWithValue("@" + childParams[index + 1], parameters[index]);
+                    }
                     childAdapter.UpdateCommand.ExecuteNonQuery();
                     refreshTable(connection);
                     MessageBox.Show("Profil actualizat cu succes", "Notificare", MessageBoxButtons.OK, MessageBoxIcon.Information);

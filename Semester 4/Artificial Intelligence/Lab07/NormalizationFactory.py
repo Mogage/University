@@ -1,3 +1,6 @@
+from numpy import std
+
+
 class NormalizationFactory:
     @staticmethod
     def __scale(data):
@@ -14,8 +17,9 @@ class NormalizationFactory:
     def __statisticalNormalization(data):
         size = len(data)
         mean = sum(data) / size
-        std = (1 / size * sum([(x - mean) ** 2 for x in data])) ** 0.5
-        return [(x - mean) / std for x in data]
+        # stdCustom = (1 / size * sum([(x - mean) ** 2 for x in data])) ** 0.5
+        stdCustom = std(data)
+        return [(x - mean) / stdCustom for x in data]
 
     def __normalizeList(self, data, ntype):
         if ntype == 'statistical':

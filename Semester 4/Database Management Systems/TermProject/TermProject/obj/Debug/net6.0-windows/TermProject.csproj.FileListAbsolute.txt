@@ -40,3 +40,4 @@ F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\TermP
 F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\TermProject\TermProject\obj\Debug\net6.0-windows\TermProject.pdb
 F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\TermProject\TermProject\obj\Debug\net6.0-windows\TermProject.genruntimeconfig.cache
 F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\TermProject\TermProject\obj\Debug\net6.0-windows\ref\TermProject.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\TermProject\TermProject\bin\Debug\net6.0-windows\TermProject.dll.config
