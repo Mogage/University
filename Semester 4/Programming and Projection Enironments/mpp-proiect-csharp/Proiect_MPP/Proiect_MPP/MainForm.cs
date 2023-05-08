@@ -36,7 +36,7 @@ namespace Proiect_MPP
             buyTicketsButton.Enabled = false;
         }
 
-        private IEnumerable<DTOAirportFlight> updateLists(IEnumerable<Flight> flights)
+        private List<DTOAirportFlight> updateLists(List<Flight> flights)
         {
             List<DTOAirportFlight> dTOAirportFlights = new List<DTOAirportFlight>();
             Airport departure;
@@ -54,7 +54,7 @@ namespace Proiect_MPP
             return dTOAirportFlights;
         }
 
-        private void updateTable(DataGridView table, IEnumerable<DTOAirportFlight> dtoAirportFlights)
+        private void updateTable(DataGridView table, List<DTOAirportFlight> dtoAirportFlights)
         {
             table.Rows.Clear();
             foreach (DTOAirportFlight dtoAirportFlight in dtoAirportFlights)
@@ -69,8 +69,8 @@ namespace Proiect_MPP
 
         private void updateFlightsTable()
         {
-            IEnumerable<Flight> flights = mainService.getAllAvailableFlights();
-            IEnumerable<DTOAirportFlight> dtoAirportFlights = updateLists(flights);
+            List<Flight> flights = mainService.getAllAvailableFlights();
+            List<DTOAirportFlight> dtoAirportFlights = updateLists(flights);
             updateTable(allFlightsTable, dtoAirportFlights);
         }
 
@@ -78,9 +78,9 @@ namespace Proiect_MPP
         {
             string destination = destinationTextBox.Text;
             DateTime dateTime = datePicker.Value;
-            DateOnly date = new DateOnly(dateTime.Year, dateTime.Month, dateTime.Day);
-            IEnumerable<Flight> flights = mainService.findByDestinationDate(destination, date);
-            IEnumerable<DTOAirportFlight> dtoAirportFlights = updateLists(flights);
+            DateTime date = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
+            List<Flight> flights = mainService.findByDestinationDate(destination, date);
+            List<DTOAirportFlight> dtoAirportFlights = updateLists(flights);
             updateTable(searchFlightsTable, dtoAirportFlights);
         }
 

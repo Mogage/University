@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain
 {
-    internal class Invoice : Entity<int>
+    public class Invoice : Entity<int>
     {
         private int clientId;
 

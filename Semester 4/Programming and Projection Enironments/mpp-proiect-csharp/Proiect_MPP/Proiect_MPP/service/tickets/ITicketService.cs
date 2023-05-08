@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.tickets
 {
-    internal interface ITicketService
+    public interface ITicketService
     {
         int buyTicket(Client client, List<Person> people, Flight airportFlight);
     }

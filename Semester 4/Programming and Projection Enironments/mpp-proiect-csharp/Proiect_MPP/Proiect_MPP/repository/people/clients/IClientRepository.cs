@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people.clients
 {
-    internal interface IClientRepository : IPersonRepository<Client>
+    public interface IClientRepository : IPersonRepository<Client>
     {
         Client? findByAddress(string address);
     }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people.employees
 {
-    internal interface IEmployeeRepository : IPersonRepository<Employee>
+    public interface IEmployeeRepository : IPersonRepository<Employee>
     {
         Employee? findByEmail(string email);
-        IEnumerable<Employee> getByPosition(string position);
+        List<Employee> getByPosition(string position);
     }
 }

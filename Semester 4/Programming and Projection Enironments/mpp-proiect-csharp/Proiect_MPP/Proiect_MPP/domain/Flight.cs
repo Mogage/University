@@ -11,8 +11,8 @@ namespace Proiect_MPP.domain
         private int freeSeats;
         private int destinationAirport;
         private int departureAirport;
-        private DateOnly departureDate;
-        private TimeOnly departureTime;
+        private DateTime departureDate;
+        private DateTime departureTime;
 
         // Class Constructors //
 
@@ -21,11 +21,11 @@ namespace Proiect_MPP.domain
             this.freeSeats = 0;
             this.destinationAirport = 0;
             this.departureAirport = 0;
-            this.departureDate = DateOnly.MinValue;
-            this.departureTime = TimeOnly.MinValue;
+            this.departureDate = DateTime.MinValue;
+            this.departureTime = DateTime.MinValue;
         }
 
-        public Flight(int id, int freeSeats, int destinationAirport, int departureAirport, DateOnly departureDate, TimeOnly departureTime) : base(id)
+        public Flight(int id, int freeSeats, int destinationAirport, int departureAirport, DateTime departureDate, DateTime departureTime) : base(id)
         {
             this.freeSeats = freeSeats;
             this.destinationAirport = destinationAirport;
@@ -54,13 +54,13 @@ namespace Proiect_MPP.domain
             set { this.departureAirport = value; }
         }
 
-        public DateOnly DepartureDate
+        public DateTime DepartureDate
         {
             get { return this.departureDate; }
             set { this.departureDate = value; }
         }
 
-        public TimeOnly DepartureTime
+        public DateTime DepartureTime
         {
             get { return this.departureTime; }
             set { this.departureTime = value; }

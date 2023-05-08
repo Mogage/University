@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people.employees
 {
-    internal class EmployeeRepository : PersonRepository<Employee>, IEmployeeRepository
+    public class EmployeeRepository : PersonRepository<Employee>, IEmployeeRepository
     {
 
         public EmployeeRepository(IDictionary<string, string> properties) : base(properties)
@@ -161,7 +161,7 @@ namespace Proiect_MPP.repository.people.employees
             }
         }
 
-        public IEnumerable<Employee> getByPosition(string position)
+        public List<Employee> getByPosition(string position)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -177,7 +177,7 @@ namespace Proiect_MPP.repository.people.employees
             }
         }
 
-        public override IList<Employee> findAll()
+        public override List<Employee> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

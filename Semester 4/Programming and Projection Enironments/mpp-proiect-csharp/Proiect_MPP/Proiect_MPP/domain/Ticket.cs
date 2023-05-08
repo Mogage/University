@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain
 {
-    internal class Ticket : Entity<int>
+    public class Ticket : Entity<int>
     {
         private int flightId;
         private int invoiceId;

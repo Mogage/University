@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people.clients
 {
-    internal class ClientRepository : PersonRepository<Client>, IClientRepository
+    public class ClientRepository : PersonRepository<Client>, IClientRepository
     {
         public ClientRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -141,7 +141,7 @@ namespace Proiect_MPP.repository.people.clients
             }
         }
 
-        public override IList<Client> findAll()
+        public override List<Client> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

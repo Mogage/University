@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.invoices
 {
-    internal class InvoiceRepository : AbstractRepository<Invoice, int>, IInvoiceRepository
+    public class InvoiceRepository : AbstractRepository<Invoice, int>, IInvoiceRepository
     {
         public InvoiceRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -98,7 +98,7 @@ namespace Proiect_MPP.repository.invoices
             }
         }
 
-        public override IList<Invoice> findAll()
+        public override List<Invoice> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

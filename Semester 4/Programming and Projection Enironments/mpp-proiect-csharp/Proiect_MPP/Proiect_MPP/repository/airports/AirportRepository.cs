@@ -10,7 +10,7 @@ using Proiect_MPP.databaseUtils;
 
 namespace Proiect_MPP.repository.airports
 {
-    internal class AirportRepository : AbstractRepository<Airport, int>, IAirportRepository
+    public class AirportRepository : AbstractRepository<Airport, int>, IAirportRepository
     {
         public AirportRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -86,7 +86,7 @@ namespace Proiect_MPP.repository.airports
             }
         }
 
-        public override IList<Airport> findAll()
+        public override List<Airport> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -112,7 +112,7 @@ namespace Proiect_MPP.repository.airports
             }
         }
 
-        public IList<Airport> getAirportAfterName(string name)
+        public List<Airport> getAirportAfterName(string name)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -128,7 +128,7 @@ namespace Proiect_MPP.repository.airports
             }
         }
 
-        public IList<Airport> getAirportsInCity(string cityName)
+        public List<Airport> getAirportsInCity(string cityName)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

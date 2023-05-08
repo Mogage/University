@@ -93,10 +93,12 @@ public class ServiceImpl implements IService {
         return flightList;
     }
 
-    @Override
-    public void updateFlight(Flight flight, int id) {
-        flightRepository.update(flight, id);
-    }
+//    @Override
+//    public void updateFlight(int id, int numberOfSeats) {
+//        Flight flight = flightRepository.findById(id);
+//        flight.setFreeSeats(numberOfSeats);
+//        flightRepository.update(flight, id);
+//    }
 
     @Override
     public synchronized Airport findAirportById(int id) {
@@ -113,12 +115,13 @@ public class ServiceImpl implements IService {
         return flightRepository.getAvailable();
     }
 
-    private synchronized void addTicket(int flightId, int invoiceId, String touristName) {
-        ticketRepository.add(new Ticket(flightId, invoiceId, 1, touristName));
+    @Override
+    public synchronized Collection<Airport> getAllAirports() {
+        return airportRepository.getAll();
     }
 
     @Override
-    public synchronized int buyTicket(Client client, List<Person> people, Flight flight) throws Exception {
+    public synchronized void buyTicket(Client client, List<Person> people, Flight flight) throws Exception {
         if (client.getFirstName().isBlank() || client.getLastName().isBlank() || client.getAddress().isBlank()) {
             throw new Exception("Client can't be empty");
         }
@@ -138,14 +141,29 @@ public class ServiceImpl implements IService {
 
         Invoice invoice = new Invoice(clientRepository.findByAddress(client.getAddress()).getId());
         invoice.setId(invoiceRepository.add(invoice));
-        addTicket(flight.getId(), invoice.getId(), client.getFirstName() + " " + client.getLastName());
+        // addTicket(flight.getId(), invoice.getId(), client.getFirstName() + " " + client.getLastName());
+        Ticket ticket = new Ticket(flight.getId(), invoice.getId(), 1, client.getFirstName() + " " + client.getLastName());
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(ticket);
+        ticketRepository.add(ticket);
         for (Person person : people) {
             if (person.getFirstName().isBlank() || person.getLastName().isBlank()) {
                 break;
             }
-            addTicket(flight.getId(), invoice.getId(), person.getFirstName() + " " + person.getLastName());
+            // addTicket(flight.getId(), invoice.getId(), person.getFirstName() + " " + person.getLastName());
+            ticket = new Ticket(flight.getId(), invoice.getId(), 1, client.getFirstName() + " " + client.getLastName());
+            ticketRepository.add(ticket);
+            tickets.add(ticket);
         }
 
-        return numberOfTickets;
+        Flight newFlight = new Flight(flight.getId(), flight.getFreeSeats() - numberOfTickets, flight.getDestinationAirport(),
+                flight.getDepartureAirport(), flight.getDepartureDate(), flight.getDepartureTime());
+        flightRepository.update(newFlight, flight.getId());
+
+        for (IObserver loggedEmployee : loggedEmployees.values()) {
+            loggedEmployee.ticketBought(flightRepository.getAvailable());
+        }
+
+        //return numberOfTickets;
     }
 }

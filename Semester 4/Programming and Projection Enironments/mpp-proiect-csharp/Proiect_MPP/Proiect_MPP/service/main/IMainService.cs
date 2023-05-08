@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.main
 {
-    internal interface IMainService
+    public interface IMainService
     {
         void updateFlight(Flight flight, int id);
 
-        IEnumerable<Flight> findByDestinationDate(string destination, DateOnly date);
+        List<Flight> findByDestinationDate(string destination, DateTime date);
 
         Airport? findAirportById(int id);
 
         Flight? findFlightById(int id);
 
-        IEnumerable<Flight> getAllAvailableFlights();
+        List<Flight> getAllAvailableFlights();
     }
 }

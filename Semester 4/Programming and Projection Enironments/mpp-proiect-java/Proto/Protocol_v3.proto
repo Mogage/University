@@ -1,0 +1,99 @@
+syntax = "proto3";
+package proiect_mpp.protocol;
+
+//option java_multiple_files = true;
+option java_package = "root";
+option java_outer_classname = "Protobuffs";
+option objc_class_prefix = "PB";
+
+message Flight {
+  int32 id = 1;
+  int32 freeSeats = 2;
+  int32 destinationAirport = 3;
+  int32 departureAirport = 4;
+  string departureDate = 5;
+  string departureTime = 6;
+}
+
+message Person {
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+
+message Client {
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string address = 4;
+}
+
+message Employee{
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string position = 4;
+  string username = 5;
+  string password = 6;
+}
+
+message Airport {
+  int32 id = 1;
+  string name = 2;
+  string cityName = 3;
+}
+
+message DTOFlight {
+  Flight flight = 1;
+  Client client = 2;
+  repeated Person persons = 3;
+}
+
+message DTOAirportFlight {
+  int32 id = 1;
+  string departureName = 2;
+  string departureCityName = 3;
+  string destinationName = 4;
+  string destinationCityName = 5;
+  string departureDate = 6;
+  string departureTime = 7;
+  int32 freeSeats = 8;
+}
+
+message DTODestinationDate {
+  string destination = 1;
+  string date = 2;
+}
+
+message Request {
+  enum Type {Unknown = 0; LOGIN = 1; LOGOUT = 2; BUY_TICKET = 3; GET_FLIGHT = 4; GET_DD_FLIGHT = 5; GET_AIRPORT = 6;
+    GET_ALL_AIRPORTS = 7; GET_A_FLIGHTS = 8; UPDATE_FLIGHT = 9;}
+
+  // Identifies which request is filled in.
+  Type type = 1;
+
+  // One of the following will be filled in, depending on the type.
+  oneof payload {
+    Employee employee = 2;
+    DTODestinationDate dtoDestinationDate = 3;
+    DTOFlight dtoFlight = 4;
+    int32 id = 5;
+  }
+}
+
+message Response{
+  enum Type {Unknown = 0; OK = 1; ERROR = 2; TICKET_BOUGHT = 3; GET_FLIGHT = 4; GET_DD_FLIGHT = 5; GET_AIRPORT = 6;
+    GET_ALL_AIRPORTS = 7; GET_A_FLIGHTS = 8;}
+
+  // Identifies which request is filled in.
+  Type type = 1;
+
+  // One of the following will be filled in, depending on the type.
+
+  Employee employee = 2;
+  repeated Flight flights = 3;
+  Flight flight = 4;
+  Airport airport = 5;
+  repeated Airport airports = 6;
+  string error = 7;
+}

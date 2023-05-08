@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.flights
 {
-    internal class FlightRepository : AbstractRepository<Flight, int>, IFlightRepository
+    public class FlightRepository : AbstractRepository<Flight, int>, IFlightRepository
     {
         public FlightRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -22,8 +22,8 @@ namespace Proiect_MPP.repository.flights
             int freeSeats = dataReader.GetInt32(1);
             int destinationAirport = dataReader.GetInt32(2);
             int departureAirport = dataReader.GetInt32(3);
-            DateOnly departureDate = DateOnly.ParseExact(dataReader.GetString(4), "dd/MM/yyyy");
-            TimeOnly departureTime = TimeOnly.Parse(dataReader.GetString(5));
+            DateTime departureDate = DateTime.ParseExact(dataReader.GetString(4), "dd/MM/yyyy");
+            DateTime departureTime = DateTime.Parse(dataReader.GetString(5));
             return new Flight(id, freeSeats, destinationAirport, departureAirport, departureDate, departureTime);
         }
 
@@ -144,7 +144,7 @@ namespace Proiect_MPP.repository.flights
             }
         }
 
-        public override IList<Flight> findAll()
+        public override List<Flight> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -154,7 +154,7 @@ namespace Proiect_MPP.repository.flights
                 return base.findAll();
             }
         }
-        public IEnumerable<Flight> getAfterDepartureDateTime(DateTime departureDateTime)
+        public List<Flight> getAfterDepartureDateTime(DateTime departureDateTime)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -175,7 +175,7 @@ namespace Proiect_MPP.repository.flights
             }
         }
 
-        public IEnumerable<Flight> getByDepartureAirport(int departureAirport)
+        public List<Flight> getByDepartureAirport(int departureAirport)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -191,7 +191,7 @@ namespace Proiect_MPP.repository.flights
             }
         }
 
-        public IEnumerable<Flight> getByDestinationAirport(int destinationAirport)
+        public List<Flight> getByDestinationAirport(int destinationAirport)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -207,7 +207,7 @@ namespace Proiect_MPP.repository.flights
             }
         }
 
-        public IEnumerable<Flight> getAvailable()
+        public List<Flight> getAvailable()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

@@ -1,0 +1,12 @@
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\bin\Debug\net6.0\model.deps.json
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\bin\Debug\net6.0\model.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\bin\Debug\net6.0\model.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.csproj.AssemblyReference.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.GeneratedMSBuildEditorConfig.editorconfig
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.AssemblyInfoInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.AssemblyInfo.cs
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.csproj.CoreCompileInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\refint\model.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\model.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\model\obj\Debug\net6.0\ref\model.dll

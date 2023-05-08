@@ -11,7 +11,7 @@ using log4net;
 
 namespace Proiect_MPP.repository
 {
-    internal abstract class AbstractRepository<T, Tid> : Repository<T, Tid> where T : Entity<Tid>
+    public abstract class AbstractRepository<T, Tid> : Repository<T, Tid> where T : Entity<Tid>
     {
         protected IDictionary<string, string> properties;
         protected IDbConnection? connection;
@@ -44,9 +44,9 @@ namespace Proiect_MPP.repository
             }
         }
 
-        private IList<T> executeQuery()
+        private List<T> executeQuery()
         {
-            IList<T> elements = new List<T> { };
+            List<T> elements = new List<T> { };
             try
             {
                 using (var dataReader = sqlCommand.ExecuteReader()) 
@@ -89,7 +89,7 @@ namespace Proiect_MPP.repository
             return getOne();
         }
 
-        public virtual IList<T> findAll()
+        public virtual List<T> findAll()
         {
             logger.Info("Finding all elements");
             return executeQuery();
@@ -97,7 +97,7 @@ namespace Proiect_MPP.repository
 
         public T? getOne()
         {
-            IList<T> elements = executeQuery();
+            List<T> elements = executeQuery();
             if (elements.Count() == 0)
             {
                 return null;

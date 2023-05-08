@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,6 +34,8 @@ public class MainController implements IObserver {
     public Button ticketsButton;
     @FXML
     public Button logOutButton;
+    @FXML
+    public Button searchButton;
     @FXML
     public TableView<DTOAirportFlight> flightsTable;
     @FXML
@@ -75,6 +78,7 @@ public class MainController implements IObserver {
     private Parent root;
     private BuyTicketController buyTicketController;
     private final Stage stage = new Stage();
+    private Collection<Airport> airports = null;
 
     public void setServer(IService service) {
         this.service = service;
@@ -97,9 +101,21 @@ public class MainController implements IObserver {
     }
 
     public void initialise() {
+        Collection<Flight> flights = null;
+        Collection<Flight> availableFlights = null;
+        try {
+            flights = service.findFlightByDestinationDate("", LocalDate.now());
+            availableFlights = service.getAllAvailableFlights();
+            airports = service.getAllAirports();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Collection<Flight> finalFlights = flights;
+        Collection<Flight> finalAvailableFlights = availableFlights;
+
         ticketsButton.disableProperty().bind(Bindings.isEmpty(searchFlightsTable.getSelectionModel().getSelectedItems()));
-        destinationSearchInput.textProperty().addListener(o -> updateSearchTable());
-        dateSearchInput.valueProperty().addListener(o -> updateSearchTable());
+        //destinationSearchInput.textProperty().addListener(o -> updateSearchTable(finalAirports));
+        //dateSearchInput.valueProperty().addListener(o -> updateSearchTable(finalAirports));
         dateSearchInput.setValue(LocalDate.now());
         dateSearchInput.setConverter(new StringConverter<>() {
             @Override
@@ -121,15 +137,12 @@ public class MainController implements IObserver {
             }
         });
 
-        initialiseTables();
+        initialiseFlightsTable(finalAvailableFlights);
+        initialiseSearchTable(finalFlights);
     }
 
-    private void initialiseTables() {
-        initialiseFlightsTable();
-        initialiseSearchTable();
-    }
 
-    private void initialiseFlightsTable() {
+    private void initialiseFlightsTable(Collection<Flight> flights) {
         departureCityColumn.setCellValueFactory(new PropertyValueFactory<>("departureCityName"));
         departureAirportColumn.setCellValueFactory(new PropertyValueFactory<>("departureName"));
         destinationCityColumn.setCellValueFactory(new PropertyValueFactory<>("destinationCityName"));
@@ -137,10 +150,10 @@ public class MainController implements IObserver {
         departureDateColumn.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
         departureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departureTime"));
         freeSeatsColumn.setCellValueFactory(new PropertyValueFactory<>("freeSeats"));
-        updateFlightsTable();
+        updateFlightsTable(flights);
     }
 
-    private void initialiseSearchTable() {
+    private void initialiseSearchTable(Collection<Flight> flights) {
         searchDepartureCityColumn.setCellValueFactory(new PropertyValueFactory<>("departureCityName"));
         searchDepartureAirportColumn.setCellValueFactory(new PropertyValueFactory<>("departureName"));
         searchDestinationCityColumn.setCellValueFactory(new PropertyValueFactory<>("destinationCityName"));
@@ -148,22 +161,18 @@ public class MainController implements IObserver {
         searchDepartureDateColumn.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
         searchDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departureTime"));
         searchFreeSeatsColumn.setCellValueFactory(new PropertyValueFactory<>("freeSeats"));
-        updateSearchTable();
+        updateSearchTable(flights);
     }
 
     private List<DTOAirportFlight> updateLists(Collection<Flight> flights) {
         List<DTOAirportFlight> dtoAirportFlightList = new ArrayList<>();
+        List<Airport> airportsList = airports.stream().toList();
         Airport departure;
         Airport destination;
 
         for (Flight flight : flights) {
-            try {
-                departure = service.findAirportById(flight.getDepartureAirport());
-                destination = service.findAirportById(flight.getDestinationAirport());
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+            departure = airportsList.stream().filter(airport -> airport.getId() == flight.getDepartureAirport()).findFirst().orElse(null);
+            destination = airportsList.stream().filter(airport -> airport.getId() == flight.getDestinationAirport()).findFirst().orElse(null);
             dtoAirportFlightList.add(new DTOAirportFlight(flight.getId(), departure.getCityName(), departure.getName(),
                     destination.getCityName(), destination.getName(), flight.getDepartureDate(), flight.getDepartureTime(),
                     flight.getFreeSeats()));
@@ -172,41 +181,34 @@ public class MainController implements IObserver {
         return dtoAirportFlightList;
     }
 
-    private void updateFlightsTable() {
-        Collection<Flight> flights;
-        try {
-            flights = service.getAllAvailableFlights();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+    private void updateFlightsTable(Collection<Flight> flights) {
         flightsList.setAll(updateLists(flights));
         flightsTable.setItems(flightsList);
     }
 
-    public void updateFlights(int flightId, int numberOfSeats) {
-        Flight flight;
-        try {
-            flight = service.findFlightById(flightId);
-            flight.setFreeSeats(numberOfSeats);
-            service.updateFlight(flight, flightId);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        updateFlightsTable();
-        updateSearchTable();
-    }
+//    public void updateFlights(int flightId, int numberOfSeats) {
+//        Flight flight;
+//        Collection<Flight> flights = null;
+//        Collection<Flight> availableFlights = null;
+//        Collection<Airport> airports = null;
+//        try {
+//            //flight = service.findFlightById(flightId);
+//            //flight.setFreeSeats(numberOfSeats);
+//           // service.updateFlight(flightId, numberOfSeats);
+//            flights = service.findFlightByDestinationDate(destinationSearchInput.getText(), dateSearchInput.getValue());
+//            availableFlights = service.getAllAvailableFlights();
+//            airports = service.getAllAirports();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        Collection<Flight> finalFlights = flights;
+//        Collection<Flight> finalAvailableFlights = availableFlights;
+//        Collection<Airport> finalAirports = airports;
+//        updateFlightsTable(finalAvailableFlights, finalAirports);
+//        updateSearchTable(finalFlights, finalAirports);
+//    }
 
-    private void updateSearchTable() {
-        String destination = destinationSearchInput.getText();
-        LocalDate date = dateSearchInput.getValue();
-        Collection<Flight> flights;
-        try {
-            flights = service.findFlightByDestinationDate(destination, date);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+    private void updateSearchTable(Collection<Flight> flights) {
         searchList.setAll(updateLists(flights));
         searchFlightsTable.setItems(searchList);
     }
@@ -216,6 +218,7 @@ public class MainController implements IObserver {
         DTOAirportFlight airportFlight = searchFlightsTable.getSelectionModel().getSelectedItem();
         destinationSearchInput.setText("");
         dateSearchInput.setValue(LocalDate.now());
+        updateSearchTable(new ArrayList<>());
         buyTicketController.setServer(service);
         buyTicketController.setAirportFlight(airportFlight);
         buyTicketController.setMainController(this);
@@ -232,6 +235,7 @@ public class MainController implements IObserver {
     @FXML
     public void logOutAction() {
         try {
+            stage.close();
             service.logout(loggedUser, this);
             logInStage.show();
         } catch (Exception e) {
@@ -240,13 +244,23 @@ public class MainController implements IObserver {
     }
 
     @Override
-    public void ticketBought(Ticket ticket) {
+    public void ticketBought(Collection<Flight> flights) {
         Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ticket bought");
-            alert.setHeaderText("Ticket bought");
-            alert.setContentText("Ticket bought successfully!");
-            alert.showAndWait();
+            try {
+                updateFlightsTable(flights);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
+    }
+
+    public void searchAction() {
+        String destination = destinationSearchInput.getText();
+        LocalDate date = dateSearchInput.getValue();
+        try {
+            updateSearchTable(service.findFlightByDestinationDate(destination, date));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

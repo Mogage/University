@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace Proiect_MPP.repository.tickets
 {
-    internal class TicketRepository : AbstractRepository<Ticket, int>, ITicketRepository
+    public class TicketRepository : AbstractRepository<Ticket, int>, ITicketRepository
     {
         public TicketRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -144,7 +144,7 @@ namespace Proiect_MPP.repository.tickets
             }
         }
 
-        public override IList<Ticket> findAll()
+        public override List<Ticket> findAll()
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -155,7 +155,7 @@ namespace Proiect_MPP.repository.tickets
             }
         }
 
-        public IEnumerable<Ticket> getByFlightId(int flightId)
+        public List<Ticket> getByFlightId(int flightId)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -171,7 +171,7 @@ namespace Proiect_MPP.repository.tickets
             }
         }
 
-        public IEnumerable<Ticket> getByInvoiceId(int invoiceId)
+        public List<Ticket> getByInvoiceId(int invoiceId)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

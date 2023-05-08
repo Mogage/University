@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.invoices
 {
-    internal interface IInvoiceRepository : Repository<Invoice, int>
+    public interface IInvoiceRepository : Repository<Invoice, int>
     {
     }
 }

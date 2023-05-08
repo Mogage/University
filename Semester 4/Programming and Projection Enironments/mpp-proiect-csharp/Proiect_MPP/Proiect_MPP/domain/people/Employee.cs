@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain.people
 {
-    internal class Employee : Person
+    public class Employee : Person
     {
         private string position;
         private string email;

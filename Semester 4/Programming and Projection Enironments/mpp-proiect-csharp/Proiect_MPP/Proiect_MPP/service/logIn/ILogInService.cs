@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.logIn
 {
-    internal interface ILogInService
+    public interface ILogInService
     {
         Employee findByEmail(string email);
     }

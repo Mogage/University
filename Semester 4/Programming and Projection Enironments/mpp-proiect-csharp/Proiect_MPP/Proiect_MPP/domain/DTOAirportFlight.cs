@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain
 {
-    internal class DTOAirportFlight : Entity<int>
+    public class DTOAirportFlight : Entity<int>
     {
         private string departureName;
         private string departureCity;
         private string destinationName;
         private string destinationCity;
-        private DateOnly departureDate;
-        private TimeOnly departureTime;
+        private DateTime departureDate;
+        private DateTime departureTime;
         private int freeSeats;
 
         public DTOAirportFlight(int id, string departureName, string departureCity, string destinationName, string destinationCity,
-            DateOnly departureDate, TimeOnly departureTime, int freeSeats) : base(id)
+            DateTime departureDate, DateTime departureTime, int freeSeats) : base(id)
         {
             this.departureName = departureName;
             this.departureCity = departureCity;
@@ -32,8 +32,8 @@ namespace Proiect_MPP.domain
         public string DepartureCity { get => departureCity; set => departureCity = value; }
         public string DestinationName { get => destinationName; set => destinationName = value; }
         public string DestinationCity { get => destinationCity; set => destinationCity = value; }
-        public DateOnly DepartureDate { get => departureDate; set => departureDate = value; }
-        public TimeOnly DepartureTime { get => departureTime; set => departureTime = value; }
+        public DateTime DepartureDate { get => departureDate; set => departureDate = value; }
+        public DateTime DepartureTime { get => departureTime; set => departureTime = value; }
         public int FreeSeats { get => freeSeats; set => freeSeats = value; }
     }
 }

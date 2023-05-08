@@ -8,7 +8,7 @@ using log4net.Config;
 
 namespace Proiect_MPP
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         ///  The main entry point for the application.

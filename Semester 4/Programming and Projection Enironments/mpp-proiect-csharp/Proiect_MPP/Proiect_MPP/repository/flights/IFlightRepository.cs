@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.flights
 {
-    internal interface IFlightRepository : Repository<Flight, int>
+    public interface IFlightRepository : Repository<Flight, int>
     {
-        IEnumerable<Flight> getByDepartureAirport(int departureAirport);
-        IEnumerable<Flight> getByDestinationAirport(int destinationAirport);
-        IEnumerable<Flight> getAfterDepartureDateTime(DateTime departureDateTime);
-        IEnumerable<Flight> getAvailable();
+        List<Flight> getByDepartureAirport(int departureAirport);
+        List<Flight> getByDestinationAirport(int destinationAirport);
+        List<Flight> getAfterDepartureDateTime(DateTime departureDateTime);
+        List<Flight> getAvailable();
     }
 }

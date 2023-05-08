@@ -1,0 +1,109 @@
+02 May 2023 08:50:29,240 INFO  root.proiect_mpp.repositories.AbstractRepository 25 <init> - Initializing Abstract Repository with properties: {jdbc.url=jdbc:sqlite:../../../../data-base/tourism.db} 
+02 May 2023 08:50:29,245 INFO  root.proiect_mpp.repositories.people.PersonRepository 12 <init> - Initializing Person Repository 
+02 May 2023 08:50:29,246 INFO  root.proiect_mpp.repositories.people.employees.EmployeeRepository 13 <init> - Initializing Employee Repository 
+02 May 2023 08:50:38,238 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:38,238 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:38,238 TRACE root.proiect_mpp.utils.JdbcUtils 23 getNewConnection - Enter
+02 May 2023 08:50:38,239 INFO  root.proiect_mpp.utils.JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:../../../../data-base/tourism.db
+02 May 2023 08:50:38,240 INFO  root.proiect_mpp.utils.JdbcUtils 29 getNewConnection - user: null
+02 May 2023 08:50:38,241 INFO  root.proiect_mpp.utils.JdbcUtils 30 getNewConnection - pass: null
+02 May 2023 08:50:38,277 ERROR root.proiect_mpp.utils.JdbcUtils 39 getNewConnection - java.sql.SQLException: path to '../../../../data-base/tourism.db': 'F:\Repositories\MPP\mpp-proiect-java-MogageNicolae\Proiect_MPP\Thrift\..\..\..\..\data-base' does not exist
+02 May 2023 08:50:38,278 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit
+02 May 2023 08:50:54,303 INFO  root.proiect_mpp.repositories.AbstractRepository 25 <init> - Initializing Abstract Repository with properties: {jdbc.url=jdbc:sqlite:../../../data-base/tourism.db} 
+02 May 2023 08:50:54,307 INFO  root.proiect_mpp.repositories.people.PersonRepository 12 <init> - Initializing Person Repository 
+02 May 2023 08:50:54,308 INFO  root.proiect_mpp.repositories.people.employees.EmployeeRepository 13 <init> - Initializing Employee Repository 
+02 May 2023 08:50:59,594 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:59,595 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,595 TRACE root.proiect_mpp.utils.JdbcUtils 23 getNewConnection - Enter
+02 May 2023 08:50:59,595 INFO  root.proiect_mpp.utils.JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:../../../data-base/tourism.db
+02 May 2023 08:50:59,596 INFO  root.proiect_mpp.utils.JdbcUtils 29 getNewConnection - user: null
+02 May 2023 08:50:59,596 INFO  root.proiect_mpp.utils.JdbcUtils 30 getNewConnection - pass: null
+02 May 2023 08:50:59,807 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@114189ea)
+02 May 2023 08:50:59,815 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,816 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,816 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@114189ea)
+02 May 2023 08:50:59,816 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,889 INFO  root.proiect_mpp.repositories.AbstractRepository 25 <init> - Initializing Abstract Repository with properties: {jdbc.url=jdbc:sqlite:../../../data-base/tourism.db} 
+02 May 2023 08:50:59,890 INFO  root.proiect_mpp.repositories.flights.FlightRepository 18 <init> - Initializing Flight Repository 
+02 May 2023 08:50:59,892 INFO  root.proiect_mpp.repositories.AbstractRepository 25 <init> - Initializing Abstract Repository with properties: {jdbc.url=jdbc:sqlite:../../../data-base/tourism.db} 
+02 May 2023 08:50:59,893 INFO  root.proiect_mpp.repositories.airports.AirportRepository 14 <init> - Initializing Airport Repository 
+02 May 2023 08:50:59,898 INFO  root.proiect_mpp.repositories.airports.AirportRepository 89 getAirportsInCity - SELECT * FROM airports WHERE LOWER(city_name) LIKE '%'
+02 May 2023 08:50:59,898 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,898 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,899 TRACE root.proiect_mpp.utils.JdbcUtils 23 getNewConnection - Enter
+02 May 2023 08:50:59,899 INFO  root.proiect_mpp.utils.JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:../../../data-base/tourism.db
+02 May 2023 08:50:59,900 INFO  root.proiect_mpp.utils.JdbcUtils 29 getNewConnection - user: null
+02 May 2023 08:50:59,901 INFO  root.proiect_mpp.utils.JdbcUtils 30 getNewConnection - pass: null
+02 May 2023 08:50:59,902 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,904 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,905 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=1
+02 May 2023 08:50:59,905 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,906 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,907 TRACE root.proiect_mpp.utils.JdbcUtils 23 getNewConnection - Enter
+02 May 2023 08:50:59,907 INFO  root.proiect_mpp.utils.JdbcUtils 28 getNewConnection - trying to connect to database ... jdbc:sqlite:../../../data-base/tourism.db
+02 May 2023 08:50:59,907 INFO  root.proiect_mpp.utils.JdbcUtils 29 getNewConnection - user: null
+02 May 2023 08:50:59,907 INFO  root.proiect_mpp.utils.JdbcUtils 30 getNewConnection - pass: null
+02 May 2023 08:50:59,908 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,915 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,915 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=2
+02 May 2023 08:50:59,916 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,916 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,917 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,918 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,919 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=3
+02 May 2023 08:50:59,919 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,920 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,920 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,921 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,923 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,923 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,924 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,925 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,927 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:59,928 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,928 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,928 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,929 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,929 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,930 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,930 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:59,930 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,931 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,931 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,932 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,932 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,933 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,934 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:59,935 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,935 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,936 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,936 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,936 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,937 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,937 TRACE root.proiect_mpp.repositories.AbstractRepository 114 getOne - Enter
+02 May 2023 08:50:59,937 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,938 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,938 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,938 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,939 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,939 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,940 INFO  root.proiect_mpp.repositories.airports.AirportRepository 89 getAirportsInCity - SELECT * FROM airports WHERE LOWER(city_name) LIKE '%'
+02 May 2023 08:50:59,940 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,940 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,941 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@5d79dfc5)
+02 May 2023 08:50:59,943 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,943 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=1
+02 May 2023 08:50:59,943 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,945 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,945 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,947 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,948 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=2
+02 May 2023 08:50:59,948 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,948 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,948 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,949 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit
+02 May 2023 08:50:59,949 INFO  root.proiect_mpp.repositories.flights.FlightRepository 110 getByDestinationAirport - SELECT * FROM flights WHERE destination_airport=3
+02 May 2023 08:50:59,949 TRACE root.proiect_mpp.repositories.AbstractRepository 123 getAll - Enter
+02 May 2023 08:50:59,949 TRACE root.proiect_mpp.utils.JdbcUtils 46 getConnection - Enter
+02 May 2023 08:50:59,949 TRACE root.proiect_mpp.utils.JdbcUtils 55 getConnection - Exit with(org.sqlite.jdbc4.JDBC4Connection@7cce46d3)
+02 May 2023 08:50:59,950 TRACE root.proiect_mpp.repositories.AbstractRepository 89 executeQuery - Exit

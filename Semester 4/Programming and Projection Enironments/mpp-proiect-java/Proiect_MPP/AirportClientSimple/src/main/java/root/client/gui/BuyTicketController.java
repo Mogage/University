@@ -69,8 +69,9 @@ public class BuyTicketController {
         people.add(new Person(tourist5FirstNameText.getText(), tourist5LastNameText.getText()));
 
         try {
-            int numberOfSeats = service.buyTicket(client, people, airportFlight.toFlight());
-            mainController.updateFlights(airportFlight.getId(), airportFlight.getFreeSeats() - numberOfSeats);
+            service.buyTicket(client, people, airportFlight.toFlight());
+            // int numberOfSeats = service.buyTicket(client, people, airportFlight.toFlight());
+            // mainController.updateFlights(airportFlight.getId(), airportFlight.getFreeSeats() - numberOfSeats);
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.show();

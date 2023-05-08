@@ -48,6 +48,7 @@ dependencies {
     implementation project(':AirportModel')
     implementation project(':AirportServices')
     implementation project(':AirportNetworking')
+    implementation project(':Protobuff')
 }
 
 test {

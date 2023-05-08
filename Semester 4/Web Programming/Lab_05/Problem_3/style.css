@@ -1,0 +1,22 @@
+tr, td {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    cursor: default;
+}
+
+.cell {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+}
+
+div {
+    text-align: center;
+}
+
+.imageCell {
+    width: 100px;
+    height: 133px;
+    visibility: hidden;
+}

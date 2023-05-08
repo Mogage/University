@@ -19,8 +19,9 @@ public interface IService {
     Airport findAirportById(int id) throws Exception;
     Flight findFlightById(int id) throws Exception;
     Collection<Flight> getAllAvailableFlights() throws Exception;
+    Collection<Airport> getAllAirports() throws Exception;
 
-    void updateFlight(Flight flight, int id) throws Exception;
+    //void updateFlight(int id, int numberOfSeats) throws Exception;
 
-    int buyTicket(Client client, List<Person> people, Flight flight) throws Exception;
+    void buyTicket(Client client, List<Person> people, Flight flight) throws Exception;
 }

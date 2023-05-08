@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.databaseUtils
 {
-    internal class DbUtils
+    public class DbUtils
     {
         private static IDbConnection? instance = null;
 

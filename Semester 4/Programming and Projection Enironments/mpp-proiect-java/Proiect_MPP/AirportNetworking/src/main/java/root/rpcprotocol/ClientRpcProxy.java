@@ -107,6 +107,18 @@ public class ClientRpcProxy implements IService {
         return getFlights(request);
     }
 
+    @Override
+    public Collection<Airport> getAllAirports() throws Exception {
+        Request request = new Request.Builder().type(RequestType.GET_ALL_AIRPORTS).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new Exception(err);
+        }
+        return (Collection<Airport>) response.data();
+    }
+
     private Collection<Flight> getFlights(Request request) throws Exception {
         sendRequest(request);
         Response response = readResponse();
@@ -117,19 +129,19 @@ public class ClientRpcProxy implements IService {
         return (Collection<Flight>) response.data();
     }
 
-    @Override
-    public void updateFlight(Flight flight, int id) throws Exception {
-        Request request = new Request.Builder().type(RequestType.UPDATE_FLIGHT).data(flight).build();
-        sendRequest(request);
-        Response response = readResponse();
-        if (response.type() == ResponseType.ERROR) {
-            String err = response.data().toString();
-            throw new Exception(err);
-        }
-    }
+//    @Override
+//    public void updateFlight(int id, int numberOfSeats) throws Exception {
+//        Request request = new Request.Builder().type(RequestType.UPDATE_FLIGHT).data().build();
+//        sendRequest(request);
+//        Response response = readResponse();
+//        if (response.type() == ResponseType.ERROR) {
+//            String err = response.data().toString();
+//            throw new Exception(err);
+//        }
+//    }
 
     @Override
-    public int buyTicket(Client client, List<Person> people, Flight flight) throws Exception {
+    public void buyTicket(Client client, List<Person> people, Flight flight) throws Exception {
         DTOFlight airportFlight = new DTOFlight(client, people, flight);
         Request request = new Request.Builder().type(RequestType.BUY_TICKET).data(airportFlight).build();
         sendRequest(request);
@@ -138,7 +150,7 @@ public class ClientRpcProxy implements IService {
             String err = response.data().toString();
             throw new Exception(err);
         }
-        return (int) response.data();
+        //return (int) response.data();
     }
 
     private void sendRequest(Request request) throws Exception {
@@ -197,8 +209,8 @@ public class ClientRpcProxy implements IService {
     private void handleUpdate(Response response) throws Exception {
         if (response.type() == ResponseType.TICKET_BOUGHT) {
             System.out.println("Bought ticket update" + response.data());
-            Ticket ticket = (Ticket) response.data();
-            client.ticketBought(ticket);
+            Collection<Flight> flights = (Collection<Flight>) response.data();
+            client.ticketBought(flights);
         }
     }
 
@@ -211,7 +223,6 @@ public class ClientRpcProxy implements IService {
                     if (isUpdate((Response) response)) {
                         handleUpdate((Response) response);
                     } else {
-
                         try {
                             qresponses.put((Response) response);
                         } catch (InterruptedException e) {

@@ -1,6 +1,8 @@
 package root.model;
 
-public class Ticket implements Entity<Integer>{
+import java.io.Serializable;
+
+public class Ticket implements Entity<Integer>, Serializable {
     private int id;
     private int flightId;
     private int invoiceId;

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people
 {
-    internal interface IPersonRepository<T> : Repository<T, int> where T : Person
+    public interface IPersonRepository<T> : Repository<T, int> where T : Person
     {
-        IEnumerable<T> getPersonByFirstName(string firstName);
-        IEnumerable<T> getPersonByLastName(string lastName);
+        List<T> getPersonByFirstName(string firstName);
+        List<T> getPersonByLastName(string lastName);
     }
 }

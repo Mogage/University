@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.tickets
 {
-    internal interface ITicketRepository : Repository<Ticket, int>
+    public interface ITicketRepository : Repository<Ticket, int>
     {
         Ticket? findByTouristName(string name);
-        IEnumerable<Ticket> getByInvoiceId(int invoiceId);
-        IEnumerable<Ticket> getByFlightId(int flightId);
+        List<Ticket> getByInvoiceId(int invoiceId);
+        List<Ticket> getByFlightId(int flightId);
     }
 }

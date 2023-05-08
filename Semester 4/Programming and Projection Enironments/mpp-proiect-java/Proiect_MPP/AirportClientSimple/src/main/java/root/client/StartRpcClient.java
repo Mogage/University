@@ -1,5 +1,6 @@
 package root.client;
 
+import root.Proxy;
 import root.client.gui.*;
 import root.rpcprotocol.ClientRpcProxy;
 import root.services.IService;
@@ -14,7 +15,7 @@ import java.util.Properties;
 
 
 public class StartRpcClient extends Application {
-    private final static int defaultChatPort = 55555;
+    private final static int defaultChatPort = 55558;
     private final static String defaultServer = "localhost";
 
     public void start(Stage primaryStage) throws Exception {
@@ -40,7 +41,8 @@ public class StartRpcClient extends Application {
         System.out.println("Using server IP " + serverIP);
         System.out.println("Using server port " + serverPort);
 
-        IService server = new ClientRpcProxy(serverIP, serverPort);
+        // IService server = new ClientRpcProxy(serverIP, serverPort);
+        IService server = new Proxy(serverIP, serverPort);
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("root/LogInView.fxml"));
         Parent root = loader.load();
@@ -52,7 +54,7 @@ public class StartRpcClient extends Application {
         Parent mainRoot = mainLoader.load();
 
         MainController mainController = mainLoader.getController();
-        mainController.initialise();
+        // mainController.initialise();
         mainController.setServer(server);
 
         logInController.setMainController(mainController);

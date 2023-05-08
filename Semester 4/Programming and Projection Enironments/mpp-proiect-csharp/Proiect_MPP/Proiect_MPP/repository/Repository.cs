@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository
 {
-    internal interface Repository<T, Tid>
+    public interface Repository<T, Tid>
     {
         int add(T item);
         void delete(T item);
         void update(T item, Tid id);
         T? findById(Tid id);
-        IList<T> findAll();
+        List<T> findAll();
     }
 }

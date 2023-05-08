@@ -42,9 +42,11 @@
         <TextField fx:id="destinationSearchInput" layoutX="111.0" layoutY="242.0" promptText="Destination"/>
         <DatePicker fx:id="dateSearchInput" layoutX="270.0" layoutY="242.0" prefHeight="25.0" prefWidth="149.0"
                     promptText="Date"/>
-        <Button fx:id="ticketsButton" layoutX="428.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="100.0" text="Buy tickets" onAction="#buyTicketAction"/>
-        <Button fx:id="logOutButton" layoutX="537.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="100.0" text="Log out" onAction="#logOutAction"/>
+        <Button fx:id="ticketsButton" layoutX="551.0" layoutY="242.0" mnemonicParsing="false"
+                onAction="#buyTicketAction" prefHeight="25.0" prefWidth="100.0" text="Buy tickets"/>
+        <Button fx:id="logOutButton" layoutX="673.0" layoutY="242.0" mnemonicParsing="false" onAction="#logOutAction"
+                prefHeight="25.0" prefWidth="100.0" text="Log out"/>
+        <Button fx:id="searchButton" layoutX="434.0" layoutY="242.0" mnemonicParsing="false" onAction="#searchAction"
+                prefHeight="25.0" prefWidth="100.0" text="Search"/>
     </children>
 </AnchorPane>

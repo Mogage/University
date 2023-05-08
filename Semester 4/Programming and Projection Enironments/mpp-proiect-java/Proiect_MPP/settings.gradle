@@ -5,4 +5,5 @@ include 'AirportPersistence'
 include 'AirportServer'
 include 'AirportServices'
 include 'AirportClientSimple'
+include 'Protobuff'
 

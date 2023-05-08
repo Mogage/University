@@ -1,0 +1,17 @@
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.csproj.AssemblyReference.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.GeneratedMSBuildEditorConfig.editorconfig
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.AssemblyInfoInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.AssemblyInfo.cs
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.csproj.CoreCompileInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\network.deps.json
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\network.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\network.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\model.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\services.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\model.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\bin\Debug\net6.0\services.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.csproj.CopyComplete
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\refint\network.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\network.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\network\obj\Debug\net6.0\ref\network.dll

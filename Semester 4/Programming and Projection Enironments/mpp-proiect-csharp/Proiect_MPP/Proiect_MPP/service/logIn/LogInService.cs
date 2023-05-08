@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.logIn
 {
-    internal class LogInService : ILogInService
+    public class LogInService : ILogInService
     {
         private readonly IEmployeeRepository _employeeRepository;
         public LogInService(IEmployeeRepository employeeRepository)

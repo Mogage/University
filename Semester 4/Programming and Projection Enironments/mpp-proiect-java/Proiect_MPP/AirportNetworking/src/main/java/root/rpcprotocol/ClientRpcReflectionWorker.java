@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.Collection;
+import java.util.List;
 
 public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private final IService server;
@@ -64,9 +65,9 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
     }
 
     @Override
-    public void ticketBought(Ticket ticket) throws Exception {
+    public void ticketBought(Collection<Flight> flights) throws Exception {
         try {
-            sendResponse(new Response.Builder().type(ResponseType.TICKET_BOUGHT).data(ticket).build());
+            sendResponse(new Response.Builder().type(ResponseType.TICKET_BOUGHT).data(flights).build());
         } catch (IOException e) {
             throw new Exception("sending error: " + e);
         }
@@ -136,22 +137,32 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
-    private Response handleUPDATE_FLIGHT(Request request) {
-        System.out.println("Update flight request...");
-        try {
-            Flight flight = (Flight) request.data();
-            server.updateFlight(flight, flight.getId());
-            return okResponse;
-        } catch (Exception e) {
-            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-        }
-    }
+//    private Response handleUPDATE_FLIGHT(Request request) {
+//        System.out.println("Update flight request...");
+//        try {
+//            Flight flight = (Flight) request.data();
+//            server.updateFlight(flight, flight.getId());
+//            return okResponse;
+//        } catch (Exception e) {
+//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+//        }
+//    }
 
     private Response handleGET_AIRPORT(Request request) {
         System.out.println("Get airport request...");
         try {
             Airport airport = server.findAirportById((int) request.data());
             return new Response.Builder().type(ResponseType.GET_AIRPORT).data(airport).build();
+        } catch (Exception e) {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
+
+    private Response handleGET_ALL_AIRPORTS(Request request) {
+        System.out.println("Get airports request...");
+        try {
+            Collection<Airport> airport = server.getAllAirports();
+            return new Response.Builder().type(ResponseType.GET_ALL_AIRPORTS).data(airport).build();
         } catch (Exception e) {
             return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
         }
@@ -172,8 +183,10 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         System.out.println("Buy ticket request...");
         try {
             DTOFlight dto = (DTOFlight) request.data();
-            int numberOfSeats = server.buyTicket(dto.getClient(), dto.getPeople(), dto.getFlight());
-            return new Response.Builder().type(ResponseType.OK).data(numberOfSeats).build();
+            //int numberOfSeats = server.buyTicket(dto.getClient(), dto.getPeople(), dto.getFlight());
+            server.buyTicket(dto.getClient(), dto.getPeople(), dto.getFlight());
+            //return new Response.Builder().type(ResponseType.OK).data(numberOfSeats).build();
+            return okResponse;
         } catch (Exception e) {
             return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
         }

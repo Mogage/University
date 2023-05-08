@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.main
 {
-    internal class MainService : IMainService
+    public class MainService : IMainService
     {
         private readonly FlightRepository flightRepository;
         private readonly AirportRepository airportRepository;
@@ -35,17 +35,17 @@ namespace Proiect_MPP.service.main
             return flightRepository.findById(id);
         }
 
-        public IEnumerable<Flight> getAllAvailableFlights()
+        public List<Flight> getAllAvailableFlights()
         {
             return flightRepository.getAvailable();
         }
 
-        public IEnumerable<Flight> findByDestinationDate(string destination, DateOnly Date)
+        public List<Flight> findByDestinationDate(string destination, DateTime Date)
         {
-            IEnumerable<Airport> airports = airportRepository.getAirportsInCity(destination);
+            List<Airport> airports = airportRepository.getAirportsInCity(destination);
             List<Flight> flightList = new List<Flight>();
-            IEnumerable<Flight> flights;
-            DateOnly departureDate;
+            List<Flight> flights;
+            DateTime departureDate;
             foreach (Airport airport in airports) 
             {
                 flights = flightRepository.getByDestinationAirport(airport.ID);

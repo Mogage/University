@@ -1,0 +1,334 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\client\\client.csproj": {}
+  },
+  "projects": {
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\client\\client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\client\\client.csproj",
+        "projectName": "client",
+        "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\client\\client.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj"
+              },
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\network.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\network.csproj"
+              },
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\persistence.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\persistence.csproj"
+              },
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj",
+        "projectName": "model",
+        "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\network.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\network.csproj",
+        "projectName": "network",
+        "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\network.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\network\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj"
+              },
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\persistence.csproj",
+        "projectName": "persistence",
+        "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\persistence.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.117, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj",
+        "projectName": "services",
+        "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\services.csproj",
+        "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+        "outputPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj": {
+                "projectPath": "F:\\Repositories\\MPP\\mpp-proiect-csharp-MogageNicolae\\Proiect_MPP\\model\\model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

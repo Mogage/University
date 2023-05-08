@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.repository.people
 {
-    internal abstract class PersonRepository<T> : AbstractRepository<T, int>, IPersonRepository<T> where T : Person
+    public abstract class PersonRepository<T> : AbstractRepository<T, int>, IPersonRepository<T> where T : Person
     {
         public PersonRepository(IDictionary<string, string> properties) : base(properties)
         {
@@ -18,7 +18,7 @@ namespace Proiect_MPP.repository.people
 
         protected abstract string getTableName();
 
-        public IEnumerable<T> getPersonByFirstName(string firstName)
+        public List<T> getPersonByFirstName(string firstName)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())
@@ -34,7 +34,7 @@ namespace Proiect_MPP.repository.people
             }
         }
 
-        public IEnumerable<T> getPersonByLastName(string lastName)
+        public List<T> getPersonByLastName(string lastName)
         {
             base.connection = DbUtils.getConnection(base.properties);
             using (base.sqlCommand = connection.CreateCommand())

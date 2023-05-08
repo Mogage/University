@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain.people
 {
-    internal class Person : Entity<int>
+    public class Person : Entity<int>
     {
         private string firstName;
         private string lastName;

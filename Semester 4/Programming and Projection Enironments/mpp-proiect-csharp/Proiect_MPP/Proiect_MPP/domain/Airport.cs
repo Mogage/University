@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.domain
 {
-    internal class Airport : Entity<int>
+    public class Airport : Entity<int>
     {
         private string name;
         private string cityName;

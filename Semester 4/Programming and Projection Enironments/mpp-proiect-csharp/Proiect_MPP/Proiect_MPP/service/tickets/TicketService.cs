@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Proiect_MPP.service.tickets
 {
-    internal class TicketService : ITicketService
+    public class TicketService : ITicketService
     {
         private readonly ITicketRepository ticketRepository;
         private readonly IInvoiceRepository invoiceRepository;

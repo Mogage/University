@@ -1,0 +1,15 @@
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\bin\Debug\net6.0\services.deps.json
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\bin\Debug\net6.0\services.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\bin\Debug\net6.0\services.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\bin\Debug\net6.0\model.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\bin\Debug\net6.0\model.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.csproj.AssemblyReference.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.GeneratedMSBuildEditorConfig.editorconfig
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.AssemblyInfoInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.AssemblyInfo.cs
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.csproj.CoreCompileInputs.cache
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.csproj.CopyComplete
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\refint\services.dll
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\services.pdb
+F:\Repositories\MPP\mpp-proiect-csharp-MogageNicolae\Proiect_MPP\services\obj\Debug\net6.0\ref\services.dll
