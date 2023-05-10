@@ -85,6 +85,7 @@ CREATE TABLE ProductionsActors(
 CREATE TABLE ProductionsProducers(
 	idProduction INT,
 	idProducer INT,
+	salary INT,
 	CONSTRAINT fkProductionProducer FOREIGN KEY (idProduction) REFERENCES Productions(idProduction),
 	CONSTRAINT fkProducer FOREIGN KEY (idProducer) REFERENCES Producers(idProducer),
 	CONSTRAINT pkProductionsProducers PRIMARY KEY (idProduction, idProducer)
@@ -145,12 +146,12 @@ INSERT INTO ProductionsActors (idProduction, idActor) VALUES (2, 6);
 INSERT INTO ProductionsActors (idProduction, idActor) VALUES (3, 1);
 INSERT INTO ProductionsActors (idProduction, idActor) VALUES (3, 2);
 
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (1, 1);
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (1, 2);
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (1, 3);
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (2, 4);
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (2, 5);
-INSERT INTO ProductionsProducers (idProduction, idProducer) VALUES (3, 6);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (1, 1, 20);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (1, 2, 200);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (1, 3, 500);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (2, 4, 1);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (2, 5, 1000);
+INSERT INTO ProductionsProducers (idProduction, idProducer, salary) VALUES (3, 6, 243);
 
 INSERT INTO ProductionsGenres (idProduction, idGenre) VALUES (1, 1);
 INSERT INTO ProductionsGenres (idProduction, idGenre) VALUES (1, 3);

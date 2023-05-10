@@ -1,0 +1,15 @@
+a {
+    display: inline-flex;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-size: 30px;
+}
+
+a:first-of-type {
+    margin-left: 135px;
+}
+
+tr, td {
+    outline: 1px solid black;
+    padding: 10px;
+}

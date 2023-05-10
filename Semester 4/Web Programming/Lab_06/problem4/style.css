@@ -1,0 +1,23 @@
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 400px;
+    height: 400px;
+}
+
+td {
+    width: 75px;
+    height: 75px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.vertical {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.horizontal {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}

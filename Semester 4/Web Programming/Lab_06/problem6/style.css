@@ -1,0 +1,20 @@
+div {
+    display: block;
+    margin: 10px;
+    padding: 5px;
+}
+
+.wrapper {
+    justify-content: center;
+    display: flex;
+}
+
+h2 {
+    text-align: center;
+}
+
+td, th{
+    padding-right: 50px;
+    font-size: 25px;
+    text-align: center;
+}
