@@ -1,0 +1,22 @@
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\Deadlock Application.exe
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\Deadlock Application.deps.json
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\Deadlock Application.runtimeconfig.json
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\Deadlock Application.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\Deadlock Application.pdb
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.csproj.AssemblyReference.cache
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.GeneratedMSBuildEditorConfig.editorconfig
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.AssemblyInfoInputs.cache
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.AssemblyInfo.cs
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.csproj.CoreCompileInputs.cache
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.csproj.CopyComplete
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\refint\Deadlock Application.dll
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.pdb
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\Deadlock Application.genruntimeconfig.cache
+F:\Repositories\Git_repo\University\Semester 4\Database Management Systems\Deadlock Application\Deadlock Application\obj\Debug\net6.0\ref\Deadlock Application.dll

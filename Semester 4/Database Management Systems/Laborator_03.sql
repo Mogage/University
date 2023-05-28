@@ -140,13 +140,13 @@ AS BEGIN
 END;
 GO
 
-CREATE TABLE LOGS(
+CREATE TABLE Logs(
 	table_name VARCHAR(50),
 	realisation_time DATETIME
 )
 GO;
 
-DROP TABLE LOGS
+DROP TABLE Logs
 
 CREATE OR ALTER PROCEDURE InsertProductionProducersV1
 	@firstName NVARCHAR(50),

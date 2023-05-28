@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<form action="getTrains.php" method="POST">
+    <div>
+        <input type="text" id="plecare" name="plecare" placeholder="Plecare" required>
+    </div>
+    <div>
+        <input type="text" id="destinatie" name="destinatie" placeholder="Destinatie" required>
+    </div>
+    <div>
+        <label for="legatura">Legaturi</label>
+        <input type="checkbox" id="legatura" name="legatura" value="true">
+    </div>
+    <div>
+        <input type="submit" id="submit" name="search" value="Search">
+    </div>
+</form>
+</body>
+</html>
