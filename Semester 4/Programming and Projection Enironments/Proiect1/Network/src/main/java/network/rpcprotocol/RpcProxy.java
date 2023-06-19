@@ -87,10 +87,8 @@ public class RpcProxy implements IService {
     }
 
     private void handleUpdate(Response response) throws Exception {
-        if (response.type() == ResponseType.GAME_FINISHED) {
-            Collection<Game> finishedGame = (Collection<Game>) response.data();
-            client.gameFinished(finishedGame);
-        }
+        Collection<Game> finishedGame = (Collection<Game>) response.data();
+        client.gameFinished(finishedGame);
     }
 
     private class ReaderThread implements Runnable {

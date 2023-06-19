@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import model.Player;
 import services.IService;
 
-public class LoginController {
+public class LogInController {
     @FXML
     public TextField usernameText;
 

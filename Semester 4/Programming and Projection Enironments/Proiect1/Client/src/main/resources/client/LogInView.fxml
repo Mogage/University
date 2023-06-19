@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="175.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="client.controllers.LoginController">
+            fx:controller="client.controllers.LogInController">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="14.0" prefHeight="24.0"
                prefWidth="117.0" text="Log In">

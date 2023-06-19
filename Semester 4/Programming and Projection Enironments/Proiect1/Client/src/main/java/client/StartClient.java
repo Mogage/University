@@ -1,6 +1,6 @@
 package client;
 
-import client.controllers.LoginController;
+import client.controllers.LogInController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,10 +38,10 @@ public class StartClient extends Application {
 
         IService service = new RpcProxy(serverIP, serverPort);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("client/LoginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("client/LogInView.fxml"));
         Parent root = loader.load();
 
-        LoginController loginController = loader.getController();
+        LogInController loginController = loader.getController();
         loginController.setService(service);
 
         primaryStage.setTitle("Log in");

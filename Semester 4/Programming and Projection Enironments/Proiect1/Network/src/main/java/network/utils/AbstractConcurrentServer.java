@@ -2,9 +2,9 @@ package network.utils;
 
 import java.net.Socket;
 
-public abstract class AbstractConcurentServer extends AbstractServer {
+public abstract class AbstractConcurrentServer extends AbstractServer {
 
-    public AbstractConcurentServer(int port) {
+    public AbstractConcurrentServer(int port) {
         super(port);
         System.out.println("Concurrent AbstractServer");
     }

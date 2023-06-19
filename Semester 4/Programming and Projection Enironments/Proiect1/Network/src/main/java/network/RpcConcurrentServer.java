@@ -1,12 +1,12 @@
 package network;
 
-import network.rpcprotocol.RpcReflectionWorker;
-import network.utils.AbstractConcurentServer;
+import network.rpcprotocol.RpcWorker;
+import network.utils.AbstractConcurrentServer;
 import services.IService;
 
 import java.net.Socket;
 
-public class RpcConcurrentServer extends AbstractConcurentServer {
+public class RpcConcurrentServer extends AbstractConcurrentServer {
     private final IService service;
 
     public RpcConcurrentServer(int port, IService chatServer) {
@@ -17,7 +17,7 @@ public class RpcConcurrentServer extends AbstractConcurentServer {
 
     @Override
     protected Thread createWorker(Socket client) {
-        RpcReflectionWorker worker = new RpcReflectionWorker(service, client);
+        RpcWorker worker = new RpcWorker(service, client);
 
         return new Thread(worker);
     }

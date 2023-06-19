@@ -14,14 +14,14 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.Collection;
 
-public class RpcReflectionWorker implements Runnable, IObserver {
+public class RpcWorker implements Runnable, IObserver {
     private final IService service;
     private final Socket connection;
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private volatile boolean connected;
 
-    public RpcReflectionWorker(IService service, Socket connection) {
+    public RpcWorker(IService service, Socket connection) {
         this.service = service;
         this.connection = connection;
         try {
@@ -61,7 +61,7 @@ public class RpcReflectionWorker implements Runnable, IObserver {
     }
 
     private void sendResponse(Response response) throws IOException {
-//        System.out.println("sending response " + response);
+        System.out.println("sending response " + response);
         output.writeObject(response);
         output.flush();
     }
