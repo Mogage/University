@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="350.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.controllers.MainController">
+    <children>
+        <Label fx:id="box1" alignment="CENTER" layoutX="13.0" layoutY="21.0" prefHeight="50.0" prefWidth="100.0"
+               style="-fx-border-color: black;" text="Label">
+            <font>
+                <Font name="Book Antiqua Italic" size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="box2" alignment="CENTER" layoutX="113.0" layoutY="21.0" prefHeight="50.0" prefWidth="100.0"
+               style="-fx-border-color: black;" text="Label">
+            <font>
+                <Font name="Book Antiqua Italic" size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="box3" alignment="CENTER" layoutX="213.0" layoutY="21.0" prefHeight="50.0" prefWidth="100.0"
+               style="-fx-border-color: black;" text="Label">
+            <font>
+                <Font name="Book Antiqua Italic" size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="box4" alignment="CENTER" layoutX="313.0" layoutY="21.0" prefHeight="50.0" prefWidth="100.0"
+               style="-fx-border-color: black;" text="Label">
+            <font>
+                <Font name="Book Antiqua Italic" size="20.0"/>
+            </font>
+        </Label>
+        <Label fx:id="box5" alignment="CENTER" layoutX="413.0" layoutY="21.0" prefHeight="50.0" prefWidth="100.0"
+               style="-fx-border-color: black;" text="Label">
+            <font>
+                <Font name="Book Antiqua Italic" size="20.0"/>
+            </font>
+        </Label>
+        <Button alignment="CENTER" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" prefHeight="30.0"
+                prefWidth="100.0" text="Move" textAlignment="CENTER" onAction="#moveAction">
+            <font>
+                <Font name="Book Antiqua Italic" size="15.0"/>
+            </font>
+        </Button>
+        <Label fx:id="currentPosition" layoutX="158.0" layoutY="88.0" prefHeight="30.0" prefWidth="110.0" text="Current position:"/>
+        <Label fx:id="finalScore" layoutX="313.0" layoutY="88.0" prefHeight="30.0" prefWidth="110.0" text="Suma obtinuta:"/>
+        <TableView fx:id="scoresTable" layoutX="13.0" layoutY="129.0" prefHeight="200.0" prefWidth="500.0">
+            <columns>
+                <TableColumn fx:id="usernameColumn" prefWidth="135.0" text="Username"/>
+                <TableColumn fx:id="dateColumn" prefWidth="116.0" text="Date"/>
+                <TableColumn fx:id="timeColumn" prefWidth="108.0" text="Time"/>
+                <TableColumn fx:id="scoreColumn" prefWidth="140.0" text="Score"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

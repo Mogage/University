@@ -1,0 +1,9 @@
+rootProject.name = 'Proiect2'
+include 'Server'
+include 'Rest'
+include 'Persistence'
+include 'Services'
+include 'Network'
+include 'Model'
+include 'Client'
+
