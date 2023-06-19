@@ -59,8 +59,6 @@ public class MainController implements IObserver {
     private IService service;
     private Player loggedInPlayer;
     private boolean gameFinished = false;
-    private int tries = 0;
-    private int corectGuesses = 0;
 
     public void setService(IService service) {
         this.service = service;
@@ -81,14 +79,7 @@ public class MainController implements IObserver {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        scoresTable.setItems(scores.sorted(Comparator.comparingInt(Game::getScore)));
-    }
-
-    private boolean isGameFinished() {
-        if (corectGuesses == 3) {
-            return true;
-        }
-        return tries == 4;
+        scoresTable.setItems(scores.sorted(Comparator.comparingInt(Game::getScore).reversed()));
     }
 
     private void finishGame() {
@@ -116,13 +107,11 @@ public class MainController implements IObserver {
                 return;
             }
             String output = service.guess(loggedInPlayer.getId(), guess);
-            if (Objects.equals(output, "W")) {
-                return;
+            if (output.contains("W")) {
+                gameFinished = true;
+                finishGame();
+                output = output.substring(0, 1);
             }
-            if (Objects.equals(output, "S")) {
-                corectGuesses = corectGuesses + 1;
-            }
-            tries = tries + 1;
             switch (guess) {
                 case 1 -> box1.setText(output);
                 case 2 -> box2.setText(output);
@@ -135,10 +124,6 @@ public class MainController implements IObserver {
                 case 9 -> box9.setText(output);
             }
             guessText.clear();
-            if (isGameFinished()) {
-                gameFinished = true;
-                finishGame();
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -147,6 +132,6 @@ public class MainController implements IObserver {
     @Override
     public void gameFinished(Collection<Game> gamesList) {
         scores.setAll(gamesList);
-        scoresTable.setItems(scores.sorted(Comparator.comparingInt(Game::getScore)));
+        scoresTable.setItems(scores.sorted(Comparator.comparingInt(Game::getScore).reversed()));
     }
 }

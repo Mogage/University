@@ -23,6 +23,7 @@ public class ServiceImplementation implements IService {
     private final Map<Integer, IObserver> loggedPlayers;
     private final Map<Integer, Game> games;
     private final Map<Integer, Configuration> configurations;
+    private final Map<Integer, Integer> tries;
 
 
     public ServiceImplementation(IPlayerRepository playerRepository, IConfigurationRepository configurationRepository,
@@ -31,12 +32,13 @@ public class ServiceImplementation implements IService {
         this.configurationRepository = configurationRepository;
         this.gameRepository = gameRepository;
         loggedPlayers = new ConcurrentHashMap<>();
-        games = new HashMap<>();
-        configurations = new HashMap<>();
+        games = new ConcurrentHashMap<>();
+        configurations = new ConcurrentHashMap<>();
+        tries = new ConcurrentHashMap<>();
     }
 
     @Override
-    public Player login(Player player, IObserver client) throws Exception {
+    public synchronized Player login(Player player, IObserver client) throws Exception {
         Player playerToLogin = playerRepository.findByUsername(player.getUsername());
         if (playerToLogin == null) {
             throw new Exception("Authentication failed.");
@@ -54,17 +56,18 @@ public class ServiceImplementation implements IService {
 
         games.put(playerToLogin.getId(), game);
         configurations.put(playerToLogin.getId(), configuration);
+        tries.put(playerToLogin.getId(), 0);
 
         return playerToLogin;
     }
 
     @Override
-    public void logout(Player player) {
+    public synchronized void logout(Player player) {
         loggedPlayers.remove(player.getId());
     }
 
     @Override
-    public Collection<Game> getScores() {
+    public synchronized Collection<Game> getScores() {
         Collection<Game> gamesList = gameRepository.getAll();
         for (Game game1 : games.values()) {
             gamesList.removeIf(game2 -> Objects.equals(game1.getId(), game2.getId()));
@@ -73,14 +76,16 @@ public class ServiceImplementation implements IService {
     }
 
     @Override
-    public String guess(int id, int guess) {
+    public synchronized String guess(int id, int guess) {
         Configuration configuration = configurations.get(id);
         Game game = games.get(id);
         List<String> found = game.getFound();
 
-        if (found.size() == 3) {
+        if (found.size() == 3 || tries.get(id) == 4) {
             return "W";
         }
+
+        tries.put(id, tries.get(id) + 1);
 
         if (configuration.getPosition1() == guess ||
                 configuration.getPosition2() == guess ||
@@ -90,6 +95,9 @@ public class ServiceImplementation implements IService {
             found.add(String.valueOf(guess));
             gameRepository.updateGame(game);
             games.put(id, game);
+            if (found.size() == 3) {
+                return "SW";
+            }
             return "S";
         }
 
@@ -129,11 +137,14 @@ public class ServiceImplementation implements IService {
         game.setScore(game.getScore() - 1);
         gameRepository.updateGame(game);
         games.put(id, game);
+        if (tries.get(id) == 4) {
+            return output + "W";
+        }
         return output;
     }
 
     @Override
-    public DTOFinishedGame getFinishedGameInfo(Integer id) {
+    public synchronized DTOFinishedGame getFinishedGameInfo(Integer id) {
         Game game = games.get(id);
         Configuration configuration = configurations.get(id);
         DTOFinishedGame dtoFinishedGame = new DTOFinishedGame(game.getScore(),
