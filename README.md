@@ -44,12 +44,12 @@ Algorithms implementation, labs and school work.
 
 **Second semester** 
 
-Web Programming
+✔️ Web Programming
 
-Artificial Intelligence
+✔️ Artificial Intelligence
 
-Software Engineering
+✔️ Software Engineering
 
-Programming and Projection Environments
+✔️ Programming and Projection Environments
 
-Database Management Systems
+✔️ Database Management Systems
