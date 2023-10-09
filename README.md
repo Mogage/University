@@ -53,3 +53,17 @@ Algorithms implementation, labs and school work.
 ✔️ Programming and Projection Environments
 
 ✔️ Database Management Systems
+
+
+## **Year 3**
+**First semester** 
+
+Computer Vision and Deep Learning
+
+Robotic Process Automation
+
+Mobile Programming
+
+Parallel and Distributed Programming
+
+Formal Languages and Compilation Techniques
