@@ -44,12 +44,26 @@ Algorithms implementation, labs and school work.
 
 **Second semester** 
 
-Web Programming
+✔️ Web Programming
 
-Artificial Intelligence
+✔️ Artificial Intelligence
 
-Software Engineering
+✔️ Software Engineering
 
-Programming and Projection Environments
+✔️ Programming and Projection Environments
 
-Database Management Systems
+✔️ Database Management Systems
+
+
+## **Year 3**
+**First semester** 
+
+Computer Vision and Deep Learning
+
+Robotic Process Automation
+
+Mobile Programming
+
+Parallel and Distributed Programming
+
+Formal Languages and Compilation Techniques
