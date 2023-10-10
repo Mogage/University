@@ -1,0 +1,33 @@
+<program>::=#include < <tip_include> >
+	        using namespace std;
+            <decl_globale>
+<tip_include>::=iostream | math.h | string.h
+<decl_globale>::=<tip_decl_globale><decl_globale>|<tip_decl_globale>
+<tip_decl_globale>::=<functie>|<constanta>
+<constanta>::=const <tip> ID <atribuire>;
+<functie>::=<antet><corp>
+<antet>::=<tip> ID (<list_decl>)
+<tip>::=int | float | double | void
+<tip_struct>::=struct {list_decl}; 
+<lista_decl>::=<decl>, <lista_decl>|<decl>
+<decl>::=<tip> <atribuire>|<tip> ID
+<corp>::={<instr_corp>} | <instr_return>
+<instr_corp>::=<instr><instr_corp>|<instr>
+<instr>::=<lista_decl_instr>|<atribuire>;|<instr_if>|<instr_cicl>|<instr_return>|<instr_intrare>|<instr_iesire>|<apel_functie>
+<lista_decl_instr>::=<tip> <decl_instr>;
+<decl_instr>::= <decl_instr_id>, <decl_instr>|<decl_instr_id>
+<decl_instr_id>::=<atribuire>|ID
+<apel_functie>::=ID (<lista_param>);
+<lista_param>::=<parametru>,<lista_param>| <parametru>
+<instr_if>::= if (<cond>) <corp>
+<atribuire>::=ID = <expr_aritmetica>
+<expr_aritmetica>::=<expr_aritmetica><op_aritmetica><expr_aritmetica>|ID <op_aritmetica>= <expr_aritmetica>|ID++|ID--|ID|CONST
+<instr_intrare>::=cin <lista_intrari>;
+<lista_intrari>::= >> ID <lista_intrari> | >> ID
+<instr_cicl>::= while (<cond>) <corp> | for (<decl>;<cond>;<atribuire>) <corp>
+<cond>::= ID|CONST|<expr_aritmetica><op_rel><expr_aritmetica>
+<instr_iesire>::= cout <lista_iesiri>;
+<lista_iesiri>::= << <expr_aritmetica> <lista_iesiri> | << <expr_aritmetica>
+<op_rel>::= != | == | < | > | <= | >=
+<op_aritmetica>::= + | * | / | %
+<instr_return>::= return <expr_aritmetica>;
