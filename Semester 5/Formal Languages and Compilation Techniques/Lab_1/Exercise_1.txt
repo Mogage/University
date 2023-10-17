@@ -4,10 +4,10 @@
 <tip_include>::=iostream | math.h | string.h
 <decl_globale>::=<tip_decl_globale><decl_globale>|<tip_decl_globale>
 <tip_decl_globale>::=<functie>|<constanta>
-<constanta>::=const <tip> ID <atribuire>;
+<constanta>::=const <tip> <atribuire>;
 <functie>::=<antet><corp>
 <antet>::=<tip> ID (<list_decl>)
-<tip>::=int | float | double | void
+<tip>::=int | float | double | void | <tip_struct>
 <tip_struct>::=struct {list_decl}; 
 <lista_decl>::=<decl>, <lista_decl>|<decl>
 <decl>::=<tip> <atribuire>|<tip> ID
@@ -18,7 +18,7 @@
 <decl_instr>::= <decl_instr_id>, <decl_instr>|<decl_instr_id>
 <decl_instr_id>::=<atribuire>|ID
 <apel_functie>::=ID (<lista_param>);
-<lista_param>::=<parametru>,<lista_param>| <parametru>
+<lista_param>::=<expr_aritmetica>,<lista_param>|<expr_aritmetica>
 <instr_if>::= if (<cond>) <corp>
 <atribuire>::=ID = <expr_aritmetica>
 <expr_aritmetica>::=<expr_aritmetica><op_aritmetica><expr_aritmetica>|ID <op_aritmetica>= <expr_aritmetica>|ID++|ID--|ID|CONST
@@ -27,7 +27,8 @@
 <instr_cicl>::= while (<cond>) <corp> | for (<decl>;<cond>;<atribuire>) <corp>
 <cond>::= ID|CONST|<expr_aritmetica><op_rel><expr_aritmetica>
 <instr_iesire>::= cout <lista_iesiri>;
-<lista_iesiri>::= << <expr_aritmetica> <lista_iesiri> | << <expr_aritmetica>
+<lista_iesiri>::= << <tip_iesire> <lista_iesiri> | << <tip_iesire>;
+<tip_iesire>::=<expr_aritmetica>|<apel_functie>
 <op_rel>::= != | == | < | > | <= | >=
-<op_aritmetica>::= + | * | / | %
+<op_aritmetica>::= + | * | / | % | -
 <instr_return>::= return <expr_aritmetica>;
