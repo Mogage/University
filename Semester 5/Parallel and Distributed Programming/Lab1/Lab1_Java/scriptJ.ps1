@@ -17,7 +17,7 @@ $suma = 0
 
 for ($i = 0; $i -lt $param4; $i++){
     Write-Host "Rulare" ($i+1)
-    $a = C:\Users\nicol\.jdks\openjdk-21\bin\java.exe "-javaagent:D:\IntelliJ IDEA 2023.2.3\lib\idea_rt.jar=56925:D:\IntelliJ IDEA 2023.2.3\bin" -classpath "D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab1\Lab1_Java\out\production\Lab1_Java" $args[0] $args[1] $args[2]# rulare class java
+    $a = C:\Users\nicol\.jdks\openjdk-21.0.1\bin\java.exe "-javaagent:F:\IntelliJ IDEA 2023.2.3\lib\idea_rt.jar=61150:F:\IntelliJ IDEA 2023.2.3\bin" -classpath "F:\Repositories\Git_repo\University\Semester 5\Parallel and Distributed Programming\Lab1\Lab1_Java\out\production\Lab1_Java" $args[0] $args[1] $args[2]# rulare class java
     Write-Host $a
     $suma += $a
     Write-Host ""

@@ -167,7 +167,29 @@ public class Main {
 //        printMatrix(resultMatrix);
     }
 
-    public static void main(String[] args) {
+    private static void compareResults(String type) throws Exception {
+        try {
+            File secFile = new File("output-sec.txt");
+            Scanner secScanner = new Scanner(secFile);
+            File resultFile = new File("output-" + type + ".txt");
+            Scanner resultScanner = new Scanner(resultFile);
+            int[][] resultMatrix = readMatrixFromFile(rowSize, columnSize, resultScanner);
+            int[][] secMatrix = readMatrixFromFile(rowSize, columnSize, secScanner);
+            secScanner.close();
+            resultScanner.close();
+            for (int i = 0; i < rowSize; i++) {
+                for (int j = 0; j < columnSize; j++) {
+                    if (resultMatrix[i][j] != secMatrix[i][j]) {
+                        throw new Exception("Wrong result");
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         String filename = "data.txt";
 //        createFile(filename);
         double time = runScript(args, filename);
@@ -177,6 +199,10 @@ public class Main {
             writeMatrixToFile(rowSize, columnSize, resultMatrix, printWriter);
         } catch (IOException e) {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        }
+
+        if (!Objects.equals(args[1], "sec")) {
+            compareResults(args[1]);
         }
 
         System.out.println(time);
