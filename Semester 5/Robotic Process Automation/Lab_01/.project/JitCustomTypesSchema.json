@@ -1,0 +1,667 @@
+{
+  "exportedBy": null,
+  "bundleHash": null,
+  "version": "1.0.0.0",
+  "jitAssemblyCompilerCommands": [
+    {
+      "providerName": "TypedDataTable",
+      "typedDataTableDto": {
+        "id": 1,
+        "idRef": "ForEachRowConnections`1_1",
+        "hash": "ForEachRowConnections`1_1|DataRow|4B9nTGCyuY56cIGFk7x0dxqgIvtsmrr3i621sn7h4",
+        "dataType": "System.Data.DataRow, System.Data.Common",
+        "columns": [
+          {
+            "columnName": "Column A",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column A"
+          },
+          {
+            "columnName": "Column B",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column B"
+          },
+          {
+            "columnName": "Column C",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column C"
+          },
+          {
+            "columnName": "Column D",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column D"
+          },
+          {
+            "columnName": "Column E",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column E"
+          },
+          {
+            "columnName": "Column F",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column F"
+          },
+          {
+            "columnName": "Column G",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column G"
+          },
+          {
+            "columnName": "Column H",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column H"
+          },
+          {
+            "columnName": "Column I",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column I"
+          },
+          {
+            "columnName": "Column J",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column J"
+          },
+          {
+            "columnName": "Column K",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column K"
+          },
+          {
+            "columnName": "Column L",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column L"
+          },
+          {
+            "columnName": "Column M",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column M"
+          },
+          {
+            "columnName": "Column N",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column N"
+          },
+          {
+            "columnName": "Column O",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column O"
+          },
+          {
+            "columnName": "Column P",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column P"
+          },
+          {
+            "columnName": "Column Q",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Q"
+          },
+          {
+            "columnName": "Column R",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column R"
+          },
+          {
+            "columnName": "Column S",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column S"
+          },
+          {
+            "columnName": "Column T",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column T"
+          },
+          {
+            "columnName": "Column U",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column U"
+          },
+          {
+            "columnName": "Column V",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column V"
+          },
+          {
+            "columnName": "Column W",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column W"
+          },
+          {
+            "columnName": "Column X",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column X"
+          },
+          {
+            "columnName": "Column Y",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Y"
+          },
+          {
+            "columnName": "Column Z",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Z"
+          },
+          {
+            "columnName": "Column AA",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AA"
+          },
+          {
+            "columnName": "Column AB",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AB"
+          }
+        ],
+        "rowExtensionProperties": [
+          {
+            "columnName": "SheetsRowIndex",
+            "dataType": "System.Int32, System.Private.CoreLib",
+            "descriptionKey": "General_RowExtensions_Property_SheetsRowIndex_Description"
+          },
+          {
+            "columnName": "Column_A_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column A Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_A_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column A ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_B_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column B Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_B_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column B ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_C_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column C Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_C_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column C ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_D_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column D Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_D_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column D ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_E_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column E Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_E_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column E ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_F_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column F Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_F_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column F ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_G_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column G Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_G_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column G ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_H_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column H Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_H_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column H ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_I_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column I Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_I_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column I ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_J_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column J Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_J_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column J ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_K_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column K Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_K_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column K ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_L_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column L Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_L_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column L ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_M_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column M Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_M_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column M ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_N_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column N Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_N_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column N ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_O_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column O Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_O_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column O ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_P_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column P Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_P_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column P ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_Q_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Q Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_Q_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Q ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_R_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column R Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_R_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column R ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_S_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column S Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_S_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column S ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_T_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column T Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_T_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column T ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_U_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column U Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_U_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column U ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_V_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column V Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_V_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column V ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_W_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column W Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_W_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column W ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_X_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column X Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_X_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column X ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_Y_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Y Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_Y_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Y ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_Z_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Z Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_Z_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Z ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_AA_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AA Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_AA_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AA ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          },
+          {
+            "columnName": "Column_AB_Address",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AB Address",
+            "descriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+          },
+          {
+            "columnName": "Column_AB_ColumnAddress",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AB ColumnAddress",
+            "descriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+          }
+        ],
+        "resourceManager": {
+          "resourceManagerName": "UiPath.GSuite.Properties.UiPath.GSuite",
+          "resourceManagerAssemblyName": "UiPath.GSuite"
+        }
+      },
+      "entityAssemblyKey": {
+        "name": "Studio.Generated.TypedDataRow1",
+        "hash": "ForEachRowConnections`1_1|DataRow|IMK0oxcKJ82Chw5KsUlCg5PE3OVuYVhJ8gJHQUNJzxo|jOlEOyES5G6UqfVavDeaU1OKOtLtOsj4XU3c2kUqAk|HT8aFX0uTakdBZzx1gQ7QazRUYM25L1273kAdp3Xng",
+        "assemblyName": "Studio.Generated.TypedDataRow1"
+      }
+    },
+    {
+      "providerName": "TypedDataTable",
+      "typedDataTableDto": {
+        "id": 3,
+        "idRef": "ReadRangeConnections`1_1",
+        "hash": "ReadRangeConnections`1_1|DataTable|4B9nTGCyuY56cIGFk7x0dxqgIvtsmrr3i621sn7h4",
+        "dataType": "System.Data.DataTable, System.Data.Common",
+        "columns": [
+          {
+            "columnName": "Column A",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column A"
+          },
+          {
+            "columnName": "Column B",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column B"
+          },
+          {
+            "columnName": "Column C",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column C"
+          },
+          {
+            "columnName": "Column D",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column D"
+          },
+          {
+            "columnName": "Column E",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column E"
+          },
+          {
+            "columnName": "Column F",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column F"
+          },
+          {
+            "columnName": "Column G",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column G"
+          },
+          {
+            "columnName": "Column H",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column H"
+          },
+          {
+            "columnName": "Column I",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column I"
+          },
+          {
+            "columnName": "Column J",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column J"
+          },
+          {
+            "columnName": "Column K",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column K"
+          },
+          {
+            "columnName": "Column L",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column L"
+          },
+          {
+            "columnName": "Column M",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column M"
+          },
+          {
+            "columnName": "Column N",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column N"
+          },
+          {
+            "columnName": "Column O",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column O"
+          },
+          {
+            "columnName": "Column P",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column P"
+          },
+          {
+            "columnName": "Column Q",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Q"
+          },
+          {
+            "columnName": "Column R",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column R"
+          },
+          {
+            "columnName": "Column S",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column S"
+          },
+          {
+            "columnName": "Column T",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column T"
+          },
+          {
+            "columnName": "Column U",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column U"
+          },
+          {
+            "columnName": "Column V",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column V"
+          },
+          {
+            "columnName": "Column W",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column W"
+          },
+          {
+            "columnName": "Column X",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column X"
+          },
+          {
+            "columnName": "Column Y",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Y"
+          },
+          {
+            "columnName": "Column Z",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column Z"
+          },
+          {
+            "columnName": "Column AA",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AA"
+          },
+          {
+            "columnName": "Column AB",
+            "dataType": "System.String, System.Private.CoreLib",
+            "name": "Column AB"
+          }
+        ],
+        "rowExtensionProperties": []
+      },
+      "entityAssemblyKey": {
+        "name": "Studio.Generated.TypedDataTable3",
+        "hash": "ReadRangeConnections`1_1|DataTable|IMK0oxcKJ82Chw5KsUlCg5PE3OVuYVhJ8gJHQUNJzxo",
+        "assemblyName": "Studio.Generated.TypedDataTable3"
+      }
+    }
+  ]
+}

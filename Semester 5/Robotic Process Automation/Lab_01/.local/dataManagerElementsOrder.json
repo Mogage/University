@@ -1,0 +1,59 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "browser&Sequence_1",
+        "selectedCity&Sequence_14",
+        "userData&Sequence_1",
+        "noOfPeople&Sequence_1",
+        "userOneRow&Sequence_1",
+        "auxTable&Sequence_1",
+        "personIndex&Sequence_1",
+        "firstRow&Sequence_8",
+        "comments&Sequence_1",
+        "name&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "WriteToSheets.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "outputData&Flowchart_2"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_broser",
+        "comments",
+        "auxTable"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "CreateTableFromString.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "aux&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "auxTable",
+        "name",
+        "userData"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}

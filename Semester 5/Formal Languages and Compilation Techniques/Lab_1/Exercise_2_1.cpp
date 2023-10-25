@@ -13,6 +13,6 @@ double Arie ( double raza ) {
 int main ( ) {
     double raza ;
     cin >> raza ;
-    cout << Perimetru ( raza ) << Arie ( raza ) ;
+    cout << Perim ( raza ) << Arie ( raza ) ;
     return 0 ;
 }
