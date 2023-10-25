@@ -27,3 +27,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+outJ.csv
+output-col.txt
+output-row.txt
+output-sec.txt

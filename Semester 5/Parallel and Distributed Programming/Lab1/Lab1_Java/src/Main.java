@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Main {
     static int rowSize = 10;
-    static int columnSize = 10;
-    static int smallSize = 3;
+    static int columnSize = 10000;
+    static int smallSize = 5;
     static int[][] resultMatrix = new int[rowSize][columnSize];
 
     public static int[][] generateMatrix(int numRows, int numCols, int bound) {
@@ -132,8 +132,6 @@ public class Main {
             } catch (InterruptedException interruptedException) {
             }
         }
-
-
     }
 
     public static void printMatrix(int[][] matrix) {
@@ -148,7 +146,7 @@ public class Main {
         System.out.println();
     }
 
-    private static void runScript(String[] args, String filename) {
+    private static double runScript(String[] args, String filename) {
         MatrixPair matrixPair = readFile(filename);
         createBiggerMatrix(matrixPair);
         long startTime;
@@ -165,13 +163,22 @@ public class Main {
             multiThread(matrixPair, columnSize, false, Integer.parseInt(args[0]));
         }
         long endTime = System.nanoTime();
-        System.out.println((double)(endTime - startTime)/1E6);//
+        return (double)(endTime - startTime)/1E6;
 //        printMatrix(resultMatrix);
     }
 
     public static void main(String[] args) {
         String filename = "data.txt";
-        createFile(filename);
-        runScript(args, filename);
+//        createFile(filename);
+        double time = runScript(args, filename);
+
+        try (FileWriter fileWriter = new FileWriter("output-" + args[1] + ".txt");
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            writeMatrixToFile(rowSize, columnSize, resultMatrix, printWriter);
+        } catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        }
+
+        System.out.println(time);
     }
 }

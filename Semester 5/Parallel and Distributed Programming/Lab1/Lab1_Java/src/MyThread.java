@@ -25,7 +25,8 @@ public class MyThread extends Thread {
         return sum;
     }
 
-    private void computeMatrix() {
+    private void computeRows() {
+        this.size = matrixPair.getMatrix1()[0].length;
         for (int i = start; i < end; i++) {
             for (int j = 1; j < size - 1; j++) {
                 resultMatrix[i - 1][j - 1] = computeSubMatrix(i, j);
@@ -33,14 +34,13 @@ public class MyThread extends Thread {
         }
     }
 
-    private void computeRows() {
-        this.size = matrixPair.getMatrix1()[0].length;
-        computeMatrix();
-    }
-
     private void computeCols() {
         this.size = matrixPair.getMatrix1().length;
-        computeMatrix();
+        for (int i = start; i < end; i++) {
+            for (int j = 1; j < size - 1; j++) {
+                resultMatrix[j - 1][i - 1] = computeSubMatrix(j, i);
+            }
+        }
     }
 
     @Override
