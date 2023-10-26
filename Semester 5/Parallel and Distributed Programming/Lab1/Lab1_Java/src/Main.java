@@ -95,8 +95,8 @@ public class Main {
 
     public static void sequential(MatrixPair matrixPair) {
         int sum;
-        for (int i = 1; i < rowSize + 1; i++) {
-            for (int j = 1; j < columnSize + 1; j++) {
+        for (int i = 1; i <= rowSize; i++) {
+            for (int j = 1; j <= columnSize; j++) {
                 sum = 0;
                 for (int index1 = i - 1; index1 <= i + 1; index1++) {
                     for (int index2 = j - 1; index2 <= j + 1; index2++) {
