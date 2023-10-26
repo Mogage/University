@@ -7,6 +7,7 @@
 #include <random>
 
 const std::string fileName = "data.txt";
+std::chrono::duration<double, std::milli> duration;
 
 const int rowSize = 1000;
 const int columnSize = 1000;
@@ -102,8 +103,7 @@ void sequential()
         }
     }
     auto endSequential = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> durationSequential = endSequential - startSequential;
-    std::cout << "Sequential run time: " << durationSequential.count() << " ms\n";
+    duration = endSequential - startSequential;
 }
 
 void runOnRows(int start, int end)
@@ -179,8 +179,7 @@ void multiThread(void (*function)(int, int), int threadCount, int batchSize, int
     }
 
     auto endParallel = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> durationParallel = endParallel - startParallel;
-    std::cout << "Parallel run time: " << durationParallel.count() << " ms\n";
+    duration = endParallel - startParallel;
 }
 
 void multiThreadRows(int threadCount = 4)
@@ -259,6 +258,8 @@ int main(int argc, char* argv[])
 {
     //createFile();
     runProgram(argv);
+
+    std::cout << duration.count();
 
     return 0;
 }
