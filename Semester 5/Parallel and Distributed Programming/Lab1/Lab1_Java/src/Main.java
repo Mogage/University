@@ -92,7 +92,6 @@ public class Main {
         matrixPair.setMatrix1(biggerMatrix);
     }
 
-
     public static void sequential(MatrixPair matrixPair) {
         int sum;
         for (int i = 1; i <= rowSize; i++) {
@@ -108,10 +107,10 @@ public class Main {
         }
     }
 
-    public static void multiThread(MatrixPair matrixPair, int size, boolean onRows, int noOfCores) {
+    public static void multiThread(MatrixPair matrixPair, int size, int type, int noOfCores, int startValue) {
         int batchSize = size / noOfCores;
         int batchReminder = size % noOfCores;
-        int start = 1;
+        int start = startValue;
         int end;
         MyThread[] threads = new MyThread[noOfCores + 1];
 
@@ -121,7 +120,7 @@ public class Main {
                 --batchReminder;
                 ++end;
             }
-            threads[i] = new MyThread(start, end, onRows, matrixPair, resultMatrix);
+            threads[i] = new MyThread(start, end, type, matrixPair, resultMatrix);
             threads[i].start();
             start = end;
         }
@@ -156,11 +155,15 @@ public class Main {
         }
         else if (Objects.equals(args[1], "row")) {
             startTime = System.nanoTime();
-            multiThread(matrixPair, rowSize, true, Integer.parseInt(args[0]));
+            multiThread(matrixPair, rowSize, 1, Integer.parseInt(args[0]), 1);
+        }
+        else if (Objects.equals(args[1], "col")){
+            startTime = System.nanoTime();
+            multiThread(matrixPair, columnSize, 2, Integer.parseInt(args[0]), 1);
         }
         else {
             startTime = System.nanoTime();
-            multiThread(matrixPair, columnSize, false, Integer.parseInt(args[0]));
+            multiThread(matrixPair, rowSize * columnSize, 3, Integer.parseInt(args[0]), 0);
         }
         long endTime = System.nanoTime();
         return (double)(endTime - startTime)/1E6;
@@ -189,9 +192,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        String filename = "data.txt";
-//        createFile(filename);
+    private static void runProgram(String[] args, String filename) throws Exception {
         double time = runScript(args, filename);
 
         try (FileWriter fileWriter = new FileWriter("output-" + args[1] + ".txt");
@@ -206,5 +207,11 @@ public class Main {
         }
 
         System.out.println(time);
+    }
+
+    public static void main(String[] args) throws Exception {
+        String filename = "data.txt";
+//        createFile(filename);
+        runProgram(args, filename);
     }
 }

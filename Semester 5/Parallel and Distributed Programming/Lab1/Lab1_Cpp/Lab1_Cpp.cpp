@@ -138,9 +138,28 @@ void runOnColumns(int start, int end)
     }
 }
 
-void multiThread(int threadCount, int batchSize, int batchReminder)
+void runOnSubMatrix(int start, int end)
 {
-    int start = 1;
+    int i;
+    int j;
+    int sum;
+    for (int aux = start; aux < end; aux++) {
+        sum = 0;
+        i = aux / columnSize + 1;
+        j = aux % columnSize + 1;
+        for (int index1 = i - 1; index1 <= i + 1; index1++) {
+            for (int index2 = j - 1; index2 <= j + 1; index2++) {
+                sum += bigMatrix[index1][index2] * smallMatrix[index1 - i + 1][index2 - j + 1];
+            }
+        }
+        resultMatrix[i - 1][j - 1] = sum;
+
+    }
+}
+
+void multiThread(void (*function)(int, int), int threadCount, int batchSize, int batchReminder, int startValue)
+{
+    int start = startValue;
     int end;
     std::vector<std::thread> threads(threadCount);
 
@@ -151,7 +170,7 @@ void multiThread(int threadCount, int batchSize, int batchReminder)
             end++;
             batchReminder--;
         }
-        threads[i] = std::thread(runOnRows, start, end);
+        threads[i] = std::thread(function, start, end);
         start = end;
     }
 
@@ -168,14 +187,21 @@ void multiThreadRows(int threadCount = 4)
 {
     int batchSize = rowSize / threadCount;
     int batchReminder = rowSize % threadCount;
-    multiThread(threadCount, batchSize, batchReminder);
+    multiThread(runOnRows, threadCount, batchSize, batchReminder, 1);
 }   
 
 void multiThreadColumns(int threadCount = 4)
 {
     int batchSize = columnSize / threadCount;
     int batchReminder = columnSize % threadCount;
-    multiThread(threadCount, batchSize, batchReminder);
+    multiThread(runOnColumns, threadCount, batchSize, batchReminder, 1);
+}
+
+void multiThreadSubMatrix(int threadCount = 4)
+{
+    int batchSize = (rowSize * columnSize) / threadCount;
+    int batchReminder = (rowSize * columnSize) % threadCount;
+    multiThread(runOnSubMatrix, threadCount, batchSize, batchReminder, 0);
 }
 
 void compareResults(std::string fileName)
@@ -216,9 +242,13 @@ void runProgram(char* argv[])
         {
             multiThreadRows(threadCount);
         }
-        else
+        else if (outputFileName == "col")
         {
             multiThreadColumns(threadCount);
+        }
+        else
+        {
+            multiThreadSubMatrix(threadCount);
         }
         writeMatrixToFile("output-" + outputFileName + ".txt");
         compareResults(outputFileName);

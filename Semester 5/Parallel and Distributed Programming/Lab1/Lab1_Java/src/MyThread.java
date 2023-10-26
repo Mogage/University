@@ -1,17 +1,17 @@
 
 public class MyThread extends Thread {
-    private boolean onRows;
+    private int type;
     private int start;
     private int end;
     private int size;
     int[][] resultMatrix;
     private MatrixPair matrixPair;
 
-    public MyThread(int start, int end, boolean onRows, MatrixPair matrixPair, int[][] resultMatrix) {
+    public MyThread(int start, int end, int type, MatrixPair matrixPair, int[][] resultMatrix) {
         this.start = start;
         this.end = end;
         this.matrixPair = matrixPair;
-        this.onRows = onRows;
+        this.type = type;
         this.resultMatrix = resultMatrix;
     }
 
@@ -43,12 +43,24 @@ public class MyThread extends Thread {
         }
     }
 
+    private void computeSubMatrices() {
+        int i;
+        int j;
+        for (int aux = start; aux < end; aux++) {
+            i = aux / (matrixPair.getMatrix1()[0].length - 2) + 1;
+            j = aux % (matrixPair.getMatrix1()[0].length - 2) + 1;
+            resultMatrix[i - 1][j - 1] = computeSubMatrix(i, j);
+        }
+    }
+
     @Override
     public void run() {
-        if (onRows) {
+        if (type == 1) {
             computeRows();
-        } else {
+        } else if (type == 2){
             computeCols();
+        } else {
+            computeSubMatrices();
         }
     }
 }
