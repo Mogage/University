@@ -9,17 +9,17 @@
 const std::string fileName = "data.txt";
 std::chrono::duration<double, std::milli> duration;
 
-const int rowSize = 1000;
-const int columnSize = 1000;
+const int rowSize = 10000;
+const int columnSize = 10;
 const int smallSize = 5;
 
-int resultMatrix[rowSize][columnSize];
-int bigMatrix[rowSize + 2][columnSize + 2];
-int smallMatrix[smallSize][smallSize];
+//int resultMatrix[rowSize][columnSize];
+//int bigMatrix[rowSize][columnSize];
+//int smallMatrix[smallSize][smallSize];
 
-//std::vector<std::vector<int>> resultMatrix(rowSize, std::vector<int>(columnSize));
-//std::vector<std::vector<int>> bigMatrix(rowSize + 2, std::vector<int>(columnSize + 2));
-//std::vector<std::vector<int>> smallMatrix(smallSize, std::vector<int>(smallSize));
+std::vector<std::vector<int>> resultMatrix(rowSize, std::vector<int>(columnSize));
+std::vector<std::vector<int>> bigMatrix(rowSize, std::vector<int>(columnSize));
+std::vector<std::vector<int>> smallMatrix(smallSize, std::vector<int>(smallSize));
 
 void createFile() 
 {
@@ -45,8 +45,8 @@ void readFromFile()
 {
     std::ifstream fin(fileName);
     int temp;
-    for (int i = 1; i <= rowSize; i++) {
-        for (int j = 1; j <= columnSize; j++) {
+    for (int i = 0; i < rowSize; i++) {
+        for (int j = 0; j < columnSize; j++) {
             fin >> temp;
             bigMatrix[i][j] = temp;
         }
@@ -90,16 +90,30 @@ void createBorder()
 void sequential()
 {
     auto startSequential = std::chrono::high_resolution_clock::now();
+    int rowIndex;
+    int columnIndex;
     int sum;
-    for (int i = 1; i <= rowSize; i++) {
-        for (int j = 1; j <= columnSize; j++) {
+    for (int i = 0; i < rowSize; i++) {
+        for (int j = 0; j < columnSize; j++) {
             sum = 0;
-            for (int index1 = i - 1; index1 <= i + 1; index1++) {
-                for (int index2 = j - 1; index2 <= j + 1; index2++) {
-                    sum += bigMatrix[index1][index2] * smallMatrix[index1 - i + 1][index2 - j + 1];
+            for (int index1 = 0; index1 < smallSize; index1++) {
+                for (int index2 = 0; index2 < smallSize; index2++) {
+                    if (i - smallSize / 2 + index1 < 0)
+                        rowIndex = 0;
+                    else if (i - smallSize / 2 + index1 >= rowSize)
+                        rowIndex = rowSize - 1;
+                    else
+                        rowIndex = i - smallSize / 2 + index1;
+                    if (j - smallSize / 2 + index2 < 0)
+                        columnIndex = 0;
+                    else if (j - smallSize / 2 + index2 >= columnSize)
+                        columnIndex = columnSize - 1;
+                    else
+                        columnIndex = j - smallSize / 2 + index2;
+                    sum += bigMatrix[rowIndex][columnIndex] * smallMatrix[index1][index2];
                 }
             }
-            resultMatrix[i - 1][j - 1] = sum;
+            resultMatrix[i][j] = sum;
         }
     }
     auto endSequential = std::chrono::high_resolution_clock::now();
@@ -108,52 +122,93 @@ void sequential()
 
 void runOnRows(int start, int end)
 {
+    int rowIndex;
+    int columnIndex;
     int sum;
     for (int i = start; i < end; i++) {
-        for (int j = 1; j <= columnSize; j++) {
+        for (int j = 0; j < columnSize; j++) {
             sum = 0;
-            for (int index1 = i - 1; index1 <= i + 1; index1++) {
-                for (int index2 = j - 1; index2 <= j + 1; index2++) {
-                    sum += bigMatrix[index1][index2] * smallMatrix[index1 - i + 1][index2 - j + 1];
+            for (int index1 = 0; index1 < smallSize; index1++) {
+                for (int index2 = 0; index2 < smallSize; index2++) {
+                    if (i - smallSize / 2 + index1 < 0)
+                        rowIndex = 0;
+                    else if (i - smallSize / 2 + index1 >= rowSize)
+                        rowIndex = rowSize - 1;
+                    else
+                        rowIndex = i - smallSize / 2 + index1;
+                    if (j - smallSize / 2 + index2 < 0)
+                        columnIndex = 0;
+                    else if (j - smallSize / 2 + index2 >= columnSize)
+                        columnIndex = columnSize - 1;
+                    else
+                        columnIndex = j - smallSize / 2 + index2;
+                    sum += bigMatrix[rowIndex][columnIndex] * smallMatrix[index1][index2];
                 }
             }
-            resultMatrix[i - 1][j - 1] = sum;
+            resultMatrix[i][j] = sum;
         }
     }
 }
 
 void runOnColumns(int start, int end)
 {
+    int rowIndex;
+    int columnIndex;
     int sum;
-    for (int i = 1; i <= rowSize; i++) {
+    for (int i = 0; i < rowSize; i++) {
         for (int j = start; j < end; j++) {
             sum = 0;
-            for (int index1 = i - 1; index1 <= i + 1; index1++) {
-                for (int index2 = j - 1; index2 <= j + 1; index2++) {
-                    sum += bigMatrix[index1][index2] * smallMatrix[index1 - i + 1][index2 - j + 1];
+            for (int index1 = 0; index1 < smallSize; index1++) {
+                for (int index2 = 0; index2 < smallSize; index2++) {
+                    if (i - smallSize / 2 + index1 < 0)
+                        rowIndex = 0;
+                    else if (i - smallSize / 2 + index1 >= rowSize)
+                        rowIndex = rowSize - 1;
+                    else
+                        rowIndex = i - smallSize / 2 + index1;
+                    if (j - smallSize / 2 + index2 < 0)
+                        columnIndex = 0;
+                    else if (j - smallSize / 2 + index2 >= columnSize)
+                        columnIndex = columnSize - 1;
+                    else
+                        columnIndex = j - smallSize / 2 + index2;
+                    sum += bigMatrix[rowIndex][columnIndex] * smallMatrix[index1][index2];
                 }
             }
-            resultMatrix[i - 1][j - 1] = sum;
+            resultMatrix[i][j] = sum;
         }
     }
 }
 
 void runOnSubMatrix(int start, int end)
 {
+    int rowIndex;
+    int columnIndex;
     int i;
     int j;
     int sum;
     for (int aux = start; aux < end; aux++) {
         sum = 0;
-        i = aux / columnSize + 1;
-        j = aux % columnSize + 1;
-        for (int index1 = i - 1; index1 <= i + 1; index1++) {
-            for (int index2 = j - 1; index2 <= j + 1; index2++) {
-                sum += bigMatrix[index1][index2] * smallMatrix[index1 - i + 1][index2 - j + 1];
+        i = aux / columnSize;
+        j = aux % columnSize;
+        for (int index1 = 0; index1 < smallSize; index1++) {
+            for (int index2 = 0; index2 < smallSize; index2++) {
+                if (i - smallSize / 2 + index1 < 0)
+                    rowIndex = 0;
+                else if (i - smallSize / 2 + index1 >= rowSize)
+                    rowIndex = rowSize - 1;
+                else
+                    rowIndex = i - smallSize / 2 + index1;
+                if (j - smallSize / 2 + index2 < 0)
+                    columnIndex = 0;
+                else if (j - smallSize / 2 + index2 >= columnSize)
+                    columnIndex = columnSize - 1;
+                else
+                    columnIndex = j - smallSize / 2 + index2;
+                sum += bigMatrix[rowIndex][columnIndex] * smallMatrix[index1][index2];
             }
         }
-        resultMatrix[i - 1][j - 1] = sum;
-
+        resultMatrix[i][j] = sum;
     }
 }
 
@@ -186,14 +241,14 @@ void multiThreadRows(int threadCount = 4)
 {
     int batchSize = rowSize / threadCount;
     int batchReminder = rowSize % threadCount;
-    multiThread(runOnRows, threadCount, batchSize, batchReminder, 1);
+    multiThread(runOnRows, threadCount, batchSize, batchReminder, 0);
 }   
 
 void multiThreadColumns(int threadCount = 4)
 {
     int batchSize = columnSize / threadCount;
     int batchReminder = columnSize % threadCount;
-    multiThread(runOnColumns, threadCount, batchSize, batchReminder, 1);
+    multiThread(runOnColumns, threadCount, batchSize, batchReminder, 0);
 }
 
 void multiThreadSubMatrix(int threadCount = 4)
@@ -226,7 +281,7 @@ void runProgram(char* argv[])
     int threadCount = atoi(argv[1]);
 
     readFromFile();
-    createBorder();
+    //createBorder();
 
     std::string outputFileName = std::string(argv[2]);
 
@@ -258,7 +313,6 @@ int main(int argc, char* argv[])
 {
     //createFile();
     runProgram(argv);
-
     std::cout << duration.count();
 
     return 0;

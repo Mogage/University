@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int rowSize = 10;
-    static int columnSize = 10000;
+    static int rowSize = 10000;
+    static int columnSize = 10;
     static int smallSize = 5;
     static int[][] resultMatrix = new int[rowSize][columnSize];
 
@@ -93,16 +93,30 @@ public class Main {
     }
 
     public static void sequential(MatrixPair matrixPair) {
+        int rowIndex;
+        int columnIndex;
         int sum;
-        for (int i = 1; i <= rowSize; i++) {
-            for (int j = 1; j <= columnSize; j++) {
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < columnSize; j++) {
                 sum = 0;
-                for (int index1 = i - 1; index1 <= i + 1; index1++) {
-                    for (int index2 = j - 1; index2 <= j + 1; index2++) {
-                        sum += matrixPair.getMatrix1()[index1][index2] * matrixPair.getMatrix2()[index1 - i + 1][index2 - j + 1];
+                for (int index1 = 0; index1 < smallSize; index1++) {
+                    for (int index2 = 0; index2 < smallSize; index2++) {
+                        if (i - smallSize / 2 + index1 < 0)
+                            rowIndex = 0;
+                        else if (i - smallSize / 2 + index1 >= matrixPair.getMatrix1().length)
+                            rowIndex = matrixPair.getMatrix1().length - 1;
+                        else
+                            rowIndex = i - smallSize / 2 + index1;
+                        if (j - smallSize / 2 + index2 < 0)
+                            columnIndex = 0;
+                        else if (j - smallSize / 2 + index2 >= matrixPair.getMatrix1()[0].length)
+                            columnIndex = matrixPair.getMatrix1()[0].length - 1;
+                        else
+                            columnIndex = j - smallSize / 2 + index2;
+                        sum += matrixPair.getMatrix1()[rowIndex][columnIndex] * matrixPair.getMatrix2()[index1][index2];
                     }
                 }
-                resultMatrix[i - 1][j - 1] = sum;
+                resultMatrix[i][j] = sum;
             }
         }
     }
@@ -147,7 +161,7 @@ public class Main {
 
     private static double runScript(String[] args, String filename) {
         MatrixPair matrixPair = readFile(filename);
-        createBiggerMatrix(matrixPair);
+//        createBiggerMatrix(matrixPair);
         long startTime;
         if (Objects.equals(args[1], "sec")) {
             startTime = System.nanoTime();
@@ -155,11 +169,11 @@ public class Main {
         }
         else if (Objects.equals(args[1], "row")) {
             startTime = System.nanoTime();
-            multiThread(matrixPair, rowSize, 1, Integer.parseInt(args[0]), 1);
+            multiThread(matrixPair, rowSize, 1, Integer.parseInt(args[0]), 0);
         }
         else if (Objects.equals(args[1], "col")){
             startTime = System.nanoTime();
-            multiThread(matrixPair, columnSize, 2, Integer.parseInt(args[0]), 1);
+            multiThread(matrixPair, columnSize, 2, Integer.parseInt(args[0]), 0);
         }
         else {
             startTime = System.nanoTime();
