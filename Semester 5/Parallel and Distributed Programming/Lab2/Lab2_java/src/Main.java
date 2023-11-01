@@ -1,7 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.CyclicBarrier;
 
 public class Main {
+    private static String fileName = "data.txt";
     public static int[][] generateMatrix(int numRows, int numCols, int bound) {
         int[][] matrix = new int[numRows][numCols];
         Random random = new Random();
@@ -38,12 +43,9 @@ public class Main {
             try {
                 threads[i].join();
             } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
             }
         }
-    }
-
-    private static int computeSubMatrix(int row, int col, int[][] bigMatrix, int[][] smallMatrix) {
-        return 0;
     }
 
     public static void sequential(int[][] bigMatrix, int[][] smallMatrix) {
@@ -55,101 +57,97 @@ public class Main {
         int smallSize = smallMatrix.length;
         int noOfRowsBuffer = smallSize / 2 + 1;
         int[][] usedBuffer = new int[noOfRowsBuffer][columnSize];
-
-//        for (int i = 0; i < noOfRowsBuffer; i++) {
-//            System.arraycopy(bigMatrix[i], 0, usedBuffer[i], 0, columnSize);
-//        }
-
         System.arraycopy(bigMatrix[0], 0, usedBuffer[noOfRowsBuffer - 1], 0, columnSize);
 
-        for (int i = 0; i < rowSize; i++) {
-
-            System.out.println(i);
-            for (int[] row : usedBuffer) {
-                for (int col : row) {
-                    System.out.print(col + " ");
-                }
-                System.out.println();
-            }
-            System.out.println();
-
+        for (int i = 0; i < rowSize - 1; i++) {
             for (int j = 0; j < columnSize; j++) {
                 sum = 0;
                 for (int index1 = 0; index1 < noOfRowsBuffer; index1++) {
                     for (int index2 = 0; index2 < smallSize; index2++) {
-                        rowIndex = Math.max(index1 - smallSize / 2, 0);
-                        if (j - smallSize / 2 + index2 < 0)
-                            columnIndex = 0;
-                        else if (j - smallSize / 2 + index2 >= columnSize)
-                            columnIndex = columnSize - 1;
-                        else
-                            columnIndex = j - smallSize / 2 + index2;
+                        rowIndex = Math.min(Math.max(index1 - smallSize / 2 + 1, 0), rowSize - 1);
+                        columnIndex = Math.min(Math.max(j - smallSize / 2 + index2, 0), columnSize - 1);
                         sum += usedBuffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
                     }
                 }
                 for (int index1 = noOfRowsBuffer; index1 < smallSize; index1++) {
                     for (int index2 = 0; index2 < smallSize; index2++) {
-                        if (i - smallSize / 2 + index1 < 0)
-                            rowIndex = 0;
-                        else if (i - smallSize / 2 + index1 >= rowSize)
-                            rowIndex = rowSize - 1;
-                        else
-                            rowIndex = i - smallSize / 2 + index1;
-                        if (j - smallSize / 2 + index2 < 0)
-                            columnIndex = 0;
-                        else if (j - smallSize / 2 + index2 >= columnSize)
-                            columnIndex = columnSize - 1;
-                        else
-                            columnIndex = j - smallSize / 2 + index2;
+                        rowIndex = Math.min(Math.max(i - smallSize / 2 + index1, 0), rowSize - 1);
+                        columnIndex = Math.min(Math.max(j - smallSize / 2 + index2, 0), columnSize - 1);
                         sum += bigMatrix[rowIndex][columnIndex] * smallMatrix[index1][index2];
                     }
                 }
                 bigMatrix[i][j] = sum;
             }
-            if (i < rowSize - 1) {
-                for (int index1 = 0; index1 < noOfRowsBuffer - 1; index1++) {
-                    System.arraycopy(usedBuffer[index1 + 1], 0, usedBuffer[index1], 0, columnSize);
-                }
-                System.arraycopy(bigMatrix[i + 1], 0, usedBuffer[noOfRowsBuffer - 1], 0, columnSize);
+            for (int index1 = 0; index1 < noOfRowsBuffer - 1; index1++) {
+                System.arraycopy(usedBuffer[index1 + 1], 0, usedBuffer[index1], 0, columnSize);
             }
-            for (int[] row : bigMatrix) {
-                for (int col : row) {
-                    System.out.print(col + " ");
-                }
-                System.out.println();
-            }
-            System.out.println();
+            System.arraycopy(bigMatrix[i + 1], 0, usedBuffer[noOfRowsBuffer - 1], 0, columnSize);
         }
-
+        for (int j = 0; j < columnSize; j++) {
+            sum = 0;
+            for (int index1 = 0; index1 < smallSize; index1++) {
+                for (int index2 = 0; index2 < smallSize; index2++) {
+                    rowIndex = Math.min(Math.max(index1 - smallSize / 2 + 1, 0), smallSize / 2);
+                    columnIndex = Math.min(Math.max(j - smallSize / 2 + index2, 0), columnSize - 1);
+                    sum += usedBuffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
+                }
+            }
+            bigMatrix[rowSize - 1][j] = sum;
+        }
     }
 
-    public static void runProgram(FileManager fileManager) {
-        fileManager.readFile();
+    public static void compareResults(FileManager fileManager, String fileName1, String fileName2, int rowSize, int columnSize) {
+        try {
+            File secFile = new File(fileName1);
+            Scanner secScanner = new Scanner(secFile);
+            File resultFile = new File(fileName2);
+            Scanner resultScanner = new Scanner(resultFile);
+            int[][] resultMatrix = fileManager.readMatrixFromFile(rowSize, columnSize, resultScanner);
+            int[][] secMatrix = fileManager.readMatrixFromFile(rowSize, columnSize, secScanner);
+            secScanner.close();
+            resultScanner.close();
+            for (int i = 0; i < rowSize; i++) {
+                for (int j = 0; j < columnSize; j++) {
+                    if (resultMatrix[i][j] != secMatrix[i][j]) {
+                        System.out.println("Wrong result at position: " + i + " " + j);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        }
+    }
+
+    public static void runProgram(FileManager fileManager, String[] args) {
+        fileManager.readFile(fileName);
         int[][] bigMatrix = fileManager.getBigMatrix();
         int[][] smallMatrix = fileManager.getSmallMatrix();
-        int size = bigMatrix.length;
-        int noOfThreads = 4;
 
-        long startTime = System.nanoTime();
-        multiThread(bigMatrix, smallMatrix, size, noOfThreads);
+        long startTime;
+        if (Objects.equals(args[1], "sec")) {
+            startTime = System.nanoTime();
+            sequential(bigMatrix, smallMatrix);
+        } else {
+            startTime = System.nanoTime();
+            multiThread(bigMatrix, smallMatrix, bigMatrix.length, 8);
+        }
         long endTime = System.nanoTime();
         System.out.println("Time: " + (endTime - startTime) / 1e6 + " ms");
 
-        for (int[] row : bigMatrix) {
-            for (int col : row) {
-                System.out.print(col + " ");
-            }
-            System.out.println();
+        fileManager.writeMatrix(bigMatrix, "result-" + args[1] + ".txt");
+
+        if (!Objects.equals(args[1], "sec")) {
+            compareResults(fileManager, "result-sec.txt", "result-row.txt", bigMatrix.length, bigMatrix[0].length);
         }
     }
 
     public static void main(String[] args) {
-        String fileName = "data.txt";
-        FileManager fileManager = new FileManager(fileName, 10, 10, 3, Main::generateMatrix);
-//        fileManager.createFile();
-//        runProgram(fileManager);
+        FileManager fileManager = new FileManager(1000, 1000, 3, Main::generateMatrix);
 
-        fileManager.readFile();
-        sequential(fileManager.getBigMatrix(), fileManager.getSmallMatrix());
+        if (Objects.equals(args[0], "1")) {
+            fileManager.createFile(fileName);
+            return;
+        }
+        runProgram(fileManager, args);
     }
 }

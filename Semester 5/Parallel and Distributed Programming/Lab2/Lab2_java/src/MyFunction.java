@@ -1,3 +1,3 @@
 public interface MyFunction {
-    int[][] apply(int noOfRows, int noOfCols, int bound);
+    int[][] generateMatrix(int noOfRows, int noOfCols, int bound);
 }

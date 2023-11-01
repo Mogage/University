@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class FileManager {
-    private String fileName;
     private int rowSize;
     private int columnSize;
     private int smallSize;
@@ -10,8 +9,7 @@ public class FileManager {
     private int [][] smallMatrix;
     private final MyFunction generateMatrix;
 
-    public FileManager(String fileName, int rowSize, int columnSize, int smallSize, MyFunction myFunction) {
-        this.fileName = fileName;
+    public FileManager(int rowSize, int columnSize, int smallSize, MyFunction myFunction) {
         this.rowSize = rowSize;
         this.columnSize = columnSize;
         this.smallSize = smallSize;
@@ -35,17 +33,17 @@ public class FileManager {
         }
     }
 
-    public void createFile() {
+    public void createFile(String fileName) {
         try (FileWriter fileWriter = new FileWriter(fileName);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            writeMatrixToFile(rowSize, columnSize, generateMatrix.apply(rowSize, columnSize, 101), printWriter);
-            writeMatrixToFile(smallSize, smallSize, generateMatrix.apply(smallSize, smallSize, 2), printWriter);
+            writeMatrixToFile(rowSize, columnSize, generateMatrix.generateMatrix(rowSize, columnSize, 101), printWriter);
+            writeMatrixToFile(smallSize, smallSize, generateMatrix.generateMatrix(smallSize, smallSize, 2), printWriter);
         } catch (IOException e) {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
         }
     }
 
-    public void writeMatrix(int[][] matrix) {
+    public void writeMatrix(int[][] matrix, String fileName) {
         try (FileWriter fileWriter = new FileWriter(fileName);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
             writeMatrixToFile(matrix.length, matrix[0].length, matrix, printWriter);
@@ -54,7 +52,7 @@ public class FileManager {
         }
     }
 
-    private static int[][] readMatrixFromFile(int numRows, int numCols, Scanner scanner) {
+    public int[][] readMatrixFromFile(int numRows, int numCols, Scanner scanner) {
         int[][] matrix = new int[numRows][numCols];
 
         for (int row = 0; row < numRows; row++) {
@@ -68,7 +66,7 @@ public class FileManager {
         return matrix;
     }
 
-    public void readFile() {
+    public void readFile(String fileName) {
         try {
             File file = new File(fileName);
             Scanner scanner = new Scanner(file);
