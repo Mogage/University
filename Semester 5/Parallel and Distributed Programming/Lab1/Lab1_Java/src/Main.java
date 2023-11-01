@@ -121,10 +121,10 @@ public class Main {
         }
     }
 
-    public static void multiThread(MatrixPair matrixPair, int size, int type, int noOfCores, int startValue) {
+    public static void multiThread(MatrixPair matrixPair, int size, int type, int noOfCores) {
         int batchSize = size / noOfCores;
         int batchReminder = size % noOfCores;
-        int start = startValue;
+        int start = 0;
         int end;
         MyThread[] threads = new MyThread[noOfCores + 1];
 
@@ -166,21 +166,18 @@ public class Main {
         if (Objects.equals(args[1], "sec")) {
             startTime = System.nanoTime();
             sequential(matrixPair);
-        }
-        else if (Objects.equals(args[1], "row")) {
+        } else if (Objects.equals(args[1], "row")) {
             startTime = System.nanoTime();
-            multiThread(matrixPair, rowSize, 1, Integer.parseInt(args[0]), 0);
-        }
-        else if (Objects.equals(args[1], "col")){
+            multiThread(matrixPair, rowSize, 1, Integer.parseInt(args[0]));
+        } else if (Objects.equals(args[1], "col")) {
             startTime = System.nanoTime();
-            multiThread(matrixPair, columnSize, 2, Integer.parseInt(args[0]), 0);
-        }
-        else {
+            multiThread(matrixPair, columnSize, 2, Integer.parseInt(args[0]));
+        } else {
             startTime = System.nanoTime();
-            multiThread(matrixPair, rowSize * columnSize, 3, Integer.parseInt(args[0]), 0);
+            multiThread(matrixPair, rowSize * columnSize, 3, Integer.parseInt(args[0]));
         }
         long endTime = System.nanoTime();
-        return (double)(endTime - startTime)/1E6;
+        return (double) (endTime - startTime) / 1E6;
 //        printMatrix(resultMatrix);
     }
 
