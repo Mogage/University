@@ -1,5 +1,5 @@
-def read_content_from_file():
-    with open("data.txt") as file:
+def read_content_from_file(file_name):
+    with open(file_name) as file:
         states = file.readline().replace('\n', '').split(' ')
         alphabet = file.readline().replace('\n', '').split(' ')
         begin_states = file.readline().replace('\n', '').split(' ')
@@ -44,7 +44,10 @@ def print_response(current_states, prefix):
         print("The sequence is not accepted.")
 
     if len(prefix) == 0:
-        print("The prefix is empty.")
+        if begin_states[0] in end_states:
+            print("Epsilon")
+        else:
+            print("The prefix is empty.")
     else:
         print('The prefix is: ' + prefix)
 
@@ -80,13 +83,14 @@ def print_menu():
 if __name__ == '__main__':
     inputType = int(input('Read the data from: 1.File or 2. Keyboard.\n>>'))
     if inputType == 1:
-        states, alphabet, begin_states, end_states, dictionary = read_content_from_file()
+        file_name = input('Input file: ')
+        states, alphabet, begin_states, end_states, dictionary = read_content_from_file(file_name)
     else:
         states, alphabet, begin_states, end_states, dictionary = read_content_from_keyboard()
 
     while True:
         print_menu()
-        option = int(input(">>"))
+        option = int(input('>>'))
 
         if option == 0:
             break

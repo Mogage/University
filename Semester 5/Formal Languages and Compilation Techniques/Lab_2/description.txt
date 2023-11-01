@@ -1,0 +1,13 @@
+automation = states alphabet begin_states end_states transitions
+
+states = ID{ " " ID }"\n"
+
+alphabet = character{ " " character }"\n"
+character = ID | CONST
+
+begin_states = ID"\n"
+
+end_states = ID{ " " ID}"\n"
+
+transitions = transition { "\n" transition }
+transition = ID character ID
