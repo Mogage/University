@@ -56,17 +56,25 @@ public class Main {
         int columnSize = bigMatrix[0].length;
         int smallSize = smallMatrix.length;
         int noOfRowsBuffer = smallSize / 2 + 1;
-        int[][] usedBuffer = new int[noOfRowsBuffer][columnSize];
-        System.arraycopy(bigMatrix[0], 0, usedBuffer[noOfRowsBuffer - 1], 0, columnSize);
+        int[][] buffer = new int[noOfRowsBuffer][columnSize];
+
+        for (int i = 0; i < noOfRowsBuffer; i++) {
+            System.arraycopy(bigMatrix[0], 0, buffer[i], 0, columnSize);
+        }
 
         for (int i = 0; i < rowSize - 1; i++) {
+//            for (int k = 0; k < noOfRowsBuffer; k++) {
+//                    for (int j = 0; j < buffer[0].length; j++) {
+//                        System.out.print(buffer[k][j] + " ");
+//                    }
+//                    System.out.println();
+//                }
             for (int j = 0; j < columnSize; j++) {
                 sum = 0;
                 for (int index1 = 0; index1 < noOfRowsBuffer; index1++) {
                     for (int index2 = 0; index2 < smallSize; index2++) {
-                        rowIndex = Math.min(Math.max(index1 - smallSize / 2 + 1, 0), rowSize - 1);
                         columnIndex = Math.min(Math.max(j - smallSize / 2 + index2, 0), columnSize - 1);
-                        sum += usedBuffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
+                        sum += buffer[index1][columnIndex] * smallMatrix[index1][index2];
                     }
                 }
                 for (int index1 = noOfRowsBuffer; index1 < smallSize; index1++) {
@@ -79,17 +87,17 @@ public class Main {
                 bigMatrix[i][j] = sum;
             }
             for (int index1 = 0; index1 < noOfRowsBuffer - 1; index1++) {
-                System.arraycopy(usedBuffer[index1 + 1], 0, usedBuffer[index1], 0, columnSize);
+                System.arraycopy(buffer[index1 + 1], 0, buffer[index1], 0, columnSize);
             }
-            System.arraycopy(bigMatrix[i + 1], 0, usedBuffer[noOfRowsBuffer - 1], 0, columnSize);
+            System.arraycopy(bigMatrix[i + 1], 0, buffer[noOfRowsBuffer - 1], 0, columnSize);
         }
         for (int j = 0; j < columnSize; j++) {
             sum = 0;
             for (int index1 = 0; index1 < smallSize; index1++) {
                 for (int index2 = 0; index2 < smallSize; index2++) {
-                    rowIndex = Math.min(Math.max(index1 - smallSize / 2 + 1, 0), smallSize / 2);
+                    rowIndex = Math.min(index1, smallSize / 2);
                     columnIndex = Math.min(Math.max(j - smallSize / 2 + index2, 0), columnSize - 1);
-                    sum += usedBuffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
+                    sum += buffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
                 }
             }
             bigMatrix[rowSize - 1][j] = sum;
@@ -110,6 +118,7 @@ public class Main {
                 for (int j = 0; j < columnSize; j++) {
                     if (resultMatrix[i][j] != secMatrix[i][j]) {
                         System.out.println("Wrong result at position: " + i + " " + j);
+                        return;
                     }
                 }
             }
@@ -129,7 +138,7 @@ public class Main {
             sequential(bigMatrix, smallMatrix);
         } else {
             startTime = System.nanoTime();
-            multiThread(bigMatrix, smallMatrix, bigMatrix.length, 8);
+            multiThread(bigMatrix, smallMatrix, bigMatrix.length, 4);
         }
         long endTime = System.nanoTime();
         System.out.println("Time: " + (endTime - startTime) / 1e6 + " ms");
@@ -142,7 +151,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        FileManager fileManager = new FileManager(1000, 1000, 3, Main::generateMatrix);
+        FileManager fileManager = new FileManager(1000, 1000, 5, Main::generateMatrix);
 
         if (Objects.equals(args[0], "1")) {
             fileManager.createFile(fileName);

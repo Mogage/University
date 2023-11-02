@@ -4,6 +4,7 @@ public class MyThread extends Thread {
     private int start;
     private int end;
     private int smallSize;
+    private int halfSmallSize;
     private int[][] bigMatrix;
     private int[][] smallMatrix;
     private CyclicBarrier cyclicBarrier;
@@ -17,30 +18,28 @@ public class MyThread extends Thread {
         this.bigMatrix = bigMatrix;
         this.smallMatrix = smallMatrix;
         this.smallSize = smallMatrix.length;
+        this.halfSmallSize = smallSize / 2;
         this.cyclicBarrier = cyclicBarrier;
-        this.buffer = new int[end - start + 2][bigMatrix[0].length];
-        this.noOfRowsBuffer = end - start + 2;
+        this.buffer = new int[end - start + halfSmallSize * 2][bigMatrix[0].length];
+        this.noOfRowsBuffer = end - start + halfSmallSize * 2;
     }
 
     private void createBuffer() {
+
         for (int i = 0; i < noOfRowsBuffer; i++) {
-            if (i + start - 1 < 0 || i + start - 1 >= bigMatrix.length) {
+            if (i + start - halfSmallSize < 0 || i + start - halfSmallSize >= bigMatrix.length) {
+                System.arraycopy(bigMatrix[start], 0, buffer[i], 0, bigMatrix[0].length);
                 continue;
             }
-            System.arraycopy(bigMatrix[i + start - 1], 0, buffer[i], 0, bigMatrix[0].length);
+            System.arraycopy(bigMatrix[i + start - halfSmallSize], 0, buffer[i], 0, bigMatrix[0].length);
         }
         if (end == bigMatrix.length) {
-            noOfRowsBuffer--;
+            noOfRowsBuffer -= halfSmallSize;
         }
     }
 
     private int getIndex(int position, int index, int positionSize) {
-        if (position - smallSize / 2 + index < 0)
-            return 0;
-        else if (position - smallSize / 2 + index >= positionSize)
-            return positionSize - 1;
-        else
-            return position - smallSize / 2 + index;
+        return Math.min(Math.max(position - halfSmallSize + index, 0), positionSize - 1);
     }
 
     private int computeSubMatrix(int row, int col) {
@@ -59,9 +58,9 @@ public class MyThread extends Thread {
 
     private void computeRows() {
         this.size = bigMatrix[0].length;
-        for (int i = 1; i <= end - start; i++) {
+        for (int i = halfSmallSize; i < end - start + halfSmallSize; i++) {
             for (int j = 0; j < size; j++) {
-                bigMatrix[i + start - 1][j] = computeSubMatrix(i, j);
+                bigMatrix[i + start - halfSmallSize][j] = computeSubMatrix(i, j);
             }
         }
     }
