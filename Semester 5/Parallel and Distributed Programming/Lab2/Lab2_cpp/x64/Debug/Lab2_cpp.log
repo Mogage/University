@@ -1,0 +1,3 @@
+﻿  Lab2_cpp.cpp
+F:\Repositories\Git_repo\University\Semester 5\Parallel and Distributed Programming\Lab2\Lab2_cpp\Lab2_cpp.cpp(38,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Lab2_cpp.vcxproj -> F:\Repositories\Git_repo\University\Semester 5\Parallel and Distributed Programming\Lab2\Lab2_cpp\x64\Debug\Lab2_cpp.exe

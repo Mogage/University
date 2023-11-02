@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.CyclicBarrier;
 
 public class Main {
-    private static String fileName = "data.txt";
+    private static final String fileName = "data.txt";
     public static int[][] generateMatrix(int numRows, int numCols, int bound) {
         int[][] matrix = new int[numRows][numCols];
         Random random = new Random();
@@ -63,12 +63,6 @@ public class Main {
         }
 
         for (int i = 0; i < rowSize - 1; i++) {
-//            for (int k = 0; k < noOfRowsBuffer; k++) {
-//                    for (int j = 0; j < buffer[0].length; j++) {
-//                        System.out.print(buffer[k][j] + " ");
-//                    }
-//                    System.out.println();
-//                }
             for (int j = 0; j < columnSize; j++) {
                 sum = 0;
                 for (int index1 = 0; index1 < noOfRowsBuffer; index1++) {

@@ -25,7 +25,6 @@ public class MyThread extends Thread {
     }
 
     private void createBuffer() {
-
         for (int i = 0; i < noOfRowsBuffer; i++) {
             if (i + start - halfSmallSize < 0 || i + start - halfSmallSize >= bigMatrix.length) {
                 System.arraycopy(bigMatrix[start], 0, buffer[i], 0, bigMatrix[0].length);
@@ -69,9 +68,7 @@ public class MyThread extends Thread {
     public void run() {
         try {
             createBuffer();
-            System.out.println("Threads are buffering rows " + start + " to " + end);
             cyclicBarrier.await();
-            System.out.println("Threads are computing rows " + start + " to " + end);
             computeRows();
         } catch (Exception e) {
             e.printStackTrace();
