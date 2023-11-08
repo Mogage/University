@@ -30,4 +30,9 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="scriptC.ps1">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

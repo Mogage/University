@@ -10,6 +10,8 @@ public class MyThread extends Thread {
     private CyclicBarrier cyclicBarrier;
     private int[][] buffer;
     private int noOfRowsBuffer;
+    private int[] topBuffer;
+    private int[] bottomBuffer;
     protected int size;
 
     public MyThread(int start, int end, int[][] bigMatrix, int[][] smallMatrix, CyclicBarrier cyclicBarrier) {
@@ -20,20 +22,21 @@ public class MyThread extends Thread {
         this.smallSize = smallMatrix.length;
         this.halfSmallSize = smallSize / 2;
         this.cyclicBarrier = cyclicBarrier;
-        this.buffer = new int[end - start + halfSmallSize * 2][bigMatrix[0].length];
-        this.noOfRowsBuffer = end - start + halfSmallSize * 2;
+        this.buffer = new int[3][bigMatrix[0].length];
+        this.noOfRowsBuffer = 3;
     }
 
     private void createBuffer() {
-        for (int i = 0; i < noOfRowsBuffer; i++) {
-            if (i + start - halfSmallSize < 0 || i + start - halfSmallSize >= bigMatrix.length) {
-                System.arraycopy(bigMatrix[start], 0, buffer[i], 0, bigMatrix[0].length);
-                continue;
-            }
-            System.arraycopy(bigMatrix[i + start - halfSmallSize], 0, buffer[i], 0, bigMatrix[0].length);
+        if (start == 0) {
+            System.arraycopy(bigMatrix[start], 0, buffer[0], 0, bigMatrix[0].length);
+        } else {
+            System.arraycopy(bigMatrix[start - 1], 0, buffer[0], 0, bigMatrix[0].length);
         }
+        System.arraycopy(bigMatrix[start], 0, buffer[1], 0, bigMatrix[0].length);
         if (end == bigMatrix.length) {
-            noOfRowsBuffer -= halfSmallSize;
+            System.arraycopy(bigMatrix[end - 1], 0, buffer[2], 0, bigMatrix[0].length);
+        } else {
+            System.arraycopy(bigMatrix[end], 0, buffer[2], 0, bigMatrix[0].length);
         }
     }
 
@@ -42,25 +45,34 @@ public class MyThread extends Thread {
     }
 
     private int computeSubMatrix(int row, int col) {
-        int rowIndex;
         int columnIndex;
         int sum = 0;
-        for (int index1 = 0; index1 < smallSize; index1++) {
+        for (int index1 = 0; index1 < 2; index1++) {
             for (int index2 = 0; index2 < smallSize; index2++) {
-                rowIndex = getIndex(row, index1, noOfRowsBuffer);
                 columnIndex = getIndex(col, index2, buffer[0].length);
-                sum += buffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
+                sum += buffer[index1][columnIndex] * smallMatrix[index1][index2];
             }
+        }
+
+        for (int index2 = 0; index2 < smallSize; index2++) {
+            columnIndex = getIndex(col, index2, buffer[0].length);
+            if (row >= end - 1) {
+                sum += buffer[2][columnIndex] * smallMatrix[2][index2];
+                continue;
+            }
+            sum += bigMatrix[row + 1][columnIndex] * smallMatrix[2][index2];
         }
         return sum;
     }
 
     private void computeRows() {
         this.size = bigMatrix[0].length;
-        for (int i = halfSmallSize; i < end - start + halfSmallSize; i++) {
+        for (int i = start; i < end; i++) {
             for (int j = 0; j < size; j++) {
-                bigMatrix[i + start - halfSmallSize][j] = computeSubMatrix(i, j);
+                bigMatrix[i][j] = computeSubMatrix(i, j);
             }
+            System.arraycopy(buffer[1], 0, buffer[0], 0, size);
+            System.arraycopy(bigMatrix[Math.min(i + 1, end - 1)], 0, buffer[1], 0, size);
         }
     }
 

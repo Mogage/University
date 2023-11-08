@@ -11,8 +11,8 @@
 const std::string fileName = "data.txt";
 std::chrono::duration<double, std::milli> duration;
 
-const int rowSize = 1000;
-const int columnSize = 1000;
+const int rowSize = 10000;
+const int columnSize = 10000;
 const int smallSize = 3;
 
 std::vector<std::vector<int>> bigMatrix(rowSize, std::vector<int>(columnSize));
@@ -24,8 +24,6 @@ void writeMatrixToFile(std::string);
 
 void sequential();
 
-std::vector<std::vector<int>> createBuffer(int, int, int);
-int computeSubMatrix(int, int, int, int, std::vector<std::vector<int>>);
 void runOnRows(std::barrier<>&, int, int);
 void multiThread(int);
 
@@ -108,7 +106,7 @@ void sequential()
 
     for (int i = 0; i < noOfRowsBuffer; i++)
     {
-        buffer[i].assign(bigMatrix[0].begin(), bigMatrix[0].end());
+        buffer[i] = bigMatrix[0];
     }
 
     for (int i = 0; i < rowSize - 1; i++)
@@ -138,9 +136,9 @@ void sequential()
 
         for (int index1 = 0; index1 < noOfRowsBuffer - 1; index1++)
         {
-            buffer[index1].assign(buffer[index1 + 1].begin(), buffer[index1 + 1].end());
+            buffer[index1] = buffer[index1 + 1];
         }
-        buffer[noOfRowsBuffer - 1].assign(bigMatrix[i + 1].begin(), bigMatrix[i + 1].end());
+        buffer[noOfRowsBuffer - 1] = bigMatrix[i + 1];
     }
     for (int j = 0; j < columnSize; j++)
     {
@@ -158,54 +156,55 @@ void sequential()
     }
 }
 
-std::vector<std::vector<int>> createBuffer(int halfSmallSize, int noOfRowsBuffer, int start)
-{
-    std::vector<std::vector<int>> buffer = std::vector<std::vector<int>>(noOfRowsBuffer, std::vector<int>(columnSize));
-    for (int i = 0; i < noOfRowsBuffer; i++)
-    {
-        if (i + start - halfSmallSize < 0 || i + start - halfSmallSize >= rowSize)
-        {
-            buffer[i].assign(bigMatrix[0].begin(), bigMatrix[0].end());
-            continue;
-        }
-        buffer[i].assign(bigMatrix[i + start - halfSmallSize].begin(), bigMatrix[i + start - halfSmallSize].end());
-    }
-    return buffer;
-}
-
-int computeSubMatrix(int row, int col, int halfSmallSize, int noOfRowsBuffer, std::vector<std::vector<int>> buffer)
-{
-    int rowIndex;
-    int columnIndex;
-    int sum = 0;
-    for (int index1 = 0; index1 < smallSize; index1++)
-    {
-        for (int index2 = 0; index2 < smallSize; index2++)
-        {
-            rowIndex = std::min(std::max(row - halfSmallSize + index1, 0), noOfRowsBuffer - 1);
-            columnIndex = std::min(std::max(col - halfSmallSize + index2, 0), columnSize - 1);
-            sum += buffer[rowIndex][columnIndex] * smallMatrix[index1][index2];
-        }
-    }
-    return sum;
-}
-
 void runOnRows(std::barrier<>& barrier, int start, int end)
 {
     int halfSmallSize = smallSize / 2;
-    int noOfRowsBuffer = end - start + halfSmallSize * 2;
-    std::vector<std::vector<int>> buffer = createBuffer(halfSmallSize, noOfRowsBuffer, start);
+    int noOfRowsBuffer = 3;
+    int rowIndex;
+    int columnIndex;
+    int sum;
+    std::vector<std::vector<int>> buffer = std::vector<std::vector<int>>(noOfRowsBuffer, std::vector<int>(columnSize));
+    if (start == 0)
+    {
+        buffer[0] = bigMatrix[0];
+    }
+    else
+    {
+        buffer[0] = bigMatrix[start - 1];
+    }
+    buffer[1] = bigMatrix[start];
     if (end == rowSize)
     {
-        noOfRowsBuffer -= halfSmallSize;
+        buffer[2] = bigMatrix[rowSize - 1];
+    }
+    else
+    {
+        buffer[2] = bigMatrix[end];
     }
     barrier.arrive_and_wait();
-    for (int i = halfSmallSize; i < end - start + halfSmallSize; i++)
+    for (int i = start; i < end; i++)
     {
         for (int j = 0; j < columnSize; j++)
         {
-            bigMatrix[i + start - halfSmallSize][j] = computeSubMatrix(i, j, halfSmallSize, noOfRowsBuffer, buffer);
+            sum = 0;
+            for (int index1 = 0; index1 < 2; index1++) {
+                for (int index2 = 0; index2 < smallSize; index2++) {
+                    columnIndex = std::min(std::max(j - halfSmallSize + index2, 0), columnSize - 1);
+                    sum += buffer[index1][columnIndex] * smallMatrix[index1][index2];
+                }
+            }
+            for (int index2 = 0; index2 < smallSize; index2++) {
+                columnIndex = std::min(std::max(j - halfSmallSize + index2, 0), columnSize - 1);
+                if (i >= end - 1) {
+                    sum += buffer[2][columnIndex] * smallMatrix[2][index2];
+                    continue;
+                }
+                sum += bigMatrix[i + 1][columnIndex] * smallMatrix[2][index2];
+            }
+            bigMatrix[i][j] = sum;
         }
+        buffer[0] = buffer[1];
+        buffer[1] = bigMatrix[std::min(i + 1, end - 1)];
     }
 }
 
@@ -238,8 +237,6 @@ void multiThread(int threadCount)
 
 void runProgram(char* argv[])
 {
-    int threadCount = 4;
-
     readFromFile();
 
     if (std::string(argv[2]) == "sec")
@@ -252,7 +249,7 @@ void runProgram(char* argv[])
         return;
     }
     auto start = std::chrono::high_resolution_clock::now();
-    multiThread(threadCount);
+    multiThread(atoi(argv[3]));
     auto end = std::chrono::high_resolution_clock::now();
     duration = end - start;
     writeMatrixToFile("result-row.txt");

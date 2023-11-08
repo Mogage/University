@@ -357,6 +357,9 @@
     <Text Include="result-row.txt" />
     <Text Include="result-sec.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="scriptC.ps1" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

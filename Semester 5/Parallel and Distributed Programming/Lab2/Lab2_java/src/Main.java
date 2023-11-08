@@ -132,10 +132,10 @@ public class Main {
             sequential(bigMatrix, smallMatrix);
         } else {
             startTime = System.nanoTime();
-            multiThread(bigMatrix, smallMatrix, bigMatrix.length, 4);
+            multiThread(bigMatrix, smallMatrix, bigMatrix.length, Integer.parseInt(args[2]));
         }
         long endTime = System.nanoTime();
-        System.out.println("Time: " + (endTime - startTime) / 1e6 + " ms");
+        System.out.println((endTime - startTime) / 1e6);
 
         fileManager.writeMatrix(bigMatrix, "result-" + args[1] + ".txt");
 
@@ -145,7 +145,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        FileManager fileManager = new FileManager(1000, 1000, 5, Main::generateMatrix);
+        FileManager fileManager = new FileManager(5, 5, 3, Main::generateMatrix);
 
         if (Objects.equals(args[0], "1")) {
             fileManager.createFile(fileName);
