@@ -1,5 +1,5 @@
 export interface CalendarItemProps {
-  id?: string;
+  _id?: string;
   title: string;
   type: string;
   noOfGuests: number;

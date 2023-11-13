@@ -1,70 +1,82 @@
-import axios from 'axios';
-import { getLogger } from '../core';
-import { CalendarItemProps } from './CalendarItemProps';
+import axios from "axios";
+import { authConfig, baseUrl, getLogger, withLogs } from "../core";
+import { CalendarItemProps } from "./CalendarItemProps";
 
-const log = getLogger('itemApi');
+const log = getLogger("calendarItemApi");
 
-const baseUrl = 'localhost:3000';
-const calendarItemUrl = `http://${baseUrl}/calendarItem`;
+const calendarItemUrl = `http://${baseUrl}/api/calendarItem`;
 
-interface ResponseProps<T> {
-  data: T;
-}
-
-function withLogs<T>(promise: Promise<ResponseProps<T>>, fnName: string): Promise<T> {
-  log(`${fnName} - started`);
-  return promise
-    .then(res => {
-      log(`${fnName} - succeeded`);
-      return Promise.resolve(res.data);
-    })
-    .catch(err => {
-      log(`${fnName} - failed`);
-      return Promise.reject(err);
-    });
-}
-
-const config = {
-  headers: {
-    'Content-Type': 'application/json'
-  }
+export const getCalendarItems: (
+  token: string
+) => Promise<CalendarItemProps[]> = (token) => {
+  return withLogs(
+    axios.get(calendarItemUrl, authConfig(token)),
+    "getCalendarItems"
+  );
 };
 
-export const getCalendarItems: () => Promise<CalendarItemProps[]> = () => {
-  return withLogs(axios.get(calendarItemUrl, config), 'getCalendarItems');
-}
+export const createCalendarItem: (
+  token: string,
+  calendarItem: CalendarItemProps
+) => Promise<CalendarItemProps[]> = (token, calendarItem) => {
+  return withLogs(
+    axios.post(calendarItemUrl, calendarItem, authConfig(token)),
+    "createCalendarItem"
+  );
+};
 
-export const createCalendarItem: (calendarItem: CalendarItemProps) => Promise<CalendarItemProps[]> = calendarItem => {
-  return withLogs(axios.post(calendarItemUrl, calendarItem, config), 'createCalendarItem');
-}
+export const updateCalendarItem: (
+  token: string,
+  calendarItem: CalendarItemProps
+) => Promise<CalendarItemProps[]> = (token, calendarItem) => {
+  return withLogs(
+    axios.put(
+      `${calendarItemUrl}/${calendarItem._id}`,
+      calendarItem,
+      authConfig(token)
+    ),
+    "updateCalendarItem"
+  );
+};
 
-export const updateCalendarItem: (calendarItem: CalendarItemProps) => Promise<CalendarItemProps[]> = calendarItem => {
-  return withLogs(axios.put(`${calendarItemUrl}/${calendarItem.id}`, calendarItem, config), 'updateCalendarItem');
-}
+export const syncCalendarItems: (
+  token: string,
+  calendarItems: CalendarItemProps[]
+) => Promise<CalendarItemProps[]> = (token, calendarItems) => {
+  return withLogs(
+    axios.put(`${calendarItemUrl}/sync`, calendarItems, authConfig(token)),
+    "syncCalendarItems"
+  );
+};
 
 interface MessageData {
   event: string;
+  type: string;
   payload: {
     calendarItem: CalendarItemProps;
   };
 }
 
-export const newWebSocket = (onMessage: (data: MessageData) => void) => {
-  const ws = new WebSocket(`ws://${baseUrl}`)
+export const newWebSocket = (
+  token: string,
+  onMessage: (data: MessageData) => void
+) => {
+  const ws = new WebSocket(`ws://${baseUrl}`);
   ws.onopen = () => {
-    log('web socket onopen');
+    log("web socket onopen");
+    ws.send(JSON.stringify({ type: "authorization", payload: { token } }));
   };
   ws.onclose = () => {
-    log('web socket onclose');
+    log("web socket onclose");
   };
-  ws.onerror = error => {
-    log('web socket onerror', error);
+  ws.onerror = (error) => {
+    log("web socket onerror", error);
   };
-  ws.onmessage = messageEvent => {
-    log('web socket onmessage');
+  ws.onmessage = (messageEvent) => {
+    log("web socket onmessage");
     onMessage(JSON.parse(messageEvent.data));
   };
   return () => {
     ws.close();
-  }
-}
+  };
+};
