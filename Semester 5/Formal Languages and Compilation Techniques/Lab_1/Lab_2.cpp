@@ -7,7 +7,7 @@
 #include <algorithm>
 
 std::string fileName = "Exercise_2_1.cpp";
-const std::string inPath = "D:\\1. Repositories\\University\\Semester 5\\Formal Languages and Compilation Techniques\\Lab_1\\" + fileName;
+const std::string inPath = "Part_1\\" + fileName;
 const std::string outPath = "Out_" + fileName.replace(fileName.length() - 4, 4, ".txt");
 std::ifstream in(inPath);
 std::ofstream out(outPath);
@@ -182,6 +182,6 @@ void TransformCode(std::ostream& outStream) {
 int main()
 {
     CreateIdTable();
-    TransformCode(std::cout);
+    TransformCode(out);
     return 0;
 }

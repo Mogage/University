@@ -1,0 +1,4 @@
+﻿  Lab_2.cpp
+F:\Repositories\Git_repo\University\Semester 5\Formal Languages and Compilation Techniques\Lab_1\Lab_2.cpp(102,35): warning C4101: 'e': unreferenced local variable
+F:\Repositories\Git_repo\University\Semester 5\Formal Languages and Compilation Techniques\Lab_1\Lab_2.cpp(104,31): warning C4101: 'e': unreferenced local variable
+  Lab_2.vcxproj -> F:\Repositories\Git_repo\University\Semester 5\Formal Languages and Compilation Techniques\Lab_1\x64\Debug\Lab_2.exe

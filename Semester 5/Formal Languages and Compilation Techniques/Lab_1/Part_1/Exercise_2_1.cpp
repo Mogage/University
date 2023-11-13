@@ -2,7 +2,7 @@
 using namespace std ;
 const double PI = 3.145 ;
 
-double Perimetru ( double raza ) {
+double Perim ( double raza ) {
     return 2 * PI * raza ;
 }
 
