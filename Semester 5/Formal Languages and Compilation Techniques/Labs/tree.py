@@ -35,7 +35,7 @@ class Tree:
         if root is None:
             return
         self.print_tree_rec(root.left)
-        # print(root.data)
+        print(root.data)
         root.index = self.TS_code
         self.TS_code += 1
         self.print_tree_rec(root.right)

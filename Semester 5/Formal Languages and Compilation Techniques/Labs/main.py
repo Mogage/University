@@ -29,8 +29,8 @@ def handle_option(option, fa):
 
 
 def verify_automata_file():
-    inputType = int(input('Read the data from: 1.File or 2. Keyboard.\n>>'))
-    if inputType == 1:
+    input_type = int(input('Read the data from: 1.File or 2. Keyboard.\n>>'))
+    if input_type == 1:
         file_name = input('Input file: ')
         fa = read_content_from_file(file_name)
     else:
@@ -47,6 +47,6 @@ def verify_automata_file():
 
 
 if __name__ == '__main__':
-    file_name = 'Exercise_2_1.cpp'
+    file_name = 'Exercise_3.cpp'
     codeTransformer = CodeTransformer()
     codeTransformer.transform_code(file_name)

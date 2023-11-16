@@ -12,6 +12,7 @@
       "Path": "Main.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "isCluj&Sequence_1",
         "browser&Sequence_1",
         "selectedCity&Sequence_14",
         "userData&Sequence_1",
@@ -31,6 +32,7 @@
       "Path": "WriteToSheets.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "rowExists&Flowchart_2",
         "outputData&Flowchart_2"
       ],
       "ArgumentsSectionElementsOrder": [

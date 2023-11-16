@@ -4,7 +4,7 @@ from IOFactory import read_content_from_file
 
 class CodeTransformer:
     def __init__(self):
-        self.idTable = None
+        self.id_table = None
         self.__create_id_table()
         self.identifiers_automata = read_content_from_file('data/identifiers.txt')
         self.integer_numbers_automata = read_content_from_file('data/integerNumbers.txt')
@@ -13,7 +13,7 @@ class CodeTransformer:
         self.constants_tree = Tree()
 
     def __create_id_table(self):
-        tableContents = [
+        table_contents = [
             "ID", "CONST", "include", "using", "namespace", "std", "iostream", "math.h", "string.h",
             "const", "int", "float", "double", "void", "struct",
             "if", "while", "for", "cin", "cout", "return",
@@ -21,10 +21,10 @@ class CodeTransformer:
             "#"]
 
         content_id = 0
-        self.idTable = {}
+        self.id_table = {}
 
-        for content in tableContents:
-            self.idTable[content] = content_id
+        for content in table_contents:
+            self.id_table[content] = content_id
             content_id += 1
 
     def transform_code(self, file_name, file_output=True):
@@ -39,7 +39,9 @@ class CodeTransformer:
                 if self.__work_line(line.replace('\n', ''), line_number) is False:
                     return
 
+        print("Identifiers tree:")
         self.identifiers_tree.print_tree()
+        print("Constants tree:")
         self.constants_tree.print_tree()
 
         if file_output:
@@ -59,13 +61,13 @@ class CodeTransformer:
                 continue
 
             prefix, is_identifier = self.__work_prefix(line)
-            if prefix not in self.idTable.keys():
+            if prefix not in self.id_table.keys():
                 if is_identifier:
                     output_file.write(f'{prefix} -> 0 {self.identifiers_tree.get_index(prefix)}\n')
                 else:
                     output_file.write(f'{prefix} -> 1 {self.constants_tree.get_index(prefix)}\n')
             else:
-                output_file.write(f'{prefix} -> {self.idTable[prefix]} -\n')
+                output_file.write(f'{prefix} -> {self.id_table[prefix]} -\n')
             line = line[len(prefix):]
 
     def __work_line(self, line, line_number):
@@ -80,8 +82,8 @@ class CodeTransformer:
                 continue
 
             prefix, is_identifier = self.__work_prefix(line)
-            if prefix not in self.idTable.keys():
-                if len(prefix) >= 8:
+            if prefix not in self.id_table.keys():
+                if len(prefix) > 8:
                     print("Lexical error on line " + str(line_number) + " at position " + str(
                         len(prefix)) + ": " + prefix)
                     return False
