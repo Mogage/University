@@ -51,6 +51,6 @@ export const useNetwork = () => {
       }
       sendUpdatesToServer();
     }
-  }, [token]);
+  }, []);
   return { networkStatus };
 };

@@ -89,6 +89,7 @@ calendarItemRouter.put("/sync", async (ctx) => {
     response.status = 200;
     broadcast(userId, { type: "synced", payload: response.body });
   } catch (err) {
+    console.log(err.message);
     ctx.response.body = { message: err.message };
     ctx.response.status = 400;
   }

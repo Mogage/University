@@ -118,6 +118,8 @@ const CalendarItemList: React.FC<RouteComponentProps> = ({ history }) => {
                   endDate,
                   isCompleted,
                   doesRepeat,
+                  latitude,
+                  longitude,
                 }) => (
                   <CalendarItem
                     key={_id}
@@ -129,6 +131,8 @@ const CalendarItemList: React.FC<RouteComponentProps> = ({ history }) => {
                     endDate={endDate}
                     isCompleted={isCompleted}
                     doesRepeat={doesRepeat}
+                    latitude={latitude}
+                    longitude={longitude}
                     onEdit={(id) => history.push(`/calendarItem/${id}`)}
                   />
                 )

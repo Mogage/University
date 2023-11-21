@@ -7,4 +7,6 @@ export interface CalendarItemProps {
   endDate: Date;
   isCompleted: boolean;
   doesRepeat: boolean;
+  latitude: number;
+  longitude: number;
 }

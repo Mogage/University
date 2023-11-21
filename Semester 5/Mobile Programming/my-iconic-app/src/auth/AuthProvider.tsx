@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getLogger } from "../core";
-import { login as loginApi } from "./authAPI";
+import { login as loginApi, signup as signupApi } from "./authAPI";
 import { usePreferences } from "../hooks/usePreferencesToken";
 import { Preferences } from "@capacitor/preferences";
 
 const log = getLogger("AuthProvider");
 
 type LoginFn = (username?: string, password?: string) => void;
+type SignupFn = (username?: string, password?: string) => void;
 type LogoutFn = (token?: string) => void;
 
 export interface AuthState {
@@ -16,6 +17,7 @@ export interface AuthState {
   isAuthenticating: boolean;
   login?: LoginFn;
   logout?: LogoutFn;
+  signup?: SignupFn;
   pendingAuthentication?: boolean;
   username?: string;
   password?: string;
@@ -61,17 +63,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   } = state;
   const login = useCallback<LoginFn>(loginCallback, []);
   const logout = useCallback<LogoutFn>(logoutCallback, []);
+  const signup = useCallback<SignupFn>(signupCallback, []);
   useEffect(authenticationEffect, [pendingAuthentication]);
   const value = {
     isAuthenticated,
     login,
     logout,
+    signup,
     isAuthenticating,
     authenticationError,
     token,
   };
   log("render");
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+
+  function signupCallback(username?: string, password?: string): void {
+    log("signup");
+    const fetchToken = async () => {
+      const { token } = await signupApi(username, password);
+      setState({
+        ...state,
+        token,
+        pendingAuthentication: false,
+        isAuthenticated: true,
+        isAuthenticating: false,
+      });
+    };
+    fetchToken();
+  }
 
   function logoutCallback(token?: string) {
     const unsetToken = async () => {

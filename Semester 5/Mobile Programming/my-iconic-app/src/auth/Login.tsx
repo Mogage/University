@@ -12,9 +12,7 @@ import {
 } from "@ionic/react";
 import { AuthContext } from "./AuthProvider";
 import { getLogger } from "../core";
-import { useAppState } from "../hooks/useAppState";
-import { useNetwork } from "../hooks/useNetwork";
-import { Preferences } from "@capacitor/preferences";
+import { MyModal } from "../components/MyModal";
 
 const log = getLogger("Login");
 
@@ -55,6 +53,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       history.push("/");
     }
   }, [isAuthenticated]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -78,6 +77,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
           <div>{authenticationError.message || "Failed to authenticate"}</div>
         )}
         <IonButton onClick={handleLogin}>Login</IonButton>
+        <MyModal />
       </IonContent>
     </IonPage>
   );
