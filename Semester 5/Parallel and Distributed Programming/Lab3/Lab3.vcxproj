@@ -133,6 +133,7 @@
     <ClCompile Include="Lab3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="x64\Debug\lab2-result.txt" />
     <Text Include="x64\Debug\matrix.txt" />
     <Text Include="x64\Debug\result.txt" />
   </ItemGroup>

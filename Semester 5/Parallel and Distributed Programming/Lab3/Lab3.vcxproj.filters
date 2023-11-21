@@ -26,6 +26,9 @@
     <Text Include="x64\Debug\result.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="x64\Debug\lab2-result.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="x64\Debug\scriptC.ps1">

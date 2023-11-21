@@ -1,4 +1,4 @@
 ﻿  Lab3.cpp
 D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab3\Lab3.cpp(147,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab3\Lab3.cpp(228,13): warning C4101: 'rowIndex': unreferenced local variable
+D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab3\Lab3.cpp(225,13): warning C4101: 'rowIndex': unreferenced local variable
   Lab3.vcxproj -> D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab3\x64\Debug\Lab3.exe

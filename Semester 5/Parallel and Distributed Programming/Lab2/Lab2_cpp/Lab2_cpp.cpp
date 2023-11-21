@@ -11,8 +11,8 @@
 const std::string fileName = "data.txt";
 std::chrono::duration<double, std::milli> duration;
 
-const int rowSize = 10000;
-const int columnSize = 10000;
+const int rowSize = 1000;
+const int columnSize = 1000;
 const int smallSize = 3;
 
 std::vector<std::vector<int>> bigMatrix(rowSize, std::vector<int>(columnSize));

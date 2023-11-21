@@ -25,6 +25,8 @@ int smallMatrix[smallSize][smallSize];
 void createFile();
 void readFromFile(bool);
 void writeMatrixToFile(int matrix[rowSize][columnSize]);
+bool verifyResult();
+bool verifyResultScatter();
 
 void copyVector(int[], int[]);
 void printVector(int[]);
@@ -55,9 +57,6 @@ void printVector(int[]);
 //    {
 //        startTime1 = std::chrono::high_resolution_clock::now();
 //        readFromFile(true);
-//
-//        MPI_Bcast(&smallMatrix, smallSize * smallSize, MPI_INT, 0, MPI_COMM_WORLD);
-//        
 //    }
 //
 //    int batchSize = rowSize / numprocs;
@@ -135,6 +134,7 @@ void printVector(int[]);
 //        auto endTime1 = std::chrono::high_resolution_clock::now();
 //        duration1 = endTime1 - startTime1;
 //        std::cout << duration1.count() << '\n';
+//        verifyResultScatter();
 //    }
 //
 //    MPI_Finalize();
@@ -178,11 +178,6 @@ int main(int argc, char* argv[])
         for (int procIndex = 1; procIndex < numprocs; procIndex++)
         {
             end = start + batchSize;
-            if (batchReminder > 0)
-            {
-                end++;
-                batchReminder--;
-            }
             for (int i = start; i < end; i++)
             {
                 for (int j = 0; j < columnSize; j++)
@@ -213,6 +208,8 @@ int main(int argc, char* argv[])
         endTime = std::chrono::high_resolution_clock::now();
         duration1 = endTime - startTime1;
         std::cout << duration1.count() << '\n';
+
+        verifyResult();
     }
     else
     {
@@ -348,6 +345,37 @@ void writeMatrixToFile(int matrix[rowSize][columnSize])
         fout << '\n';
     }
     fout.close();
+}
+
+bool verifyResult()
+{
+    std::ifstream fin("lab2-result.txt");
+    int temp;
+    for (int i = 0; i < rowSize; i++) {
+        for (int j = 0; j < columnSize; j++) {
+            fin >> temp;
+            if (bigMatrix[i][j] != temp)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool verifyResultScatter()
+{
+    std::ifstream fin("lab2-result.txt");
+    int temp;
+    for (int i = 0; i < rowSize * columnSize; i++) {
+        fin >> temp;
+        if (flatBigMatrix[i] != temp)
+        {
+            return false;
+        }
+    }
+    return true;
+
 }
 
 void copyVector(int newVector[], int oldVector[])
