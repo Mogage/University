@@ -78,9 +78,10 @@ void handleContent(char* yytext, int code)
 %} 
 
 /* Definitions */
-LID     [a-zA-Z_][a-zA-Z0-9_]*
-LCONST  [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?
-WS      [ \t\r\n]
+LID      [a-zA-Z_][a-zA-Z0-9_]*
+LREAL    [-+]?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?|0[xX][0-9a-fA-F]+|[fFlL](16|32|64|128|bf16|F16|F32|F64|F128|BF16)
+LINTEGER [-+]?[0-9]+(x|X)?([0-9]+|a|A|b|B|c|C|d|D|e|E|f|F)*((l|L|u|U)+(z|Z)*)?
+WS       [ \t\r\n]
 
 %%
 
@@ -129,7 +130,17 @@ WS      [ \t\r\n]
 "while"         { handleContent(yytext, WHILE); }
 "for"           { handleContent(yytext, FOR); }
  
-{LCONST}        { 
+{LREAL}        { 
+                    if (areTreeCreated) {
+                        // fout << yytext << " -> " << CONST << " " << search(constantsTree, yytext)->index << '\n'; 
+                        fout << CONST << " " << search(constantsTree, yytext)->index << '\n'; 
+                    }
+                    
+                    if (!search(constantsTree, yytext)) {
+                        constantsTree = insert(constantsTree, yytext);
+                    }
+                }
+{LINTEGER}      { 
                     if (areTreeCreated) {
                         // fout << yytext << " -> " << CONST << " " << search(constantsTree, yytext)->index << '\n'; 
                         fout << CONST << " " << search(constantsTree, yytext)->index << '\n'; 

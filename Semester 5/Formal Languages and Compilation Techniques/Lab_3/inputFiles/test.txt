@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+int main(){
+    int oct = 075;     
+    int hex = 0x1A;      
+    int bin = 0b1101; 
+    int d = 255u;
+    int e = 123456789L;
+    int f = 9876543210LL;
+    int g = -13.0251;
+    return 0;
+}
