@@ -1,5 +1,9 @@
-data
-test
+data/
+.data/
+test/
 train/
 val/
 vimeo_super_resolution_test/
+lightning_logs/
+video.mp4
+video2.mp4
