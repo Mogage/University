@@ -122,7 +122,7 @@ scale_factor = 4
 # Setup dataloaders
 train_dataset = BSDS500(scale_factor=scale_factor)
 val_dataset = BSDS100(scale_factor=scale_factor)
-test_dataset = Set14(scale_factor=scale_factor)
+test_dataset = Set5(scale_factor=scale_factor)
 
 # train_dataset = MyDataset()
 
@@ -136,7 +136,7 @@ channels = 3
 model = SRResNet(scale_factor, channels)
 module = Module(model)
 
-trainer = pl.Trainer(max_epochs=25)
+trainer = pl.Trainer(max_epochs=100)
 trainer.fit(
     module,
     train_dataloader,

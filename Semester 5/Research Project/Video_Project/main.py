@@ -1,5 +1,11 @@
 import torch
 import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+import numpy as np
+import cv2
+import os
+from skimage.metrics import structural_similarity as ssim
 
 
 class DoubleConvBlock(nn.Module):
@@ -131,3 +137,83 @@ class DeepWBNet(nn.Module):
         x_s = self.shade_decoder_up3(x_s, x2)
         s = self.shade_decoder_out(x_s, x1)
         return torch.cat((awb, t, s), dim=1)
+
+
+class MyDataset(torch.utils.data.Dataset):
+    def __init__(self, transform=None):
+        self.inputs = []
+        self.targets = []
+        self.transform = transform
+        for filename in os.listdir('Set1_input_images_JPG/'):
+            img = cv2.imread('Set1_input_images_JPG/' + filename)
+            img = img.transpose((2, 0, 1)).astype(np.float32)
+            self.inputs.append(img)
+        for filename in os.listdir('Set1_ground_truth_images'):
+            img = cv2.imread('Set1_ground_truth_images' + filename)
+            img = img.transpose((2, 0, 1)).astype(np.float32)
+            self.targets.append(img)
+
+        self.inputs = np.array(self.inputs)
+        self.targets = np.array(self.targets)
+
+        self.inputs = torch.tensor(self.inputs, dtype=torch.float32)
+        self.targets = torch.tensor(self.targets, dtype=torch.float32)
+
+    def __len__(self):
+        return len(self.inputs)
+
+    def __getitem__(self, idx):
+        item = self.inputs[idx]
+        target = self.targets[idx]
+
+        if self.transform:
+            item = self.transform(item)
+
+        return item, target
+
+
+model = DeepWBNet()
+
+# Define the loss function
+criterion = nn.MSELoss()
+
+# Define the optimizer
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+num_epochs = 10  # adjust as needed
+
+train_dataset = MyDataset()
+train_dataloader = DataLoader(train_dataset, batch_size=4, shuffle=True)
+test_dataset = MyDataset()
+test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False)
+
+for epoch in range(num_epochs):
+    model.train()
+    running_loss = 0.0
+
+    for batch_idx, (inputs, targets) in enumerate(train_dataloader):
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        loss = criterion(outputs, targets)
+        loss.backward()
+        optimizer.step()
+
+        running_loss += loss.item()
+
+    average_loss = running_loss / len(train_dataloader)
+    print(f"Epoch {epoch + 1}/{num_epochs}, Loss: {average_loss}")
+
+model.eval()
+total_ssim = 0.0
+
+with torch.no_grad():
+    for batch_idx, (inputs, targets) in enumerate(test_dataloader):
+        outputs = model(inputs)
+        ssim_value = np.mean(np.array([
+            ssim(targets_i, output_i, multichannel=True)
+            for targets_i, output_i in zip(targets.cpu().numpy(), outputs.cpu().numpy())
+        ]))
+        total_ssim += ssim_value
+
+average_ssim = total_ssim / len(test_dataloader)
+print(f"Test SSIM: {average_ssim}")
