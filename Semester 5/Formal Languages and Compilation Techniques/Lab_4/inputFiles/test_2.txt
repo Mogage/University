@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+float perim (float r) {
+    float PI;
+    PI = 3.1425;
+    return 2*PI*r;
+}
+
+float aria (float r) {
+    float PI;
+    PI = 3.1425;
+    return PI*r*r;
+}
+
+int main(){
+    struct cerc {
+        int radius;
+        int altc;
+    };
+
+    float radius;
+    cin >> radius;
+    int p;
+    p = perim(radius);
+    int a;
+    a = aria(radius);
+    cout << p;
+    cout << a;
+    return 0;
+}

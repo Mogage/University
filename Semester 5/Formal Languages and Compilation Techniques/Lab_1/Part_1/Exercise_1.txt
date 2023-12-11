@@ -1,4 +1,4 @@
-<program>::=#include < <tip_include> >
+<program>::=#include <<tip_include>>
 	        using namespace std;
             <decl_globale>
 <tip_include>::=iostream | math.h | string.h
@@ -32,3 +32,5 @@
 <op_rel>::= != | == | < | > | <= | >=
 <op_aritmetica>::= + | * | / | % | -
 <instr_return>::= return <expr_aritmetica>;
+
+    | ID op_aritmetica EQUAL expr_aritmetica

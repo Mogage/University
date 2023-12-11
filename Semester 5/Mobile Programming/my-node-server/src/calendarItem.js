@@ -99,6 +99,7 @@ const createCalendarItem = async (ctx, calendarItem, response) => {
   try {
     const userId = ctx.state.user._id;
     calendarItem.userId = userId;
+    console.log(calendarItem);
     response.body = await calendarItemStore.insert(calendarItem);
     response.status = 201; // created
     broadcast(userId, { type: "created", payload: response.body });

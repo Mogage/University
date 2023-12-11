@@ -1,0 +1,115 @@
+Simbol de start
+program
+
+Neterminale
+apel_functie
+atribuire
+cond
+constanta
+corp
+decl
+decl_globale
+decl_instr
+eps
+expr_aritmetica
+functie
+instr
+instr_cicl
+instr_corp
+instr_iesire
+instr_if
+instr_intrare
+instr_return
+list_decl
+list_decl_struct
+list_iesiri
+list_intrari
+list_param
+lista_decl_instr
+op_aritmetica
+op_rel
+program
+tip
+tip_decl_globale
+tip_iesire
+tip_include
+tip_struct
+
+Terminale
+CIN
+COMMA
+CONST
+CONST_
+COUT
+DECREMENT
+DIVIDE
+DOUBLE
+EQUAL
+EQUAL_EQUAL
+FLOAT
+FOR
+GREATER_THAN
+GREATER_THAN_OR_EQUAL
+HASH
+ID
+IF
+INCLUDE
+INCREMENT
+INT
+IOSTREAM
+LEFT_BRACE
+LEFT_PAREN
+LEFT_SHIFT
+LESS_THAN
+LESS_THAN_OR_EQUAL
+MATH_H
+MINUS
+MODULO
+MULTIPLY
+NAMESPACE
+NOT_EQUAL
+PLUS
+RETURN
+RIGHT_BRACE
+RIGHT_PAREN
+RIGHT_SHIFT
+SEMICOLON
+STD
+STRING_H
+STRUCT
+USING
+VOID
+WHILE
+
+Reguli
+program -> HASH INCLUDE LESS_THAN tip_include GREATER_THAN USING NAMESPACE STD SEMICOLON decl_globale
+tip_include -> IOSTREAM | MATH_H | STRING_H
+decl_globale -> tip_decl_globale decl_globale | tip_decl_globale
+tip_decl_globale -> constanta | functie
+constanta -> CONST_ tip atribuire SEMICOLON
+functie -> tip ID LEFT_PAREN list_decl RIGHT_PAREN corp
+tip -> INT | FLOAT | DOUBLE | VOID | tip_struct
+tip_struct -> STRUCT ID LEFT_BRACE list_decl_struct RIGHT_BRACE
+list_decl_struct -> list_decl SEMICOLON list_decl_struct | list_decl SEMICOLON
+list_decl -> decl COMMA list_decl | decl | ;
+decl -> tip atribuire | tip ID
+corp -> LEFT_BRACE instr_corp RIGHT_BRACE | instr_return
+instr_corp -> instr instr_corp | instr
+instr -> lista_decl_instr | atribuire SEMICOLON | instr_if | instr_cicl | instr_return | instr_intrare | instr_iesire | apel_functie
+lista_decl_instr -> tip decl_instr SEMICOLON | tip_struct SEMICOLON
+decl_instr -> atribuire | ID
+apel_functie -> ID LEFT_PAREN list_param RIGHT_PAREN
+list_param -> expr_aritmetica COMMA list_param | expr_aritmetica
+instr_if -> IF LEFT_PAREN cond RIGHT_PAREN corp
+atribuire -> ID EQUAL expr_aritmetica | ID EQUAL apel_functie
+expr_aritmetica -> expr_aritmetica op_aritmetica expr_aritmetica | ID INCREMENT | ID DECREMENT | ID | CONST
+instr_intrare -> CIN list_intrari SEMICOLON
+list_intrari -> RIGHT_SHIFT ID list_intrari | RIGHT_SHIFT ID
+instr_cicl -> WHILE LEFT_PAREN cond RIGHT_PAREN corp | FOR LEFT_PAREN decl SEMICOLON cond SEMICOLON atribuire RIGHT_PAREN corp
+cond -> ID | CONST | expr_aritmetica op_rel expr_aritmetica
+instr_iesire -> COUT list_iesiri SEMICOLON
+list_iesiri -> LEFT_SHIFT tip_iesire list_iesiri | LEFT_SHIFT tip_iesire
+tip_iesire -> expr_aritmetica | apel_functie
+op_rel -> NOT_EQUAL | EQUAL_EQUAL | GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL
+op_aritmetica -> PLUS | MULTIPLY | DIVIDE | MODULO | MINUS
+instr_return -> RETURN expr_aritmetica SEMICOLON
