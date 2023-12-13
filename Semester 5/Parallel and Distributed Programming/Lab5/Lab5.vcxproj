@@ -136,6 +136,13 @@
     <ClInclude Include="CustomQueue.h" />
     <ClInclude Include="LinkedList.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Output-par.txt" />
+    <Text Include="Output-sec.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Debug\scriptC.ps1" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

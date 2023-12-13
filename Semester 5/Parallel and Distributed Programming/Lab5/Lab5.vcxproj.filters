@@ -33,4 +33,17 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Output-sec.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Output-par.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Debug\scriptC.ps1">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
