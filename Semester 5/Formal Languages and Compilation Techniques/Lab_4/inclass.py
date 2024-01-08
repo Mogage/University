@@ -1,3 +1,4 @@
+# reguli -> vector de stringuri
 def citire_reguli(fisier):
     with open(fisier, "r") as f:
         reguli = []
@@ -5,6 +6,8 @@ def citire_reguli(fisier):
           reguli.append(linie.strip())
     return reguli
 
+# terminale -> set unic de stringuri
+# neterminale -> set unic de stringuri
 def identificare_terminale_neterminale(reguli):
     terminale = set()
     neterminale = set()
@@ -24,6 +27,7 @@ def identificare_terminale_neterminale(reguli):
                     terminale.add(simbol)
     return list(terminale), list(neterminale)
 
+# simbol_start -> string
 if __name__ == "__main__":
     fisier = "reguli.txt"
     reguli = citire_reguli(fisier)

@@ -23,6 +23,7 @@ CustomQueue::CustomQueue(int maxSize, int numberOfReaders)
 
 void CustomQueue::decrementReaders()
 {
+    cvPop.notify_all();
     numberOfReaders--;
 }
 
@@ -47,7 +48,9 @@ void CustomQueue::push(int id, int score)
 std::pair<int, int> CustomQueue::pop()
 {
 	std::unique_lock<std::mutex> lock(mutex);
-	cvPop.wait(lock, [this]() {return numberOfReaders != 0 || !queue.empty(); });
+
+	cvPop.wait(lock, [this]() { return !queue.empty() || numberOfReaders == 0; });
+
     if (queue.empty())
     {
 		return std::make_pair(-1, -1);
@@ -55,7 +58,7 @@ std::pair<int, int> CustomQueue::pop()
 
 	std::pair<int, int> result = queue.front();
 	queue.pop();
-	cvPush.notify_one();
+	cvPush.notify_all();
 	return result;
 }
 

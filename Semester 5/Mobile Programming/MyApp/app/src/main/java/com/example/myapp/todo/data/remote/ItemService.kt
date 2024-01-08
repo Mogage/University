@@ -30,4 +30,11 @@ interface ItemService {
         @Path("id") itemId: String?,
         @Body item: Item
     ): Item
+
+    @Headers("Content-Type: application/json")
+    @PUT("/api/item/sync")
+    suspend fun sync(
+        @Header("Authorization") authorization: String,
+        @Body items: List<Item>
+    ): List<Item>
 }

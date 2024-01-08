@@ -10,6 +10,7 @@ import com.example.myapp.todo.data.remote.ItemWsClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 
@@ -35,6 +36,20 @@ class ItemRepository(
             Log.d(TAG, "refresh succeeded")
         } catch (e: Exception) {
             Log.w(TAG, "refresh failed", e)
+        }
+    }
+
+    suspend fun sync() {
+        try {
+            val items = itemDao.getAll().firstOrNull() ?: emptyList()
+            Log.d(TAG, "repo sync $items...")
+
+            val updatedItems = itemService.sync(authorization = getBearerToken(), items = items)
+//            itemDao.deleteAll()
+//            updatedItems.forEach { itemDao.insert(it) }
+            Log.d(TAG, "sync $items succeeded")
+        } catch (e: Exception) {
+            Log.w(TAG, "sync failed", e)
         }
     }
 
@@ -76,21 +91,34 @@ class ItemRepository(
         awaitClose { itemWsClient.closeSocket() }
     }
 
-    suspend fun update(item: Item): Item {
+    suspend fun update(item: Item, isOnline: Boolean): Item {
         Log.d(TAG, "update $item...")
-        val updatedItem =
-            itemService.update(itemId = item._id, item = item, authorization = getBearerToken())
-        Log.d(TAG, "update $item succeeded")
-        handleItemUpdated(updatedItem)
-        return updatedItem
+        if (isOnline) {
+            val updatedItem =
+                itemService.update(itemId = item._id, item = item, authorization = getBearerToken())
+            Log.d(TAG, "update $item succeeded")
+            handleItemUpdated(updatedItem)
+            return updatedItem
+        } else {
+            itemDao.update(item)
+
+            Log.d(TAG, "update $item succeeded")
+            return item
+        }
     }
 
-    suspend fun save(item: Item): Item {
+    suspend fun save(item: Item, isOnline: Boolean): Item {
         Log.d(TAG, "save $item...")
-        val createdItem = itemService.create(item = item, authorization = getBearerToken())
-        Log.d(TAG, "save $item succeeded")
-        handleItemCreated(createdItem)
-        return createdItem
+        if (isOnline) {
+            val createdItem = itemService.create(item = item, authorization = getBearerToken())
+            Log.d(TAG, "save $item succeeded")
+            handleItemCreated(createdItem)
+            return createdItem
+        } else {
+            itemDao.insert(item)
+            Log.d(TAG, "save $item succeeded")
+            return item
+        }
     }
 
     private suspend fun handleItemDeleted(item: Item) {

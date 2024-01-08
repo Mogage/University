@@ -1,2 +1,6 @@
-﻿  Lab5.cpp
-  Lab5.vcxproj -> F:\Repositories\Git_repo\University\Semester 5\Parallel and Distributed Programming\Lab5\x64\Debug\Lab5.exe
+﻿  CustomQueue.cpp
+D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab5\CustomQueue.cpp(67,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Lab5.cpp
+  LinkedList.cpp
+  Generating Code...
+  Lab5.vcxproj -> D:\1. Repositories\University\Semester 5\Parallel and Distributed Programming\Lab5\x64\Debug\Lab5.exe

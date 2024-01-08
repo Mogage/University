@@ -1,0 +1,5 @@
+.venv
+lfw_dataset/
+CelebAMask-HQ/
+wandb/
+*.pt

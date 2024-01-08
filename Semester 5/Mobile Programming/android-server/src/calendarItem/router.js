@@ -42,6 +42,41 @@ const createCalendarItem = async (ctx, calendarItem, response) => {
   }
 };
 
+router.put("/sync", async (ctx) => {
+  try {
+    const userId = ctx.state.user._id;
+    console.log("userId: " + userId);
+    const calendarItems = ctx.request.body;
+    console.log("calendarItems=" + calendarItems);
+    const response = ctx.response;
+    const currentCalendarItems = await calendarItemStore.find({ userId });
+    for (var calendarItem of calendarItems) {
+      calendarItem.userId = userId;
+      if (!calendarItem._id) {
+        await createMovie(ctx, calendarItem, ctx.response);
+      } else {
+        const existingCalendarItem = currentCalendarItems.find(
+          (m) => m._id === calendarItem._id
+        );
+        if (existingCalendarItem) {
+          await calendarItemStore.update(
+            { _id: calendarItem._id },
+            calendarItem
+          );
+        }
+      }
+    }
+
+    response.body = await calendarItemStore.find({ userId });
+    response.status = 200;
+    //broadcast(userId, { type: 'sync', payload: response.body });
+  } catch (err) {
+    console.log(err);
+    ctx.response.body = { message: err.message };
+    ctx.response.status = 400;
+  }
+});
+
 router.post(
   "/",
   async (ctx) => await createCalendarItem(ctx, ctx.request.body, ctx.response)

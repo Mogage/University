@@ -58,7 +58,8 @@ class ItemViewModel(private val itemId: String?, private val itemRepository: Ite
         startDate: String,
         endDate: String,
         isCompleted: Boolean,
-        doesRepeat: Boolean
+        doesRepeat: Boolean,
+        isOnline: Boolean
     ) {
         viewModelScope.launch {
             Log.d(TAG, "saveOrUpdateItem...");
@@ -75,9 +76,9 @@ class ItemViewModel(private val itemId: String?, private val itemRepository: Ite
                 )
                 val savedItem: Item;
                 if (itemId == null) {
-                    savedItem = itemRepository.save(item)
+                    savedItem = itemRepository.save(item, isOnline)
                 } else {
-                    savedItem = itemRepository.update(item)
+                    savedItem = itemRepository.update(item, isOnline)
                 }
                 Log.d(TAG, "saveOrUpdateItem succeeeded");
                 uiState = uiState.copy(submitResult = Result.Success(savedItem))

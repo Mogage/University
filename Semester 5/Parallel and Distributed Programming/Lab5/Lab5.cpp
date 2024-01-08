@@ -85,6 +85,7 @@ void parallel(char* argv[])
     int start = 0;
     int end;
 
+
     for (int i = 0; i < numberOfReaders; i++)
     {
         end = start + batchSize;
@@ -100,7 +101,7 @@ void parallel(char* argv[])
     {
         workerThreads[i] = std::thread(worker, std::ref(barrier), std::ref(queue));
     }
-
+ 
     for (int i = 0; i < numberOfWorkers; i++)
     {
         workerThreads[i].join();
@@ -128,7 +129,7 @@ void reader(std::barrier<>& barrier, CustomQueue& queue, int start, int end)
         }
     }
     queue.decrementReaders();
-    //std::cout << "reader finished with: " + std::to_string(start) + " " + std::to_string(end) + "\n";
+    // std::cout << "reader finished with: " + std::to_string(start) + " " + std::to_string(end) + "\n";
     if (start == 0)
     {
         barrier.arrive_and_wait();
@@ -144,11 +145,11 @@ void worker(std::barrier<>& barrier, CustomQueue& queue)
         if (data.first == -1)
         {
             continue;
-		}
+	    }
         list.add(data.first, data.second);
     }
     barrier.arrive_and_drop();
-    //std::cout << "worker finished\n";
+    // std::cout << "worker finished\n";
 }
 
 void createFiles()

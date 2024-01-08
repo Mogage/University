@@ -1029,7 +1029,7 @@ YY_RULE_SETUP
 case 48:
 YY_RULE_SETUP
 #line 65 ".\\lexer_4.lxi"
-{ std::cout << "Error at line " << yylineno << ". Unexpected character: " << yytext << '\n'; }
+{ std::cout << "Error at line " << yylineno << ". Unexpected character: " << yytext << '\n'; exit(1); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <mutex>
 #include <vector>
+#include <map>
 
 class LinkedList
 {
@@ -18,6 +19,8 @@ private:
     Node* tail;
     int size;
     std::vector<int> blackList;
+    std::map<int, std::mutex> appearnceList;
+    std::mutex blackListMutex;
     std::mutex mutex;
 
     void remove(int);

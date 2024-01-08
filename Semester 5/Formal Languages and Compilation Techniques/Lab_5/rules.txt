@@ -1,0 +1,125 @@
+program
+program -> HASH INCLUDE LESS_THAN tip_include GREATER_THAN USING NAMESPACE STD SEMICOLON decl_globale
+
+tip_include -> IOSTREAM
+tip_include -> MATH_H
+tip_include -> STRING_H
+
+decl_globale -> tip_decl_globale decl_globale_next
+
+decl_globale_next -> decl_globale
+decl_globale_next -> ;
+
+tip_decl_globale -> constanta
+tip_decl_globale -> functie
+
+constanta -> CONST_ tip starts_with_id SEMICOLON
+
+functie -> tip ID LEFT_PAREN list_decl RIGHT_PAREN corp
+
+tip -> INT
+tip -> FLOAT
+tip -> DOUBLE
+tip -> VOID
+
+tip_struct -> STRUCT ID LEFT_BRACE list_decl_struct RIGHT_BRACE
+
+list_decl_struct -> lista_decl_instr_simple SEMICOLON list_decl_struct_next
+
+list_decl_struct_next -> lista_decl_instr_simple list_decl_struct_next
+list_decl_struct_next -> ;
+
+list_decl -> decl list_decl_next
+
+list_decl_next -> COMMA decl list_decl_next
+list_decl_next -> ;
+
+decl -> tip starts_with_id
+
+corp -> LEFT_BRACE instr_corp RIGHT_BRACE
+corp -> instr_return
+
+instr_corp -> instr instr_corp_next
+
+instr_corp_next -> instr_corp
+instr_corp_next -> ;
+
+instr -> lista_decl_instr
+instr -> instr_if
+instr -> instr_cicl
+instr -> instr_return
+instr -> instr_intrare
+instr -> instr_iesire
+instr -> starts_with_id atribuire_apel_functie_instr
+
+atribuire_apel_functie_instr -> SEMICOLON
+atribuire_apel_functie_instr -> ;
+
+lista_decl_instr_simple -> decl SEMICOLON
+lista_decl_instr_struct -> tip_struct SEMICOLON
+
+lista_decl_instr -> lista_decl_instr_simple
+lista_decl_instr -> lista_decl_instr_struct
+
+list_param -> expr_aritmetica list_param_next
+
+list_param_next -> COMMA list_param
+list_param_next -> ;
+
+instr_if -> IF LEFT_PAREN cond RIGHT_PAREN corp
+
+expr_aritmetica -> starts_with_id
+expr_aritmetica -> starts_with_const
+
+expr_aritmetica_next -> op_aritmetica expr_aritmetica
+expr_aritmetica_next -> ;
+
+expr_aritmetica_id_next -> INCREMENT
+expr_aritmetica_id_next -> DECREMENT
+expr_aritmetica_id_next -> ;
+
+instr_intrare -> CIN list_intrari SEMICOLON
+
+list_intrari -> RIGHT_SHIFT ID list_intrari_next
+
+list_intrari_next -> RIGHT_SHIFT ID list_intrari_next
+list_intrari_next -> ;
+
+instr_cicl -> WHILE LEFT_PAREN cond RIGHT_PAREN corp
+instr_cicl -> FOR LEFT_PAREN decl SEMICOLON cond SEMICOLON starts_with_id RIGHT_PAREN corp
+
+cond -> expr_aritmetica op_rel expr_aritmetica
+
+instr_iesire -> COUT list_iesiri SEMICOLON
+
+list_iesiri -> LEFT_SHIFT tip_iesire list_iesiri_next
+
+list_iesiri_next -> list_iesiri
+list_iesiri_next -> ;
+
+tip_iesire -> expr_aritmetica
+
+op_rel -> NOT_EQUAL
+op_rel -> EQUAL_EQUAL
+op_rel -> GREATER_THAN
+op_rel -> LESS_THAN
+op_rel -> GREATER_THAN_OR_EQUAL
+op_rel -> LESS_THAN_OR_EQUAL
+
+op_aritmetica -> PLUS
+op_aritmetica -> MULTIPLY
+op_aritmetica -> DIVIDE
+op_aritmetica -> MODULO
+op_aritmetica -> MINUS
+
+instr_return -> RETURN expr_aritmetica SEMICOLON
+
+starts_with_id -> ID starts_with_id_next
+starts_with_id_next -> LEFT_PAREN list_param RIGHT_PAREN
+starts_with_id_next -> EQUAL expr_aritmetica
+starts_with_id_next -> expr_aritmetica_id_next expr_aritmetica_next
+starts_with_id_next -> ;
+
+starts_with_const -> CONST starts_with_const_next
+starts_with_const_next -> ;
+starts_with_const_next -> expr_aritmetica_next

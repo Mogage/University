@@ -1,9 +1,12 @@
 package com.example.myapp
 
+import android.Manifest
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -17,14 +20,31 @@ import com.example.myapp.core.data.remote.Api
 import com.example.myapp.core.ui.UserPreferencesViewModel
 import com.example.myapp.todo.ui.ItemScreen
 import com.example.myapp.todo.ui.items.ItemsScreen
+import com.example.myapp.ui.MyLocation
+import com.example.myapp.util.ConnectivityManagerNetworkMonitor
+import com.example.myapp.util.Permissions
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 val itemsRoute = "items"
 val authRoute = "auth"
+val mapRoute = "map"
 
 @Composable
 fun MyAppNavHost() {
+    val context = LocalContext.current
+    val connectivityManager = remember {
+        ConnectivityManagerNetworkMonitor(context)
+    }
+    val isOnline by connectivityManager.isOnline.collectAsStateWithLifecycle(
+        initialValue = false
+    )
+
     val navController = rememberNavController()
     val onCloseItem = {
+        Log.d("MyAppNavHost", "navigate back to list")
+        navController.popBackStack()
+    }
+    val onExitMap = {
         Log.d("MyAppNavHost", "navigate back to list")
         navController.popBackStack()
     }
@@ -33,6 +53,7 @@ fun MyAppNavHost() {
     val userPreferencesUiState by userPreferencesViewModel.uiState.collectAsStateWithLifecycle(
         initialValue = UserPreferences()
     )
+
     val myAppViewModel = viewModel<MyAppViewModel>(factory = MyAppViewModel.Factory)
     NavHost(
         navController = navController,
@@ -55,7 +76,12 @@ fun MyAppNavHost() {
                     navController.navigate(authRoute) {
                         popUpTo(0)
                     }
-                })
+                },
+                onOpenMap = {
+                    Log.d("MyAppNavHost", "navigate to map")
+                    navController.navigate("map")
+                },
+                isOnline = isOnline)
         }
         composable(
             route = "$itemsRoute/{id}",
@@ -64,6 +90,7 @@ fun MyAppNavHost() {
         {
             ItemScreen(
                 itemId = it.arguments?.getString("id"),
+                isOnline = isOnline,
                 onClose = { onCloseItem() }
             )
         }
@@ -71,6 +98,7 @@ fun MyAppNavHost() {
         {
             ItemScreen(
                 itemId = null,
+                isOnline = isOnline,
                 onClose = { onCloseItem() }
             )
         }
@@ -83,6 +111,12 @@ fun MyAppNavHost() {
                 }
             )
         }
+        composable(route = mapRoute)
+        {
+            MapContent(
+                onExitMap = { onExitMap() }
+            )
+        }
     }
     LaunchedEffect(userPreferencesUiState.token) {
         if (userPreferencesUiState.token.isNotEmpty()) {
@@ -93,5 +127,20 @@ fun MyAppNavHost() {
                 popUpTo(0)
             }
         }
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun MapContent(onExitMap: () -> Unit) {
+    Permissions(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ),
+        rationaleText = "Please allow app to use location (coarse or fine)",
+        dismissedText = "O noes! No location provider allowed!"
+    ) {
+        MyLocation(onExitMap)
     }
 }

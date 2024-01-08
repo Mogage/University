@@ -26,16 +26,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapp.R
 import com.example.myapp.core.Result
 import com.example.myapp.todo.ui.item.ItemViewModel
+import com.example.myapp.util.showSimpleNotificationWithTapAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemScreen(itemId: String?, onClose: () -> Unit) {
+fun ItemScreen(itemId: String?, onClose: () -> Unit, isOnline: Boolean) {
+    val context = LocalContext.current
+    val channelId = "MyTestChannel"
     val itemViewModel = viewModel<ItemViewModel>(factory = ItemViewModel.Factory(itemId))
     val itemUiState = itemViewModel.uiState
     var title by rememberSaveable { mutableStateOf(itemUiState.item.title) }
@@ -79,7 +83,7 @@ fun ItemScreen(itemId: String?, onClose: () -> Unit) {
                 title = { Text(text = stringResource(id = R.string.item)) },
                 actions = {
                     Button(onClick = {
-                        Log.d("ItemScreen", "save item title = $title");
+                        Log.d("ItemScreen", "save item title = $title")
                         itemViewModel.saveOrUpdateItem(
                             title,
                             type,
@@ -87,8 +91,28 @@ fun ItemScreen(itemId: String?, onClose: () -> Unit) {
                             startDate,
                             endDate,
                             isCompleted,
-                            doesRepeat
+                            doesRepeat,
+                            isOnline
                         )
+
+                        if (isOnline) {
+                            showSimpleNotificationWithTapAction(
+                                context = context,
+                                channelId = channelId,
+                                notificationId = 1,
+                                textTitle = "Item saved",
+                                textContent = "Item with title $title saved"
+                            )
+                        }
+                        else {
+                            showSimpleNotificationWithTapAction(
+                                context = context,
+                                channelId = channelId,
+                                notificationId = 1,
+                                textTitle = "Item saved locally",
+                                textContent = "Item with title $title saved locally. Sync when online"
+                            )
+                        }
                     }) { Text("Save") }
                 }
             )
@@ -173,9 +197,9 @@ fun ItemScreen(itemId: String?, onClose: () -> Unit) {
     }
 }
 
-
-@Preview
-@Composable
-fun PreviewItemScreen() {
-    ItemScreen(itemId = "0", onClose = {})
-}
+//
+//@Preview
+//@Composable
+//fun PreviewItemScreen() {
+//    ItemScreen(itemId = "0", onClose = {})
+//}

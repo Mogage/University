@@ -1,0 +1,230 @@
+program
+program -> lista_importuri USING NAMESPACE STD SEMICOLON tip MAIN LPAREN RPAREN LBRAKET lista_instructiuni retuSEMICOLON RBRAKET
+
+lista_importuri -> import lista_importuri
+lista_importuri -> ;
+
+import -> HASH INCLUDE LT librarie GT
+
+librarie -> IOSTREAM
+librarie -> MATH.H
+
+lista_instructiuni -> instructiune lista_instructiuni
+lista_instructiuni -> ;
+
+instructiune -> declarare
+instructiune -> atribuire SEMICOLON
+instructiune -> intrare
+instrucitune -> iesire
+instructiune -> conditional
+instructiune -> ciclare
+
+declarare -> tip declarare_body SEMICOLON
+
+declarare_body -> id_sau_atribuire continuare_declarare_body
+continuare_declarare_body -> COMMA declarare_body
+continuare_declarare_body -> ;
+
+id_sau_atribuire -> ID continuare_id_sau_atribuire
+continuare_id_sau_atribuire -> EQUAL constant
+continuare_id_sau_atribuire -> ;
+
+tip -> INT
+tip -> FLOAT
+tip -> CHAR
+
+atribuire -> ID EQUAL expresie
+
+expresie -> atom continuare_expresie
+continuare_expresie -> op atom
+continuare_expresie -> ;
+
+op -> PLUS
+op -> MINUS
+op -> MULTIPLY
+op -> DIVIDE
+op -> MODULO
+
+atom -> id
+atom -> constant
+
+constant -> DECIMAL
+constant -> BINARY
+constant -> OCTAL
+constant -> HEXA
+
+intrare -> CIN RIGHT_SHIIFT id SEMICOLON
+
+iesire -> COUT LEFT_SHIFT expresie SEMICOLON
+
+conditional -> IF LPAREN conditie RPAREN LBRAKET lista_instructiuni RBRAKET altfel
+
+altfel -> ELSE LBRAKET lista_instructiuni RBRAKET
+altfel -> ;
+
+conditie -> expresie relatie expresie
+
+relatie -> EQUAL_EQUAL
+relatie -> NOT_EQUAL
+relatie -> LESS
+relatie -> LESS_EQUAL
+relatie -> GREATER
+relatie -> GREATER_EQUAL
+
+ciclare -> for_loop
+ciclare -> while_loop
+
+for_loop -> FOR LPAREN atribuire SEMICOLON conditie SEMICOLON incrementare RPAREN LBRAKET lista_instructiuni RBRAKET
+
+incrementare -> ID PLUS_PLUS
+
+while_loop -> WHILE LPAREN conditie RPAREN LBRAKET lista_instructiuni RBRAKET
+
+id -> letter lista_litere
+lista_litere -> letter lista_litere
+lista_litere -> ;
+letter -> A
+letter -> B
+letter -> C
+letter -> D
+letter -> E
+letter -> F
+letter -> G
+letter -> H
+letter -> I
+letter -> J
+letter -> K
+letter -> L
+letter -> M
+letter -> N
+letter -> O
+letter -> P
+letter -> Q
+letter -> R
+letter -> S
+letter -> T
+letter -> U
+letter -> V
+letter -> W
+letter -> X
+letter -> Y
+letter -> Z
+
+binary -> OB binary_digits
+binary_digits -> binary_digit binary_digits
+binary_digits -> ;
+binary_digit -> 0
+binary_digit -> 1
+
+octal -> O octal_digits
+octal_digits -> octal_digit octal_digits
+octal_digits -> ;
+octal_digit -> 0
+octal_digit -> 1
+octal_digit -> 2
+octal_digit -> 3
+octal_digit -> 4
+octal_digit -> 5
+octal_digit -> 6
+octal_digit -> 7
+
+decimal -> nenul_digit decimal_digits
+decimal_digits -> decimal_digit decimal_digits
+decimal_digits -> ;
+decimal_digit -> 0
+decimal_digit -> nenul_digit
+nenul_digit -> 1
+nenul_digit -> 2
+nenul_digit -> 3
+nenul_digit -> 4
+nenul_digit -> 5
+nenul_digit -> 6
+nenul_digit -> 7
+nenul_digit -> 8
+nenul_digit -> 9
+
+hexa -> H hexa_digits
+hexa_digits -> hexa_digit hexa_digits
+hexa_digits -> ;
+hexa_digit -> 0
+hexa_digit -> 1
+hexa_digit -> 2
+hexa_digit -> 3
+hexa_digit -> 4
+hexa_digit -> 5
+hexa_digit -> 6
+hexa_digit -> 7
+hexa_digit -> 8
+hexa_digit -> 9
+hexa_digit -> A
+hexa_digit -> B
+hexa_digit -> C
+hexa_digit -> D
+hexa_digit -> E
+hexa_digit -> F
+
+
+41
+2
+26
+6
+27
+3
+4
+5
+28
+10
+46
+23
+24
+21
+10
+47
+25
+48
+29
+50
+25
+49
+28
+18
+40
+47
+28
+17
+23
+10
+45
+29
+50
+28
+45
+26
+47
+28
+45
+29
+45
+34
+51
+24
+21
+18
+40
+49
+28
+48
+29
+48
+34
+49
+28
+22
+19
+39
+48
+28
+20
+50
+28
+22

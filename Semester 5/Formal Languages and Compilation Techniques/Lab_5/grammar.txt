@@ -1,0 +1,6 @@
+S
+S -> b L e
+S -> i
+L -> S B
+B -> ;
+B -> p L

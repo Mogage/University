@@ -1,0 +1,85 @@
+program
+program -> lista_importuri 3 4 5 28 tip id 23 24 21 lista_instructiuni 20 50 28 22
+
+lista_importuri -> import lista_importuri
+lista_importuri -> ;
+
+import -> 41 2 26 librarie 27
+
+librarie -> 6
+librarie -> 7
+
+lista_instructiuni -> instructiune lista_instructiuni
+lista_instructiuni -> ;
+
+instructiune -> declarare
+instructiune -> atribuire 28
+instructiune -> intrare
+instructiune -> iesire
+instructiune -> conditional
+instructiune -> ciclare
+
+declarare -> tip declarare_body 28
+
+declarare_body -> id_sau_atribuire continuare_declarare_body
+continuare_declarare_body -> 25 declarare_body
+continuare_declarare_body -> ;
+
+id_sau_atribuire -> id continuare_id_sau_atribuire
+continuare_id_sau_atribuire -> 29 constant
+continuare_id_sau_atribuire -> ;
+
+tip -> 10
+tip -> 11
+tip -> 12
+
+atribuire -> id 29 expresie
+
+expresie -> atom continuare_expresie
+continuare_expresie -> op atom
+continuare_expresie -> ;
+
+op -> 34
+op -> 35
+op -> 36
+op -> 37
+op -> 38
+
+atom -> id
+atom -> constant
+
+intrare -> 18 40 id 28
+
+iesire -> 19 39 expresie 28
+
+conditional -> 15 23 conditie 24 21 lista_instructiuni 22 altfel
+
+altfel -> 44 21 lista_instructiuni 22
+altfel -> ;
+
+conditie -> expresie relatie expresie
+
+relatie -> 31
+relatie -> 30
+relatie -> 26
+relatie -> 32
+relatie -> 27
+relatie -> 33
+
+ciclare -> for_loop
+ciclare -> while_loop
+
+for_loop -> 17 23 tip atribuire 28 conditie 28 incrementare 24 21 lista_instructiuni 22
+
+incrementare -> id 29 id 34 constant
+
+while_loop -> 16 23 conditie 24 21 lista_instructiuni 22
+
+id -> 45
+id -> 46
+id -> 47
+id -> 48
+id -> 49
+
+constant -> 50
+constant -> 51

@@ -23,7 +23,7 @@ Write-Host "Timp de executie mediu:" $media
 # Creare fisier .csv
 if (!(Test-Path outC.csv)){
     New-Item outC.csv -ItemType File
-    #Scrie date in csv
+    #Scrie date in csv  
     Set-Content outC.csv 'Nr Readers, Nr Workers ,Timp executie'
 }
 
