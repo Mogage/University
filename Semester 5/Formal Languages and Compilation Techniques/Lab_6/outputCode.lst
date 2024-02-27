@@ -1,0 +1,111 @@
+     1                                  bits 32
+     2                                  global start
+     3                                  
+     4                                  extern scanf
+     5                                  import scanf msvcrt.dll
+     6                                  
+     7                                  extern printf
+     8                                  import printf msvcrt.dll
+     9                                  
+    10                                  extern exit
+    11                                  import exit msvcrt.dll
+    12                                  
+    13                                  segment data use32 class=data
+    14 00000000 04000000                	a dd 4
+    15 00000004 00000000                	b dd 0
+    16 00000008 00000000                	c dd 0
+    17 0000000C 256400                  	format db "%d", 0
+    18                                  
+    19                                  segment code use32 class=code
+    20                                  	start:
+    21 00000000 6A04                    		push 4
+    22 00000002 6A00                    		push 0
+    23 00000004 8F05[04000000]          		pop dword [b]
+    24 0000000A 8F05[00000000]          		pop dword [a]
+    25 00000010 6A04                    		push 4
+    26 00000012 6A05                    		push 5
+    27 00000014 6A06                    		push 6
+    28 00000016 5A                      		pop EDX
+    29 00000017 58                      		pop EAX
+    30 00000018 F6E2                    		mul DL
+    31 0000001A 50                      		push EAX
+    32                                  
+    33 0000001B 5A                      		pop EDX
+    34 0000001C 58                      		pop EAX
+    35 0000001D 6601D0                  		add AX, DX
+    36 00000020 50                      		push EAX
+    37                                  
+    38 00000021 8F05[00000000]          		pop dword [a]
+    39                                  
+    40 00000027 FF35[00000000]          		push dword [a]
+    41 0000002D 68[0C000000]            		push dword format
+    42 00000032 FF15[00000000]          		call [printf]
+    43 00000038 83C408                  		add ESP, 4 * 2
+    44                                  
+    45 0000003B 6A04                    		push 4
+    46 0000003D 8F05[00000000]          		pop dword [a]
+    47                                  
+    48 00000043 6A02                    		push 2
+    49 00000045 6A02                    		push 2
+    50 00000047 5A                      		pop EDX
+    51 00000048 58                      		pop EAX
+    52 00000049 F6E2                    		mul DL
+    53 0000004B 50                      		push EAX
+    54                                  
+    55 0000004C 6A04                    		push 4
+    56 0000004E 6A02                    		push 2
+    57 00000050 5B                      		pop EBX
+    58 00000051 58                      		pop EAX
+    59 00000052 66BA0000                		mov DX, 0
+    60 00000056 66F7F3                  		div WORD BX
+    61 00000059 50                      		push EAX
+    62                                  
+    63 0000005A 6A01                    		push 1
+    64 0000005C 5A                      		pop EDX
+    65 0000005D 58                      		pop EAX
+    66 0000005E 6629D0                  		sub AX, DX
+    67 00000061 50                      		push EAX
+    68                                  
+    69 00000062 5A                      		pop EDX
+    70 00000063 58                      		pop EAX
+    71 00000064 6601D0                  		add AX, DX
+    72 00000067 50                      		push EAX
+    73                                  
+    74 00000068 8F05[04000000]          		pop dword [b]
+    75                                  
+    76 0000006E FF35[00000000]          		push dword [a]
+    77 00000074 FF35[04000000]          		push dword [b]
+    78 0000007A 5A                      		pop EDX
+    79 0000007B 58                      		pop EAX
+    80 0000007C 6601D0                  		add AX, DX
+    81 0000007F 50                      		push EAX
+    82                                  
+    83 00000080 8F05[08000000]          		pop dword [c]
+    84                                  
+    85 00000086 68[00000000]            		push dword a
+    86 0000008B 68[0C000000]            		push dword format
+    87 00000090 FF15[00000000]          		call [scanf]
+    88 00000096 83C408                  		add ESP, 4 * 2
+    89                                  
+    90 00000099 68[04000000]            		push dword b
+    91 0000009E 68[0C000000]            		push dword format
+    92 000000A3 FF15[00000000]          		call [scanf]
+    93 000000A9 83C408                  		add ESP, 4 * 2
+    94                                  
+    95 000000AC FF35[00000000]          		push dword [a]
+    96 000000B2 68[0C000000]            		push dword format
+    97 000000B7 FF15[00000000]          		call [printf]
+    98 000000BD 83C408                  		add ESP, 4 * 2
+    99                                  
+   100 000000C0 FF35[04000000]          		push dword [b]
+   101 000000C6 68[0C000000]            		push dword format
+   102 000000CB FF15[00000000]          		call [printf]
+   103 000000D1 83C408                  		add ESP, 4 * 2
+   104                                  
+   105 000000D4 FF35[08000000]          		push dword [c]
+   106 000000DA 68[0C000000]            		push dword format
+   107 000000DF FF15[00000000]          		call [printf]
+   108 000000E5 83C408                  		add ESP, 4 * 2
+   109                                  
+   110 000000E8 6A00                    		push dword 0
+   111 000000EA FF15[00000000]          		call [exit]

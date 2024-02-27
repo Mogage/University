@@ -24,11 +24,6 @@ class LFWDataset(torch.utils.data.Dataset):
             if os.path.exists(gt_path):
                 input_photo = Image.open(input_file_path).convert('RGB')
                 gt_photo = Image.open(gt_path).convert('RGB')
-                # input_photo = cv2.imread(input_file_path)
-                # input_photo = cv2.cvtColor(input_photo, cv2.COLOR_BGR2RGB)
-                #
-                # gt_photo = cv2.imread(gt_path)
-                # gt_photo = cv2.cvtColor(gt_photo, cv2.COLOR_BGR2RGB)
 
                 self.inputs.append(input_photo)
                 self.targets.append(gt_photo)

@@ -1,0 +1,19 @@
+name: random_search
+method: random
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  learning_rate:
+    type: float
+    min: 0.0001
+    max: 0.1
+    scale: log
+  patience:
+    type: int
+    min: 2
+    max: 25
+  batch_size:
+    type: int
+    min: 3
+    max: 7

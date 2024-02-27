@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # output, output_sequence = parser.parse('bipie')
 
     if output[-1] == 'ERROR':
-        print("Sequence is not LL(1)")
+        print("Sequence is not accepted.")
         exit(0)
 
     print(output)

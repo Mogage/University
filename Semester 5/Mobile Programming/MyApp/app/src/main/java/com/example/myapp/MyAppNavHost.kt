@@ -1,11 +1,10 @@
 package com.example.myapp
 
 import android.Manifest
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -19,11 +18,13 @@ import com.example.myapp.core.data.UserPreferences
 import com.example.myapp.core.data.remote.Api
 import com.example.myapp.core.ui.UserPreferencesViewModel
 import com.example.myapp.todo.ui.ItemScreen
+import com.example.myapp.todo.ui.OrientationSensorMonitor
 import com.example.myapp.todo.ui.items.ItemsScreen
 import com.example.myapp.ui.MyLocation
 import com.example.myapp.util.ConnectivityManagerNetworkMonitor
 import com.example.myapp.util.Permissions
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import kotlinx.coroutines.delay
 
 val itemsRoute = "items"
 val authRoute = "auth"
@@ -38,6 +39,50 @@ fun MyAppNavHost() {
     val isOnline by connectivityManager.isOnline.collectAsStateWithLifecycle(
         initialValue = false
     )
+
+    val orientationSensorMonitor = OrientationSensorMonitor(context = LocalContext.current)
+    val orientation by orientationSensorMonitor.orientation.collectAsStateWithLifecycle(
+        initialValue = "portrait"
+    )
+
+    var lastOrientation by remember { mutableStateOf("portrait") }
+    LaunchedEffect(orientation) {
+        if (orientation != lastOrientation) {
+            delay(500L)
+            when (orientation) {
+                "landscape" -> {
+                    Log.d("ItemsScreen", "landscape")
+                    (context as? Activity)?.requestedOrientation =
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                }
+
+                "portrait" -> {
+                    Log.d("ItemsScreen", "portrait")
+                    (context as? Activity)?.requestedOrientation =
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
+
+                "rlandscape" -> {
+                    Log.d("ItemsScreen", "rlandscape")
+                    (context as? Activity)?.requestedOrientation =
+                        ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+                }
+
+                "rportrait" -> {
+                    Log.d("ItemsScreen", "rportrait")
+                    (context as? Activity)?.requestedOrientation =
+                        ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
+                }
+
+                else -> {
+                    Log.d("ItemsScreen", "portrait")
+                    (context as? Activity)?.requestedOrientation =
+                        ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                }
+            }
+            lastOrientation = orientation
+        }
+    }
 
     val navController = rememberNavController()
     val onCloseItem = {
@@ -81,7 +126,8 @@ fun MyAppNavHost() {
                     Log.d("MyAppNavHost", "navigate to map")
                     navController.navigate("map")
                 },
-                isOnline = isOnline)
+                isOnline = isOnline
+            )
         }
         composable(
             route = "$itemsRoute/{id}",

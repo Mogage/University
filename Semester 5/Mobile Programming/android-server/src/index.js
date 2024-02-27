@@ -10,7 +10,6 @@ import {
   initWss,
   verifyClient,
 } from "./utils";
-import { router as noteRouter } from "./note";
 import { router as calendarItemRouter } from "./calendarItem";
 import { router as authRouter } from "./auth";
 import jwt from "koa-jwt";

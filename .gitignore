@@ -1,1 +1,7 @@
 *.ipch
+\node_modules
+\x64
+*.rar
+*.zip
+*.pth
+*.txt
