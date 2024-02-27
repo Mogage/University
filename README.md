@@ -1,69 +1,83 @@
 # University-Courses - UBB Computer Science
+
 Algorithms implementation, labs and school work.
 
 ## **Year 1**
-**First semester** 
 
-✔️ Computer System Architecture
+**First semester**
 
-✔️ Fundamentals of Programming
+✔️ Computer System Architecture - 9
 
-✔️ Computational Logic
+✔️ Fundamentals of Programming - 10
 
-✔️ Algebra
+✔️ Computational Logic - 9
 
-✔️ Mathematical Analysis
+✔️ Algebra - 7
+
+✔️ Mathematical Analysis - 6
 
 **Second semester**
 
-✔️ Operating System
+✔️ Operating System - 10
 
-✔️ Object Oriented Programming
+✔️ Object Oriented Programming - 10
 
-✔️ Data Structures and Algorithms
+✔️ Data Structures and Algorithms - 10
 
-✔️ Graph Algorithms
+✔️ Graph Algorithms - 9
 
-✔️ Geometry
+✔️ Geometry - 8
 
-✔️ Dynamical Systems
-
+✔️ Dynamical Systems - 10
 
 ## **Year 2**
-**First semester** 
 
-✔️ Databases
+**First semester**
 
-✔️ Advanced Programming Techniques
+✔️ Databases - 10
 
-✔️ Computer networks
+✔️ Advanced Programming Techniques - 10
 
-✔️ Functional logic programming
+✔️ Computer networks - 9
 
-✔️ Probability and statistics
+✔️ Functional logic programming - 10
 
-**Second semester** 
+✔️ Probability and statistics - 10
 
-✔️ Web Programming
+**Second semester**
 
-✔️ Artificial Intelligence
+✔️ Web Programming - 10
 
-✔️ Software Engineering
+✔️ Artificial Intelligence - 10
 
-✔️ Programming and Projection Environments
+✔️ Software Engineering - 10
 
-✔️ Database Management Systems
+✔️ Programming and Projection Environments - 10
 
+✔️ Database Management Systems - 10
 
 ## **Year 3**
-**First semester** 
 
-Computer Vision and Deep Learning
+**First semester**
 
-Robotic Process Automation
+✔️ Computer Vision and Deep Learning - 10
 
-Mobile Programming
+✔️ Robotic Process Automation - 10
 
-Parallel and Distributed Programming
+✔️ Mobile Programming - 10
 
-Formal Languages and Compilation Techniques
+✔️ Parallel and Distributed Programming - 10
+
+✔️ Formal Languages and Compilation Techniques - 9
+
+**Second semester**
+
+Design Patterns
+
+Blockchain: Smart Contracts
+
+Business Intelligence
+
+Numerical Calculus
+
+Verification & Validation of Software Systems
