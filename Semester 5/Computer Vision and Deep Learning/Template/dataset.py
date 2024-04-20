@@ -1,5 +1,7 @@
 import os
 
+import torch
+
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self, transform=None):
