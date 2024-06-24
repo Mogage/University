@@ -72,12 +72,12 @@ Algorithms implementation, labs and school work.
 
 **Second semester**
 
-Design Patterns
+✔️ Design Patterns - 9
 
-Blockchain: Smart Contracts
+✔️ Blockchain: Smart Contracts - 10
 
-Business Intelligence
+✔️ Business Intelligence - 10
 
-Numerical Calculus
+✔️ Numerical Calculus - 9
 
-Verification & Validation of Software Systems
+✔️ Verification & Validation of Software Systems - 10
