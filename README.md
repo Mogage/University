@@ -82,6 +82,11 @@ Algorithms implementation, labs and school work.
 
 ✔️ Numerical Calculus - 9
 
+✔️ Verification & Validation of Software Systems - 10
+
+
 ## **Master of science in Applied Computational Intelligence**
 
-✔️ Verification & Validation of Software Systems - 10
+## **Year 1**
+
+**First semester**
