@@ -2,6 +2,8 @@
 
 Algorithms implementation, labs and school work.
 
+## **Bachelor in Computer Science**
+
 ## **Year 1**
 
 **First semester**
@@ -79,5 +81,7 @@ Algorithms implementation, labs and school work.
 ✔️ Business Intelligence - 10
 
 ✔️ Numerical Calculus - 9
+
+## **Master of science in Applied Computational Intelligence**
 
 ✔️ Verification & Validation of Software Systems - 10
