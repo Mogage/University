@@ -19,7 +19,7 @@ end
 %         end
 %         rightMatrix(i) = sum(values' .* base(:, i));
 %     end
-%     a = linsolve(leftMatrix, rightMatrix)'
+%     a = linsolve(leftMatrix, rightMatrix)';
 %     evalBase = ones(length(eval), n+1);
 %     for i = 1:n
 %         evalBase(:, i+1) = eval.^i;
